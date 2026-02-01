@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-class db_repository_interface(ABC):
+class BaseRepositoryInterface(ABC):
     
     @abstractmethod
     def find_all(self):
@@ -9,5 +9,5 @@ class db_repository_interface(ABC):
     def save(self):
         pass
     @abstractmethod
-    def execute(self, query : str, collection : str):
+    def execute(self):
         pass

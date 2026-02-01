@@ -1,45 +1,46 @@
-from infrastructure.mongo.mongo_user import Mongo_user
-from infrastructure.mongo.repositories import (
-    EodPrice_Repository,
-    IncomeStatement_Repository,
-    Profile_Repository,
-    FinanceData_Repository,
-    CompanyData_Repository,
-)
+from enum import Enum
+import os
 
+class MongoUser(Enum):
+    APPUSER = "appUser"
+    DASHBOARDUSER = "dashboardUser"
+
+class MongoDatabase(Enum):
+    RAW = "raw"
+    PROCESSED = "processed"
+
+class MongoCollection(Enum):
+    EODPRICE = "eodPrice"
+    TEST = "test"
+
+# DEPRICATED
 USER_CONFIG = {
-    Mongo_user.RAWUSER: {
-        "user": "MONGO_RAW_USER",
-        "password": "MONGO_RAW_PASSWORD",
-        "db": "MONGO_DB_RAW",
+    MongoUser.APPUSER: {
+        "user": "MONGO_APPUSER_USER",
+        "password": "MONGO_APPUSER_PASSWORD",
+        "auth_db": "MONGO_APPUSER_AUTH_DB",
     },
-    Mongo_user.PROCESSEDUSER: {
-        "user": "MONGO_PROCESSED_USER",
-        "password": "MONGO_PROCESSED_PASSWORD",
-        "db": "MONGO_DB_PROCESSED",
-    },
-    Mongo_user.REPORTUSER: {
-        "user": "MONGO_REPORT_USER",
-        "password": "MONGO_REPORT_PASSWORD",
-        "db": "MONGO_DB_REPORT",
-    },
+    MongoUser.DASHBOARDUSER: {
+        "user": "MONGO_DASHBOARDUSER_USER",
+        "password": "MONGO_DASHBOARDUSER_PASSWORD",
+        "auth_db": "MONGO_DASHBOARDUSER_AUTH_DB",
+    }
 }
 
-REPO_MAP = {
-    Mongo_user.RAWUSER: [
-        ("eodPrice", EodPrice_Repository),
-        ("incomeStatement", IncomeStatement_Repository),
-        ("profile", Profile_Repository),
-    ],
-    Mongo_user.PROCESSEDUSER: [
-        ("eodPrice", EodPrice_Repository),
-        ("incomeStatement", IncomeStatement_Repository),
-        ("profile", Profile_Repository),
-        ("financeData", FinanceData_Repository),
-        ("companyData", CompanyData_Repository),
-    ],
-    Mongo_user.REPORTUSER: [
-        ("financeData", FinanceData_Repository),
-        ("companyData", CompanyData_Repository),
-    ],
-}
+from dotenv import load_dotenv
+load_dotenv(".env.dev")
+
+HOST = os.environ["MONGO_HOST"]
+PORT = os.environ["MONGO_PORT"]
+
+APPUSER_USER = os.environ["MONGO_APPUSER_USER"]
+APPUSER_PASSWORD = os.environ["MONGO_APPUSER_PASSWORD"]
+APPUSER_AUTHDB = os.environ["MONGO_APPUSER_AUTH_DB"]
+
+DASHBOARDUSER_USER = os.environ["MONGO_DASHBOARDUSER_USER"]
+DASHBOARDUSER_PASSWORD = os.environ["MONGO_DASHBOARDUSER_PASSWORD"]
+DASHBOARDUSER_AUTHDB = os.environ["MONGO_DASHBOARDUSER_AUTH_DB"]
+
+APPUSER_URI = f"mongodb://{APPUSER_USER}:{APPUSER_PASSWORD}@{HOST}:{PORT}/{APPUSER_AUTHDB}?authSource={APPUSER_AUTHDB}"
+DASHBOARDUSER_URI = f"mongodb://{DASHBOARDUSER_USER}:{DASHBOARDUSER_PASSWORD}@{HOST}:{PORT}/{DASHBOARDUSER_AUTHDB}?authSource={DASHBOARDUSER_AUTHDB}"
+

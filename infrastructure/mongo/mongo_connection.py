@@ -1,38 +1,34 @@
-from pymongo import MongoClient, errors
+from pymongo import MongoClient
 from pymongo.errors import ServerSelectionTimeoutError
+from config.mongo_config import APPUSER_URI, DASHBOARDUSER_URI, MongoUser
 
-class Mongo_Connection:
-    def __init__(self, user, password, host, port, db_name):
+class MongoConnection:
+    def __init__(self, user : MongoUser):
         self.user = user
-        self.password = password
-        self.connected = False
-        self.host = host
-        self.port = port
-        self.db_name = db_name
-        self.db = None
         self.connected = False
 
     def connect(self):
-        conn_str = f"mongodb://{self.user}:{self.password}@{self.host}:{self.port}/{self.db_name}?authSource={self.db_name}"
-        self.client = MongoClient(conn_str)
-    
+        if self.user == MongoUser.APPUSER:
+            self.uri = APPUSER_URI
+        elif self.user == MongoUser.DASHBOARDUSER:
+            self.uri = DASHBOARDUSER_URI
+        else:
+            raise ValueError(f"{self.user} has no connection String in Mongo Config File")
+        
         try:
-            self.client.server_info()
-            self.db = self.client[self.db_name]  
+            self.client = MongoClient(self.uri)
+            self.client.server_info() 
             self.connected = True
-            print(f"--- Connected as {self.user} ---")
+            print(f"--- Connected as {self.user.value} ---")
         except ServerSelectionTimeoutError as e:
             print(f"Not able to connect to database")
             print(f"Error: {e}")
         
-    
-    def get_db(self):
-        return self.client[self.db_name]
 
     def close(self):
         self.client.close()
         self.connected = False
-        print(f"--- Connection {self.user} closed ---")
+        print(f"--- Connection {self.user.value} closed ---")
 
     def __enter__(self):
         self.connect()
