@@ -1,0 +1,25 @@
+services:
+    mongodb:
+        image: mongodb/mongodb-community-server:latest
+        container_name: mongodb
+        restart: unless-stopped
+        ports:
+            - "27017:27017"
+        env_file:
+            - .env.dev
+        volumes:
+            - mongodb:/data/db
+            - ./scripts/mongo-init:/docker-entrypoint-initdb.d
+#    migrate:
+#        image: python:3.11
+#        depends_on:
+#            - mongodb
+#        working_dir: /app
+#        volumes:
+#            - .:/app
+#        command: ["python", "scripts/migration/migrate.py"]
+
+volumes:
+    mongodb:
+        external: false
+        # umstellen für prod um volume nicht immer zu löschen 
