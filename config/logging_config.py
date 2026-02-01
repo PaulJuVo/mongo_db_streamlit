@@ -15,7 +15,7 @@ def performance_log(logger : logging.Logger):
                 logger.log(logging.INFO,f"← {func.__name__} beendet, Time={start_time - end_time}")
                 return result
             except Exception as e:
-                logger.log(logging.ERROR,f"Fehler in {func.__name__}: {e}")
+                logger.exception(logging.ERROR,f"Fehler in {func.__name__}")
                 raise
         return wrapper
     return decorator
@@ -23,12 +23,14 @@ def performance_log(logger : logging.Logger):
 
 
 def setup_logging():
+    # für mongo eigenen logger mit eigenem file -> Handler bestimmt file.
     # Mongo-Logger
     mongo_logger = logging.getLogger("mongo")
     mongo_logger.setLevel(logging.INFO)
-    fh_mongo = RotatingFileHandler("logs/mongo.log", maxBytes=1_000_000, backupCount=3)
+    fh_mongo = RotatingFileHandler("logs/mongo.log", maxBytes=1_000_000, backupCount=3, mode="a")
     fh_mongo.setFormatter(logging.Formatter("%(asctime)s | %(levelname)s | %(name)s | %(message)s"))
     mongo_logger.addHandler(fh_mongo)
     mongo_logger.propagate = False
 
+    # alle anderen logs über basicConfig 
     logging.basicConfig(level=logging.INFO, format="%(asctime)s | %(levelname)s | %(name)s | %(message)s", filename="logs/app.log")

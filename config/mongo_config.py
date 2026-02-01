@@ -13,20 +13,8 @@ class MongoCollection(Enum):
     EODPRICE = "eodPrice"
     TEST = "test"
 
-# DEPRICATED
-USER_CONFIG = {
-    MongoUser.APPUSER: {
-        "user": "MONGO_APPUSER_USER",
-        "password": "MONGO_APPUSER_PASSWORD",
-        "auth_db": "MONGO_APPUSER_AUTH_DB",
-    },
-    MongoUser.DASHBOARDUSER: {
-        "user": "MONGO_DASHBOARDUSER_USER",
-        "password": "MONGO_DASHBOARDUSER_PASSWORD",
-        "auth_db": "MONGO_DASHBOARDUSER_AUTH_DB",
-    }
-}
 
+# TODO delete wenn DOCKERFILE da ist 
 from dotenv import load_dotenv
 load_dotenv(".env.dev")
 

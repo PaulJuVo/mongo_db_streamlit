@@ -1,24 +1,114 @@
-2026-02-01 14:18:02,727 | INFO | mongo | → execute gestartet
-2026-02-01 14:18:02,732 | INFO | mongo | ← execute beendet, Time=-0.004675149917602539
-2026-02-01 14:18:02,732 | INFO | mongo | → execute gestartet
-2026-02-01 14:18:02,733 | INFO | mongo | ← execute beendet, Time=-0.00047898292541503906
-2026-02-01 14:18:02,733 | INFO | mongo | → execute gestartet
-2026-02-01 14:18:02,733 | INFO | mongo | ← execute beendet, Time=-0.00045108795166015625
-2026-02-01 14:34:56,190 | INFO | mongo | → execute gestartet
-2026-02-01 14:34:56,191 | INFO | mongo | ← execute beendet, Time=-0.0014712810516357422
-2026-02-01 14:34:56,191 | INFO | mongo | → execute gestartet
-2026-02-01 14:34:56,192 | INFO | mongo | ← execute beendet, Time=-0.0007181167602539062
-2026-02-01 14:34:56,192 | INFO | mongo | → execute gestartet
-2026-02-01 14:34:56,193 | INFO | mongo | ← execute beendet, Time=-0.0004379749298095703
-2026-02-01 14:36:55,706 | INFO | mongo | → execute gestartet
-2026-02-01 14:36:55,708 | INFO | mongo | ← execute beendet, Time=-0.0015969276428222656
-2026-02-01 14:36:55,708 | INFO | mongo | → execute gestartet
-2026-02-01 14:36:55,709 | INFO | mongo | ← execute beendet, Time=-0.0004978179931640625
-2026-02-01 14:36:55,709 | INFO | mongo | → execute gestartet
-2026-02-01 14:36:55,709 | INFO | mongo | ← execute beendet, Time=-0.0005400180816650391
-2026-02-01 14:38:54,475 | INFO | mongo | → execute gestartet
-2026-02-01 14:38:54,477 | INFO | mongo | ← execute beendet, Time=-0.0011048316955566406
-2026-02-01 14:38:54,477 | INFO | mongo | → execute gestartet
-2026-02-01 14:38:54,477 | INFO | mongo | ← execute beendet, Time=-0.0003609657287597656
-2026-02-01 14:38:54,477 | INFO | mongo | → execute gestartet
-2026-02-01 14:38:54,477 | INFO | mongo | ← execute beendet, Time=-0.000347137451171875
+2026-02-01 14:53:54,709 | INFO | mongo | --- Connected as appUser ---
+2026-02-01 14:53:54,709 | INFO | mongo | → execute gestartet
+2026-02-01 14:53:54,713 | INFO | mongo | ← execute beendet, Time=-0.004451751708984375
+2026-02-01 14:53:54,713 | INFO | mongo | → execute gestartet
+2026-02-01 14:53:54,714 | INFO | mongo | ← execute beendet, Time=-0.0005910396575927734
+2026-02-01 14:53:54,714 | INFO | mongo | → execute gestartet
+2026-02-01 14:53:54,715 | INFO | mongo | ← execute beendet, Time=-0.0009186267852783203
+2026-02-01 14:53:54,716 | INFO | mongo | --- Connection closed: appUser ---
+2026-02-01 14:55:15,092 | INFO | mongo | --- Connected as appUser ---
+2026-02-01 14:55:15,092 | INFO | mongo | → execute gestartet
+2026-02-01 14:55:15,095 | INFO | mongo | ← execute beendet, Time=-0.003219127655029297
+2026-02-01 14:55:15,095 | INFO | mongo | → execute gestartet
+2026-02-01 14:55:15,096 | INFO | mongo | ← execute beendet, Time=-0.00039196014404296875
+2026-02-01 14:55:15,096 | INFO | mongo | → execute gestartet
+2026-02-01 14:55:15,096 | INFO | mongo | ← execute beendet, Time=-0.0005309581756591797
+2026-02-01 14:55:15,097 | INFO | mongo | --- Connection closed: appUser ---
+2026-02-01 14:56:01,570 | ERROR | mongo | Not able to connect to database appUser
+Traceback (most recent call last):
+  File "/Users/paulvogt/mongo_db_streamlit/infrastructure/mongo/mongo_connection.py", line 24, in connect
+    self.client.server_info()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/paulvogt/mongo_db_streamlit/venv/lib/python3.13/site-packages/pymongo/synchronous/mongo_client.py", line 2309, in server_info
+    self.admin.command(
+    ~~~~~~~~~~~~~~~~~~^
+        "buildinfo", read_preference=ReadPreference.PRIMARY, session=session
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ),
+    ^
+  File "/Users/paulvogt/mongo_db_streamlit/venv/lib/python3.13/site-packages/pymongo/_csot.py", line 125, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/Users/paulvogt/mongo_db_streamlit/venv/lib/python3.13/site-packages/pymongo/synchronous/database.py", line 934, in command
+    with self._client._conn_for_reads(read_preference, session, operation=command_name) as (
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/paulvogt/mongo_db_streamlit/venv/lib/python3.13/site-packages/pymongo/synchronous/mongo_client.py", line 1885, in _conn_for_reads
+    server = self._select_server(read_preference, session, operation)
+  File "/Users/paulvogt/mongo_db_streamlit/venv/lib/python3.13/site-packages/pymongo/synchronous/mongo_client.py", line 1833, in _select_server
+    server = topology.select_server(
+        server_selector,
+    ...<2 lines>...
+        operation_id=operation_id,
+    )
+  File "/Users/paulvogt/mongo_db_streamlit/venv/lib/python3.13/site-packages/pymongo/synchronous/topology.py", line 428, in select_server
+    server = self._select_server(
+        selector,
+    ...<4 lines>...
+        operation_id=operation_id,
+    )
+  File "/Users/paulvogt/mongo_db_streamlit/venv/lib/python3.13/site-packages/pymongo/synchronous/topology.py", line 402, in _select_server
+    servers = self.select_servers(
+        selector,
+    ...<4 lines>...
+        deprioritized_servers,
+    )
+  File "/Users/paulvogt/mongo_db_streamlit/venv/lib/python3.13/site-packages/pymongo/synchronous/topology.py", line 298, in select_servers
+    server_descriptions = self._select_servers_loop(
+        selector,
+    ...<4 lines>...
+        deprioritized_servers=deprioritized_servers,
+    )
+  File "/Users/paulvogt/mongo_db_streamlit/venv/lib/python3.13/site-packages/pymongo/synchronous/topology.py", line 359, in _select_servers_loop
+    raise ServerSelectionTimeoutError(
+        f"{self._error_message(selector)}, Timeout: {timeout}s, Topology Description: {self.description!r}"
+    )
+pymongo.errors.ServerSelectionTimeoutError: localhost:27017: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 30s, Topology Description: <TopologyDescription id: 697f5b5368c82f1d70e7f41c, topology_type: Unknown, servers: [<ServerDescription ('localhost', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('localhost:27017: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>
+2026-02-01 14:56:01,583 | INFO | mongo | → execute gestartet
+2026-02-01 14:56:31,952 | INFO | mongo | --- Connection closed: appUser ---
+2026-02-01 14:57:47,601 | ERROR | mongo | Not able to connect to database appUser
+Traceback (most recent call last):
+  File "/Users/paulvogt/mongo_db_streamlit/infrastructure/mongo/mongo_connection.py", line 24, in connect
+    self.client.server_info()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/paulvogt/mongo_db_streamlit/venv/lib/python3.13/site-packages/pymongo/synchronous/mongo_client.py", line 2309, in server_info
+    self.admin.command(
+    ~~~~~~~~~~~~~~~~~~^
+        "buildinfo", read_preference=ReadPreference.PRIMARY, session=session
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ),
+    ^
+  File "/Users/paulvogt/mongo_db_streamlit/venv/lib/python3.13/site-packages/pymongo/_csot.py", line 125, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/Users/paulvogt/mongo_db_streamlit/venv/lib/python3.13/site-packages/pymongo/synchronous/database.py", line 934, in command
+    with self._client._conn_for_reads(read_preference, session, operation=command_name) as (
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/paulvogt/mongo_db_streamlit/venv/lib/python3.13/site-packages/pymongo/synchronous/mongo_client.py", line 1885, in _conn_for_reads
+    server = self._select_server(read_preference, session, operation)
+  File "/Users/paulvogt/mongo_db_streamlit/venv/lib/python3.13/site-packages/pymongo/synchronous/mongo_client.py", line 1833, in _select_server
+    server = topology.select_server(
+        server_selector,
+    ...<2 lines>...
+        operation_id=operation_id,
+    )
+  File "/Users/paulvogt/mongo_db_streamlit/venv/lib/python3.13/site-packages/pymongo/synchronous/topology.py", line 428, in select_server
+    server = self._select_server(
+        selector,
+    ...<4 lines>...
+        operation_id=operation_id,
+    )
+  File "/Users/paulvogt/mongo_db_streamlit/venv/lib/python3.13/site-packages/pymongo/synchronous/topology.py", line 402, in _select_server
+    servers = self.select_servers(
+        selector,
+    ...<4 lines>...
+        deprioritized_servers,
+    )
+  File "/Users/paulvogt/mongo_db_streamlit/venv/lib/python3.13/site-packages/pymongo/synchronous/topology.py", line 298, in select_servers
+    server_descriptions = self._select_servers_loop(
+        selector,
+    ...<4 lines>...
+        deprioritized_servers=deprioritized_servers,
+    )
+  File "/Users/paulvogt/mongo_db_streamlit/venv/lib/python3.13/site-packages/pymongo/synchronous/topology.py", line 359, in _select_servers_loop
+    raise ServerSelectionTimeoutError(
+        f"{self._error_message(selector)}, Timeout: {timeout}s, Topology Description: {self.description!r}"
+    )
+pymongo.errors.ServerSelectionTimeoutError: localhost:27017: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 30s, Topology Description: <TopologyDescription id: 697f5bbdc9116dda4d46d237, topology_type: Unknown, servers: [<ServerDescription ('localhost', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('localhost:27017: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>
