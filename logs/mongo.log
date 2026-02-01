@@ -1,0 +1,24 @@
+2026-02-01 14:18:02,727 | INFO | mongo | → execute gestartet
+2026-02-01 14:18:02,732 | INFO | mongo | ← execute beendet, Time=-0.004675149917602539
+2026-02-01 14:18:02,732 | INFO | mongo | → execute gestartet
+2026-02-01 14:18:02,733 | INFO | mongo | ← execute beendet, Time=-0.00047898292541503906
+2026-02-01 14:18:02,733 | INFO | mongo | → execute gestartet
+2026-02-01 14:18:02,733 | INFO | mongo | ← execute beendet, Time=-0.00045108795166015625
+2026-02-01 14:34:56,190 | INFO | mongo | → execute gestartet
+2026-02-01 14:34:56,191 | INFO | mongo | ← execute beendet, Time=-0.0014712810516357422
+2026-02-01 14:34:56,191 | INFO | mongo | → execute gestartet
+2026-02-01 14:34:56,192 | INFO | mongo | ← execute beendet, Time=-0.0007181167602539062
+2026-02-01 14:34:56,192 | INFO | mongo | → execute gestartet
+2026-02-01 14:34:56,193 | INFO | mongo | ← execute beendet, Time=-0.0004379749298095703
+2026-02-01 14:36:55,706 | INFO | mongo | → execute gestartet
+2026-02-01 14:36:55,708 | INFO | mongo | ← execute beendet, Time=-0.0015969276428222656
+2026-02-01 14:36:55,708 | INFO | mongo | → execute gestartet
+2026-02-01 14:36:55,709 | INFO | mongo | ← execute beendet, Time=-0.0004978179931640625
+2026-02-01 14:36:55,709 | INFO | mongo | → execute gestartet
+2026-02-01 14:36:55,709 | INFO | mongo | ← execute beendet, Time=-0.0005400180816650391
+2026-02-01 14:38:54,475 | INFO | mongo | → execute gestartet
+2026-02-01 14:38:54,477 | INFO | mongo | ← execute beendet, Time=-0.0011048316955566406
+2026-02-01 14:38:54,477 | INFO | mongo | → execute gestartet
+2026-02-01 14:38:54,477 | INFO | mongo | ← execute beendet, Time=-0.0003609657287597656
+2026-02-01 14:38:54,477 | INFO | mongo | → execute gestartet
+2026-02-01 14:38:54,477 | INFO | mongo | ← execute beendet, Time=-0.000347137451171875
