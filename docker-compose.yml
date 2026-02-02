@@ -11,7 +11,18 @@ services:
             - mongodb:/data/db
             - ./scripts/mongo-init:/docker-entrypoint-initdb.d
 
+#    streamlit:
+#        build: .
+#        container_name: streamlit_app
+#        depends_on:
+#            - mongodb
+#        ports:
+#            - "8501:8501"
+#
+#        volumes:
+#            - ./logs:/app/logs
+
 volumes:
     mongodb:
-        external: false
-        # umstellen für prod um volume nicht immer zu löschen 
+        external: true
+        # auf true umstellen für prod um volume nicht immer zu löschen 

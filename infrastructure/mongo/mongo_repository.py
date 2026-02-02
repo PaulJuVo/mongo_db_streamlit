@@ -14,8 +14,7 @@ class MongoRepository(BaseRepositoryInterface):
      
     @performance_log(logger)
     def execute(self):
-        print(self.collection.name)
-        self.collection.insert_one({"x": 69})
+        self.collection.insert_one({"x": 77})
         return None
 
     def find_all(self):

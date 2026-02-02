@@ -1,7 +1,8 @@
 import logging
 from logging.handlers import RotatingFileHandler
 from functools import wraps
-import time 
+import time
+import os
 
 def performance_log(logger : logging.Logger):
     def decorator(func):
@@ -12,7 +13,7 @@ def performance_log(logger : logging.Logger):
                 start_time = time.time()
                 result = func(*args, **kwargs)
                 end_time = time.time()
-                logger.log(logging.INFO,f"← {func.__name__} beendet, Time={start_time - end_time}")
+                logger.log(logging.INFO,f"← {func.__name__} beendet, Time={end_time - start_time}")
                 return result
             except Exception as e:
                 logger.exception(logging.ERROR,f"Fehler in {func.__name__}")
@@ -25,6 +26,7 @@ def performance_log(logger : logging.Logger):
 def setup_logging():
     # für mongo eigenen logger mit eigenem file -> Handler bestimmt file.
     # Mongo-Logger
+    os.makedirs("logs", exist_ok=True)
     mongo_logger = logging.getLogger("mongo")
     mongo_logger.setLevel(logging.INFO)
     fh_mongo = RotatingFileHandler("logs/mongo.log", maxBytes=1_000_000, backupCount=3, mode="a")

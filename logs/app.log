@@ -1,23 +1,2 @@
-2026-02-01 14:38:54,441 | WARNING | core.domain.extract | ich bin hier
-2026-02-01 14:38:54,475 | WARNING | __main__ | logger is aktiv
-2026-02-01 14:38:54,477 | WARNING | __main__ | logger is aktiv
-2026-02-01 14:38:54,477 | WARNING | __main__ | logger is aktiv
-2026-02-01 14:49:09,067 | WARNING | core.domain.extract | ich bin hier
-2026-02-01 14:49:09,105 | WARNING | __main__ | logger is aktiv
-2026-02-01 14:49:09,108 | WARNING | __main__ | logger is aktiv
-2026-02-01 14:49:09,109 | WARNING | __main__ | logger is aktiv
-2026-02-01 14:51:39,198 | WARNING | core.domain.extract | ich bin hier
-2026-02-01 14:51:39,228 | WARNING | __main__ | logger is aktiv
-2026-02-01 14:51:39,230 | WARNING | __main__ | logger is aktiv
-2026-02-01 14:51:39,230 | WARNING | __main__ | logger is aktiv
-2026-02-01 14:53:54,647 | WARNING | core.domain.extract | ich bin hier
-2026-02-01 14:53:54,709 | WARNING | __main__ | logger is aktiv
-2026-02-01 14:53:54,713 | WARNING | __main__ | logger is aktiv
-2026-02-01 14:53:54,714 | WARNING | __main__ | logger is aktiv
-2026-02-01 14:55:15,051 | WARNING | core.domain.extract | ich bin hier
-2026-02-01 14:55:15,092 | WARNING | __main__ | logger is aktiv
-2026-02-01 14:55:15,095 | WARNING | __main__ | logger is aktiv
-2026-02-01 14:55:15,096 | WARNING | __main__ | logger is aktiv
-2026-02-01 14:55:31,260 | WARNING | core.domain.extract | ich bin hier
-2026-02-01 14:56:01,582 | WARNING | __main__ | logger is aktiv
-2026-02-01 14:57:17,194 | WARNING | core.domain.extract | ich bin hier
+2026-02-02 17:31:20,837 | INFO | core.application.run_import | UI Connected
+2026-02-02 17:31:20,885 | INFO | core.application.run_import | dip ist aktiv und funktioniert

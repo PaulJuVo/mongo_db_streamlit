@@ -8,39 +8,10 @@ TEST
 
 ### SETUP
 
-Beim ersten hochfahren auth enablen [how to](https://www.mongodb.com/docs/manual/tutorial/enable-authentication/)
+docker compose up -d
+docker compose up --build wenn änderung
 
-User erstellen:
-
-```javascript
-raw >
-  db.createUser({
-    user: "rawUser",
-    pwd: "password", // or cleartext password
-    roles: [{ role: "readWrite", db: "raw" }],
-  });
-{
-  ok: 1;
-}
-processed >
-  db.createUser({
-    user: "processedUser",
-    pwd: "password", // or cleartext password
-    roles: [
-      { role: "readWrite", db: "processed" },
-      { role: "read", db: "raw" },
-    ],
-  });
-{
-  ok: 1;
-}
-processed >
-  db.createUser({
-    user: "reportUser",
-    pwd: "password", // or cleartext password
-    roles: [{ role: "read", db: "processed" }],
-  });
-```
+streamlit run app/streamlit_app.py
 
 ### DB ROLLEN
 
