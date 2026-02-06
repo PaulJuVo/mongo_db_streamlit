@@ -25,7 +25,8 @@ class MongoConnection:
             self.connected = True
             logger.info(f"--- Connected as {self.user.value} ---")
         except ServerSelectionTimeoutError:
-            logger.exception(f"Not able to connect to database {self.user.value}")
+            logger.exception(f"Not able to connect to database {self.user.value}\
+                             \n {self.uri}")
             raise
         
 

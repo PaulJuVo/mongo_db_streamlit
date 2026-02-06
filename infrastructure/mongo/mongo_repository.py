@@ -16,9 +16,28 @@ class MongoRepository(BaseRepositoryInterface):
     def execute(self):
         self.collection.insert_one({"x": 77})
         return None
+    
+    @performance_log(logger)
+    def exists(self, filter):
+        rec = self.collection.find_one(filter=filter)
+        return rec is not None
+    
+    @performance_log(logger)
+    def insert_one(self, data):
+        return self.collection.insert_one(data)
+    
+    @performance_log(logger)
+    def insert_many(self, data):
+        return self.collection.insert_many(data)
 
     def find_all(self):
         raise NotImplementedError
 
     def save(self):
         raise NotImplementedError
+    
+    def get_collection_name(self):
+        return self.collection.name
+    
+    def delete(self, filter):
+        self.collection.delete_many(filter=filter)

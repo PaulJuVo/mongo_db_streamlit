@@ -14,11 +14,12 @@ services:
 #    streamlit:
 #        build: .
 #        container_name: streamlit_app
+#        env_file:
+#            - .env.dev
 #        depends_on:
 #            - mongodb
 #        ports:
 #            - "8501:8501"
-#
 #        volumes:
 #            - ./logs:/app/logs
 

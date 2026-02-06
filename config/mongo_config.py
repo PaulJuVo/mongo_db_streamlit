@@ -11,10 +11,15 @@ class MongoDatabase(Enum):
 
 class MongoCollection(Enum):
     EODPRICE = "eodPrice"
+    INCOMESTATEMENT = "incomeStatement"
+    PROFILE="profile"
     TEST = "test"
 
+FILTER_QUERIES_UPLOAD = {MongoCollection.PROFILE.value: ["symbol"], 
+              MongoCollection.INCOMESTATEMENT.value : ["symbol", "date"], 
+              MongoCollection.EODPRICE.value : ["symbol", "date"]}
 
-# TODO delete wenn DOCKERFILE da ist 
+# TODO delete wenn streamlit über docker läuft und prod sein soll 
 from dotenv import load_dotenv
 load_dotenv(".env.dev")
 
