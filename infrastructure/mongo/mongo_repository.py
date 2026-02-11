@@ -48,3 +48,6 @@ class MongoRepository(BaseRepositoryInterface):
         except errors.PyMongoError as e:
             self.logger.exception("Fehler bei aggregate(): %s", e)
             raise
+    @performance_log(logger)
+    def run_db_command(self, command):
+        self.db.command(command)

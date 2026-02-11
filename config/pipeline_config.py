@@ -23,6 +23,7 @@ COMPANY_PIPELINE = [
     }
 ]
 
+# TODO DELETE 
 STAGED_FINANCEDATA_PIPELINE = [
     {
         "$unwind": "$historical"
@@ -98,6 +99,52 @@ STAGED_FINANCEDATA_PIPELINE = [
         "$out": {
             "db": MongoDatabase.RAW.value,
             "coll": MongoCollection.STAGED_FINANCEDATA.value,
+        }
+    }
+]
+
+
+EOD_STAGED = [
+    {
+        "$unwind": "$historical"
+    },
+    {
+        "$addFields": {
+            "date": { "$toDate" : "$historical.date"},
+            "adjClose" : "$historical.adjClose"
+        }
+    },
+    {
+        "$project": {
+            "_id": 0,
+            "symbol": 1,
+            "date": 1,
+            "adjClose": 1
+        }
+    },
+    {
+        "$out": {
+            "db": MongoDatabase.RAW.value,
+            "coll": MongoCollection.STAGED_EODPRICE.value,
+        }
+    }
+]
+
+INCOME_STAGED = [
+    {
+        "$project": {
+            "_id": 1,
+            "symbol": 1,
+            "date": { "$toDate" : "$date"},
+            "fillingDate": { "$toDate" : "$fillingDate"},
+            "eps": 1,
+            "epsdiluted" : 1
+        }
+    },
+    {
+        "$out": {
+            "db": MongoDatabase.RAW.value,
+            "coll": MongoCollection.STAGED_INCOMESTATEMENT.value,
         }
     }
 ]

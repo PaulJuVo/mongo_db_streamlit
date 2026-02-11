@@ -16,10 +16,22 @@ class MongoCollection(Enum):
     FINANCEDATA = "financeData"
     COMPANYDATA = "companyData"
     STAGED_FINANCEDATA = "stagedFinanceData"
+    STAGED_EODPRICE = "stagedEodPrice"
+    STAGED_INCOMESTATEMENT = "stagedIncomeStatement"
 
 FILTER_QUERIES_UPLOAD = {MongoCollection.PROFILE.value: ["symbol"], 
               MongoCollection.INCOMESTATEMENT.value : ["symbol", "date"], 
               MongoCollection.EODPRICE.value : ["symbol"]}
+
+STAGED_INCOMESTATEMENT_INDEX =   {
+    "createIndexes": MongoCollection.STAGED_INCOMESTATEMENT.value,
+    "indexes": [
+      {
+        "key": { "symbol" : 1, "fillingDate": -1 },
+        "name": "symbol_fillingdate_index"
+      }
+    ]
+}
 
 
 # TODO delete wenn streamlit über docker läuft und prod sein soll 

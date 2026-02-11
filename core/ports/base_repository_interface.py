@@ -26,3 +26,6 @@ class BaseRepositoryInterface(ABC):
     @abstractmethod
     def write_rejected_data(self, data):
         pass
+    @abstractmethod
+    def run_db_command(self, command):
+        pass

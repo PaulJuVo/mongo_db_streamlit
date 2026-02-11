@@ -1,4 +1,3 @@
-from typing import List
 import streamlit as st
 from streamlit.runtime.uploaded_file_manager import UploadedFile
 from infrastructure.mongo.mongo_repository import MongoRepository
@@ -7,14 +6,16 @@ from app.shared.logging import init_logging
 from app.shared.mongo import get_mongo
 from core.application.run_import import import_many
 from app.adapter.adapter import get_dict_from_json
+from core.application.etl_pipeline import PipelineService
+import time
 import logging
 
 
 
 init_logging()
-logger = logging.getLogger("Streamlit - Upload")
+logger = logging.getLogger("Streamlit - Pipeline")
 
-st.title("Upload")
+st.title("Pipeline")
 
 def import_files(upload_file):
     i = 0 
@@ -67,12 +68,21 @@ def get_collection_name(rawJson : UploadedFile):
         raise ValueError(f"Keine gemappte Mongo Collection für: {name}")
 
 conn = get_mongo(MongoUser.APPUSER)
-eod_repo = MongoRepository(mongo_connection=conn, db=MongoDatabase.RAW, collection=MongoCollection.EODPRICE)
-income_repo = MongoRepository(mongo_connection=conn, db=MongoDatabase.RAW, collection=MongoCollection.INCOMESTATEMENT)
-profile_repo = MongoRepository(mongo_connection=conn, db=MongoDatabase.RAW, collection=MongoCollection.PROFILE)
+eod_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.EODPRICE)
+staged_eod_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.STAGED_EODPRICE)
+staged_income_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.STAGED_INCOMESTATEMENT)
+income_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.INCOMESTATEMENT)
+profile_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.PROFILE)
 
-container = st.container(horizontal=True, horizontal_alignment="left")
+pipeline = PipelineService(eodprice_repo=eod_repo, 
+                           income_repo=income_repo, 
+                           profile_repo=profile_repo, 
+                           staged_income_repo=staged_income_repo, 
+                           staged_eodprice_repo=staged_eod_repo)
+
 upload_container = st.container()
+container = st.container(horizontal=True, horizontal_alignment="left")
+
 
 with upload_container:
     upload_file: list[UploadedFile] = upload_container.file_uploader(label="Upload JSON or directory with JSON", 
@@ -81,15 +91,19 @@ with upload_container:
                                max_upload_size=2000)
          
 with container:
-     if st.button(label="Import to Database", icon="💾", 
+    if st.button(label="Import to Database", icon="💾", 
               icon_position="right", help="Import the data to the MongoDb Database"):
         with st.spinner("Importing Files", show_time=True):
-            import_files(upload_file=upload_file)
-                
-           
-
+            import_files(upload_file=upload_file)    
+        
+if st.button(label="Run pipeline", icon="🚀", icon_position="right", help="run etl pipeline"):
+    with st.spinner("running Pipeline...", show_time=True):
+        pipeline.run() 
+    st.toast(f"Pipeline run completed", icon="✅", duration="long")
                 
                      
+
+
                 
           
 

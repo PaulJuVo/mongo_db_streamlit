@@ -7,4 +7,3 @@ def get_mongo(user : MongoUser):
     conn = MongoConnection(user)
     conn.connect()
     return conn
-
