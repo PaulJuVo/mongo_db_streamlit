@@ -24,13 +24,15 @@ class PipelineService:
         self.staged_income_repo.drop()
         self.income_repo.execute_pipeline(INCOME_STAGED)
         self.staged_income_repo.run_db_command(STAGED_INCOMESTATEMENT_INDEX)
+        # create_finance_data
+        # self.finance_tmp_rep.execute_pipeline( merge daten in processed )
 
     def create_finance_data(self):
         '''
             loop all eod data in staging
                 find last 4 eps in staged income
                 calc pe ratio 
-                write to processed.finance
+                write to processed.finance_tmp
         '''
         pass
 
