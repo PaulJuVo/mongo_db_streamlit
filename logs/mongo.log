@@ -1,3 +1,0 @@
-2026-02-02 17:31:20,883 | INFO | mongo | --- Connected as appUser ---
-2026-02-02 17:31:20,885 | INFO | mongo | → execute gestartet
-2026-02-02 17:31:20,888 | INFO | mongo | ← execute beendet, Time=0.0032079219818115234

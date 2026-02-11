@@ -8,15 +8,15 @@ def performance_log(logger : logging.Logger):
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
-            logger.log(logging.INFO,f"→ {func.__name__} mit gestartet")
+            logger.info(f"→ {func.__name__} gestartet")
             try:
                 start_time = time.time()
                 result = func(*args, **kwargs)
                 end_time = time.time()
-                logger.log(logging.INFO,f"← {func.__name__} beendet, Time={end_time - start_time}")
+                logger.info(f"← {func.__name__} beendet, Time={end_time - start_time}")
                 return result
             except Exception:
-                logger.exception(logging.ERROR,f"Fehler in {func.__name__}")
+                logger.exception(f"Fehler in {func.__name__}")
                 raise
         return wrapper
     return decorator

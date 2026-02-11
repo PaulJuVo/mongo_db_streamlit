@@ -1,7 +1,6 @@
 from typing import List
 import streamlit as st
 from streamlit.runtime.uploaded_file_manager import UploadedFile
-from infrastructure.mongo.mongo_connection import MongoConnection
 from infrastructure.mongo.mongo_repository import MongoRepository
 from config.mongo_config import MongoCollection, MongoDatabase, MongoUser
 from app.shared.logging import init_logging
@@ -13,13 +12,15 @@ import logging
 
 
 init_logging()
-logger = logging.getLogger("Streamli - Upload")
+logger = logging.getLogger("Streamlit - Upload")
 
 st.title("Upload")
 
 def import_files(upload_file):
     i = 0 
     size = len(upload_file)
+    msg = "Import process finished" 
+    failed_import_counter = 0
     if size < 1:
         st.toast("There is nothing to Import", icon="🤠")
         return
@@ -28,31 +29,42 @@ def import_files(upload_file):
         try:
             coll_name = get_collection_name(file)
             data = get_dict_from_json(file, coll_name)
-            if coll_name == "profile":
+            
+            if coll_name == MongoCollection.PROFILE.value.lower():
                 repo = profile_repo
-            elif coll_name == "incomestatement":
+            elif coll_name == MongoCollection.INCOMESTATEMENT.value.lower():
                 repo = income_repo
-            else: # coll_name =="eod_prices"
+            else: # coll_name =="eodprices"
                 repo = eod_repo
             import_many(repo, data)
         except Exception as e:
-             logger.exception("Could not import")
-             st.toast(f"Couldn't import {file.name}: {e}", icon="❌", duration="short")
-             continue
+            st.toast(f"Couldn't import {file.name}: {e}", icon="❌", duration="short")
+            failed_import_counter += 1
+            continue
         finally:
             i += 1
             pg_bar.progress(i / size)
             
+    if failed_import_counter > 0:
+        msg += f" but {failed_import_counter} files couldn't get imported"
     pg_bar.empty()
-    st.success("Import completed")  
+    st.toast(f"{msg}", icon="☑️")
+    
         
-
      
 def get_collection_name(rawJson : UploadedFile):
     name : str = rawJson.name
     name = name.removesuffix(".json")
-    collection_name = name.split("_", maxsplit=1)[1].lower()
-    return collection_name
+    parts = name.split("_", 1)
+    if len(parts) != 2:
+        raise ValueError(f"Ungültiger Dateiname: {name}")
+    normalized = parts[1].lower().replace("_", "")
+    if normalized == "eodprices":
+        normalized = "eodprice"
+    if normalized in [c.value.lower() for c in MongoCollection]:
+        return normalized
+    else:
+        raise ValueError(f"Keine gemappte Mongo Collection für: {name}")
 
 conn = get_mongo(MongoUser.APPUSER)
 eod_repo = MongoRepository(mongo_connection=conn, db=MongoDatabase.RAW, collection=MongoCollection.EODPRICE)
@@ -73,7 +85,7 @@ with container:
               icon_position="right", help="Import the data to the MongoDb Database"):
         with st.spinner("Importing Files", show_time=True):
             import_files(upload_file=upload_file)
-            
+                
            
 
                 
