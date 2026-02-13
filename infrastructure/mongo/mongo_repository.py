@@ -1,8 +1,8 @@
 from core.ports.base_repository_interface import BaseRepositoryInterface
+from core.ports.cursor import Cursor
 from infrastructure.mongo.mongo_connection import MongoConnection
 from config.mongo_config import MongoDatabase, MongoCollection
 from config.logging_config import performance_log
-from pymongo import errors
 import logging
 
 
@@ -13,9 +13,6 @@ class MongoRepository(BaseRepositoryInterface):
         self.db = mongo_connection.client.get_database(db.value)
         self.collection = self.db.get_collection(collection.value)
         self.rejection_collection = self.collection.name + "_rejected"
-    
-    def insert_one(self, data):
-        return self.collection.insert_one(data)
     
     @performance_log(logger)
     def insert_many(self, data):
@@ -41,13 +38,10 @@ class MongoRepository(BaseRepositoryInterface):
     
     @performance_log(logger)
     def execute_pipeline(self, pipeline):
-        try:
-            cursor = self.collection.aggregate(pipeline)
-            results = list(cursor)
-            return results
-        except errors.PyMongoError as e:
-            self.logger.exception("Fehler bei aggregate(): %s", e)
-            raise
-    @performance_log(logger)
-    def run_db_command(self, command):
-        self.db.command(command)
+        self.collection.aggregate(pipeline)
+    
+    def find(self, filter = None, batch_size = 101, limit = 0) -> Cursor[dict]:
+        return self.collection.find(filter = filter, batch_size = batch_size, limit = limit)
+        
+    def create_index(self, keys : list[tuple], unique : bool):
+        self.collection.create_index(keys=keys, unique=unique)

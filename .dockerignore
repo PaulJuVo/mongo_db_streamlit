@@ -42,3 +42,7 @@ docker-compose.yml
 build/
 dist/
 *.egg-info/
+
+pytest.ini
+
+tests/

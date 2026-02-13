@@ -15,94 +15,18 @@ COMPANY_PIPELINE = [
             "industry": 1
         }
     },
-    {  
-        "$out": {
-            "db": MongoDatabase.PROCESSED.value,
-            "coll": MongoCollection.COMPANYDATA.value,
+    {
+        "$merge": {
+            "into" :{
+                "db": MongoDatabase.PROCESSED.value,
+                "coll": MongoCollection.COMPANYDATA.value,
+            },
+            "on": "symbol",
+            "whenMatched": "replace",
+            "whenNotMatched": "insert"
         }
     }
 ]
-
-# TODO DELETE 
-STAGED_FINANCEDATA_PIPELINE = [
-    {
-        "$unwind": "$historical"
-    },
-    {
-        "$addFields": {
-            "date": { "$toDate" : "$historical.date"},
-            "adjClose" : "$historical.adjClose"
-        }
-    },
-    {
-        "$project": {
-            "_id": 0,
-            "symbol": 1,
-            "date": 1,
-            "adjClose": 1
-        }
-    },
-    {
-        "$lookup": {
-            "from" : MongoCollection.INCOMESTATEMENT.value,
-            "localField" : "symbol",
-            "foreignField": "symbol",
-            "let" : { "eod_date" : "$date"},
-            "pipeline": [
-               {
-                   "$match": { 
-                       "$expr" : { 
-                           "$gte" : ["$$eod_date", { "$toDate" :"$fillingDate"}] 
-                       }
-                   }
-               },
-               {
-                   "$sort" :{
-                       "fillingDate" : -1
-                   }
-               },
-               {
-                   "$limit" : 1
-               }
-            ],
-            "as" : "incomeStatement"
-            
-        }
-    },
-    {
-        "$unwind": {
-            "path" : "$incomeStatement",
-            "preserveNullAndEmptyArrays" : True
-        }
-    },
-    {
-        "$addFields": {
-            "incomeStatementDate": { "$toDate" : "$incomeStatement.date"},
-            "incomeStatementFillingDate": { "$toDate" : "$incomeStatement.fillingDate"},
-            "eps" : "$incomeStatement.eps",
-            "epsdiluted" : "$incomeStatement.epsdiluted"
-        }
-    },
-    {
-        "$project": {
-            "_id": 0,
-            "symbol": 1,
-            "date": 1,
-            "adjClose": 1,
-            "incomeStatementDate": 1,
-            "incomeStatementFillingDate": 1,
-            "eps": 1,
-            "epsdiluted": 1,
-        }
-    },
-    {
-        "$out": {
-            "db": MongoDatabase.RAW.value,
-            "coll": MongoCollection.STAGED_FINANCEDATA.value,
-        }
-    }
-]
-
 
 EOD_STAGED = [
     {
@@ -123,9 +47,14 @@ EOD_STAGED = [
         }
     },
     {
-        "$out": {
-            "db": MongoDatabase.RAW.value,
-            "coll": MongoCollection.STAGED_EODPRICE.value,
+        "$merge": {
+            "into" :{
+                "db": MongoDatabase.RAW.value,
+                "coll": MongoCollection.STAGED_EODPRICE.value,
+            },
+            "on": ["date", "symbol" ],
+            "whenMatched": "replace",
+            "whenNotMatched": "insert"
         }
     }
 ]
@@ -138,13 +67,21 @@ INCOME_STAGED = [
             "date": { "$toDate" : "$date"},
             "fillingDate": { "$toDate" : "$fillingDate"},
             "eps": 1,
-            "epsdiluted" : 1
+            "epsdiluted" : 1,
+            "calendarYear" : { "$toInt" : "$calendarYear"},
+            "period" : 1
         }
     },
     {
-        "$out": {
-            "db": MongoDatabase.RAW.value,
-            "coll": MongoCollection.STAGED_INCOMESTATEMENT.value,
+        "$merge": {
+            "into" :{
+                "db": MongoDatabase.RAW.value,
+                "coll": MongoCollection.STAGED_INCOMESTATEMENT.value,
+            },
+            "on": ["date", "symbol" ],
+            "whenMatched": "replace",
+            "whenNotMatched": "insert"
         }
     }
 ]
+

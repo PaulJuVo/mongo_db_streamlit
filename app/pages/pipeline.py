@@ -7,7 +7,6 @@ from app.shared.mongo import get_mongo
 from core.application.run_import import import_many
 from app.adapter.adapter import get_dict_from_json
 from core.application.etl_pipeline import PipelineService
-import time
 import logging
 
 
@@ -73,12 +72,16 @@ staged_eod_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.STAGE
 staged_income_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.STAGED_INCOMESTATEMENT)
 income_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.INCOMESTATEMENT)
 profile_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.PROFILE)
+finance_repo = MongoRepository(conn, MongoDatabase.PROCESSED, MongoCollection.FINANCEDATA)
+company_repo = MongoRepository(conn, MongoDatabase.PROCESSED, MongoCollection.COMPANYDATA)
 
 pipeline = PipelineService(eodprice_repo=eod_repo, 
                            income_repo=income_repo, 
                            profile_repo=profile_repo, 
                            staged_income_repo=staged_income_repo, 
-                           staged_eodprice_repo=staged_eod_repo)
+                           staged_eodprice_repo=staged_eod_repo,
+                           financedata_repo=finance_repo,
+                           company_repo = company_repo)
 
 upload_container = st.container()
 container = st.container(horizontal=True, horizontal_alignment="left")

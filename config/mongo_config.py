@@ -12,27 +12,23 @@ class MongoDatabase(Enum):
 class MongoCollection(Enum):
     EODPRICE = "eodPrice"
     INCOMESTATEMENT = "incomeStatement"
+    STAGED_EODPRICE = "stagedEodPrice"
+    STAGED_INCOMESTATEMENT = "stagedIncomeStatement"
     PROFILE = "profile"
     FINANCEDATA = "financeData"
     COMPANYDATA = "companyData"
-    STAGED_FINANCEDATA = "stagedFinanceData"
-    STAGED_EODPRICE = "stagedEodPrice"
-    STAGED_INCOMESTATEMENT = "stagedIncomeStatement"
+    
 
 FILTER_QUERIES_UPLOAD = {MongoCollection.PROFILE.value: ["symbol"], 
               MongoCollection.INCOMESTATEMENT.value : ["symbol", "date"], 
               MongoCollection.EODPRICE.value : ["symbol"]}
 
-STAGED_INCOMESTATEMENT_INDEX =   {
-    "createIndexes": MongoCollection.STAGED_INCOMESTATEMENT.value,
-    "indexes": [
-      {
-        "key": { "symbol" : 1, "fillingDate": -1 },
-        "name": "symbol_fillingdate_index"
-      }
-    ]
-}
 
+FINANCEDATA_TIMESERIES_CONFIG = {
+               "timeField": "date",
+               "metaField": "symbol",
+               "granularity": "hours"
+           }
 
 # TODO delete wenn streamlit über docker läuft und prod sein soll 
 from dotenv import load_dotenv

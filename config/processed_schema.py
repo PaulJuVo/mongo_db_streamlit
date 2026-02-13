@@ -27,12 +27,13 @@ EODPRICE_SCHEMA = {
 }
 INCOMESTATEMENT_SCHEMA = {
     "type": "object",
-    "required": ["symbol", "date", "epsdiluted", "fillingDate"],
+    "required": ["symbol", "date", "epsdiluted", "fillingDate", "period"],
     "properties": {
         "symbol": {"type": "string"},
         "epsdiluted": {"type": "number"},
         "date": {"type": "string"},
         "fillingDate": {"type": "string"},
+        "period": {"type": "string"}
     }
 }
 
@@ -42,15 +43,3 @@ VALIDATION_SCHEMAS = {
     MongoCollection.EODPRICE.value: EODPRICE_SCHEMA,
     MongoCollection.INCOMESTATEMENT.value : INCOMESTATEMENT_SCHEMA
 }
-
-FINANCEDATACONFIG = { 
-      "timeField": "date", 
-      "metaField": "company",
-      "granularity": "hours"
-    }
-
-#"timeseries": {
-           #    "timeField": "date",
-           #    "metaField": "symbol",
-           #    "granularity": "hours"
-           #}

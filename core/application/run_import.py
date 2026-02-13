@@ -3,7 +3,9 @@ from config.mongo_config import FILTER_QUERIES_UPLOAD
 from config.processed_schema import VALIDATION_SCHEMAS
 from jsonschema import validate, ValidationError
 import datetime 
+import logging
 
+logger = logging.getLogger(__name__)
 
 def import_many(repo: BaseRepositoryInterface, data : list[dict]):
     collection_name = repo.get_collection_name()
@@ -19,7 +21,8 @@ def import_many(repo: BaseRepositoryInterface, data : list[dict]):
                 validate(instance=each, schema=schema)
                 repo.delete(filter)
                 insert_data.append(each)
-            except ValidationError as e : 
+            except ValidationError as e :
+                logger.warning(f"Upload data was rejected: {e.message}")
                 rejected_data.append({**each, "rejectionTime": datetime.datetime.now(), "validationError": e.message})
                 continue
         repo.insert_many(insert_data)
