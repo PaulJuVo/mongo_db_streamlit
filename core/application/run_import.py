@@ -1,4 +1,5 @@
 from core.ports.base_repository_interface import BaseRepositoryInterface
+from config.logging_config import performance_log
 from config.mongo_config import FILTER_QUERIES_UPLOAD
 from config.processed_schema import VALIDATION_SCHEMAS
 from jsonschema import validate, ValidationError
@@ -7,6 +8,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+@performance_log(logger)
 def import_many(repo: BaseRepositoryInterface, data : list[dict]):
     collection_name = repo.get_collection_name()
     filter_queries = FILTER_QUERIES_UPLOAD[collection_name]

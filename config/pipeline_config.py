@@ -9,7 +9,7 @@ COMPANY_PIPELINE = [
     },
     {
         "$project": {
-            "_id": 1,
+            "_id": 0,
             "symbol": 1,
             "companyName": 1,
             "industry": 1
@@ -62,7 +62,7 @@ EOD_STAGED = [
 INCOME_STAGED = [
     {
         "$project": {
-            "_id": 1,
+            "_id": 0,
             "symbol": 1,
             "date": { "$toDate" : "$date"},
             "fillingDate": { "$toDate" : "$fillingDate"},

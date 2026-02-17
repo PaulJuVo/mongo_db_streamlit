@@ -1,3 +1,4 @@
+from typing import Any
 from core.ports.base_repository_interface import BaseRepositoryInterface
 from core.ports.cursor import Cursor
 from infrastructure.mongo.mongo_connection import MongoConnection
@@ -40,8 +41,11 @@ class MongoRepository(BaseRepositoryInterface):
     def execute_pipeline(self, pipeline):
         self.collection.aggregate(pipeline)
     
-    def find(self, filter = None, batch_size = 101, limit = 0) -> Cursor[dict]:
-        return self.collection.find(filter = filter, batch_size = batch_size, limit = limit)
-        
+    def find(self, filter = None, batch_size = 101, limit = 0, projection = None, sort = None) -> Cursor[dict]:
+        return self.collection.find(filter = filter, batch_size = batch_size, limit = limit, projection = projection, sort = sort)
+    
+    def find_distinct(self,key, filter = None)  -> list[Any]:
+        return self.collection.distinct(key=key, filter = filter)
+
     def create_index(self, keys : list[tuple], unique : bool):
         self.collection.create_index(keys=keys, unique=unique)

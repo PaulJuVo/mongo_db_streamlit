@@ -8,7 +8,7 @@ from core.application.run_import import import_many
 from app.adapter.adapter import get_dict_from_json
 from core.application.etl_pipeline import PipelineService
 import logging
-
+from pathlib import Path
 
 
 init_logging()
@@ -16,7 +16,7 @@ logger = logging.getLogger("Streamlit - Pipeline")
 
 st.title("Pipeline")
 
-def import_files(upload_file):
+def import_files(upload_file, is_path = False):
     i = 0 
     size = len(upload_file)
     msg = "Import process finished" 
@@ -27,18 +27,18 @@ def import_files(upload_file):
     pg_bar = st.progress(i / size, "Importing files")
     for file in upload_file:
         try:
-            coll_name = get_collection_name(file)
-            data = get_dict_from_json(file, coll_name)
-            
-            if coll_name == MongoCollection.PROFILE.value.lower():
-                repo = profile_repo
-            elif coll_name == MongoCollection.INCOMESTATEMENT.value.lower():
-                repo = income_repo
-            else: # coll_name =="eodprices"
-                repo = eod_repo
+            if is_path:
+                with open(file) as ofile:
+                    coll_name = get_collection_name(ofile, is_path=is_path)
+                    repo = get_repo(coll_name)
+                    data = get_dict_from_json(ofile, coll_name)
+            else:
+                coll_name = get_collection_name(file, is_path=is_path)
+                repo = get_repo(coll_name)
+                data = get_dict_from_json(file, coll_name)
             import_many(repo, data)
         except Exception as e:
-            st.toast(f"Couldn't import {file.name}: {e}", icon="❌", duration="short")
+            logger.warning(f"Couldn't import {file.name}: {e}")
             failed_import_counter += 1
             continue
         finally:
@@ -49,12 +49,27 @@ def import_files(upload_file):
         msg += f" but {failed_import_counter} files couldn't get imported"
     pg_bar.empty()
     st.toast(f"{msg}", icon="☑️")
-    
-        
-     
-def get_collection_name(rawJson : UploadedFile):
-    name : str = rawJson.name
-    name = name.removesuffix(".json")
+
+def get_repo(collection_name):
+    if collection_name == MongoCollection.PROFILE.value.lower():
+                repo = profile_repo
+    elif collection_name == MongoCollection.INCOMESTATEMENT.value.lower():
+            repo = income_repo
+    elif collection_name == MongoCollection.EODPRICE.value.lower():
+            repo = eod_repo
+    else:
+        raise ValueError(f"Keine gemappte Mongo Collection für: {collection_name}")
+    return repo
+
+def get_collection_name(rawJson, is_path : bool):
+    rawname : str = rawJson.name
+    if is_path:
+        rawname = Path(rawname).resolve().relative_to(PROJECT_ROOT).name
+    name = rawname.removesuffix(".json")
+    coll_name = map_filename_to_collection(name)
+    return coll_name
+
+def map_filename_to_collection(name):
     parts = name.split("_", 1)
     if len(parts) != 2:
         raise ValueError(f"Ungültiger Dateiname: {name}")
@@ -65,6 +80,11 @@ def get_collection_name(rawJson : UploadedFile):
         return normalized
     else:
         raise ValueError(f"Keine gemappte Mongo Collection für: {name}")
+
+
+FILE = Path(__file__).resolve()
+PROJECT_ROOT = FILE.parents[2]
+DATA_PATH = PROJECT_ROOT / "tmp" / "data"
 
 conn = get_mongo(MongoUser.APPUSER)
 eod_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.EODPRICE)
@@ -94,10 +114,19 @@ with upload_container:
                                max_upload_size=2000)
          
 with container:
-    if st.button(label="Import to Database", icon="💾", 
+    if st.button(label="Import to Database from Uploaded File", icon="💾", 
               icon_position="right", help="Import the data to the MongoDb Database"):
         with st.spinner("Importing Files", show_time=True):
             import_files(upload_file=upload_file)    
+    if st.button(label="Import to Database from tmp/test", icon="🧑‍💻", 
+              icon_position="right", help="Import the data to the MongoDb Database"):
+
+        files = []
+        json_files = list(DATA_PATH.glob("*.json"))
+        with st.spinner("Importing Files", show_time=True):
+            for file in json_files:
+                files.append(file)
+            import_files(upload_file=files, is_path=True)
         
 if st.button(label="Run pipeline", icon="🚀", icon_position="right", help="run etl pipeline"):
     with st.spinner("running Pipeline...", show_time=True):

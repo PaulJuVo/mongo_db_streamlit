@@ -26,7 +26,10 @@ class BaseRepositoryInterface(ABC):
     def write_rejected_data(self, data):
         pass
     @abstractmethod
-    def find(self, filter : Optional[dict] = None, batch_size : Optional[int] = None, limit : Optional[int] = None) -> Cursor:
+    def find(self, filter : Optional[dict] = None, batch_size : Optional[int] = None, limit : Optional[int] = None, projection : Optional[dict] = None, sort : Optional[dict] = None) -> Cursor:
+        pass
+    @abstractmethod
+    def find_distinct(self,key, filter = None) -> list:
         pass
     @abstractmethod
     def create_index(self, keys : list[tuple], unique : bool):
