@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from core.ports.cursor import Cursor
-from typing import Optional
+from typing import Any, Optional
 
 class BaseRepositoryInterface(ABC):
     
@@ -30,6 +30,9 @@ class BaseRepositoryInterface(ABC):
         pass
     @abstractmethod
     def find_distinct(self,key, filter = None) -> list:
+        pass
+    @abstractmethod
+    def find_one(self, filter : Optional[dict] = None) -> Any:
         pass
     @abstractmethod
     def create_index(self, keys : list[tuple], unique : bool):

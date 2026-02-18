@@ -12,7 +12,13 @@ COMPANY_PIPELINE = [
             "_id": 0,
             "symbol": 1,
             "companyName": 1,
-            "industry": 1
+            "industry": {
+                "$cond": {
+                  "if": { "$eq": [ "$industry", "" ] },
+                  "then": "Unknown",
+                  "else": "$industry"
+                }
+            }
         }
     },
     {

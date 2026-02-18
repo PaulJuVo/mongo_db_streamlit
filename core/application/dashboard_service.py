@@ -29,10 +29,16 @@ class DashboardService():
         else: 
             return res_list
     
-    def get_company_data(self, key : str, filter : Optional[dict] = None):  
+    def get_distinct_company_data(self, key : str, filter : Optional[dict] = None):  
         result = self.company_repo.find_distinct(key = key, filter=filter)
         return result
     
+    def get_company_suggestions(self, filter : Optional[dict] = None):  
+        result = self.company_repo.find( filter=filter)
+        return result
+    def get_company_data(self, filter : Optional[dict] = None):  
+        result = self.company_repo.find_one(filter=filter)
+        return result
 
 
 

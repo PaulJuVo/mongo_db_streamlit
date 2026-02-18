@@ -9,12 +9,10 @@ from dateutil.relativedelta import relativedelta
 import plotly.express as px
 import pandas as pd
 from core.application.dashboard_service import DashboardService
-from datetime import datetime
 
+from searchbar_component import searchbar
 init_logging()
 logger = logging.getLogger("Streamlit - Dashboard")
-
-st.title("Dashboard")
 
 conn = get_mongo(MongoUser.DASHBOARDUSER)
 finance_repo = MongoRepository(conn, MongoDatabase.PROCESSED, MongoCollection.FINANCEDATA)
@@ -23,37 +21,36 @@ dashboard_service = DashboardService(finance_repo=finance_repo, company_repo=com
 
 @st.cache_data
 def get_industry():
-    result =  dashboard_service.get_company_data(key="industry")
+    result =  dashboard_service.get_distinct_company_data(key="industry")
     return result
 
 @st.cache_data
 def get_symbols(industry):
-    result = dashboard_service.get_company_data(key="symbol", filter = {"industry" : industry})
+    result = dashboard_service.get_distinct_company_data(key="symbol", filter = {"industry" : industry})
     
     return result
 
-industry_option = st.selectbox(
-    "Chose the Industry",
-    get_industry(),
-)
-
-
-symbols = get_symbols(industry_option)
-
-options1 = st.multiselect(
-    "What are your favorite colors?",
-    symbols,
-    default=symbols[0],
-)
+st.title("Dashboard")
 
 current_time = date.today()
 def_from_date = current_time - relativedelta(years=2)
+min_date = date(2010,1,1)
+from_date = st.sidebar.date_input(label="From Date", value=def_from_date, min_value=min_date)
+to_date = st.sidebar.date_input(label="To Date")
+industry_option = st.sidebar.selectbox(
+    "Industry",
+    get_industry(),
+)
 
-from_date = st.date_input(label="From Date", value=def_from_date)
-to_date = st.date_input(label="To Date")
-
+symbols = get_symbols(industry_option)
+symbol_options = st.sidebar.multiselect(
+    "Companies",
+    symbols,
+    default=symbols[0],
+)
+        
 try: 
-    df_ts = dashboard_service.get_finance_data(companies=options1, 
+    df_ts = dashboard_service.get_finance_data(companies=symbol_options, 
                                            from_date=datetime(from_date.year, from_date.month, from_date.day), 
                                            to_date=datetime(to_date.year, to_date.month, to_date.day),
                                            projection=["date", "symbol", "peRatio"])

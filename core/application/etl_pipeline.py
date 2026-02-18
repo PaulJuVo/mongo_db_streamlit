@@ -29,8 +29,8 @@ class PipelineService:
 
     def run(self):
         self.upsert_company_data()
-        self.upsert_eod_staged()
-        self.upsert_income_staged()
+        #self.upsert_eod_staged()
+        #self.upsert_income_staged()
         #self.create_finance_data(2000)
 
 
