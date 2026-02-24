@@ -2,19 +2,19 @@ from config.mongo_config import MongoCollection
 
 PROFIL_SCHEMA = {
     "type": "object",
-    "required": ["symbol", "industry"],
+    "required": ["symbol", "sector"],
     "properties": {
         "symbol": {"type": "string"},
         "companyName": {"type": "string"},
-        "industry": {"type": "string"},
+        "sector": {"type": "string"},
     }
 }
 COMPANY_VALIDATION_SCHEMA = {
     "bsonType": "object",
-    "required": [ "symbol", "industry"],
+    "required": [ "symbol", "sector"],
     "properties": {
         "symbol": { "bsonType": "string" },
-        "industry":  { "bsonType": "string" },
+        "sector":  { "bsonType": "string" },
         "companyName": { "bsonType": "string" }
     }
 }

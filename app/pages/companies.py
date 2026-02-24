@@ -69,22 +69,23 @@ if result:
     to_date = st.sidebar.date_input(label="To Date")
     
     data_company = dashboard_service.get_company_data(filter={"symbol" : st.session_state.symbol})
-    company_name = data_company["companyName"]
-    company_symbol = data_company["symbol"]
-    company_industry = data_company["industry"]
-    col1, col2, col3 = st.columns(3, vertical_alignment="top")
-    with col1:
-        con1 = st.container(border=False)
-        con1.write("Company Name")
-        con1.subheader(company_name)
-    with col2:
-        con2 = st.container(border=False)
-        con2.write("Symbol")
-        con2.subheader(company_symbol)
-    with col3:
-        con3 = st.container(border=False)
-        con3.write("Industry")
-        con3.subheader(company_industry)
+    if data_company:
+        company_name = data_company["companyName"]
+        company_symbol = data_company["symbol"]
+        company_sector = data_company["sector"]
+        col1, col2, col3 = st.columns(3, vertical_alignment="top")
+        with col1:
+            con1 = st.container(border=False)
+            con1.write("Company Name")
+            con1.subheader(company_name)
+        with col2:
+            con2 = st.container(border=False)
+            con2.write("Symbol")
+            con2.subheader(company_symbol)
+        with col3:
+            con3 = st.container(border=False)
+            con3.write("Sector")
+            con3.subheader(company_sector)
     try:
         df_ts = dashboard_service.get_finance_data(companies=[st.session_state.symbol], 
                                                 from_date=datetime(from_date.year, from_date.month, from_date.day), 
@@ -98,11 +99,38 @@ if result:
             df_ts,
             x="date",
             y="peRatio",
-            color="symbol",   # separate lines per company
-            symbol="symbol",  # different markers per company
-            markers=True
+            color="symbol"
         )
-        # In Streamlit anzeigen
-        st.plotly_chart(fig)
+
+        fig.update_traces(
+            line_shape="spline",
+            line=dict(width=2),
+            opacity=0.9
+        )
+
+        fig.update_layout(
+            template="plotly_white",
+            hovermode="x unified",
+            legend=dict(
+                orientation="h",
+                yanchor="bottom",
+                y=1.02,
+                xanchor="right",
+                x=1
+            )
+        )
+
+        fig.update_xaxes(
+            showgrid=True,
+            gridcolor="rgba(200,200,200,0.2)",
+            rangeslider_visible=True
+        )
+
+        fig.update_yaxes(
+            title="P/E Ratio",
+            zeroline=False
+        )
+
+        st.plotly_chart(fig, width="stretch")
     except ValueError:
         st.info("No Data found: Check filter conditions")

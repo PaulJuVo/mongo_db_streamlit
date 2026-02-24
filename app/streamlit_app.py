@@ -20,13 +20,13 @@ company_repo = MongoRepository(conn, MongoDatabase.PROCESSED, MongoCollection.CO
 dashboard_service = DashboardService(finance_repo=finance_repo, company_repo=company_repo)
 
 @st.cache_data
-def get_industry():
-    result =  dashboard_service.get_distinct_company_data(key="industry")
+def get_sector():
+    result =  dashboard_service.get_distinct_company_data(key="sector")
     return result
 
 @st.cache_data
-def get_symbols(industry):
-    result = dashboard_service.get_distinct_company_data(key="symbol", filter = {"industry" : industry})
+def get_symbols(sector):
+    result = dashboard_service.get_distinct_company_data(key="symbol", filter = {"sector" : sector})
     
     return result
 
@@ -37,12 +37,13 @@ def_from_date = current_time - relativedelta(years=2)
 min_date = date(2010,1,1)
 from_date = st.sidebar.date_input(label="From Date", value=def_from_date, min_value=min_date)
 to_date = st.sidebar.date_input(label="To Date")
-industry_option = st.sidebar.selectbox(
-    "Industry",
-    get_industry(),
+
+sector_option = st.sidebar.selectbox(
+    "Sector",
+    get_sector(),
 )
 
-symbols = get_symbols(industry_option)
+symbols = get_symbols(sector_option)
 symbol_options = st.sidebar.multiselect(
     "Companies",
     symbols,
@@ -60,13 +61,36 @@ try:
         df_ts,
         x="date",
         y="peRatio",
-        color="symbol",   # separate lines per company
-        symbol="symbol",  # different markers per company
-        markers=True
+        color="symbol",
+        line_shape="spline"
     )
-    # In Streamlit anzeigen
-    st.plotly_chart(fig)
-except ValueError:
+
+    fig.update_traces(
+        line=dict(width=2),
+        opacity=0.9
+    )
+    fig.update_layout(
+        template="plotly_white",
+        hovermode="x unified",
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=1.02,
+            xanchor="right",
+            x=1
+        )
+    )
+    fig.update_xaxes(
+        showgrid=True,
+        gridcolor="rgba(200,200,200,0.2)",
+        rangeslider_visible=True
+    )
+    fig.update_yaxes(
+        title="P/E Ratio",
+        zeroline=False
+    )
+    st.plotly_chart(fig, width="stretch")
+except KeyError:
     st.info("No Data found")
 
 

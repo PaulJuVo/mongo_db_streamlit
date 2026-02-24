@@ -12,11 +12,11 @@ COMPANY_PIPELINE = [
             "_id": 0,
             "symbol": 1,
             "companyName": 1,
-            "industry": {
+            "sector": {
                 "$cond": {
-                  "if": { "$eq": [ "$industry", "" ] },
+                  "if": { "$eq": [ "$sector", "" ] },
                   "then": "Unknown",
-                  "else": "$industry"
+                  "else": "$sector"
                 }
             }
         }
@@ -41,7 +41,9 @@ EOD_STAGED = [
     {
         "$addFields": {
             "date": { "$toDate" : "$historical.date"},
-            "adjClose" : "$historical.adjClose"
+            "adjClose" : "$historical.adjClose",
+            "unadjustedVolume" : "$historical.unadjustedVolume",
+            
         }
     },
     {
@@ -49,7 +51,8 @@ EOD_STAGED = [
             "_id": 0,
             "symbol": 1,
             "date": 1,
-            "adjClose": 1
+            "adjClose": 1,
+            "unadjustedVolume": 1
         }
     },
     {
@@ -75,7 +78,8 @@ INCOME_STAGED = [
             "eps": 1,
             "epsdiluted" : 1,
             "calendarYear" : { "$toInt" : "$calendarYear"},
-            "period" : 1
+            "period" : 1, 
+            "netIncome" : 1
         }
     },
     {
