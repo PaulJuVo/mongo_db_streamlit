@@ -57,6 +57,8 @@ def get_repo(collection_name):
             repo = income_repo
     elif collection_name == MongoCollection.EODPRICE.value.lower():
             repo = eod_repo
+    elif collection_name == MongoCollection.CASHFLOW.value.lower():
+            repo = cashflow_repo
     else:
         raise ValueError(f"Keine gemappte Mongo Collection für: {collection_name}")
     return repo
@@ -84,24 +86,27 @@ def map_filename_to_collection(name):
 
 FILE = Path(__file__).resolve()
 PROJECT_ROOT = FILE.parents[2]
-DATA_PATH = PROJECT_ROOT / "tmp" / "data"
+DATA_PATH = PROJECT_ROOT / "tmp" / "test"
 
 conn = get_mongo(MongoUser.APPUSER)
-eod_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.EODPRICE)
-staged_eod_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.STAGED_EODPRICE)
-staged_income_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.STAGED_INCOMESTATEMENT)
-income_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.INCOMESTATEMENT)
-profile_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.PROFILE)
 finance_repo = MongoRepository(conn, MongoDatabase.PROCESSED, MongoCollection.FINANCEDATA)
 company_repo = MongoRepository(conn, MongoDatabase.PROCESSED, MongoCollection.COMPANYDATA)
-
-pipeline = PipelineService(eodprice_repo=eod_repo, 
-                           income_repo=income_repo, 
-                           profile_repo=profile_repo, 
-                           staged_income_repo=staged_income_repo, 
-                           staged_eodprice_repo=staged_eod_repo,
-                           financedata_repo=finance_repo,
-                           company_repo = company_repo)
+eod_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.EODPRICE)
+cashflow_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.CASHFLOW)
+staged_eod_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.STAGED_EODPRICE)
+staged_income_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.STAGED_INCOMESTATEMENT)
+staged_cashflow_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.STAGED_CASHFLOW)
+income_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.INCOMESTATEMENT)
+profile_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.PROFILE)
+pipeline_service = PipelineService(eodprice_repo=eod_repo, 
+                                    income_repo=income_repo,
+                                    cashflow_repo=cashflow_repo, 
+                                    staged_eodprice_repo=staged_eod_repo, 
+                                    staged_income_repo=staged_income_repo,
+                                    staged_cashflow_repo=staged_cashflow_repo, 
+                                    profile_repo=profile_repo, 
+                                    financedata_repo=finance_repo, 
+                                    company_repo=company_repo)
 
 upload_container = st.container()
 container = st.container(horizontal=True, horizontal_alignment="left")
@@ -130,7 +135,7 @@ with container:
         
 if st.button(label="Run pipeline", icon="🚀", icon_position="right", help="run etl pipeline"):
     with st.spinner("running Pipeline...", show_time=True):
-        pipeline.run() 
+        pipeline_service.run() 
     st.toast(f"Pipeline run completed", icon="✅", duration="long")
                 
                      

@@ -27,10 +27,19 @@ EODPRICE_SCHEMA = {
 }
 INCOMESTATEMENT_SCHEMA = {
     "type": "object",
-    "required": ["symbol", "date", "epsdiluted", "fillingDate", "period"],
+    "required": ["symbol", "date", "fillingDate", "period"],
     "properties": {
         "symbol": {"type": "string"},
-        "epsdiluted": {"type": "number"},
+        "date": {"type": "string"},
+        "fillingDate": {"type": "string"},
+        "period": {"type": "string"}
+    }
+}
+CASHFLOW_SCHEMA = {
+    "type": "object",
+    "required": ["symbol", "date", "fillingDate", "period"],
+    "properties": {
+        "symbol": {"type": "string"},
         "date": {"type": "string"},
         "fillingDate": {"type": "string"},
         "period": {"type": "string"}
@@ -41,5 +50,6 @@ VALIDATION_SCHEMAS = {
     MongoCollection.PROFILE.value: PROFIL_SCHEMA,
     MongoCollection.COMPANYDATA.value: COMPANY_VALIDATION_SCHEMA,
     MongoCollection.EODPRICE.value: EODPRICE_SCHEMA,
-    MongoCollection.INCOMESTATEMENT.value : INCOMESTATEMENT_SCHEMA
+    MongoCollection.INCOMESTATEMENT.value : INCOMESTATEMENT_SCHEMA,
+    MongoCollection.CASHFLOW.value : CASHFLOW_SCHEMA
 }

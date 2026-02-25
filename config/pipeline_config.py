@@ -41,8 +41,7 @@ EOD_STAGED = [
     {
         "$addFields": {
             "date": { "$toDate" : "$historical.date"},
-            "adjClose" : "$historical.adjClose",
-            "unadjustedVolume" : "$historical.unadjustedVolume",
+            "adjClose" : "$historical.adjClose"
             
         }
     },
@@ -51,8 +50,7 @@ EOD_STAGED = [
             "_id": 0,
             "symbol": 1,
             "date": 1,
-            "adjClose": 1,
-            "unadjustedVolume": 1
+            "adjClose": 1
         }
     },
     {
@@ -79,7 +77,8 @@ INCOME_STAGED = [
             "epsdiluted" : 1,
             "calendarYear" : { "$toInt" : "$calendarYear"},
             "period" : 1, 
-            "netIncome" : 1
+            "revenue" : 1,
+            "weightedAverageShsOutDil" : 1
         }
     },
     {
@@ -87,6 +86,32 @@ INCOME_STAGED = [
             "into" :{
                 "db": MongoDatabase.RAW.value,
                 "coll": MongoCollection.STAGED_INCOMESTATEMENT.value,
+            },
+            "on": ["date", "symbol" ],
+            "whenMatched": "replace",
+            "whenNotMatched": "insert"
+        }
+    }
+]
+
+CASHFLOW_STAGED = [
+    {
+        "$project": {
+            "_id": 0,
+            "symbol": 1,
+            "date": { "$toDate" : "$date"},
+            "fillingDate": { "$toDate" : "$fillingDate"},
+            "calendarYear" : { "$toInt" : "$calendarYear"},
+            "period" : 1, 
+            "freeCashFlow" : 1,
+            "operatingCashFlow": 1
+        }
+    },
+    {
+        "$merge": {
+            "into" :{
+                "db": MongoDatabase.RAW.value,
+                "coll": MongoCollection.STAGED_CASHFLOW.value,
             },
             "on": ["date", "symbol" ],
             "whenMatched": "replace",

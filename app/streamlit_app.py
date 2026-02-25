@@ -7,10 +7,8 @@ from app.shared.mongo import get_mongo
 from datetime import date, datetime
 from dateutil.relativedelta import relativedelta
 import plotly.express as px
-import pandas as pd
 from core.application.dashboard_service import DashboardService
 
-from searchbar_component import searchbar
 init_logging()
 logger = logging.getLogger("Streamlit - Dashboard")
 
@@ -49,49 +47,60 @@ symbol_options = st.sidebar.multiselect(
     symbols,
     default=symbols[0],
 )
-        
-try: 
-    df_ts = dashboard_service.get_finance_data(companies=symbol_options, 
-                                           from_date=datetime(from_date.year, from_date.month, from_date.day), 
-                                           to_date=datetime(to_date.year, to_date.month, to_date.day),
-                                           projection=["date", "symbol", "peRatio"])
+
+ratios = {"peRatio": "Price / Earnings",
+          "psRatio": "Price / Sales",
+          "pcRatio": "Price / Operating Cashflow",
+          "pfcfRatio": "Price / Free Cashflow"}
+
+ratio = st.sidebar.pills("Ratios", 
+                         options=ratios.keys(), 
+                         format_func=lambda option: ratios[option], 
+                         selection_mode="single",
+                         default="peRatio")
+if ratio:
+    try: 
+        df_ts = dashboard_service.get_finance_data(companies=symbol_options, 
+                                               from_date=datetime(from_date.year, from_date.month, from_date.day), 
+                                               to_date=datetime(to_date.year, to_date.month, to_date.day),
+                                               projection=["date", "symbol", ratio])
 
 
-    fig = px.line(
-        df_ts,
-        x="date",
-        y="peRatio",
-        color="symbol",
-        line_shape="spline"
-    )
-
-    fig.update_traces(
-        line=dict(width=2),
-        opacity=0.9
-    )
-    fig.update_layout(
-        template="plotly_white",
-        hovermode="x unified",
-        legend=dict(
-            orientation="h",
-            yanchor="bottom",
-            y=1.02,
-            xanchor="right",
-            x=1
+        fig = px.line(
+            df_ts,
+            x="date",
+            y=ratio,
+            color="symbol",
+            line_shape="spline"
         )
-    )
-    fig.update_xaxes(
-        showgrid=True,
-        gridcolor="rgba(200,200,200,0.2)",
-        rangeslider_visible=True
-    )
-    fig.update_yaxes(
-        title="P/E Ratio",
-        zeroline=False
-    )
-    st.plotly_chart(fig, width="stretch")
-except KeyError:
-    st.info("No Data found")
+
+        fig.update_traces(
+            line=dict(width=2),
+            opacity=0.9
+        )
+        fig.update_layout(
+            template="plotly_white",
+            hovermode="x unified",
+            legend=dict(
+                orientation="h",
+                yanchor="bottom",
+                y=1.02,
+                xanchor="right",
+                x=1
+            )
+        )
+        fig.update_xaxes(
+            showgrid=True,
+            gridcolor="rgba(200,200,200,0.2)",
+            rangeslider_visible=True
+        )
+        fig.update_yaxes(
+            title=ratios[ratio],
+            zeroline=False
+        )
+        st.plotly_chart(fig, width="stretch")
+    except KeyError:
+        st.info("No Data found")
 
 
 

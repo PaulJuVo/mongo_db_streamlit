@@ -12,15 +12,18 @@ class MongoDatabase(Enum):
 class MongoCollection(Enum):
     EODPRICE = "eodPrice"
     INCOMESTATEMENT = "incomeStatement"
+    CASHFLOW = "cashflowStatement"
     STAGED_EODPRICE = "stagedEodPrice"
     STAGED_INCOMESTATEMENT = "stagedIncomeStatement"
+    STAGED_CASHFLOW = "stagedCashflowStatement"
     PROFILE = "profile"
     FINANCEDATA = "financeData"
     COMPANYDATA = "companyData"
     
 
 FILTER_QUERIES_UPLOAD = {MongoCollection.PROFILE.value: ["symbol"], 
-              MongoCollection.INCOMESTATEMENT.value : ["symbol", "date"], 
+              MongoCollection.INCOMESTATEMENT.value : ["symbol", "date"],
+              MongoCollection.CASHFLOW.value : ["symbol", "date"],
               MongoCollection.EODPRICE.value : ["symbol"]}
 
 

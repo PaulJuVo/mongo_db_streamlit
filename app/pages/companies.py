@@ -5,7 +5,6 @@ from infrastructure.mongo.mongo_repository import MongoRepository
 from config.mongo_config import MongoCollection, MongoDatabase, MongoUser
 from app.shared.mongo import get_mongo
 import plotly.express as px
-import pandas as pd
 from datetime import datetime, date
 from dateutil.relativedelta import relativedelta
 
@@ -86,51 +85,63 @@ if result:
             con3 = st.container(border=False)
             con3.write("Sector")
             con3.subheader(company_sector)
-    try:
-        df_ts = dashboard_service.get_finance_data(companies=[st.session_state.symbol], 
-                                                from_date=datetime(from_date.year, from_date.month, from_date.day), 
-                                                to_date=datetime(to_date.year, to_date.month, to_date.day), 
-                                                projection=["date", "symbol", "peRatio"])
+    
+    ratios = {"peRatio": "Price / Earnings",
+          "psRatio": "Price / Sales",
+          "pcRatio": "Price / Operating Cashflow",
+          "pfcfRatio": "Price / Free Cashflow"}
 
-        
+    ratio = st.sidebar.pills("Ratios", 
+                         options=ratios.keys(), 
+                         format_func=lambda option: ratios[option], 
+                         selection_mode="single",
+                         default="peRatio")
+    if ratio:
+        try:
+            df_ts = dashboard_service.get_finance_data(companies=[st.session_state.symbol], 
+                                                    from_date=datetime(from_date.year, from_date.month, from_date.day), 
+                                                    to_date=datetime(to_date.year, to_date.month, to_date.day), 
+                                                    projection=["date", "symbol", ratio])
 
 
-        fig = px.line(
-            df_ts,
-            x="date",
-            y="peRatio",
-            color="symbol"
-        )
 
-        fig.update_traces(
-            line_shape="spline",
-            line=dict(width=2),
-            opacity=0.9
-        )
 
-        fig.update_layout(
-            template="plotly_white",
-            hovermode="x unified",
-            legend=dict(
-                orientation="h",
-                yanchor="bottom",
-                y=1.02,
-                xanchor="right",
-                x=1
+            fig = px.line(
+                df_ts,
+                x="date",
+                y=ratio,
+                color="symbol"
             )
-        )
 
-        fig.update_xaxes(
-            showgrid=True,
-            gridcolor="rgba(200,200,200,0.2)",
-            rangeslider_visible=True
-        )
+            fig.update_traces(
+                line_shape="spline",
+                line=dict(width=2),
+                opacity=0.9
+            )
 
-        fig.update_yaxes(
-            title="P/E Ratio",
-            zeroline=False
-        )
+            fig.update_layout(
+                template="plotly_white",
+                hovermode="x unified",
+                legend=dict(
+                    orientation="h",
+                    yanchor="bottom",
+                    y=1.02,
+                    xanchor="right",
+                    x=1
+                )
+            )
 
-        st.plotly_chart(fig, width="stretch")
-    except ValueError:
-        st.info("No Data found: Check filter conditions")
+            fig.update_xaxes(
+                showgrid=True,
+                gridcolor="rgba(200,200,200,0.2)",
+                rangeslider_visible=True
+            )
+
+            fig.update_yaxes(
+                title=ratios[ratio],
+                zeroline=False
+            )
+
+            st.plotly_chart(fig, width="stretch")
+        except ValueError:
+            st.info("No Data found: Check filter conditions")

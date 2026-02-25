@@ -15,6 +15,7 @@ def import_many(repo: BaseRepositoryInterface, data : list[dict]):
     schema = VALIDATION_SCHEMAS[collection_name]
     insert_data = []
     rejected_data = []
+    # TODO Upsert anstatt delete and insertmany.. außer wenn kompletter batch importiert werden soll.
     try:
         for each in data:
             # filter collections for unique identifier like symbol and/or date to delete old records
