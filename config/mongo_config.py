@@ -19,6 +19,11 @@ class MongoCollection(Enum):
     PROFILE = "profile"
     FINANCEDATA = "financeData"
     COMPANYDATA = "companyData"
+    CONSTITUENTS = "constituents"
+    SCD_CONSTITUENTS = "scdConstituents"
+    SECTORDATA = "sectorData"
+    SP500 = "sp500Data"
+    SPXEW = "spxewData"
     
 
 FILTER_QUERIES_UPLOAD = {MongoCollection.PROFILE.value: ["symbol"], 

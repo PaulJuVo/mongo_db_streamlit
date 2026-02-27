@@ -44,8 +44,8 @@ class MongoRepository(BaseRepositoryInterface):
     def find(self, filter = None, batch_size = 101, limit = 0, projection = None, sort = None) -> Cursor[dict]:
         return self.collection.find(filter = filter, batch_size = batch_size, limit = limit, projection = projection, sort = sort)
     
-    def find_one(self, filter = None) -> Any:
-        return self.collection.find_one(filter = filter)
+    def find_one(self, filter = None, sort = None) -> Any:
+        return self.collection.find_one(filter = filter, sort = sort)
     
     def find_distinct(self,key, filter = None)  -> list[Any]:
         return self.collection.distinct(key=key, filter = filter)

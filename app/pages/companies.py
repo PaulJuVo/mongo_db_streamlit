@@ -7,11 +7,16 @@ from app.shared.mongo import get_mongo
 import plotly.express as px
 from datetime import datetime, date
 from dateutil.relativedelta import relativedelta
+from plotly.subplots import make_subplots
+import plotly.graph_objects as go
+import pandas as pd
 
 conn = get_mongo(MongoUser.DASHBOARDUSER)
 finance_repo = MongoRepository(conn, MongoDatabase.PROCESSED, MongoCollection.FINANCEDATA)
 company_repo = MongoRepository(conn, MongoDatabase.PROCESSED, MongoCollection.COMPANYDATA)
-dashboard_service = DashboardService(finance_repo=finance_repo, company_repo=company_repo)
+sector_repo = MongoRepository(conn,  MongoDatabase.PROCESSED, MongoCollection.SECTORDATA)
+sp_500_repo = MongoRepository(conn,  MongoDatabase.PROCESSED, MongoCollection.SP500)
+dashboard_service = DashboardService(finance_repo=finance_repo, company_repo=company_repo, sector_repo=sector_repo, sp_500_repo=sp_500_repo)
 
 @st.cache_data
 def get_suggestions(query):
@@ -101,22 +106,44 @@ if result:
             df_ts = dashboard_service.get_finance_data(companies=[st.session_state.symbol], 
                                                     from_date=datetime(from_date.year, from_date.month, from_date.day), 
                                                     to_date=datetime(to_date.year, to_date.month, to_date.day), 
-                                                    projection=["date", "symbol", ratio])
+                                                    projection=["date", "symbol", "adjClose", ratio])
+            
+            df_sp500 = dashboard_service.get_sp500_data(index="GSPC", from_date=datetime(from_date.year, from_date.month, from_date.day), 
+                                                    to_date=datetime(to_date.year, to_date.month, to_date.day))
+            
+
+            df_ts = pd.DataFrame(df_ts)
+            df_sp500 = pd.DataFrame(df_sp500)
+
+            df_ts["norm"] = df_ts["adjClose"] / df_ts["adjClose"].iloc[0] * 100
+            df_sp500["norm"] = df_sp500["adjClose"] / df_sp500["adjClose"].iloc[0] * 100
 
 
 
+            fig = make_subplots(specs=[[{"secondary_y": True}]])
 
-            fig = px.line(
-                df_ts,
-                x="date",
-                y=ratio,
-                color="symbol"
+            # Ratio (linke Achse)
+            fig.add_trace(
+                go.Scatter(
+                    x=df_ts["date"],
+                    y=df_ts[ratio],
+                    name=ratios[ratio],
+                    mode="lines",
+                    line=dict(width=2),
+                ),
+                secondary_y=False
             )
 
-            fig.update_traces(
-                line_shape="spline",
-                line=dict(width=2),
-                opacity=0.9
+            # adjClose (rechte Achse)
+            fig.add_trace(
+                go.Scatter(
+                    x=df_ts["date"],
+                    y=df_ts["adjClose"],
+                    name="Adj Close",
+                    mode="lines",
+                    line=dict(width=2, dash="dot"),
+                ),
+                secondary_y=True
             )
 
             fig.update_layout(
@@ -138,10 +165,46 @@ if result:
             )
 
             fig.update_yaxes(
-                title=ratios[ratio],
-                zeroline=False
+                title_text=ratios[ratio],
+                zeroline=False,
+                secondary_y=False
             )
 
+            fig.update_yaxes(
+                title_text="Adjusted Close",
+                zeroline=False,
+                secondary_y=True
+            )
+
+            st.plotly_chart(fig, width="stretch")
+
+            fig = go.Figure()
+
+            fig.add_trace(
+                go.Scatter(
+                    x=df_ts["date"],
+                    y=df_ts["norm"],
+                    name=st.session_state.symbol,
+                    mode="lines"
+                )
+            )
+            
+            fig.add_trace(
+                go.Scatter(
+                    x=df_sp500["date"],
+                    y=df_sp500["norm"],
+                    name="S&P 500",
+                    mode="lines",
+                    line=dict(dash="dot")
+                )
+            )
+            
+            fig.update_layout(
+                template="plotly_white",
+                hovermode="x unified",
+                yaxis_title="Performance (Start = 100)"
+            )
+            
             st.plotly_chart(fig, width="stretch")
         except ValueError:
             st.info("No Data found: Check filter conditions")

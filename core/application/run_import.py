@@ -6,6 +6,8 @@ from jsonschema import validate, ValidationError
 import datetime 
 import logging
 
+# TODO eigene exceptions
+
 logger = logging.getLogger(__name__)
 
 @performance_log(logger)
@@ -30,5 +32,26 @@ def import_many(repo: BaseRepositoryInterface, data : list[dict]):
                 continue
         repo.insert_many(insert_data)
         repo.write_rejected_data(rejected_data)
+    except Exception:
+        raise
+
+def import_constituents(repo: BaseRepositoryInterface, data : list[dict]):
+    try:
+        repo.drop()
+        repo.insert_many(data)
+    except Exception:
+        raise
+
+def import_sp500(repo: BaseRepositoryInterface, data : list[dict]):
+    try:
+        repo.drop()
+        repo.insert_many(data)
+    except Exception:
+        raise
+
+def import_spxew(repo: BaseRepositoryInterface, data : list[dict]):
+    try:
+        repo.drop()
+        repo.insert_many(data)
     except Exception:
         raise

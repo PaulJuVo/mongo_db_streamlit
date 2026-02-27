@@ -4,9 +4,9 @@ from infrastructure.mongo.mongo_repository import MongoRepository
 from config.mongo_config import MongoCollection, MongoDatabase, MongoUser
 from app.shared.logging import init_logging
 from app.shared.mongo import get_mongo
-from core.application.run_import import import_many
+from core.application.run_import import import_many, import_constituents,import_sp500, import_spxew
 from app.adapter.adapter import get_dict_from_json
-from core.application.etl_pipeline import PipelineService
+from core.application.pipeline_service import PipelineService
 import logging
 from pathlib import Path
 
@@ -83,12 +83,47 @@ def map_filename_to_collection(name):
     else:
         raise ValueError(f"Keine gemappte Mongo Collection für: {name}")
 
+def import_constituent():
+    try:
+        with open(CONSTITUENTS_PATH) as file:
+            data = get_dict_from_json(file)
+            import_constituents(constituents_repo, data)
+    except Exception as e:
+        logger.warning(f"Couldn't import {file.name}: {e}")
+
+def import_sp_data():
+    try:
+        with open(SP_500_PATH) as file:
+            data = get_dict_from_json(file, MongoCollection.SP500.value)
+            import_sp500(sp500_raw_repo, data)
+    except Exception as e:
+        logger.warning(f"Couldn't import {file.name}: {e}")
+
+def import_spxew_data():
+    try:
+        with open(SPXEW_PATH) as file:
+            data = get_dict_from_json(file, MongoCollection.SPXEW.value)
+            import_spxew(spxew_raw_repo, data)
+    except Exception as e:
+        logger.warning(f"Couldn't import {file.name}: {e}")
+     
+
 
 FILE = Path(__file__).resolve()
 PROJECT_ROOT = FILE.parents[2]
 DATA_PATH = PROJECT_ROOT / "tmp" / "test"
+CONSTITUENTS_PATH = PROJECT_ROOT / "tmp" / "0_sp_500_constituents_historical_2026.json"
+SP_500_PATH = PROJECT_ROOT / "tmp" / "^GSPC_eod_prices.json"
+SPXEW_PATH = PROJECT_ROOT / "tmp" / "^SPXEW_autoadjusted.json"
 
 conn = get_mongo(MongoUser.APPUSER)
+
+constituents_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.CONSTITUENTS)
+scd_constituents_repo = MongoRepository(conn, MongoDatabase.PROCESSED, MongoCollection.SCD_CONSTITUENTS)
+sector_repo =  MongoRepository(conn, MongoDatabase.PROCESSED, MongoCollection.SECTORDATA)
+sp500_raw_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.SP500)
+spxew_raw_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.SPXEW)
+sp500_repo = MongoRepository(conn, MongoDatabase.PROCESSED, MongoCollection.SP500)
 finance_repo = MongoRepository(conn, MongoDatabase.PROCESSED, MongoCollection.FINANCEDATA)
 company_repo = MongoRepository(conn, MongoDatabase.PROCESSED, MongoCollection.COMPANYDATA)
 eod_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.EODPRICE)
@@ -106,7 +141,13 @@ pipeline_service = PipelineService(eodprice_repo=eod_repo,
                                     staged_cashflow_repo=staged_cashflow_repo, 
                                     profile_repo=profile_repo, 
                                     financedata_repo=finance_repo, 
-                                    company_repo=company_repo)
+                                    company_repo=company_repo,
+                                    constituents_repo=constituents_repo,
+                                    scd_constituents_repo=scd_constituents_repo,
+                                    sector_repo = sector_repo,
+                                    sp500_raw_repo=sp500_raw_repo,
+                                    sp500_repo=sp500_repo,
+                                    )
 
 upload_container = st.container()
 container = st.container(horizontal=True, horizontal_alignment="left")
@@ -125,7 +166,9 @@ with container:
             import_files(upload_file=upload_file)    
     if st.button(label="Import to Database from tmp/test", icon="🧑‍💻", 
               icon_position="right", help="Import the data to the MongoDb Database"):
-
+        import_constituent()
+        import_spxew_data()
+        import_sp_data()
         files = []
         json_files = list(DATA_PATH.glob("*.json"))
         with st.spinner("Importing Files", show_time=True):

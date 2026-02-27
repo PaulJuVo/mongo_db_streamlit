@@ -1,6 +1,27 @@
 from config.mongo_config import MongoCollection, MongoDatabase
 from config.processed_schema import COMPANY_VALIDATION_SCHEMA
 
+CONSTITUES = [{"$set": 
+                            {"date": 
+                                {"$convert": 
+                                    {"input": "$date",
+                                    "to": "date",
+                                    "onError": 0,
+                                    "onNull": 0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                          "$merge": {
+                            "into": MongoCollection.CONSTITUENTS.value,   
+                            "on": ["_id"],        
+                            "whenMatched": "replace",   
+                            "whenNotMatched": "insert"  
+                          }
+                        }
+                        ]
+
 COMPANY_PIPELINE = [
     {
         "$match":{
@@ -119,4 +140,185 @@ CASHFLOW_STAGED = [
         }
     }
 ]
+SECTOR_DATA = [
+                  {
+                    "$lookup": {
+                      "from": MongoCollection.COMPANYDATA.value,
+                      "localField": "symbol",
+                      "foreignField": "symbol",
+                      "as": "companyData"
+                    }
+                  },
+                  {
+                    "$replaceRoot": {
+                      "newRoot": {
+                        "$mergeObjects": [
+                          { "$arrayElemAt": [ "$companyData", 0 ] },
+                          "$$ROOT"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "$project": { "companyData": 0 }
+                  },
+                  {
+                    "$group": {
+                      "_id": {
+                        "date": "$date",
+                        "sector": "$sector"
+                      },
+                      "pcRatioMedian": {
+                        "$median": {
+                          "input": "$pcRatio",
+                          "method": "approximate"
+                        }
+                      },
+                      "peRatioMedian": {
+                        "$median": {
+                          "input": "$peRatio",
+                          "method": "approximate"
+                        }
+                      },
+                      "pcfcRatioMedian": {
+                        "$median": {
+                          "input": "$pfcfRatio",
+                          "method": "approximate"
+                        }
+                      },
+                      "psRatioMedian": {
+                        "$median": {
+                          "input": "$psRatio",
+                          "method": "approximate"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "$project": {
+                      "_id": 0,
+                      "date": "$_id.date",      
+                      "sector": "$_id.sector",  
+                      "pcRatioMedian": 1,
+                      "peRatioMedian": 1,
+                      "pcfcRatioMedian": 1,
+                      "psRatioMedian": 1
+                    }
+                  },
+                  {
+                    "$match": {
+                        "sector": { "$exists": True }
+                    }
+                  },
+                  {
+                    "$out": {
+                      "db": MongoDatabase.PROCESSED.value,
+                      "coll": MongoCollection.SECTORDATA.value,
+                      "timeseries": {
+                        "timeField": "date",
+                        "metaField": "sector",    
+                        "granularity": "hours"      
+                      }
+                    }
+                  }
+                ]
 
+
+SPXEW = [
+    {
+    "$project": {
+      "fields": { "$objectToArray": "$$ROOT" },
+      "_id": 0
+      }
+    },
+    {
+    "$unwind": "$fields"
+    },
+    {
+        "$match": {
+            "fields.k": { "$ne": "_id" }
+        }
+    },
+    {
+    "$project": {
+      "date": {"$toDate" : "$fields.k"},
+      "close": "$fields.v.Close",
+      "symbol": "SPXEW"
+      }
+    }
+]
+
+
+SP500 = [
+    {
+        "$unwind": "$historical"
+    },
+    {
+        "$addFields": {
+            "date": { "$toDate" : "$historical.date"},
+            "adjClose" : "$historical.adjClose"
+            
+        }
+    },
+    {
+        "$project": {
+            "_id": 0,
+            "symbol": "GSPC",
+            "date": 1,
+            "adjClose": 1
+        }
+    },
+    {
+        "$unionWith": {
+            "coll": MongoCollection.SPXEW.value,
+            "pipeline": SPXEW
+        }
+    },
+    {
+      "$out": {
+        "db": MongoDatabase.PROCESSED.value,
+        "coll": MongoCollection.SP500.value,
+        "timeseries": {
+          "timeField": "date",
+          "metaField": "symbol",
+          "granularity": "hours"      
+        }
+      }
+    }
+]
+
+SPXEW = [
+    {
+    "$project": {
+      "fields": { "$objectToArray": "$$ROOT" },
+      "_id": 0
+      }
+    },
+    {
+    "$unwind": "$fields"
+    },
+    {
+        "$match": {
+            "fields.k": { "$ne": "_id" }
+        }
+    },
+    {
+    "$project": {
+      "date": {"$toDate" : "$fields.k"},
+      "close": "$fields.v.Close",
+      "symbol": "SPXEW"
+      }
+    }
+]
+
+# ,
+#    {
+#      "$out": {
+#        "db": MongoDatabase.PROCESSED.value,
+#        "coll": MongoCollection.SPXEW.value,
+#        "timeseries": {
+#          "timeField": "date",
+#          "granularity": "hours"      
+#        }
+#      }
+#    }

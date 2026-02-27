@@ -15,7 +15,9 @@ logger = logging.getLogger("Streamlit - Dashboard")
 conn = get_mongo(MongoUser.DASHBOARDUSER)
 finance_repo = MongoRepository(conn, MongoDatabase.PROCESSED, MongoCollection.FINANCEDATA)
 company_repo = MongoRepository(conn, MongoDatabase.PROCESSED, MongoCollection.COMPANYDATA)
-dashboard_service = DashboardService(finance_repo=finance_repo, company_repo=company_repo)
+sector_repo = MongoRepository(conn,  MongoDatabase.PROCESSED, MongoCollection.SECTORDATA)
+sp_500_repo = MongoRepository(conn,  MongoDatabase.PROCESSED, MongoCollection.SP500)
+dashboard_service = DashboardService(finance_repo=finance_repo, company_repo=company_repo, sector_repo=sector_repo, sp_500_repo=sp_500_repo)
 
 @st.cache_data
 def get_sector():
@@ -59,7 +61,22 @@ ratio = st.sidebar.pills("Ratios",
                          selection_mode="single",
                          default="peRatio")
 if ratio:
-    try: 
+    try:
+        last_year, five_year, ten_year = dashboard_service.get_sector_median_data(sector_option, ratio + "Median", datetime(to_date.year, to_date.month, to_date.day))
+        col1, col2, col3 = st.columns(3, vertical_alignment="top")
+        with col1:
+            con1 = st.container(border=True)
+            con1.write("Last Year")
+            con1.header(last_year)
+        with col2:
+            con2 = st.container(border=True)
+            con2.write("Last 5 Years")
+            con2.header(five_year)
+        with col3:
+            con3 = st.container(border=True)
+            con3.write("Last 10 Years")
+            con3.header(ten_year)
+
         df_ts = dashboard_service.get_finance_data(companies=symbol_options, 
                                                from_date=datetime(from_date.year, from_date.month, from_date.day), 
                                                to_date=datetime(to_date.year, to_date.month, to_date.day),

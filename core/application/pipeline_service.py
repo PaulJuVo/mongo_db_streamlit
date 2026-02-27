@@ -1,14 +1,13 @@
 
 from core.ports.base_repository_interface import BaseRepositoryInterface
+from datetime import datetime
 from config.logging_config import performance_log
 from config.mongo_config import FINANCEDATA_TIMESERIES_CONFIG
-from config.pipeline_config import COMPANY_PIPELINE, INCOME_STAGED, EOD_STAGED, CASHFLOW_STAGED
+from config.pipeline_config import COMPANY_PIPELINE, INCOME_STAGED, EOD_STAGED, CASHFLOW_STAGED, CONSTITUES, SECTOR_DATA, SP500
 from core.domain.validation import contains_right_income_statements, contains_right_cashflow_statements
 from core.domain.calculation import calc_ttm_eps, calc_pe_ratio, calc_revenue_per_share_ttm, calc_ps_ratio, \
     get_avg_shares, calc_free_cashflow_per_share_ttm, calc_op_cashflow_per_share_ttm, calc_pc_ratio, calc_pfcf_ratio
-from collections import defaultdict
 import logging
-import pprint
 
 logger = logging.getLogger(__name__)
 
@@ -22,7 +21,12 @@ class PipelineService:
                  staged_cashflow_repo : BaseRepositoryInterface,
                  profile_repo : BaseRepositoryInterface,
                  financedata_repo : BaseRepositoryInterface,
-                 company_repo : BaseRepositoryInterface
+                 company_repo : BaseRepositoryInterface,
+                 constituents_repo : BaseRepositoryInterface,
+                 scd_constituents_repo : BaseRepositoryInterface,
+                 sector_repo : BaseRepositoryInterface,
+                 sp500_raw_repo : BaseRepositoryInterface,
+                 sp500_repo : BaseRepositoryInterface
                  ):
         self.eodprice_repo = eodprice_repo
         self.income_repo = income_repo
@@ -33,24 +37,33 @@ class PipelineService:
         self.company_repo = company_repo
         self.staged_cashflow_repo = staged_cashflow_repo
         self.cashflow_repo = cashflow_repo
+        self.constituents_repo = constituents_repo
+        self.scd_constituents_repo = scd_constituents_repo
+        self.sector_repo = sector_repo
+        self.sp500_raw_repo = sp500_raw_repo
+        self.sp500_repo=sp500_repo
+
 
     def run(self):
+        self.create_scd_constituents()
         self.upsert_company_data()
+        self.create_sp500_timeseries()
         self.upsert_eod_staged()
         self.upsert_income_staged()
-        self.upsert_chasflow_staged()
-        self.create_finance_data(2000)
+        self.upsert_chashflow_staged()
+        #self.create_finance_data(2000)
+        self.create_sector_timeseries()
 
 
         
     @performance_log(logger)
     def create_finance_data(self, b_size):
+        self.financedata_repo.drop()
+        self.financedata_repo.create_time_series(config=FINANCEDATA_TIMESERIES_CONFIG)
+
         results = self.staged_eodprice_repo.find(batch_size=b_size)
         to_copy = ["date", "adjClose", "symbol", "unadjustedVolume"]
         processed_data = []
-
-        self.financedata_repo.drop()
-        self.financedata_repo.create_time_series(config=FINANCEDATA_TIMESERIES_CONFIG)
 
         for eod_price in results:
             finance_data = {k: v for k, v in eod_price.items() if k in to_copy}
@@ -89,13 +102,47 @@ class PipelineService:
 
             else:    
                 finance_data["peRatio"] = None
-                finance_data["eps_diluted_ttm"] = None
                 finance_data["psRatio"] = None
-                finance_data["revenue_per_share_ttm"] = None
 
             processed_data.append(finance_data)
         self.financedata_repo.insert_many(processed_data)
     
+
+    def create_scd_constituents(self):
+        self.constituents_repo.execute_pipeline(CONSTITUES)
+        self.constituents_repo.create_index(keys=[("removedTicker", 1), ("date", 1)], unique=False)
+
+        events = list(self.constituents_repo.find(sort={"date" : 1}))
+        
+        active = {}
+        scd = []
+
+        for event in events:
+            date = event["date"]
+
+            if event["removedSecurity"]:
+                name = event["removedSecurity"]
+                if name in active:
+                    scd.append({
+                        "companyName": name,
+                        "fromDate": active[name],
+                        "toDate": date
+                    })
+                    del active[name]
+
+            if event["addedSecurity"]:
+                name = event["addedSecurity"]
+                active[name] = date
+
+        for name, start in active.items():
+            scd.append({
+                "companyName": name,
+                "fromDate": start,
+                "toDate": datetime(2999,12,12)
+            })
+        self.scd_constituents_repo.drop()
+        self.scd_constituents_repo.insert_many(scd)
+
 
     def upsert_company_data(self):
         self.company_repo.create_index(keys=[("symbol", 1)], unique=True)
@@ -110,36 +157,17 @@ class PipelineService:
         self.income_repo.execute_pipeline(INCOME_STAGED)
         self.staged_income_repo.create_index(keys=[("symbol", 1), ("fillingDate", -1)], unique=False)
 
-    def upsert_chasflow_staged(self):
+    def upsert_chashflow_staged(self):
         self.staged_cashflow_repo.create_index(keys=[("symbol", 1), ("date", -1)], unique=True)
         self.cashflow_repo.execute_pipeline(CASHFLOW_STAGED)
         self.staged_cashflow_repo.create_index(keys=[("symbol", 1), ("fillingDate", -1)], unique=False)
 
-        
+    def create_sector_timeseries(self):
+        self.sector_repo.drop()
+        self.financedata_repo.execute_pipeline(SECTOR_DATA)
+        self.sector_repo.create_index(keys=[("sector", 1), ("date", -1)], unique=False)
 
-
-if __name__ == "__main__":
-    from infrastructure.mongo.mongo_repository import MongoRepository
-    from infrastructure.mongo.mongo_connection import MongoConnection
-    from config.mongo_config import MongoCollection, MongoDatabase, MongoUser
-    with MongoConnection(MongoUser.APPUSER) as conn:
-        finance_repo = MongoRepository(conn, MongoDatabase.PROCESSED, MongoCollection.FINANCEDATA)
-        company_repo = MongoRepository(conn, MongoDatabase.PROCESSED, MongoCollection.COMPANYDATA)
-        eod_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.EODPRICE)
-        cashflow_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.CASHFLOW)
-        staged_eod_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.STAGED_EODPRICE)
-        staged_income_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.STAGED_INCOMESTATEMENT)
-        staged_cashflow_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.STAGED_CASHFLOW)
-        income_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.INCOMESTATEMENT)
-        profile_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.PROFILE)
-        pipeline_service = PipelineService(eodprice_repo=eod_repo, 
-                                            income_repo=income_repo,
-                                            cashflow_repo=cashflow_repo, 
-                                            staged_eodprice_repo=staged_eod_repo, 
-                                            staged_income_repo=staged_income_repo,
-                                            staged_cashflow_repo=staged_cashflow_repo, 
-                                            profile_repo=profile_repo, 
-                                            financedata_repo=finance_repo, 
-                                            company_repo=company_repo)
-        
-        
+    def create_sp500_timeseries(self):
+        self.sp500_repo.drop()
+        self.sp500_raw_repo.execute_pipeline(SP500)
+        self.sp500_repo.create_index(keys=[("date", -1)], unique=False)

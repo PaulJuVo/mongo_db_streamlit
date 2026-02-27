@@ -32,7 +32,7 @@ class BaseRepositoryInterface(ABC):
     def find_distinct(self,key, filter = None) -> list:
         pass
     @abstractmethod
-    def find_one(self, filter : Optional[dict] = None) -> Any:
+    def find_one(self, filter : Optional[dict] = None, sort : Optional[dict] = None) -> Any:
         pass
     @abstractmethod
     def create_index(self, keys : list[tuple], unique : bool):
