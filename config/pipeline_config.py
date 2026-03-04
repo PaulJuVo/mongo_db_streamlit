@@ -33,6 +33,7 @@ COMPANY_PIPELINE = [
             "_id": 0,
             "symbol": 1,
             "companyName": 1,
+            "image": 1,
             "sector": {
                 "$cond": {
                   "if": { "$eq": [ "$sector", "" ] },
@@ -180,7 +181,7 @@ SECTOR_DATA = [
                           "method": "approximate"
                         }
                       },
-                      "pcfcRatioMedian": {
+                      "pfcfRatioMedian": {
                         "$median": {
                           "input": "$pfcfRatio",
                           "method": "approximate"
@@ -201,7 +202,7 @@ SECTOR_DATA = [
                       "sector": "$_id.sector",  
                       "pcRatioMedian": 1,
                       "peRatioMedian": 1,
-                      "pcfcRatioMedian": 1,
+                      "pfcfRatioMedian": 1,
                       "psRatioMedian": 1
                     }
                   },
@@ -242,7 +243,7 @@ SPXEW = [
     {
     "$project": {
       "date": {"$toDate" : "$fields.k"},
-      "close": "$fields.v.Close",
+      "adjClose": "$fields.v.Close",
       "symbol": "SPXEW"
       }
     }
@@ -287,38 +288,3 @@ SP500 = [
     }
 ]
 
-SPXEW = [
-    {
-    "$project": {
-      "fields": { "$objectToArray": "$$ROOT" },
-      "_id": 0
-      }
-    },
-    {
-    "$unwind": "$fields"
-    },
-    {
-        "$match": {
-            "fields.k": { "$ne": "_id" }
-        }
-    },
-    {
-    "$project": {
-      "date": {"$toDate" : "$fields.k"},
-      "close": "$fields.v.Close",
-      "symbol": "SPXEW"
-      }
-    }
-]
-
-# ,
-#    {
-#      "$out": {
-#        "db": MongoDatabase.PROCESSED.value,
-#        "coll": MongoCollection.SPXEW.value,
-#        "timeseries": {
-#          "timeField": "date",
-#          "granularity": "hours"      
-#        }
-#      }
-#    }

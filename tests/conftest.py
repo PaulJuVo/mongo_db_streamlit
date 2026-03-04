@@ -1,5 +1,6 @@
 import pytest
 import datetime
+from tests.data.example_data import APPLE_CORRECT, APPLE_ONLY_NONE, APPLE_W_NONE
 
 @pytest.fixture
 def sample_staged_income_data():
@@ -37,3 +38,15 @@ def sample_income_date():
 @pytest.fixture
 def sample_income_date_to_late():
     return datetime.date(2027, 1, 1)
+
+@pytest.fixture
+def sample_financedata():
+    return APPLE_CORRECT
+
+@pytest.fixture
+def sample_financedata_w_none():
+    return APPLE_W_NONE
+
+@pytest.fixture
+def sample_financedata_only_none():
+    return APPLE_ONLY_NONE

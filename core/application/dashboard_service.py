@@ -1,8 +1,10 @@
 from core.ports.base_repository_interface import BaseRepositoryInterface
+from core.domain.calculation import get_median_from_col, calc_cagr
+from core.exceptions.dashboard_exceptions import NoDataFound
 from datetime import datetime, date
 from statistics import median
 from itertools import filterfalse
-from math import isnan
+from math import pow
 from typing import Optional
 
 class DashboardService():
@@ -34,8 +36,7 @@ class DashboardService():
         result = self.finance_repo.find(filter=fi, projection=proj)
         res_list = [*result]
         if not res_list:
-            # TODO throw own exception
-            raise ValueError()
+            raise NoDataFound(message=f"No data found for filter = {fi}", errorcode=999)
         else: 
             return res_list
         
@@ -49,8 +50,7 @@ class DashboardService():
         result = self.sp_500_repo.find(filter=fi)
         res_list = [*result]
         if not res_list:
-            # TODO throw own exception
-            raise ValueError()
+            raise NoDataFound(message=f"No data found for filter = {fi}", errorcode=999)
         else: 
             return res_list
     
@@ -59,24 +59,79 @@ class DashboardService():
         return result
     
     def get_company_suggestions(self, filter : Optional[dict] = None):  
-        result = self.company_repo.find( filter=filter)
+        result = self.company_repo.find( filter=filter, sort={"symbol": 1})
         return result
     def get_company_data(self, filter : Optional[dict] = None):  
         result = self.company_repo.find_one(filter=filter)
         return result
     
-    def get_sector_median_data(self, sector, ratio, date1 : datetime):
-        result = self.sector_repo.find(filter={"sector": sector,"date" : { "$gte" : datetime(date1.year - 1, date1.month, date1.day), "$lte" : date1}})
-        clean = list([v[ratio] for v in result if v[ratio] is not None ])
-        last_year = round(median(sorted(clean)),2)
-
-        result = self.sector_repo.find(filter={"sector": sector, "date" : { "$gte" : datetime(date1.year - 5, date1.month, date1.day), "$lte" : date1}})
-        clean = list([v[ratio] for v in result if v[ratio] is not None ])
-        five_year = round(median(sorted(clean)),2)
-
-        result = self.sector_repo.find(filter={"sector": sector, "date" : { "$gte" : datetime(date1.year - 10, date1.month, date1.day), "$lte" : date1}})
-        clean = list([v[ratio] for v in result if v[ratio] is not None ])
-        ten_year = round(median(sorted(clean)),2)
-
+    def get_sector_median_data_last_years(self, sector, ratio, date1 : datetime):
+        last_year = self.get_sector_median_data(sector=sector,ratio=ratio, from_date=datetime(date1.year - 1, date1.month, date1.day), to_date=date1)
+        five_year = self.get_sector_median_data(sector=sector,ratio=ratio, from_date=datetime(date1.year - 5, date1.month, date1.day), to_date=date1)
+        ten_year = self.get_sector_median_data(sector=sector,ratio=ratio, from_date=datetime(date1.year - 10, date1.month, date1.day), to_date=date1)
         return last_year, five_year, ten_year
+    
+    def get_company_median_data(self, symbol, ratio, from_date : datetime, to_date : datetime):
+        fi = { "symbol": symbol, 
+                                "date" : { 
+                                    "$gte" : from_date,
+                                    "$lte" : to_date
+                                    }
+                            }
+        projection={"date" : 1, ratio : 1, "_id" : 0}
+        
+        result = self.finance_repo.find(filter=fi, projection=projection)
+        return get_median_from_col(records=[*result], colname=ratio)
+    
+
+    def get_sector_median_data(self, sector, ratio, from_date : datetime, to_date : datetime):
+        fi = { "sector": sector, 
+                                "date" : { 
+                                    "$gte" : from_date,
+                                    "$lte" : to_date
+                                    }
+                            }
+        projection={"date" : 1, ratio : 1, "_id" : 0}
+        
+        result = self.sector_repo.find(filter=fi, projection=projection)
+        return get_median_from_col(records=[*result], colname=ratio)
+        
+    
+    def map_symbol_to_sector(self, symbol):
+        res = self.company_repo.find_one(filter={"symbol" : symbol})
+        return res["sector"] if res is not None else None
+    
+    def get_cagr(self, repo : BaseRepositoryInterface, symbol, date1 : datetime, number_of_years : int):
+        end_rec = repo.find_one(
+            {
+                "symbol": symbol,
+                "date": {
+                    "$lte": datetime(date1.year, date1.month, date1.day)
+                },
+            },
+            sort={"date": -1}
+        )
+        start_date = datetime(date1.year - number_of_years, date1.month, date1.day)
+        beginning_rec = repo.find_one(
+            {
+                "symbol": symbol,
+                "date": {
+                    "$gte": start_date
+                },
+            },
+            sort={"date": 1}
+        )
+        return calc_cagr(end_value=end_rec["adjClose"], beginning_value=beginning_rec["adjClose"], number_of_years=number_of_years)
+
+
+    def get_financedata_cagr(self, symbol, date1 : datetime, number_of_years : int):
+        return self.get_cagr(self.finance_repo, symbol, date1, number_of_years)
+    
+    def get_sp500data_cagr(self, symbol, date1 : datetime, number_of_years : int):
+        return self.get_cagr(self.sp_500_repo, symbol, date1, number_of_years)
+    
+
+        
+
+
 
