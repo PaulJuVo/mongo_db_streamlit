@@ -39,6 +39,10 @@ class DashboardService():
             raise NoDataFound(message=f"No data found for filter = {fi}", errorcode=999)
         else: 
             return res_list
+    def get_data_edge(self):
+        result = self.finance_repo.find_one(sort={"date" : -1})
+        return result["date"]
+
         
     def get_sp500_data(self, index, from_date : datetime, to_date : datetime):
         fi = { "symbol": index, 
@@ -61,8 +65,13 @@ class DashboardService():
     def get_company_suggestions(self, filter : Optional[dict] = None):  
         result = self.company_repo.find( filter=filter, sort={"symbol": 1})
         return result
+    
     def get_company_data(self, filter : Optional[dict] = None):  
         result = self.company_repo.find_one(filter=filter)
+        return result
+    
+    def get_all_company_data(self, filter : Optional[dict] = None):  
+        result = self.company_repo.find(filter=filter)
         return result
     
     def get_sector_median_data_last_years(self, sector, ratio, date1 : datetime):

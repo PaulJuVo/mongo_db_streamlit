@@ -3,7 +3,7 @@ from app.shared.logging import init_logging
 import logging
 from infrastructure.mongo.mongo_repository import MongoRepository
 from config.mongo_config import MongoCollection, MongoDatabase, MongoUser
-from app.shared.mongo import get_mongo
+from app.shared.mongo import get_mongo, get_data_edge, dashboard_service
 from datetime import date, datetime
 from dateutil.relativedelta import relativedelta
 import plotly.express as px
@@ -13,12 +13,6 @@ from core.exceptions.dashboard_exceptions import NoDataFound
 init_logging()
 logger = logging.getLogger("Streamlit - Dashboard")
 st.set_page_config(layout="wide")
-conn = get_mongo(MongoUser.DASHBOARDUSER)
-finance_repo = MongoRepository(conn, MongoDatabase.PROCESSED, MongoCollection.FINANCEDATA)
-company_repo = MongoRepository(conn, MongoDatabase.PROCESSED, MongoCollection.COMPANYDATA)
-sector_repo = MongoRepository(conn,  MongoDatabase.PROCESSED, MongoCollection.SECTORDATA)
-sp_500_repo = MongoRepository(conn,  MongoDatabase.PROCESSED, MongoCollection.SP500)
-dashboard_service = DashboardService(finance_repo=finance_repo, company_repo=company_repo, sector_repo=sector_repo, sp_500_repo=sp_500_repo)
 
 @st.cache_data
 def get_sector():
@@ -36,8 +30,9 @@ def get_symbols(sector):
 current_time = date.today()
 def_from_date = current_time - relativedelta(years=2)
 min_date = date(2010,1,1)
+st.sidebar.caption(f"Data Edge: {get_data_edge().strftime('%Y-%m-%d'):20}")
 from_date = st.sidebar.date_input(label="From Date", value=def_from_date, min_value=min_date)
-to_date = st.sidebar.date_input(label="To Date")
+to_date = st.sidebar.date_input(label="To Date", max_value=get_data_edge())
 
 sector_option = st.sidebar.selectbox(
     "Sector",

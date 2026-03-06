@@ -1,4 +1,4 @@
-from statistics import median
+from statistics import median, stdev
 from typing import Optional
 
 # TODO clean up 
@@ -79,7 +79,7 @@ def _sum_last_4(stats : list[dict], column_name : str ):
 def get_median_from_col(records : list[dict], colname):
     clean = list([v[colname] for v in records if v[colname] is not None])
     if clean:
-        return round(median(sorted(clean)),2)
+        return float(round(median(sorted(clean)),4))
     else:
         return None
 
@@ -92,3 +92,22 @@ def calc_cagr(end_value : float, beginning_value : float, number_of_years : int)
         raise ValueError()
     cagr : float = (pow(end_value/beginning_value, (1/number_of_years)) - 1 ) * 100
     return round(cagr,2)
+
+
+def calc_std(records : list[dict], colname, mean : Optional[float] = None):
+    clean = list([v[colname] for v in records if v[colname] is not None])
+    if clean:
+        return round(stdev(sorted(clean), xbar=mean),4)
+    else:
+        return None
+    
+def calc_z_score(value : float, mean : float, std : float):
+    if any(v is None for v in (value, mean, std)):
+        return None
+    return (value - mean) / std if std != 0 else None
+
+def get_value_score(z_scores : dict):
+    scores = [sc for sc in z_scores.values() if sc is not None]
+    if len(scores) < 3:
+        return None
+    return float(round(median(scores), 2))
