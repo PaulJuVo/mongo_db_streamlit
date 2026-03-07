@@ -2,6 +2,7 @@
 from core.ports.base_repository_interface import BaseRepositoryInterface
 from datetime import datetime
 from config.logging_config import performance_log
+from core.application.notification_service import notify
 from config.mongo_config import FINANCEDATA_TIMESERIES_CONFIG
 from config.pipeline_config import COMPANY_PIPELINE, INCOME_STAGED, EOD_STAGED, CASHFLOW_STAGED, CONSTITUES, SECTOR_DATA, SP500
 from core.domain.validation import contains_right_income_statements, contains_right_cashflow_statements
@@ -45,14 +46,15 @@ class PipelineService:
 
 
     def run(self):
-        self.create_scd_constituents()
-        self.upsert_company_data()
-        self.create_sp500_timeseries()
-        self.upsert_eod_staged()
-        self.upsert_income_staged()
-        self.upsert_chashflow_staged()
+        notify("Pipeline started")
+        #self.create_scd_constituents()
+        #self.upsert_company_data()
+        #self.create_sp500_timeseries()
+        #self.upsert_eod_staged()
+        #self.upsert_income_staged()
+        #self.upsert_chashflow_staged()
         #self.create_finance_data(2000)
-        self.create_sector_timeseries()
+        #self.create_sector_timeseries()
 
 
         
@@ -103,6 +105,8 @@ class PipelineService:
             else:    
                 finance_data["peRatio"] = None
                 finance_data["psRatio"] = None
+                finance_data["pfcfRatio"] = None
+                finance_data["pcRatio"] = None
 
             processed_data.append(finance_data)
         self.financedata_repo.insert_many(processed_data)

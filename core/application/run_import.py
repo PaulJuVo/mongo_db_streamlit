@@ -27,7 +27,7 @@ def import_many(repo: BaseRepositoryInterface, data : list[dict]):
                 repo.delete(filter)
                 insert_data.append(each)
             except ValidationError as e :
-                logger.warning(f"Upload data was rejected: {e.message}")
+                logger.warning(f"{collection_name} Upload data was rejected: {e.message}")
                 rejected_data.append({**each, "rejectionTime": datetime.datetime.now(), "validationError": e.message})
                 continue
         repo.insert_many(insert_data)

@@ -5,3 +5,10 @@ class NoDataFound(Exception):
     
     def __str__(self):
         return f'{self.message}: ERRORCODE {self.errorcode}'
+    
+class EmptyJson(Exception):
+    def __init__(self, message : str) -> None:
+        self.message = message
+    
+    def __str__(self):
+        return f'{self.message}'

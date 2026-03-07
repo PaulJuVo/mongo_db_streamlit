@@ -7,6 +7,9 @@ from app.shared.mongo import get_mongo
 from core.application.run_import import import_many, import_constituents,import_sp500, import_spxew
 from app.adapter.adapter import get_dict_from_json
 from core.application.pipeline_service import PipelineService
+from core.exceptions.dashboard_exceptions import EmptyJson
+from core.application.notification_service import notify
+import time
 import logging
 from pathlib import Path
 
@@ -38,7 +41,9 @@ def import_files(upload_file, is_path = False):
                 data = get_dict_from_json(file, coll_name)
             import_many(repo, data)
         except Exception as e:
-            logger.warning(f"Couldn't import {file.name}: {e}")
+            if isinstance(e, EmptyJson):
+                logger.warning(f"Couldn't import {file.name}: {e}")
+            logger.info(f"Couldn't import {file.name}: {e}")
             failed_import_counter += 1
             continue
         finally:
@@ -111,7 +116,7 @@ def import_spxew_data():
 
 FILE = Path(__file__).resolve()
 PROJECT_ROOT = FILE.parents[2]
-DATA_PATH = PROJECT_ROOT / "tmp" / "test"
+DATA_PATH = PROJECT_ROOT / "tmp" / "data"
 CONSTITUENTS_PATH = PROJECT_ROOT / "tmp" / "0_sp_500_constituents_historical_2026.json"
 SP_500_PATH = PROJECT_ROOT / "tmp" / "^GSPC_eod_prices.json"
 SPXEW_PATH = PROJECT_ROOT / "tmp" / "^SPXEW_autoadjusted.json"
@@ -164,8 +169,10 @@ with container:
               icon_position="right", help="Import the data to the MongoDb Database"):
         with st.spinner("Importing Files", show_time=True):
             import_files(upload_file=upload_file)    
-    if st.button(label="Import to Database from tmp/test", icon="🧑‍💻", 
+    if st.button(label="Import to Database from tmp/data", icon="🧑‍💻", 
               icon_position="right", help="Import the data to the MongoDb Database"):
+        notify("Import started")
+        start_time = time.time()
         import_constituent()
         import_spxew_data()
         import_sp_data()
@@ -175,10 +182,17 @@ with container:
             for file in json_files:
                 files.append(file)
             import_files(upload_file=files, is_path=True)
+        imp_time = time.time() - start_time
+        pipe_start = time.time()
+        notify(f"Import finished with {imp_time / 60:.0f} min")
+        
+        pipe_time = time.time() - pipe_start 
+        pipeline_service.run()
+        notify(f"Pipeline finished with {pipe_time / 60:.0f} min")
         
 if st.button(label="Run pipeline", icon="🚀", icon_position="right", help="run etl pipeline"):
     with st.spinner("running Pipeline...", show_time=True):
-        pipeline_service.run() 
+        pipeline_service.run()
     st.toast(f"Pipeline run completed", icon="✅", duration="long")
                 
                      
