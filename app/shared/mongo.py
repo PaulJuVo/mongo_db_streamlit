@@ -23,6 +23,8 @@ dashboard_service = _get_dashboard_service()
 @st.cache_data
 def get_sector():
     result =  dashboard_service.get_distinct_company_data(key="sector")
+    if "Unknown" in result:
+        result.remove("Unknown")
     return result
 
 @st.cache_data
@@ -34,4 +36,5 @@ def get_symbols(sector):
 def get_data_edge():
     dataedge = dashboard_service.get_data_edge()
     return dataedge
+
 
