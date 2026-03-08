@@ -110,17 +110,23 @@ class DashboardService():
         res = self.company_repo.find_one(filter={"symbol" : symbol})
         return res["sector"] if res is not None else None
     
-    def get_cagr(self, repo : BaseRepositoryInterface, symbol, date1 : datetime, number_of_years : int):
+    def get_cagr(self, repo : BaseRepositoryInterface, symbol, date1 : datetime, number_of_years : int, forward : bool = False):
+        if forward:
+            start_date = datetime(date1.year, date1.month, date1.day)
+            end_date = datetime(date1.year + number_of_years, date1.month, date1.day)
+        else:
+            start_date = datetime(date1.year - number_of_years, date1.month, date1.day)
+            end_date = datetime(date1.year, date1.month, date1.day)
+            
         end_rec = repo.find_one(
             {
                 "symbol": symbol,
                 "date": {
-                    "$lte": datetime(date1.year, date1.month, date1.day)
+                    "$lte": end_date
                 },
             },
             sort={"date": -1}
         )
-        start_date = datetime(date1.year - number_of_years, date1.month, date1.day)
         beginning_rec = repo.find_one(
             {
                 "symbol": symbol,
@@ -133,11 +139,11 @@ class DashboardService():
         return calc_cagr(end_value=end_rec["adjClose"], beginning_value=beginning_rec["adjClose"], number_of_years=number_of_years)
 
 
-    def get_financedata_cagr(self, symbol, date1 : datetime, number_of_years : int):
-        return self.get_cagr(self.finance_repo, symbol, date1, number_of_years)
+    def get_financedata_cagr(self, symbol, date1 : datetime, number_of_years : int, forward : bool = False):
+        return self.get_cagr(self.finance_repo, symbol, date1, number_of_years, forward)
     
-    def get_sp500data_cagr(self, symbol, date1 : datetime, number_of_years : int):
-        return self.get_cagr(self.sp_500_repo, symbol, date1, number_of_years)
+    def get_sp500data_cagr(self, symbol, date1 : datetime, number_of_years : int, forward : bool = False):
+        return self.get_cagr(self.sp_500_repo, symbol, date1, number_of_years, forward)
     
 
         

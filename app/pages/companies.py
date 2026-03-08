@@ -1,12 +1,7 @@
-from typing import Optional
 import streamlit as st
 from searchbar_component import searchbar
-from core.application.dashboard_service import DashboardService
 from core.exceptions.dashboard_exceptions import NoDataFound
-from infrastructure.mongo.mongo_repository import MongoRepository
-from config.mongo_config import MongoCollection, MongoDatabase, MongoUser
-from app.shared.mongo import get_mongo, get_data_edge, dashboard_service
-import plotly.express as px
+from app.shared.mongo import get_data_edge, dashboard_service
 from datetime import datetime, date
 from dateutil.relativedelta import relativedelta
 from plotly.subplots import make_subplots
@@ -38,12 +33,12 @@ def get_finance_data():
                                                     projection=["date", "symbol", "adjClose", ratio])
     return pd.DataFrame(df_ts)
 
-def get_cagr_data(symbol, index):
+def get_cagr_data(symbol, index, cagr_date, forward):
     data : list[tuple] = []
     years = [1,3,5,10]
     for number in years:
-        sp = dashboard_service.get_sp500data_cagr(index, datetime(to_date.year, to_date.month, to_date.day), number)
-        fd = dashboard_service.get_financedata_cagr(symbol, datetime(to_date.year, to_date.month, to_date.day), number)
+        sp = dashboard_service.get_sp500data_cagr(index, cagr_date, number, forward)
+        fd = dashboard_service.get_financedata_cagr(symbol, cagr_date, number, forward)
         stri = f"{number}{"Y" if number == 1 else "Y Ann."}"
         data.append((stri, fd, sp))
     return data
@@ -275,11 +270,26 @@ if result:
                 st.divider()
                 st.subheader(f"{st.session_state.symbol} vs S&P 500", text_alignment="center")    
                 leveled_stockdata("GSPC")
-                st.caption(f"Since {to_date}")
+                t_delta = to_date - from_date
+                cagr_date = datetime(to_date.year, to_date.month, to_date.day)
+                forward = False
+                if t_delta.days > 3652.5:
+                    pill_options = ["Trailing CAGR", "Forward CAGR"]
+                    date_direction = st.pills("direction", pill_options, label_visibility="hidden", default= pill_options[0])
+                    if date_direction == pill_options[0]:
+                        st.caption(f"Trailing since {to_date}")
+                        cagr_date = datetime(to_date.year, to_date.month, to_date.day)
+                    else: 
+                        st.caption(f"Forward from {from_date}")
+                        forward = True
+                        cagr_date = datetime(from_date.year, from_date.month, from_date.day)
+                else:
+                    st.caption(f"Trailing since {to_date}")
+                    
             
                 symbol = st.session_state.symbol
 
-                data = get_cagr_data(symbol, "GSPC")
+                data = get_cagr_data(symbol, "GSPC", cagr_date, forward)
 
                 rows = []
                 for period, stock, sp in data:
