@@ -8,7 +8,7 @@ def notify(msg):
                 data=msg,
                 headers={
                     "Title": "Streamlit",
-                    "Tags": "+1"
+                    #"Tags": "+1"
                 }
         )
     except Exception:
