@@ -46,15 +46,14 @@ class PipelineService:
 
 
     def run(self):
-        notify("Pipeline started")
-        #self.create_scd_constituents()
-        #self.upsert_company_data()
-        #self.create_sp500_timeseries()
-        #self.upsert_eod_staged()
-        #self.upsert_income_staged()
-        #self.upsert_chashflow_staged()
-        #self.create_finance_data(2000)
-        #self.create_sector_timeseries()
+        self.create_scd_constituents()
+        self.upsert_company_data()
+        self.create_sp500_timeseries()
+        self.upsert_eod_staged()
+        self.upsert_income_staged()
+        self.upsert_chashflow_staged()
+        self.create_finance_data(2000)
+        self.create_sector_timeseries()
 
 
         

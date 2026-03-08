@@ -192,7 +192,10 @@ with container:
         
 if st.button(label="Run pipeline", icon="🚀", icon_position="right", help="run etl pipeline"):
     with st.spinner("running Pipeline...", show_time=True):
+        pipe_start = time.time()
         pipeline_service.run()
+        pipe_time = time.time() - pipe_start 
+        notify(f"Pipeline finished with {pipe_time / 60:.0f} min")
     st.toast(f"Pipeline run completed", icon="✅", duration="long")
                 
                      
