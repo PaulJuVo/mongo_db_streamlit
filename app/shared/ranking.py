@@ -27,7 +27,6 @@ def get_ranking(sector, date1) -> pd.DataFrame:
     df_cleaned = df_cleaned[cols]
     return df_cleaned
 
-@st.cache_data
 def sort_ranking(df_cleaned, sort_by, ascending):
     df_sorted = df_cleaned.sort_values(by=sort_by, ascending=ascending).reset_index(drop=True)
     # Ranking erzeugen

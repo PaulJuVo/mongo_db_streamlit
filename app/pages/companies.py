@@ -62,8 +62,8 @@ st.title("Search Company Data")
 
 if 'symbol' not in st.session_state:
     st.session_state.symbol = "TSLA"
-if 'sector' not in st.session_state:
-    st.session_state.sector = "Consumer Cyclical"
+
+st.session_state.sector = dashboard_service.map_symbol_to_sector(symbol=st.session_state.symbol)
 if 'query' not in st.session_state:
     st.session_state['query'] = 'a'
 
