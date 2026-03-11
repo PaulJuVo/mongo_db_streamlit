@@ -13,7 +13,6 @@ import time
 import logging
 from pathlib import Path
 
-
 init_logging()
 logger = logging.getLogger("Streamlit - Pipeline")
 

@@ -1,10 +1,7 @@
 from core.ports.base_repository_interface import BaseRepositoryInterface
 from core.domain.calculation import get_median_from_col, calc_cagr
 from core.exceptions.dashboard_exceptions import NoDataFound
-from datetime import datetime, date
-from statistics import median
-from itertools import filterfalse
-from math import pow
+from datetime import datetime
 from typing import Optional
 
 class DashboardService():
@@ -136,6 +133,8 @@ class DashboardService():
             },
             sort={"date": 1}
         )
+        if end_rec is None or beginning_rec is None:
+            raise NoDataFound("Couldn't calculate: Either end or beginning records are None", None)
         return calc_cagr(end_value=end_rec["adjClose"], beginning_value=beginning_rec["adjClose"], number_of_years=number_of_years)
 
 

@@ -37,4 +37,3 @@ def get_data_edge():
     dataedge = dashboard_service.get_data_edge()
     return dataedge
 
-

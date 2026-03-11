@@ -2,7 +2,6 @@
 from core.ports.base_repository_interface import BaseRepositoryInterface
 from datetime import datetime
 from config.logging_config import performance_log
-from core.application.notification_service import notify
 from config.mongo_config import FINANCEDATA_TIMESERIES_CONFIG
 from config.pipeline_config import COMPANY_PIPELINE, INCOME_STAGED, EOD_STAGED, CASHFLOW_STAGED, CONSTITUES, SECTOR_DATA, SP500
 from core.domain.validation import contains_right_income_statements, contains_right_cashflow_statements

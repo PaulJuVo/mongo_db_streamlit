@@ -1,18 +1,17 @@
 import streamlit as st
 from app.shared.logging import init_logging
 import logging
-from infrastructure.mongo.mongo_repository import MongoRepository
-from config.mongo_config import MongoCollection, MongoDatabase, MongoUser
-from app.shared.mongo import get_mongo, get_data_edge, dashboard_service
+from app.shared.mongo import get_data_edge, dashboard_service
 from datetime import date, datetime
 from dateutil.relativedelta import relativedelta
 import plotly.express as px
-from core.application.dashboard_service import DashboardService
 from core.exceptions.dashboard_exceptions import NoDataFound
+
 
 init_logging()
 logger = logging.getLogger("Streamlit - Dashboard")
 st.set_page_config(layout="wide")
+
 
 @st.cache_data
 def get_sector():

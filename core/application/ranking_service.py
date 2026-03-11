@@ -1,13 +1,11 @@
 from datetime import datetime
 from typing import Optional
 from core.domain.calculation import calc_std, get_median_from_col, calc_z_score, get_value_score
-from collections import defaultdict
 from core.ports.base_repository_interface import BaseRepositoryInterface
 from copy import copy
 from infrastructure.mongo.mongo_connection import MongoConnection
 from infrastructure.mongo.mongo_repository import MongoRepository
 from config.mongo_config import MongoCollection, MongoDatabase, MongoUser
-from pprint import pprint
 
 
 class RankingService():
@@ -90,6 +88,7 @@ class RankingService():
                                     }
                             }
         return self.sector_repo.find(filter=fi)
+    
     
 
 
