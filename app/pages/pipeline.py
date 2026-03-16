@@ -1,5 +1,4 @@
 import streamlit as st
-from streamlit.runtime.uploaded_file_manager import UploadedFile
 from infrastructure.mongo.mongo_repository import MongoRepository
 from config.mongo_config import MongoCollection, MongoDatabase, MongoUser
 from app.shared.logging import init_logging
@@ -115,10 +114,10 @@ def import_spxew_data():
 
 FILE = Path(__file__).resolve()
 PROJECT_ROOT = FILE.parents[2]
-DATA_PATH = PROJECT_ROOT / "tmp" / "data"
-CONSTITUENTS_PATH = PROJECT_ROOT / "tmp" / "0_sp_500_constituents_historical_2026.json"
-SP_500_PATH = PROJECT_ROOT / "tmp" / "^GSPC_eod_prices.json"
-SPXEW_PATH = PROJECT_ROOT / "tmp" / "^SPXEW_autoadjusted.json"
+DATA_PATH = PROJECT_ROOT / "data" / "data"
+CONSTITUENTS_PATH = PROJECT_ROOT / "data" / "0_sp_500_constituents_historical_2026.json"
+SP_500_PATH = PROJECT_ROOT / "data" / "^GSPC_eod_prices.json"
+SPXEW_PATH = PROJECT_ROOT / "data" / "^SPXEW_autoadjusted.json"
 
 
 conn = get_mongo(MongoUser.APPUSER)

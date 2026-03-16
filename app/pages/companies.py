@@ -5,7 +5,6 @@ from app.shared.ranking import get_ranking, sort_ranking, get_company_ranked, pr
 from app.shared.search import search_function, searchbar
 from datetime import datetime, date
 from dateutil.relativedelta import relativedelta
-from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 import pandas as pd
 
@@ -21,7 +20,7 @@ def get_cagr_data(symbol, index, cagr_date, forward):
     for number in years:
         sp = dashboard_service.get_sp500data_cagr(index, cagr_date, number, forward)
         fd = dashboard_service.get_financedata_cagr(symbol, cagr_date, number, forward)
-        stri = f"{number}{"Y" if number == 1 else "Y Ann."}"
+        stri = f'{number}{"Y" if number == 1 else "Y Ann."}'
         data.append((stri, fd, sp))
     return data
 

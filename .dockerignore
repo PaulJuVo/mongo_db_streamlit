@@ -20,20 +20,12 @@ logs/
 *.log
 
 # Temporary files
-tmp/
-*.tmp
+data/
 
 # OS files
 .DS_Store
 Thumbs.db
 
-# Git
-.git/
-.gitignore
-
-# Docker artifacts
-Dockerfile
-docker-compose.yml
 
 # Jupyter
 .ipynb_checkpoints/
