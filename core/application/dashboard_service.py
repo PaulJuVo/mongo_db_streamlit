@@ -16,7 +16,7 @@ class DashboardService():
         self.sp_500_repo = sp_500_repo
 
 
-    def get_finance_data(self, companies : list, from_date : datetime, to_date : datetime, projection : list):
+    def get_finance_data(self, companies : list, from_date : datetime, to_date : datetime):
 
         fi = { "symbol": { 
                                     "$in": companies
@@ -27,15 +27,28 @@ class DashboardService():
                                     }
                             }
         
-        proj = {"_id" : 0}
-        proj.update({k : 1 for k in projection})
-        
-        result = self.finance_repo.find(filter=fi, projection=proj)
+        result = self.finance_repo.find(filter=fi)
         res_list = [*result]
         if not res_list:
             raise NoDataFound(message=f"No data found for filter = {fi}", errorcode=999)
         else: 
             return res_list
+        
+    def get_sector_data(self, sector : str, from_date : datetime, to_date : datetime):
+        fi = { "sector": sector, 
+                                "date" : { 
+                                    "$gte" : from_date,
+                                    "$lte" : to_date
+                                    }
+                            }
+        
+        result = self.sector_repo.find(filter=fi)
+        res_list = [*result]
+        if not res_list:
+            raise NoDataFound(message=f"No data found for filter = {fi}", errorcode=999)
+        else: 
+            return res_list
+        
     def get_data_edge(self):
         result = self.finance_repo.find_one(sort={"date" : -1})
         return result["date"]
