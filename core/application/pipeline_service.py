@@ -5,8 +5,7 @@ from config.logging_config import performance_log
 from config.mongo_config import FINANCEDATA_TIMESERIES_CONFIG
 from config.pipeline_config import COMPANY_PIPELINE, INCOME_STAGED, EOD_STAGED, CASHFLOW_STAGED, CONSTITUES, SECTOR_DATA, SP500
 from core.domain.validation import contains_right_income_statements, contains_right_cashflow_statements
-from core.domain.calculation import calc_ttm_eps, calc_pe_ratio, calc_revenue_per_share_ttm, calc_ps_ratio, \
-    get_avg_shares, calc_free_cashflow_per_share_ttm, calc_op_cashflow_per_share_ttm, calc_pc_ratio, calc_pfcf_ratio
+from core.domain.calculation import calc_ratio, calc_per_share_ttm, get_avg_shares, calc_ttm_eps
 import logging
 
 logger = logging.getLogger(__name__)
@@ -62,7 +61,7 @@ class PipelineService:
         self.financedata_repo.create_time_series(config=FINANCEDATA_TIMESERIES_CONFIG)
 
         results = self.staged_eodprice_repo.find(batch_size=b_size)
-        to_copy = ["date", "adjClose", "symbol", "unadjustedVolume"]
+        to_copy = ["date", "adjClose", "symbol"]
         processed_data = []
 
         for eod_price in results:
@@ -79,22 +78,22 @@ class PipelineService:
             if contains_right_income_statements(incom_stats, eod_price["date"]):
                 avg_shares_ttm = get_avg_shares(incom_stats)
                 eps_ttm = calc_ttm_eps(incom_stats)
-                rev_p_share_ttm = calc_revenue_per_share_ttm(incom_stats, avg_shares_ttm)
+                rev_p_share_ttm = calc_per_share_ttm(incom_stats, avg_shares_ttm, "revenue")
 
                 adjclosed = eod_price["adjClose"]
 
-                finance_data["peRatio"] = calc_pe_ratio(eps_ttm, adjclosed)
-                finance_data["psRatio"] = calc_ps_ratio(rev_p_share_ttm, adjclosed)
+                finance_data["peRatio"] = calc_ratio(eps_ttm, adjclosed)
+                finance_data["psRatio"] = calc_ratio(rev_p_share_ttm, adjclosed)
 
                 finance_data["eps_diluted_ttm"] = eps_ttm
                 finance_data["revenue_per_share_ttm"] = rev_p_share_ttm
 
                 if contains_right_cashflow_statements(cashflow_stats, eod_price["date"]):
-                    free_cashflow_ttm = calc_free_cashflow_per_share_ttm(cashflow_stats,avg_shares_ttm)
-                    op_cashflow_ttm = calc_op_cashflow_per_share_ttm(cashflow_stats,avg_shares_ttm)
+                    free_cashflow_ttm = calc_per_share_ttm(cashflow_stats,avg_shares_ttm, "freeCashFlow")
+                    op_cashflow_ttm = calc_per_share_ttm(cashflow_stats,avg_shares_ttm, "operatingCashFlow")
 
-                    finance_data["pfcfRatio"] = calc_pfcf_ratio(free_cashflow_ttm, adjclosed)
-                    finance_data["pcRatio"] = calc_pc_ratio(op_cashflow_ttm, adjclosed)
+                    finance_data["pfcfRatio"] = calc_ratio(free_cashflow_ttm, adjclosed)
+                    finance_data["pcRatio"] = calc_ratio(op_cashflow_ttm, adjclosed)
                 
                 else:
                     finance_data["pfcfRatio"] = None

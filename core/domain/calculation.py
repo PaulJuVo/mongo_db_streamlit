@@ -1,64 +1,23 @@
-from statistics import median, stdev
+from statistics import median
+from scipy.stats import median_abs_deviation
 from typing import Optional
 
-# TODO clean up 
 
 def calc_ttm_eps(incom_stats : list[dict], column_name : str = "epsdiluted"):
     return _sum_last_4(stats=incom_stats, column_name=column_name)
 
-def calc_revenue_per_share_ttm(incom_stats : list[dict], shares : Optional[float]):
+def calc_per_share_ttm(stats : list[dict], shares : Optional[float], colname : str):
     if shares is None:
         return None
     else:
-        sum = _sum_last_4(stats=incom_stats, column_name="revenue")
+        sum = _sum_last_4(stats=stats, column_name=colname)
         return sum / shares if sum and sum != 0 and shares != 0 else None
 
-def calc_op_cashflow_per_share_ttm(cashflow_stats : list[dict], shares : Optional[float]):
-    if shares is None:
+def calc_ratio(ttm : Optional[float], adjclosed : float):
+    if ttm is None or ttm < 0:
         return None
     else:
-        sum = _sum_last_4(stats=cashflow_stats, column_name="operatingCashFlow")
-        return sum / shares if sum and sum != 0 and shares != 0 else None
-    
-def calc_free_cashflow_per_share_ttm(cashflow_stats : list[dict], shares : Optional[float]):
-    if shares is None:
-        return None
-    else:
-        sum = _sum_last_4(stats=cashflow_stats, column_name="freeCashFlow")
-        return sum / shares if sum and sum != 0 and shares != 0 else None
-
-def calc_pe_ratio(eps_ttm : Optional[float], adjclosed : float):
-    if eps_ttm is None:
-        return None
-    if eps_ttm < 0:
-        return None
-    else:
-        return adjclosed / eps_ttm if eps_ttm != 0 and adjclosed != 0 else 0
-
-def calc_ps_ratio(rev_p_share_ttm : Optional[float], adjclosed : float):
-    if rev_p_share_ttm is None:
-        return None
-    if rev_p_share_ttm < 0:
-        return None
-    else:
-        return adjclosed / rev_p_share_ttm if rev_p_share_ttm != 0 and adjclosed != 0 else 0
-    
-def calc_pc_ratio(op_cashflow_ttm : Optional[float], adjclosed : float):
-    if op_cashflow_ttm is None:
-        return None
-    if op_cashflow_ttm < 0:
-        return None
-    else:
-        return adjclosed / op_cashflow_ttm if op_cashflow_ttm != 0 and adjclosed != 0 else 0
-    
-def calc_pfcf_ratio(free_cashflow_ttm : Optional[float], adjclosed : float):
-    if free_cashflow_ttm is None:
-        return None
-    if free_cashflow_ttm < 0:
-        return None
-    else:
-        return adjclosed / free_cashflow_ttm if free_cashflow_ttm != 0 and adjclosed != 0 else 0
-    
+        return adjclosed / ttm if ttm != 0 and adjclosed != 0 else 0  
 
 def get_avg_shares(incom_stats : list[dict]):
     unpacked = [e["weightedAverageShsOutDil"] for e in incom_stats if e.get("weightedAverageShsOutDil") is not None]
@@ -67,14 +26,12 @@ def get_avg_shares(incom_stats : list[dict]):
     average = sum(unpacked) / 4
     return average
 
-
 def _sum_last_4(stats : list[dict], column_name : str ):
     unpacked = [e[column_name] for e in stats if e.get(column_name) is not None]
     if len(unpacked) != 4:
         return None
     summed = sum(unpacked)
     return summed
-
 
 def get_median_from_col(records : list[dict], colname):
     clean = list([v[colname] for v in records if v[colname] is not None])
@@ -93,21 +50,24 @@ def calc_cagr(end_value : float, beginning_value : float, number_of_years : int)
     cagr : float = (pow(end_value/beginning_value, (1/number_of_years)) - 1 ) * 100
     return round(cagr,2)
 
-
-def calc_std(records : list[dict], colname, mean : Optional[float] = None):
+def calc_mad(records : list[dict], colname):
     clean = list([v[colname] for v in records if v[colname] is not None])
     if clean:
-        return round(stdev(sorted(clean), xbar=mean),4)
+        return round(median_abs_deviation(sorted(clean)),4)
     else:
         return None
     
-def calc_z_score(value : float, mean : float, std : float):
-    if any(v is None for v in (value, mean, std)):
+def calc_robust_z_score(value : float, mean : float, mad : float):
+    if any(v is None for v in (value, mean, mad)):
         return None
-    return (value - mean) / std if std != 0 else None
+    return 0.6745 * ((value - mean) / mad) if mad != 0 else None
 
 def get_value_score(z_scores : dict):
     scores = [sc for sc in z_scores.values() if sc is not None]
     if len(scores) < 3:
         return None
-    return float(round(median(scores), 2))
+    return float(round(median(scores), 2)) * -1
+
+def calc_momentum(p_start, p_end):
+    if p_start and p_end and p_start > 0:
+        return (p_end - p_start) / p_start
