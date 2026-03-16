@@ -1,11 +1,11 @@
 from datetime import datetime
-from typing import Optional
-from core.domain.calculation import calc_std, get_median_from_col, calc_z_score, get_value_score
+from core.domain.calculation import calc_mad, get_median_from_col, calc_robust_z_score, get_value_score, calc_momentum
 from core.ports.base_repository_interface import BaseRepositoryInterface
 from copy import copy
 from infrastructure.mongo.mongo_connection import MongoConnection
 from infrastructure.mongo.mongo_repository import MongoRepository
 from config.mongo_config import MongoCollection, MongoDatabase, MongoUser
+from dateutil.relativedelta import relativedelta
 
 
 class RankingService():
@@ -21,16 +21,16 @@ class RankingService():
         self.company_repo = company_repo
         self.sector_repo = sector_repo
         self.date = date
-        self.ratios = ["psRatio", "pfcfRatio", "peRatio", "pcRatio"]
+        self.ratios = ["psRatio", "pfcfRatio", "peRatio"]
         self.sector_data = [*self._get_sector_data()]
         self.sector_medians  = self._get_sector_median_data(self.sector_data)
-        self.sector_stds = self._get_sector_std(self.sector_data, self.sector_medians)
+        self.sector_mad= self._get_sector_mad(self.sector_data)
         
     def get_ranking(self):
         companies = self._get_companies()
         z_scores = [v + "_z_score" for v in self.ratios]
         columns = copy(self.ratios) 
-        columns.extend(z_scores + ["symbol", "value_score"])
+        columns.extend(z_scores + ["symbol", "value_score", "momentum_score"])
         ranking : dict = {k : [] for k in columns}
         rows = []
         for company in companies:
@@ -40,7 +40,7 @@ class RankingService():
             rows.append({
                 "symbol": symbol,
                 "value_score": get_value_score(z_scores),
-                **median_data,
+                "momentum_score": self._get_momentum_score(symbol),
                 **z_scores,
             })
         ranking = {k: [row.get(k) for row in rows] for k in columns}
@@ -50,12 +50,37 @@ class RankingService():
         res = {}
         for k, v in median_data.items():
             mean = self.sector_medians[k]
-            std = self.sector_stds[k]
-            if mean is not None and std is not None and v is not None:
-                res[k + "_z_score"] = calc_z_score(v, mean, std)
+            mad = self.sector_mad[k]
+            if mean is not None and mad is not None and v is not None:
+                res[k + "_z_score"] = calc_robust_z_score(v, mean, mad)
             else:
                 res[k + "_z_score"] = None
         return res
+    
+    def _get_momentum_score(self, symbol):
+
+        today = self.date
+        six_m_ago = today - relativedelta(months=6)
+        six_fiter = { "symbol": symbol, 
+                                "date" : { 
+                                    "$gte" : datetime(six_m_ago.year, six_m_ago.month, six_m_ago.day),
+                                    }
+                            }
+        today_filter = { "symbol": symbol, 
+                                "date" : { 
+                                    "$lte": datetime(today.year, today.month, today.day)
+                                    }
+                            }
+        start_rec = self.finance_repo.find_one(filter=six_fiter, sort={"date" : 1})
+        end_rec = self.finance_repo.find_one(filter=today_filter, sort={"date" : -1})
+        
+        try:
+            p_start = start_rec["adjClose"]
+            p_end   = end_rec["adjClose"]
+            return calc_momentum(p_end=p_end, p_start=p_start)
+        except (TypeError, KeyError):
+            pass
+        return None
 
     def _get_companies(self):
         return [*self.company_repo.find(filter={"sector" : self.sector})]        
@@ -63,8 +88,8 @@ class RankingService():
     def _get_sector_median_data(self, data):
         return dict({ratio : get_median_from_col(records=data, colname=ratio + "Median") for ratio in self.ratios})
     
-    def _get_sector_std(self, data, medians : dict):
-        return dict({ratio : calc_std(records=data, colname=ratio + "Median", mean=medians[ratio]) for ratio in self.ratios})
+    def _get_sector_mad(self, data):
+        return dict({ratio : calc_mad(records=data, colname=ratio + "Median") for ratio in self.ratios})
     
     def _get_company_median_data(self, symbol):
         date1 = self.date

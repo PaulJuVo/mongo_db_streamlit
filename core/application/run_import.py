@@ -6,8 +6,6 @@ from jsonschema import validate, ValidationError
 import datetime 
 import logging
 
-# TODO eigene exceptions
-
 logger = logging.getLogger(__name__)
 
 @performance_log(logger)
@@ -17,23 +15,26 @@ def import_many(repo: BaseRepositoryInterface, data : list[dict]):
     schema = VALIDATION_SCHEMAS[collection_name]
     insert_data = []
     rejected_data = []
-    # TODO Upsert anstatt delete and insertmany.. außer wenn kompletter batch importiert werden soll.
-    try:
-        for each in data:
-            # filter collections for unique identifier like symbol and/or date to delete old records
-            filter = { k : each[k] for key in each.keys() for k in filter_queries if key == k }
-            try:
-                validate(instance=each, schema=schema)
-                repo.delete(filter)
-                insert_data.append(each)
-            except ValidationError as e :
-                logger.warning(f"{collection_name} Upload data was rejected: {e.message}")
-                rejected_data.append({**each, "rejectionTime": datetime.datetime.now(), "validationError": e.message})
-                continue
+
+    for each in data:
+        try:
+            validate(instance=each, schema=schema)
+            insert_data.append(each)
+        except ValidationError as e :
+            logger.warning(f"{collection_name} Upload data was rejected: {e.message}")
+            rejected_data.append({**each, "rejectionTime": datetime.datetime.now(), "validationError": e.message})
+            continue
+
+    if insert_data:
+        # filter collections for unique identifier like symbol and/or date to delete old records
+        all_filters = [
+            {k: each[k] for key in each.keys() for k in filter_queries if key == k}
+            for each in insert_data
+        ]
+        for i in range(0, len(all_filters), 1000):
+            repo.delete({"$or": all_filters[i:i + 1000]})
         repo.insert_many(insert_data)
-        repo.write_rejected_data(rejected_data)
-    except Exception:
-        raise
+    repo.write_rejected_data(rejected_data)
 
 def import_constituents(repo: BaseRepositoryInterface, data : list[dict]):
     try:
