@@ -89,7 +89,7 @@ def print_ranking_row(row, score):
         )
         st.markdown("<div style='margin-top:4px;'></div>", unsafe_allow_html=True)
 
-def create_table(df_ranking,sort_by: str, ascending: bool, limit: int = 1000, symbol : Optional[str] = None, caption: str = "Value Score", show_company : bool = False):
+def create_table(df_ranking,sort_by: str, ascending: bool = False, limit: int = 1000, symbol : Optional[str] = None, caption: str = "Value Score", show_company : bool = False):
 
     df_sorted = sort_ranking(df_ranking, sort_by=sort_by, ascending=ascending)
     df_top = df_sorted.head(limit)

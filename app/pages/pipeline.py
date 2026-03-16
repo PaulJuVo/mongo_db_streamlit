@@ -16,7 +16,7 @@ from pathlib import Path
 init_logging()
 logger = logging.getLogger("Streamlit - Pipeline")
 
-st.title("Pipeline")
+st.title("Pipeline", text_alignment="center")
 
 def import_files(upload_file, is_path = False):
     i = 0 
@@ -120,6 +120,7 @@ CONSTITUENTS_PATH = PROJECT_ROOT / "tmp" / "0_sp_500_constituents_historical_202
 SP_500_PATH = PROJECT_ROOT / "tmp" / "^GSPC_eod_prices.json"
 SPXEW_PATH = PROJECT_ROOT / "tmp" / "^SPXEW_autoadjusted.json"
 
+
 conn = get_mongo(MongoUser.APPUSER)
 
 constituents_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.CONSTITUENTS)
@@ -153,49 +154,71 @@ pipeline_service = PipelineService(eodprice_repo=eod_repo,
                                     sp500_repo=sp500_repo,
                                     )
 
-upload_container = st.container()
-container = st.container(horizontal=True, horizontal_alignment="left")
 
 
-with upload_container:
-    upload_file: list[UploadedFile] = upload_container.file_uploader(label="Upload JSON or directory with JSON", 
-                               type="json", 
-                               accept_multiple_files='directory', 
-                               max_upload_size=2000)
-         
-with container:
-    if st.button(label="Import to Database from Uploaded File", icon="💾", 
-              icon_position="right", help="Import the data to the MongoDb Database"):
-        with st.spinner("Importing Files", show_time=True):
-            import_files(upload_file=upload_file)    
-    if st.button(label="Import to Database from tmp/data", icon="🧑‍💻", 
-              icon_position="right", help="Import the data to the MongoDb Database"):
-        notify("Import started")
-        start_time = time.time()
-        import_constituent()
-        import_spxew_data()
-        import_sp_data()
-        files = []
-        json_files = list(DATA_PATH.glob("*.json"))
-        with st.spinner("Importing Files", show_time=True):
-            for file in json_files:
-                files.append(file)
+###         
+### if st.button(label="Run Import and Pipeline", icon="🚀", icon_position="right", help="run etl pipeline"):
+###     with st.spinner("running Pipeline...", show_time=True):
+###         notify("Started Import")
+###         start_time = time.time()
+###         import_constituent()
+###         import_spxew_data()
+###         import_sp_data()
+### 
+###         files = []
+###         json_files = list(DATA_PATH.glob("*.json"))
+###         for file in json_files:
+###             files.append(file)
+###         import_files(upload_file=files, is_path=True)
+###         imp_time = time.time() - start_time
+###         notify(f"Import finished with {imp_time / 60:.0f} min")
+###     
+###         pipe_start = time.time()
+###         pipeline_service.run()
+###         pipe_time = time.time() - pipe_start 
+###         notify(f"Pipeline finished with {pipe_time / 60:.0f} min")
+###     st.toast(f"Pipeline run completed", icon="✅", duration="long")
+
+
+col1, col2, col3 = st.columns([1, 2, 1])
+with col2:
+    if st.button(label="Run Import & Pipeline", icon="🚀", use_container_width=True, help="Startet den kompletten ETL-Prozess"):
+        with st.spinner("Pipeline läuft...", show_time=True):
+            
+            st.write("📥 **Import**")
+            progress = st.progress(0, text="Constituents werden importiert...")
+            notify("Started Import")
+            start_time = time.time()
+            
+            import_constituent()
+            progress.progress(25, text="SPXEW Daten werden importiert...")
+            
+            import_spxew_data()
+            progress.progress(50, text="SP500 Daten werden importiert...")
+            
+            import_sp_data()
+            progress.progress(75, text="JSON Files werden importiert...")
+            
+            files = list(DATA_PATH.glob("*.json"))
             import_files(upload_file=files, is_path=True)
-        imp_time = time.time() - start_time
-        pipe_start = time.time()
-        notify(f"Import finished with {imp_time / 60:.0f} min")
-        
-        pipe_time = time.time() - pipe_start 
-        pipeline_service.run()
-        notify(f"Pipeline finished with {pipe_time / 60:.0f} min")
-        
-if st.button(label="Run pipeline", icon="🚀", icon_position="right", help="run etl pipeline"):
-    with st.spinner("running Pipeline...", show_time=True):
-        pipe_start = time.time()
-        pipeline_service.run()
-        pipe_time = time.time() - pipe_start 
-        notify(f"Pipeline finished with {pipe_time / 60:.0f} min")
-    st.toast(f"Pipeline run completed", icon="✅", duration="long")
+            progress.progress(100, text="Import abgeschlossen ✅")
+            
+            imp_time = time.time() - start_time
+            notify(f"Import finished with {imp_time / 60:.0f} min")
+            st.success(f"Import abgeschlossen in {imp_time / 60:.1f} min")
+
+            st.write("⚙️ **Pipeline**")
+            pipe_progress = st.progress(0, text="Pipeline wird ausgeführt...")
+            pipe_start = time.time()
+            
+            pipeline_service.run()
+            
+            pipe_time = time.time() - pipe_start
+            pipe_progress.progress(100, text="Pipeline abgeschlossen ✅")
+            notify(f"Pipeline finished with {pipe_time / 60:.0f} min")
+            st.success(f"Pipeline abgeschlossen in {pipe_time / 60:.1f} min")
+
+        st.toast("Pipeline run completed ✅")
                 
                      
 

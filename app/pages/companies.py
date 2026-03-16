@@ -12,8 +12,7 @@ import pandas as pd
 def get_finance_data():
     df_ts = dashboard_service.get_finance_data(companies=[st.session_state.symbol], 
                                                     from_date=datetime(from_date.year, from_date.month, from_date.day), 
-                                                    to_date=datetime(to_date.year, to_date.month, to_date.day), 
-                                                    projection=["date", "symbol", "adjClose", ratio])
+                                                    to_date=datetime(to_date.year, to_date.month, to_date.day))
     return pd.DataFrame(df_ts)
 
 def get_cagr_data(symbol, index, cagr_date, forward):
@@ -58,14 +57,22 @@ def leveled_stockdata(index):
     )
     st.plotly_chart(fig, width="stretch")
             
-st.title("Search Company Data")
 
 if 'symbol' not in st.session_state:
     st.session_state.symbol = "TSLA"
-
 st.session_state.sector = dashboard_service.map_symbol_to_sector(symbol=st.session_state.symbol)
 if 'query' not in st.session_state:
     st.session_state['query'] = 'a'
+
+current_time = date.today()
+def_from_date = current_time - relativedelta(years=2)
+min_date = date(2010,1,1)
+st.sidebar.caption(f"Data Edge: {get_data_edge().strftime('%Y-%m-%d'):20}")
+from_date = st.sidebar.date_input(label="From Date", value=def_from_date, min_value=min_date)
+to_date = st.sidebar.date_input(label="To Date", max_value=get_data_edge())
+
+st.title("Search Company Data")
+
 
 # Call the function to get suggestions
 suggestions = search_function(st.session_state.query)
@@ -98,23 +105,19 @@ if result:
     elif result.get("interaction") == "reset":
         st.session_state.query = ""
     
-current_time = date.today()
-def_from_date = current_time - relativedelta(years=2)
-min_date = date(2010,1,1)
-st.sidebar.caption(f"Data Edge: {get_data_edge().strftime('%Y-%m-%d'):20}")
-from_date = st.sidebar.date_input(label="From Date", value=def_from_date, min_value=min_date)
-to_date = st.sidebar.date_input(label="To Date", max_value=get_data_edge())
-
-    
-    
-
 
 #######
 
 
-
+ratios = {"peRatio": "Price / Earnings",
+                "psRatio": "Price / Sales",
+                "pcRatio": "Price / Operating Cashflow",
+                "pfcfRatio": "Price / Free Cashflow"}
 
 data_company = dashboard_service.get_company_data(filter={"symbol" : st.session_state.symbol})
+#########  
+####   COMPANY CARD 
+#########
 if data_company:
     company_name = data_company["companyName"]
     company_symbol = data_company["symbol"]
@@ -151,46 +154,28 @@ if data_company:
         )
     st.divider()    
 
-with st.container(horizontal_alignment="left"):
-    ratios = {"peRatio": "Price / Earnings",
-          "psRatio": "Price / Sales",
-          "pcRatio": "Price / Operating Cashflow",
-          "pfcfRatio": "Price / Free Cashflow"}
-    ratio = st.pills("Ratios", 
-                         options=ratios.keys(), 
-                         format_func=lambda option: ratios[option], 
-                         selection_mode="single",
-                         default="peRatio",
-                         label_visibility="hidden")
-if ratio:
-    try:
-        with st.container():         
+
+
+try:
+    #########  
+    ###   RATIO GRAPH 
+    #########
+    with st.container(horizontal_alignment="right"):
+            log_scale = st.toggle("log", value=False)         
             df_ts = get_finance_data()
-            fig = make_subplots(specs=[[{"secondary_y": True}]])
-            # Ratio (linke Achse)
-            # adjClose (rechte Achse)
-            
-            fig.add_trace(
-                go.Scatter(
-                    x=df_ts["date"],
-                    y=df_ts["adjClose"],
-                    name="Adj Close",
-                    mode="lines",
-                    line=dict(width=2),
-                ),
-                secondary_y=True
-            )
-            fig.add_trace(
-                go.Scatter(
-                    x=df_ts["date"],
-                    y=df_ts[ratio],
-                    name=ratios[ratio],
-                    mode="lines",
-                    line=dict(width=2, dash="dot"),
-                ),
-                secondary_y=False
-            )
-        
+            fig = go.Figure()
+
+            for ratio, ratio_label in ratios.items():
+                fig.add_trace(
+                    go.Scatter(
+                        x=df_ts["date"],
+                        y=df_ts[ratio],
+                        name=ratio_label,
+                        mode="lines",
+                        line=dict(width=2),
+                    )
+                )
+
             fig.update_layout(
                 template="plotly_dark",
                 hovermode="x unified",
@@ -208,62 +193,127 @@ if ratio:
                 rangeslider_visible=True
             )
             fig.update_yaxes(
-                title_text=ratios[ratio],
                 zeroline=False,
-                secondary_y=False
-            )
-            fig.update_yaxes(
-                title_text="Adjusted Close",
-                zeroline=False,
-                secondary_y=True
+                type="log" if log_scale else "linear"
             )
             st.plotly_chart(fig, width="stretch")
+   
+
+    #########  
+    ###   RATIO TABLE 
+    #########
+    with st.container():
+        # Header
+        header_cols = st.columns([2, 3, 3, 3])
+        with header_cols[1]:
+            st.markdown(f"""
+                <div style='font-size:14px; text-align:center;
+                            color:#9CA3AF; padding-bottom:8px;'>
+                    {st.session_state.symbol}
+                </div>
+            """, unsafe_allow_html=True)
+        with header_cols[2]:
+            st.markdown(f"""
+                <div style='font-size:14px;text-align:center;
+                            color:#9CA3AF; padding-bottom:8px;'>
+                    {st.session_state.sector} Sector
+                </div>
+            """, unsafe_allow_html=True)
+        with header_cols[3]:
+            st.markdown(f"""
+                <div style='font-size:14px; text-align:center;
+                            color:#9CA3AF; padding-bottom:8px;'>
+                    vs. Sector
+                </div>
+            """, unsafe_allow_html=True)
+
+        # Rows
+        for ratio in ratios.keys():
+            company_median = dashboard_service.get_company_median_data(
+                st.session_state.symbol, ratio=ratio,
+                from_date=datetime(from_date.year, from_date.month, from_date.day),
+                to_date=datetime(to_date.year, to_date.month, to_date.day)
+            )
+            sector_median = dashboard_service.get_sector_median_data(
+                st.session_state.sector, ratio=ratio + "Median",
+                from_date=datetime(to_date.year - 1, to_date.month, to_date.day),
+                to_date=datetime(to_date.year, to_date.month, to_date.day)
+            )
+
+            company_delta = None
+            if company_median is not None and sector_median is not None:
+                company_delta = round(company_median - sector_median, 2)
+
+            # Delta styling
+            if company_delta is None:
+                delta_html = "<span style='color:#6B7280; font-size:17px;'>—</span>"
+            elif company_delta > 0:
+                delta_html = f"<span style='color:#34D399; font-weight:600; font-size:17px;'>▲ +{company_delta}</span>"
+            elif company_delta < 0:
+                delta_html = f"<span style='color:#F87171; font-weight:600; font-size:17px;'>▼ {company_delta}</span>"
+            else:
+                delta_html = f"<span style='color:#9CA3AF; font-weight:600; font-size:17px;'>● {company_delta}</span>"
+
+            cols = st.columns([2, 3, 3, 3])
+            with cols[0]:
+                st.markdown(f"""
+                    <div style='padding:12px 0; color:#E5E7EB; font-size:14px; 
+                                font-weight:500; line-height:1.5;'>
+                        {ratios[ratio]}<br>
+                        <span style='color:#6B7280; font-size:12px; font-weight:400;'>1Y Median</span>
+                    </div>
+                """, unsafe_allow_html=True)
+            with cols[1]:
+                val = f"{company_median:.2f}" if company_median is not None else "—"
+                st.markdown(f"""
+                    <div style='padding:12px 0; text-align:center;font-size:17px; font-weight:600; color:#F9FAFB;'>
+                        {val}
+                    </div>
+                """, unsafe_allow_html=True)
+            with cols[2]:
+                val = f"{sector_median:.2f}" if sector_median is not None else "—"
+                st.markdown(f"""
+                    <div style='padding:12px 0; text-align:center;font-size:17px; font-weight:600; color:#D1D5DB;'>
+                        {val}
+                    </div>
+                """, unsafe_allow_html=True)
+            with cols[3]:
+                st.markdown(f"""
+                    <div style='padding:12px 0;text-align:center;'>
+                        {delta_html}
+                    </div>
+                """, unsafe_allow_html=True)
+
+            st.markdown("<hr style='margin:0; border:none; border-top:1px solid #1F2937;'>", unsafe_allow_html=True)
+
+    #########  
+    ###   RANKING CARDS 
+    #########
+    with st.container():
+        ranking = get_ranking(st.session_state.sector, to_date)
+        value_rank = sort_ranking(ranking, sort_by="value_score", ascending=False)
+        momentum_rakn = sort_ranking(ranking, sort_by="momentum_score", ascending=False)
+        value_ranked_company = get_company_ranked(value_rank, st.session_state.symbol)
+        momentum_ranked_company = get_company_ranked(momentum_rakn, st.session_state.symbol)
+        col1, col2 = st.columns([7,1], vertical_alignment="center")
+        st.space("medium")
+        
+        st.subheader(f"Ranking on {to_date}", text_alignment="center")
+        st.caption("Value ranking")
+        with st.container(border=True):
+            col1, col2 = st.columns([10,2], vertical_alignment="center")
+            with col1: print_ranking_row(value_ranked_company.iloc[0], "value_score")
+            with col2: st.page_link(f"pages/ranking_all.py", label="Go to Ranking", icon="➡️", icon_position="right")
+        st.caption("Momentum ranking")
+        with st.container(border=True):
+            col1, col2 = st.columns([10,2], vertical_alignment="center")
+            with col1: print_ranking_row(momentum_ranked_company.iloc[0], "momentum_score")
+            with col2: st.page_link("pages/ranking_all.py", label="Go to Ranking", icon="➡️", icon_position="right")
        
-        with st.container():    
-            
-            col0, col1, col2, col3 = st.columns([2,3,3,3])
-            col0.space("xxsmall")
-            col0.space("xxsmall")
-            col0.caption(f"Trailing 1Y Median")
-            with col1:
-                company_median = dashboard_service.get_company_median_data(st.session_state.symbol, 
-                                                                           ratio=ratio, 
-                                                                           from_date=datetime(from_date.year, from_date.month, from_date.day), 
-                                                                           to_date=datetime(to_date.year, to_date.month, to_date.day))
-                st.metric(label=f"{st.session_state.symbol} {ratios[ratio]}", value=company_median)
-            with col2:
-                sector_median = dashboard_service.get_sector_median_data(st.session_state.sector, 
-                                                                           ratio=ratio + "Median", 
-                                                                           from_date=datetime(to_date.year - 1, to_date.month, to_date.day), 
-                                                                           to_date=datetime(to_date.year, to_date.month, to_date.day))
-                st.metric(label=f"{st.session_state.sector} {ratios[ratio]}", value=sector_median)
-            with col3:
-                if company_median is not None and sector_median is not None:
-                    company_delta = round(company_median - sector_median,2)
-                st.metric(label=f"Delta", value=company_delta)
-        with st.container():
-            ranking = get_ranking(st.session_state.sector, to_date)
-            value_rank = sort_ranking(ranking, sort_by="value_score", ascending=True)
-            momentum_rakn = sort_ranking(ranking, sort_by="value_score", ascending=False)
-            value_ranked_company = get_company_ranked(value_rank, st.session_state.symbol)
-            momentum_ranked_company = get_company_ranked(momentum_rakn, st.session_state.symbol)
-            col1, col2 = st.columns([7,1], vertical_alignment="center")
-            st.divider()
-            
-            st.subheader(f"Ranking on {to_date}", text_alignment="center")
-            st.caption("Value ranking")
-            with st.container(border=True):
-                col1, col2 = st.columns([10,2], vertical_alignment="center")
-                with col1: print_ranking_row(value_ranked_company.iloc[0], "value_score")
-                with col2: st.page_link(f"pages/ranking_all.py", label="Go to Ranking", icon="➡️", icon_position="right")
-            st.caption("Momentum ranking")
-            with st.container(border=True):
-                col1, col2 = st.columns([10,2], vertical_alignment="center")
-                with col1: print_ranking_row(momentum_ranked_company.iloc[0], "value_score")
-                with col2: st.page_link("pages/ranking_all.py", label="Go to Ranking", icon="➡️", icon_position="right")
-           
-                        
-        with st.container():
+    #########  
+    ###   SP 500 Comparison  
+    #########                
+    with st.container():
             st.divider()
             st.subheader(f"{st.session_state.symbol} vs S&P 500", text_alignment="center")    
             leveled_stockdata("GSPC")
@@ -302,8 +352,8 @@ if ratio:
                 color = "#09ab3b" if num > 0 else "#ff2b2b" if num < 0 else "white"
                 return f"color: {color}; font-weight: bold"
             st.dataframe(df.style.map(highlight_delta, subset=["Delta"]), width="stretch", hide_index=True) # type: ignore
-    except NoDataFound as e:
-        st.info(e.message)
+except NoDataFound as e:
+    st.info(e.message)
 
 
 

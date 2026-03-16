@@ -39,7 +39,6 @@ strategy =st.sidebar.pills("Strategies",
 
 st.title("Search Ranking Data")
 
-
 if strategy:
     tab1, tab2 = st.tabs(["by Company Name", "by Sector"])
     with tab2:
@@ -50,7 +49,7 @@ if strategy:
             )
         st.markdown(f"### {strategys[strategy]} Ranking for {st.session_state.sector} Sector")
         df_ranking = get_ranking(st.session_state.sector, date1)
-        create_table(df_ranking,sort_by="value_score", ascending=True, limit=1000, caption="Value Score", symbol=None,show_company=False)
+        create_table(df_ranking,sort_by=strategy, ascending=False, limit=1000, caption=f"{strategys[strategy]} Score", symbol=None,show_company=False)
 
     with tab1:
         suggestions = search_function(st.session_state.query)
@@ -80,5 +79,4 @@ if strategy:
 
         st.markdown(f"### {strategys[strategy]} Ranking for {st.session_state.sector2} Sector")
         df_ranking = get_ranking(st.session_state.sector2, date1)
-        create_table(df_ranking,sort_by="value_score", ascending=True, limit=1000, caption="Value Score", symbol=st.session_state.symbol,show_company=True)
-        # TODO show all button
+        create_table(df_ranking,sort_by=strategy, ascending=False, limit=1000, caption=f"{strategys[strategy]} Score", symbol=st.session_state.symbol,show_company=True)

@@ -5,6 +5,8 @@ from app.shared.mongo import get_data_edge, dashboard_service
 from datetime import date, datetime
 from dateutil.relativedelta import relativedelta
 import plotly.express as px
+import pandas as pd
+import plotly.graph_objects as go
 from core.exceptions.dashboard_exceptions import NoDataFound
 
 
@@ -21,7 +23,6 @@ def get_sector():
 @st.cache_data
 def get_symbols(sector):
     result = dashboard_service.get_distinct_company_data(key="symbol", filter = {"sector" : sector})
-    
     return result
 
 
@@ -33,16 +34,22 @@ st.sidebar.caption(f"Data Edge: {get_data_edge().strftime('%Y-%m-%d'):20}")
 from_date = st.sidebar.date_input(label="From Date", value=def_from_date, min_value=min_date)
 to_date = st.sidebar.date_input(label="To Date", max_value=get_data_edge())
 
-sector_option = st.sidebar.selectbox(
+if 'symbol' not in st.session_state:
+    st.session_state.symbol = "TSLA"
+st.session_state.sector = dashboard_service.map_symbol_to_sector(symbol=st.session_state.symbol)
+
+st.session_state.sector = st.sidebar.selectbox(
     "Sector",
     get_sector(),
+    index=get_sector().index(st.session_state.sector)
 )
 
-symbols = get_symbols(sector_option)
+
+symbols = get_symbols(st.session_state.sector)
 symbol_options = st.sidebar.multiselect(
     "Companies",
     symbols,
-    default=symbols[0],
+    default=[st.session_state.symbol] if st.session_state.symbol in symbols else []
 )
 
 ratios = {"peRatio": "Price / Earnings",
@@ -55,29 +62,36 @@ ratio = st.sidebar.pills("Ratios",
                          format_func=lambda option: ratios[option], 
                          selection_mode="single",
                          default="peRatio")
-st.title(f"{sector_option}")
-if ratio:
+st.title(f"{st.session_state.sector}")
+if ratio and st.session_state.sector:
     try:
-        st.subheader(f"{ratios[ratio]} (Median for Sector)")
-        last_year, five_year, ten_year = dashboard_service.get_sector_median_data_last_years(sector_option, ratio + "Median", datetime(to_date.year, to_date.month, to_date.day))
-        col1, col2, col3 = st.columns(3, vertical_alignment="top")
-        with col1:
-            con1 = st.container(border=True)
-            con1.write("Last Year")
-            con1.subheader(last_year)
-        with col2:
-            con2 = st.container(border=True)
-            con2.write("Last 5 Years")
-            con2.subheader(five_year)
-        with col3:
-            con3 = st.container(border=True)
-            con3.write("Last 10 Years")
-            con3.subheader(ten_year)
+        st.subheader(f"{ratios[ratio]}")
+
+        with st.container():    
+            
+            col0, col1, col2, col3 = st.columns([2,3,3,3])
+            col0.space("xxsmall")
+            col0.space("xxsmall")
+            col0.caption(f"Trailing Median")
+            tup = dashboard_service.get_sector_median_data_last_years(st.session_state.sector, ratio + "Median", datetime(to_date.year, to_date.month, to_date.day))
+            last_year, five_year, ten_year = map(lambda x: round(x,2) if x is not None else None, tup)
+            with col1:
+                st.metric(label=f"1 Year", value=last_year)
+            with col2:
+                st.metric(label=f"5 Year", value=five_year)
+            with col3:
+                st.metric(label=f"10 Year", value=ten_year)
+
 
         df_ts = dashboard_service.get_finance_data(companies=symbol_options, 
                                                from_date=datetime(from_date.year, from_date.month, from_date.day), 
                                                to_date=datetime(to_date.year, to_date.month, to_date.day),
-                                               projection=["date", "symbol", ratio])
+                                               )
+        
+        df_sector = pd.DataFrame(dashboard_service.get_sector_data(sector=st.session_state.sector,
+                                                      from_date=datetime(from_date.year, from_date.month, from_date.day), 
+                                               to_date=datetime(to_date.year, to_date.month, to_date.day)
+                                                    ))
 
 
         fig = px.line(
@@ -85,12 +99,29 @@ if ratio:
             x="date",
             y=ratio,
             color="symbol",
-            line_shape="spline"
+            line_shape="spline",
+            color_discrete_sequence=px.colors.qualitative.Safe
         )
 
         fig.update_traces(
             line=dict(width=2),
-            opacity=0.9
+            opacity=0.8
+        )
+        # Sektor-Medianlinie hinzufügen
+        median_col = ratio + "Median"
+        fig.add_trace(
+            go.Scatter(
+                x=df_sector["date"],
+                y=df_sector[median_col],
+                mode="lines",
+                name=f"Sektor-Median ({st.session_state.sector})",
+                line=dict(
+                    color="red",
+                    width=2,        # dicker als die anderen (die haben width=2)
+                    dash="solid"     
+                ),
+                opacity=1 
+            )
         )
         fig.update_layout(
             template="plotly_white",

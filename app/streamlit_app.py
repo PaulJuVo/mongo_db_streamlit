@@ -9,6 +9,9 @@ pages = {
         st.Page("pages/ranking.py", title="Top 10 per Sector"),
         st.Page("pages/ranking_all.py", title="Company")
     ],
+    "Pipeline": [
+        st.Page("pages/pipeline.py", title="Import"),
+    ]
 }
 
 navigation = st.navigation(pages)
