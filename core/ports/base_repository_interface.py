@@ -20,7 +20,7 @@ class BaseRepositoryInterface(ABC):
     def create_time_series(self, config):
         pass
     @abstractmethod
-    def execute_pipeline(self, pipeline):
+    def execute_pipeline(self, pipeline) -> Cursor:
         pass
     @abstractmethod
     def write_rejected_data(self, data):
@@ -36,4 +36,13 @@ class BaseRepositoryInterface(ABC):
         pass
     @abstractmethod
     def create_index(self, keys : list[tuple], unique : bool):
+        pass
+    @abstractmethod
+    def upsert_one(self, filter, update):
+        pass
+    @abstractmethod
+    def bulk_write(self, operations):
+        pass
+    @abstractmethod
+    def make_upsert(self, doc):
         pass

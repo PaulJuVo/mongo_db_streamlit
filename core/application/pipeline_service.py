@@ -49,12 +49,11 @@ class PipelineService:
         self.create_sp500_timeseries()
         self.upsert_eod_staged()
         self.upsert_income_staged()
-        self.upsert_chashflow_staged()
+        self.upsert_cashflow_staged()
         self.create_finance_data(2000)
         self.create_sector_timeseries()
-
-
         
+    
     @performance_log(logger)
     def create_finance_data(self, b_size):
         self.financedata_repo.drop()
@@ -63,17 +62,29 @@ class PipelineService:
         results = self.staged_eodprice_repo.find(batch_size=b_size)
         to_copy = ["date", "adjClose", "symbol"]
         processed_data = []
+        batch_size = 1000
+
+        income_docs = self.staged_income_repo.find(sort={"symbol": 1, "fillingDate": 1})
+        cashflow_docs = self.staged_cashflow_repo.find(sort={"symbol": 1, "fillingDate": 1})
+
+        income_grouped = {}
+        for doc in income_docs:
+            income_grouped.setdefault(doc["symbol"], []).append(doc)
+
+        cashflow_grouped = {}
+        for doc in cashflow_docs:
+            cashflow_grouped.setdefault(doc["symbol"], []).append(doc)
+
 
         for eod_price in results:
             finance_data = {k: v for k, v in eod_price.items() if k in to_copy}
             date = eod_price["date"]
             symbol = eod_price["symbol"]
 
-            income_cursor = self.staged_income_repo.find(filter={"symbol": symbol, "fillingDate" : { "$lte" : date}}, limit=4)
-            cashflow_cursor = self.staged_cashflow_repo.find(filter={"symbol": symbol, "fillingDate" : { "$lte" : date}}, limit=4)
-
-            incom_stats = [*income_cursor]
-            cashflow_stats = [*cashflow_cursor]
+            income_list = income_grouped.get(symbol, [])
+            incom_stats = [i for i in income_list if i["fillingDate"] <= date][-4:]
+            cashflow_list = cashflow_grouped.get(symbol, [])
+            cashflow_stats = [i for i in cashflow_list if i["fillingDate"] <= date][-4:]
 
             if contains_right_income_statements(incom_stats, eod_price["date"]):
                 avg_shares_ttm = get_avg_shares(incom_stats)
@@ -106,8 +117,11 @@ class PipelineService:
                 finance_data["pcRatio"] = None
 
             processed_data.append(finance_data)
-        self.financedata_repo.insert_many(processed_data)
-    
+            if len(processed_data) >= batch_size:
+                self.financedata_repo.insert_many(processed_data)
+                processed_data.clear()
+        if processed_data:
+            self.financedata_repo.insert_many(processed_data)
 
     def create_scd_constituents(self):
         self.constituents_repo.execute_pipeline(CONSTITUES)
@@ -144,7 +158,6 @@ class PipelineService:
         self.scd_constituents_repo.drop()
         self.scd_constituents_repo.insert_many(scd)
 
-
     def upsert_company_data(self):
         self.company_repo.create_index(keys=[("symbol", 1)], unique=True)
         self.profile_repo.execute_pipeline(COMPANY_PIPELINE)
@@ -158,7 +171,7 @@ class PipelineService:
         self.income_repo.execute_pipeline(INCOME_STAGED)
         self.staged_income_repo.create_index(keys=[("symbol", 1), ("fillingDate", -1)], unique=False)
 
-    def upsert_chashflow_staged(self):
+    def upsert_cashflow_staged(self):
         self.staged_cashflow_repo.create_index(keys=[("symbol", 1), ("date", -1)], unique=True)
         self.cashflow_repo.execute_pipeline(CASHFLOW_STAGED)
         self.staged_cashflow_repo.create_index(keys=[("symbol", 1), ("fillingDate", -1)], unique=False)

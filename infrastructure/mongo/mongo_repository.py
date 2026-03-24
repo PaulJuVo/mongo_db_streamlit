@@ -4,6 +4,7 @@ from core.ports.cursor import Cursor
 from infrastructure.mongo.mongo_connection import MongoConnection
 from config.mongo_config import MongoDatabase, MongoCollection
 from config.logging_config import performance_log
+from pymongo import UpdateOne
 import logging
 
 
@@ -15,7 +16,6 @@ class MongoRepository(BaseRepositoryInterface):
         self.collection = self.db.get_collection(collection.value)
         self.rejection_collection = self.collection.name + "_rejected"
     
-    @performance_log(logger)
     def insert_many(self, data):
         if data:
             self.collection.insert_many(data)
@@ -39,7 +39,7 @@ class MongoRepository(BaseRepositoryInterface):
     
     @performance_log(logger)
     def execute_pipeline(self, pipeline):
-        self.collection.aggregate(pipeline)
+        return self.collection.aggregate(pipeline)
     
     def find(self, filter = None, batch_size = 101, limit = 0, projection = None, sort = None) -> Cursor[dict]:
         return self.collection.find(filter = filter, batch_size = batch_size, limit = limit, projection = projection, sort = sort)
@@ -52,3 +52,17 @@ class MongoRepository(BaseRepositoryInterface):
 
     def create_index(self, keys : list[tuple], unique : bool):
         self.collection.create_index(keys=keys, unique=unique)
+
+    def upsert_one(self, filter, update):
+        return self.collection.update_one(filter=filter, update=update, upsert=True)
+
+    def bulk_write(self, operations):
+        self.collection.bulk_write(operations)
+
+    def make_upsert(self, doc):
+        from pymongo import UpdateOne
+        return UpdateOne(
+        {"symbol": doc["symbol"], "date": doc["date"]},
+        {"$set": doc},
+        upsert=True
+        )
