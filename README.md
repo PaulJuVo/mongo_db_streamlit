@@ -11,6 +11,7 @@ Vor diesem Hintergrund stellt sich die Frage, wie eine Anwendung konzipiert und 
 ## Zielsetzung
 
 Ziel dieser Arbeit ist die Konzipierung und Umsetzung einer Anwendung, die fundamental sowie historische Daten verarbeitet, in einer Datenbank speichert und diese dann in einem Dashboard zur Ansicht zur Verfügung stellt. Verschiedene Ratios sollen für ein Unternehmen über die Zeit dargestellt und vergleichbar gemacht werden. Außerdem sollen Unternehmen untereinander und mit dem Peer-Group Median verglichen werden können. Um den vollen Funktionsumfang eines Dashboards zu gewährleisten sollen auch die historischen Aktienpreise und zum Vergleich mit ihrem Index angezeigt werden. Basierend auf den Ratios wird ein Combined Score ermittelt, der in einem Ranking angezeigt und mit einem Momentum Ranking verglichen werden kann. Prototypisch wird die Anwendung nur für Unternehmen aus dem S&P500 umgesetzt. Das Projekt fokussiert sich auf historische Fundamentaldaten und beinhaltet keine Echtzeitdaten, keine Prognose -Modelle und keine automatisierte Investment-Empfehlung.
+Ziel dieser Arbeit ist die Konzipierung und Umsetzung einer Anwendung, die fundamental sowie historische Daten verarbeitet, in einer Datenbank speichert und diese dann in einem Dashboard zur Ansicht zur Verfügung stellt. Verschiedene Ratios sollen für ein Unternehmen über die Zeit dargestellt und vergleichbar gemacht werden. Außerdem sollen Unternehmen untereinander und mit dem Peer-Group Median verglichen werden können. Um den vollen Funktionsumfang eines Dashboards zu gewährleisten sollen auch die historischen Aktienpreise und zum Vergleich mit ihrem Index angezeigt werden. Basierend auf den Ratios wird ein Combined Score ermittelt, der in einem Ranking angezeigt und mit einem Momentum Ranking verglichen werden kann. Prototypisch wird die Anwendung nur für Unternehmen aus dem S&P500 umgesetzt. Das Projekt fokussiert sich auf historische Fundamentaldaten und beinhaltet keine Echtzeitdaten, keine Prognose -Modelle und keine automatisierte Investment-Empfehlung.
 
 Neben der fachlichen Funktionalität legt die Arbeit einen expliziten Schwerpunkt auf die softwaretechnische Qualität der entwickelten Anwendung. Durch den Einsatz von Clean Architecture und dem Prinzip der Dependency Inversion soll eine modulare, testbare und wartbare Codebasis entstehen. Automatisierte Tests, strukturiertes Logging sowie die konsequente Trennung von Verantwortlichkeiten (Separation of Concerns) gewährleisten dabei sowohl die Korrektheit der Berechnungen als auch die langfristige Erweiterbarkeit des Systems.
 
@@ -61,6 +62,7 @@ TTM ist die gebräuchlichste Form der Trailing-Berechnung und aggregiert die Fin
 **Forward**
 
 Forward-Kennzahlen basieren auf gebräuchlicherweise auf Analystenschätzungen für zukünftige Perioden, z.B. den erwarteten Gewinn der kommenden zwölf Monate. Der Begriff wird zur Abgrenzung gegenüber Trailing-Metriken und bezieht sich in diesem Projektkontext auf tatsächliche Finanzdaten in der vorwärtsgerichteten Betrachtung (kein Forecast!). MEHR
+Forward-Kennzahlen basieren auf gebräuchlicherweise auf Analystenschätzungen für zukünftige Perioden, z.B. den erwarteten Gewinn der kommenden zwölf Monate. Der Begriff wird zur Abgrenzung gegenüber Trailing-Metriken und bezieht sich in diesem Projektkontext auf tatsächliche Finanzdaten in der vorwärtsgerichteten Betrachtung (kein Forecast!). MEHR
 
 **Index**
 
@@ -102,7 +104,11 @@ $\quad P/FCF = \frac{\text{Price per Share}}{\text{Free Cashflow per Share (TTM)
 
 ### **Value Strategy**
 
+### **Value Strategy**
+
 > Value investing involves picking stocks that seem to be trading for less than their book value.
+
+QUELLE?
 
 QUELLE?
 
@@ -114,6 +120,7 @@ James O'Shaughnessy ist ein Amerikanischer Investor, CEO von O'Shaughnessy Ventu
 
 **Ratio-Auswahl und Peer-Group-Vergleich**
 
+Man kann aus der uns zur Verfügung stehenden PE - Ratio, der PS - Ratio und der PFCF - Ratio einen Combined Value Score machen. Die PC - Ratio wird für den Score verworfen, da der Cashflow sonst übergwichtet wäre, und der Free Cashflow einen besseren Einblick über die tatsächlich zu Verfügung stehenden liquiden Mittel gibt. Da die einzelnen Sektoren unterschiedlichen Bedingungen und damit auch unterschiedlichen Ratio Niveaus und Abweichungen unterliegen, ist es sinnvoll eine Sektor-relative Bewertung vorzunehmen. WIESO SEKTOR RELATIV ??
 Man kann aus der uns zur Verfügung stehenden PE - Ratio, der PS - Ratio und der PFCF - Ratio einen Combined Value Score machen. Die PC - Ratio wird für den Score verworfen, da der Cashflow sonst übergwichtet wäre, und der Free Cashflow einen besseren Einblick über die tatsächlich zu Verfügung stehenden liquiden Mittel gibt. Da die einzelnen Sektoren unterschiedlichen Bedingungen und damit auch unterschiedlichen Ratio Niveaus und Abweichungen unterliegen, ist es sinnvoll eine Sektor-relative Bewertung vorzunehmen. WIESO SEKTOR RELATIV ??
 
 **Robust Z-Score**
@@ -142,7 +149,7 @@ MEHR?
 
 ### Clean Architecture
 
-![Abb. 1: Die saubere Architektur (Martin 2018, S. 193)](attachment:20a16a22-2095-4892-a820-7bd4958f58c0:image.png)
+![Abb. 1: Die saubere Architektur (Martin 2018, S. 193)](attachments/image.png)
 
 Abb. 1: Die saubere Architektur (Martin 2018, S. 193)
 
@@ -188,7 +195,7 @@ Das Decorator Pattern ist ein strukturelles Entwurfsmuster, das einer bestehende
 
 ### Systemarchitektur
 
-![Abb. 2: Systemarchitektur. Quelle: Eigene Darstellung](attachment:d9486466-8e12-46a3-bd48-0db4642a7e98:image.png)
+![Abb. 2: Systemarchitektur. Quelle: Eigene Darstellung](attachments/systemarchitecture.png)
 
 Abb. 2: Systemarchitektur. Quelle: Eigene Darstellung
 
@@ -265,3 +272,55 @@ Die **Top-10 Ranking Page** zeigt die zehn bestplatzierten Unternehmen eines aus
 Die **Full Ranking Page** stellt das vollständige sektorweite Ranking dar. Der Nutzer kann entweder den gesamten Sektor einsehen oder gezielt nach einzelnen Unternehmen suchen und deren Rankingposition nachvollziehen.
 
 Die **Pipeline Page** dient als administrative Steuerungsseite der Anwendung. Über sie kann der Datenimport gestartet und die Verarbeitungspipeline ausgelöst werden. Sie bildet damit den operativen Einstiegspunkt für die Datenbeschaffung und -verarbeitung.
+
+### Docker
+
+Die Anwendung wird mittels Docker containerisiert und über Docker Compose als Multi-Container-Anwendung betrieben. Docker stellt sicher, dass die Anwendung umgebungsunabhängig und reproduzierbar ausgeführt werden kann, da alle Abhängigkeiten im Container gekapselt sind.
+Das Dockerfile basiert auf dem schlanken python:3.11-slim Image, um die Container-Größe minimal zu halten. Die Abhängigkeiten werden über requirements.txt installiert und die Streamlit-Applikation wird auf Port 8501 exponiert.
+Die docker-compose.yml definiert zwei Services. Der mongodb Service verwendet das offizielle MongoDB Community Server Image und persistiert die Datenbankdaten in einem externen Docker Volume, sodass die Daten einen Neustart des Containers überleben. Über das docker-entrypoint-initdb.d Verzeichnis wird beim ersten Start ein Initialisierungsskript ausgeführt, das die Datenbankbenutzer und Datenbanken einrichtet. Der streamlit Service wird aus dem lokalen Dockerfile gebaut und ist über depends_on mit dem MongoDB Service verknüpft, sodass die Applikation erst startet, wenn die Datenbank verfügbar ist. Umgebungsvariablen wie Datenbankverbindung und Credentials werden über eine .env.dev Datei injiziert und sind damit nicht im Quellcode hinterlegt.
+Log-Dateien und Datendateien werden über Volumes in das Host-Dateisystem gemountet, was eine persistente Fehleranalyse außerhalb des Containers ermöglicht. Das MongoDB Volume ist als external: true konfiguriert, wodurch es unabhängig vom Container-Lifecycle existiert und ein unbeabsichtigtes Löschen der Datenbankdaten beim Neustart verhindert wird.
+
+### Performance
+
+Um geringe Antwortzeiten zu gewährleisten sind alle Ratios in der Finanzzeitreihe persistiert und diese ist als Timeseries Collection in Mongo konfiguriert. Timeseries Collection sind für Zeitreihen optimiert und ermöglichen dadurch geringe Ladezeiten für Abfragen. Die Zeitreihe wurde außerdem auf dem Ticker-Symbol und dem Datum indexiert, sodass Abfragen noch schneller bearbeitet werden.
+Die Erstellung der FinanceData Collection efolgt über Batch Inserts, bei denen Dokumente in definierten Blöcken geschrieben werden. Dies beschleunigt die Verarbeitung großer Datenmengen und begrenzt gleichzeitig den Arbeitsspeicherbedarf, da nie alle Dokumente gleichzeitig im RAM gehalten werden müssen. Die Anwendung kommt dadurch mit 2 GB RAM aus.
+Besonders hervorzuheben ist, dass, wenn immer möglich und sinnvoll, das Mongo Aggregation Framework genutzt wird, welches die Datenverarbeitung auf Datenbankebene ermöglicht und damit den Datentransfer zwischen Datenbank und Anwendung minimiert.
+
+## Data
+
+### Data Source
+
+### Schema Validation
+
+Bevor die Rohdaten in die “raw” Datenbank importiert werden, wird zuerst mit der python Bibliothek jsonschema das Schema der Rohdaten geprüft. Damit wird sichergestellt, dass bestimmte essenzielle Daten vorhanden sind und das die folgenden Verarbeitungsschritte ausgeführt werden können. Ein ValidationError führt dazu, dass der Datensatz geloggt wird und in eine <collection>\_rejected Tabelle eingefügt wird. Somit kann man nochmal nachvollziehen, warum und wie der Datensatz aussieht der nicht importiert wurde.
+
+### Zielschema
+
+![Abb. 2: Zielschema. Quelle: Eigene Darstellung](attachments/processed_schema.png)
+
+### Datenfluss
+
+#### FinanceData
+
+![Abb. 2: Datenfluss Finanzdaten Zeitreihe. Quelle: Eigene Darstellung](attachments/datenfluss_ts.jpg)
+
+Nach dem Import in die "raw" Datenbank werden die Daten mit dem Mongo Aggregation Framework vorverarbeitet. Dabei werden für den Kontext unwichtige Informationen aus den Collections gefiltert und gegebenenfalls Typumwandlungen gemacht. Verschachtelte Objekte werden abgeflacht, sodass die Daten näher an das Zielschema kommen.
+Die Finanzdaten Zeitreihe wird dann in Python erstellt. Dazu wird die eodPrice Collection durchlaufen, um für jedes Datum die Ratios berechnet. Die letzten vier Incomestatements und die letzten vier Cashflowstatements werden nach einer Validierung genutzt, um die TTM Average Outstanding Shares, die TTM Earnings per Share, den TTM Revenue per Share und die TTM Cashflows zu berechnen. Dies dient als Grundlage für die Berechnung der Price - Ratios. Falls die Berechnung fehlschlägt oder die Statements nicht Korrekt sind, bzw. nicht die erwarteten letzten vier sind, wird die betroffene Ratio auf NONE gesetzt.
+
+#### Constituents - scdConstituents
+
+Aus der 0_sp_500_constituents_historical_2026.json wird eine Slowly Changing Dimension Type 2 erstellt, um nachvollziehen zu können, wann ein Unternehmen in den Index aufgenommen oder aus dem Index herausgenommen wurde. Diese Collection bleibt bisher ungenutzt, ist aber schon angelegt, da für eine Evaluierung von einer Value Strategie diese Informationen wichtig sind, weil ...
+
+#### S&P500 Data
+
+Für einen Vergleich mit dem Index werden aus den Files SPXEW_autoadjusted.json und ^GSPC_eod_prices.json Zeitreihen für den S&P 500 Index und für den S&P 500 Equal Weights Index extrahiert. Die Extrahierung geschieht durch das Mongo Aggregation Framework.
+
+#### Company Data
+
+Aus der Profil Collection wird durch das Mongo Aggregation Framework die Company Data Collection erstellt. Dabei werden nur ausgewählte Properties übernommen.
+
+#### Sector Data
+
+Diese Collection ist das Ergebnis der Aggregation aus der Financedata Zeitreihe durch das Mongo Aggregation Framework. Nach einem Join mit der CompanyData Collection wird nach Sektoren und Datum gruppiert und der Median der Ratios wird berechnet.
+
+![Abb. 2: Systemarchitektur. Quelle: Eigene Darstellung](attachments/Datenfluss.jpg)
