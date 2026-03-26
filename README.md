@@ -19,7 +19,7 @@ Neben der fachlichen Funktionalität legt die Arbeit einen expliziten Schwerpunk
 
 ### Datengrundlage
 
-Die Anwendung bezieht Daten aus… (Später)
+TODO Die Anwendung bezieht Daten aus… (Später)
 
 ### Architektur
 
@@ -35,68 +35,68 @@ Als Datenbank hat man eine Mongo Instanz ausgewählt, da sie die Flexibilität e
 
 ### Grundlegende Begriffe
 
-**Income Statement (Gewinn- und Verlustrechnung)**
+#### Income Statement (Gewinn- und Verlustrechnung)
 
 Das Income Statement ist eine periodische Finanzaufstellung, die Umsätze, Kosten und das Nettoergebnis eines Unternehmens über einen definierten Zeitraum ausweist. Es bildet die Grundlage für ertragsbezogene Kennzahlen wie das Kurs-Gewinn-Verhältnis (P/E Ratio) und ist zentraler Bestandteil der fundamentalen Unternehmensanalyse.
 
-**Cash Flow Statement (Kapitalflussrechnung)**
+#### Cash Flow Statement (Kapitalflussrechnung)
 
 Die Kapitalflussrechnung stellt die tatsächlichen Zahlungsströme eines Unternehmens dar und gliedert sich in operativen, investiven und finanzierenden Cashflow. Im Gegensatz zum Income Statement ist sie nicht durch buchhalterische Abgrenzungen beeinflusst und ermöglicht damit eine realistischere Beurteilung der Liquidität – relevant insbesondere für den Free Cash Flow als Basis des P/FCF-Ratios.
 
-**Symbol / Ticker**
+#### Symbol / Ticker
 
 Der Ticker ist ein eindeutiges alphanumerisches Kürzel, das ein börsennotiertes Unternehmen an einer Handelsplattform identifiziert (z.B. `AAPL` für Apple).
 
-**Sector**
+#### Sector
 
 Der Sektor klassifiziert Unternehmen nach ihrer wirtschaftlichen Haupttätigkeit gemäß dem Global Industry Classification Standard (GICS), z.B. _Information Technology_, _Health Care_ oder _Financials_.
 
-**Trailing**
+#### Trailing
 
 Trailing bezeichnet die rückwärtsgerichtete Betrachtung einer Kennzahl auf Basis tatsächlich realisierter Vergangenheitswerte.
 
-**TTM – Trailing Twelve Months**
+#### TTM – Trailing Twelve Months
 
 TTM ist die gebräuchlichste Form der Trailing-Berechnung und aggregiert die Finanzdaten der jeweils letzten zwölf Monate – unabhängig vom Geschäftsjahresende des Unternehmens. Da Unternehmen ihren Bilanzierungskalender selbst definieren, sorgt TTM für eine zeitlich konsistente und unternehmensübergreifend vergleichbare Datenbasis.
 
-**Forward**
+#### Forward
 
 Forward-Kennzahlen basieren auf gebräuchlicherweise auf Analystenschätzungen für zukünftige Perioden, z.B. den erwarteten Gewinn der kommenden zwölf Monate. Der Begriff wird zur Abgrenzung gegenüber Trailing-Metriken und bezieht sich in diesem Projektkontext auf tatsächliche Finanzdaten in der vorwärtsgerichteten Betrachtung (kein Forecast!). MEHR
 Forward-Kennzahlen basieren auf gebräuchlicherweise auf Analystenschätzungen für zukünftige Perioden, z.B. den erwarteten Gewinn der kommenden zwölf Monate. Der Begriff wird zur Abgrenzung gegenüber Trailing-Metriken und bezieht sich in diesem Projektkontext auf tatsächliche Finanzdaten in der vorwärtsgerichteten Betrachtung (kein Forecast!). MEHR
 
-**Index**
+#### Index
 
 Ein Aktienindex aggregiert die Kursentwicklung einer definierten Gruppe von Unternehmen zu einer einzigen Kennzahl und dient als Markt- oder Sektorreferenz. Im Kontext dieser Anwendung bildet der **S&P 500** den Referenzindex, gegen den die historische Kursentwicklung einzelner Unternehmen im Dashboard verglichen wird.
 
-**Weighted Average Shares Outstanding**
+#### Weighted Average Shares Outstanding
 
 Die gewichtete durchschnittliche Anzahl ausstehender Aktien berücksichtigt Veränderungen im Aktienbestand – etwa durch Aktienrückkäufe oder Neuemissionen – anteilig über den Berichtszeitraum. Sie ist die Berechnungsgrundlage für den Earnings per Share (EPS) und beeinflusst damit direkt alle EPS-basierten Kennzahlen wie das P/E-Ratio. Im Kontext dieser Anwendung wird ausschließlich die Diluted-Variante verwendet, da sie das vollständige Verwässerungspotenzial eines Unternehmens abbildet und damit eine konservativere sowie aus Anlegerperspektive realistischere Bewertungsgrundlage darstellt.
 
 ### Finanzkennzahlen
 
-**Price - Adjusted Closed**
+#### Price - Adjusted Closed
 
 Der Price bezieht sich im Projektkontext immer auf den adjusted Closed Preis eines Handelstages. Er ist die modifizierte Version des Closed Wertes, der Aktien Spaltung, Dividenden und andere Events berücksichtigt und ermöglicht dadurch eine realistischere Betrachtung.
 
-**Price / Earnings - PE - Ratio**
+#### Price / Earnings - PE - Ratio
 
 Diese relative Kennzahl setzt den Tages Price und die Earnings eines Unternehmens in Verhältnis. Dabei wird der Price durch die TTM Earnings per Share (EPS) geteilt.
 
 $\quad P/E = \frac{\text{Price per Share}}{\text{EPS diluted (TTM)}}$
 
-**Price / Sales - PS - Ratio**
+#### Price / Sales - PS - Ratio
 
 Diese relative Kennzahl setzt den Tages Price und die Revenues eines Unternehmens in Verhältnis. Dabei wird der Price durch die TTM Revenues per Share geteilt.
 
 $\quad P/S = \frac{\text{Price per Share}}{\text{Revenue per Share (TTM)}}$
 
-**Price / Operating Cashflow - PC - Ratio**
+#### Price / Operating Cashflow - PC - Ratio
 
 Diese relative Kennzahl setzt den Tages Price und die Operating Cashflows eines Unternehmens in Verhältnis. Dabei wird der Price durch die TTM Operating Cashflows per Share geteilt.
 
 $\quad P/C = \frac{\text{Price per Share}}{\text{Operating Cashflow per Share (TTM)}}$
 
-**Price / Free Cashflow - PFCF - Ratio**
+#### Price / Free Cashflow - PFCF - Ratio
 
 Diese relative Kennzahl setzt den Tages Price und die Free Cashflows eines Unternehmens in Verhältnis. Dabei wird der Price durch die TTM Free Cashflows per Share geteilt.
 
@@ -104,26 +104,23 @@ $\quad P/FCF = \frac{\text{Price per Share}}{\text{Free Cashflow per Share (TTM)
 
 ### **Value Strategy**
 
-### **Value Strategy**
-
 > Value investing involves picking stocks that seem to be trading for less than their book value.
-
-QUELLE?
 
 QUELLE?
 
 Eine Value Strategie basiert auf der Annahmen, dass der Aktienpreis sich von dem tatsächlichen Wert eines Unternehmens im positiven wie auch im negativen entkoppeln kann, jedoch über einen langen Zeitraum zu ihrem wahren Wert zurückkehrt. Um diese Strategie am Aktienmarkt umzusetzen werden mittels verschiedener Methoden die wahren Unternehmenswerte ermittelt. Eine Methode ist es über die Fundamentaldaten auf den Unternehmenswert Rückschlüsse zu führen. Die Hypothese von Value Investoren ist, dass man in unterbewertete Aktien investiert und sich diese mit der Zeit in Richtung ihres eigentlichen Wertes, und damit positiv entwickeln.
 
-**James O’Shaughnessy und der Value Composite**
+#### James O’Shaughnessy und der Value Composite
 
 James O'Shaughnessy ist ein Amerikanischer Investor, CEO von O'Shaughnessy Ventures und Gründer von O'Shaughnessy Asset Management sowie von LLC. In seinem Buch “What Works on Wall Street” stellt er unter anderem den Value Composite One vor. Dieser besteht aus den einem kombinierten Score aus Price-to-book Ratio, Price / Sales Ratio, EBITDA / Enterprise Value, Price / Cashflow Ratio und Price / Earnings Ratio. In seinem Buch hat er mit einem Backtest von 1963 bis 2009 gezeigt, dass man mittels der Kombination aus mehreren Metriken eine Einzelmetrik in 82% der Fällen am Aktienmarkt schlägt. Sein kombinierter Score hatte eine jährliche Rendite von 17.18%.
 
-**Ratio-Auswahl und Peer-Group-Vergleich**
+#### Ratio-Auswahl und Peer-Group-Vergleich
 
-Man kann aus der uns zur Verfügung stehenden PE - Ratio, der PS - Ratio und der PFCF - Ratio einen Combined Value Score machen. Die PC - Ratio wird für den Score verworfen, da der Cashflow sonst übergwichtet wäre, und der Free Cashflow einen besseren Einblick über die tatsächlich zu Verfügung stehenden liquiden Mittel gibt. Da die einzelnen Sektoren unterschiedlichen Bedingungen und damit auch unterschiedlichen Ratio Niveaus und Abweichungen unterliegen, ist es sinnvoll eine Sektor-relative Bewertung vorzunehmen. WIESO SEKTOR RELATIV ??
-Man kann aus der uns zur Verfügung stehenden PE - Ratio, der PS - Ratio und der PFCF - Ratio einen Combined Value Score machen. Die PC - Ratio wird für den Score verworfen, da der Cashflow sonst übergwichtet wäre, und der Free Cashflow einen besseren Einblick über die tatsächlich zu Verfügung stehenden liquiden Mittel gibt. Da die einzelnen Sektoren unterschiedlichen Bedingungen und damit auch unterschiedlichen Ratio Niveaus und Abweichungen unterliegen, ist es sinnvoll eine Sektor-relative Bewertung vorzunehmen. WIESO SEKTOR RELATIV ??
+Man kann aus der uns zur Verfügung stehenden PE - Ratio, der PS - Ratio und der PFCF - Ratio einen Combined Value Score machen. Die PC - Ratio wird für den Score verworfen, da der Cashflow sonst übergwichtet wäre, und der Free Cashflow einen besseren Einblick über die tatsächlich zu Verfügung stehenden liquiden Mittel gibt. Da die einzelnen Sektoren unterschiedlichen Bedingungen und damit auch unterschiedlichen Ratio Niveaus und Abweichungen unterliegen, ist es sinnvoll eine Sektor-relative Bewertung vorzunehmen.
 
-**Robust Z-Score**
+TODO WIESO SEKTOR RELATIV ??
+
+#### Robust Z-Score
 
 Da die Ratio im Vergleich mit sich selbst unterschiedliche Skalen aufweisen, aber trotzdem gleich gewichtet werden sollen, werden sie mittels dem Robust Z-Score standardisiert. Der Robust Z-Score ist im Gegensatz zu dem Z-Score weniger sensitiv im Bezug auf Ausreißer, da er den Durchschnitt mit dem Median und die Standardabweichung mit der mittlere absoluten Abweichung (MAD) ersetzt.
 
@@ -131,19 +128,19 @@ $\quad \text{Robust Z-Score }z_i = \frac{x_i - \tilde{x}}{\text{MAD}}$
 
 $\quad \text{MAD} = \text{median}(|x_i - \tilde{x}|)$
 
-**Combined Value Score**
+#### Combined Value Score
 
 Für die Berechnung der Robust Z-Score standardisierten Ratios werden die Mediane des Sektores und der MAD des Sektores verwendet, da der Vergleich innerhalb der Peer-Group und nicht mit der Historie der Einzelaktie stattfinden soll. Als nächstes wird der Median der drei standardisierten Ratios genommen. Da unterbewertete Aktien negative Z-Scores erhalten wird als letztes der Wert invertiert, um die Verständlichkeit für den Endanwender zu erhöhen.
 
-### Momentum-Analyse
+#### Momemntum Strategy
 
-**Momentum Score**
+### Momentum Score
 
 Der Momentum Score basiert rein auf technischen Daten und ist die Rendite aus den letzten 6 Monate. Er dient als Vergleich zum Momentum Score. Je besser die Performance der letzten 6 Monate, desto höher der Score. Momentum Investoren gehen davon aus, dass Aktien, die gut laufen auch weiterhin gut laufen werden.
 
 $\quad \text{Price Index}_{6M} = \frac{Price_{end}}{Price_{start}} - 1$
 
-MEHR?
+TODO MEHR? RENDERT NICHT
 
 ## Technologie
 
@@ -157,22 +154,22 @@ Die Clean Architektur folgt einer Regel: “Quellcode-Abhängigkeiten dürfen nu
 
 Diese Architektur stellt folgende Eigenschaften sicher:
 
-**Framework-Unabhängigkeit**
-Die Kernlogik der Anwendung ist nicht an ein bestimmtes Framework gebunden. Frameworks und Libraries werden als austauschbare Werkzeuge eingesetzt, ohne dass sie die Struktur des Systems diktieren.
+- **Framework-Unabhängigkeit**:
+  Die Kernlogik der Anwendung ist nicht an ein bestimmtes Framework gebunden. Frameworks und Libraries werden als austauschbare Werkzeuge eingesetzt, ohne dass sie die Struktur des Systems diktieren.
 
-**Testbarkeit**
-Die Geschäftslogik – also Kennzahlenberechnung und Score-Ermittlung – kann isoliert getestet werden, ohne dass eine Datenbankverbindung, ein laufendes UI oder externe Dienste notwendig sind.
+- **Testbarkeit**:
+  Die Geschäftslogik – also Kennzahlenberechnung und Score-Ermittlung – kann isoliert getestet werden, ohne dass eine Datenbankverbindung, ein laufendes UI oder externe Dienste notwendig sind.
 
-**UI-Unabhängigkeit**
-Die Präsentationsschicht ist vollständig von der Businesslogik entkoppelt. Das bestehende Streamlit-Dashboard könnte beispielsweise durch ein anderes Frontend ersetzt werden, ohne dass eine einzige Zeile der Score-Berechnung angepasst werden müsste.
+- **UI-Unabhängigkeit**:
+  Die Präsentationsschicht ist vollständig von der Businesslogik entkoppelt. Das bestehende Streamlit-Dashboard könnte beispielsweise durch ein anderes Frontend ersetzt werden, ohne dass eine einzige Zeile der Score-Berechnung angepasst werden müsste.
 
-**Datenbank-Unabhängigkeit**
-Die Geschäftsregeln haben keine direkte Kenntnis der verwendeten Datenbank. MongoDB könnte theoretisch gegen eine relationale Datenbank oder einen anderen Datenspeicher ausgetauscht werden, da die Kommunikation ausschließlich über Abstraktionen erfolgt.
+- **Datenbank-Unabhängigkeit**:
+  Die Geschäftsregeln haben keine direkte Kenntnis der verwendeten Datenbank. MongoDB könnte theoretisch gegen eine relationale Datenbank oder einen anderen Datenspeicher ausgetauscht werden, da die Kommunikation ausschließlich über Abstraktionen erfolgt.
 
-**Unabhängigkeit von externen Komponenten**
-Die Domain- und Applikationsschicht hat keinerlei direkte Abhängigkeit zu externen Datenquellen oder Schnittstellen. Ob Daten über eine Finanz-API, eine CSV-Datei oder einen anderen Kanal bezogen werden, ist für die Kernlogik irrelevant.
+- **Unabhängigkeit von externen Komponenten**:
+  Die Domain- und Applikationsschicht hat keinerlei direkte Abhängigkeit zu externen Datenquellen oder Schnittstellen. Ob Daten über eine Finanz-API, eine CSV-Datei oder einen anderen Kanal bezogen werden, ist für die Kernlogik irrelevant.
 
-**Dependency inversion Principle**
+#### Dependency inversion Principle
 
 “_HIGH LEVEL MODULES SHOULD NOT DEPEND UPON LOW
 LEVEL MODULES. BOTH SHOULD DEPEND UPON ABSTRACTIONS.
@@ -181,15 +178,15 @@ SHOULD DEPEND UPON ABSTRACTIONS_.” (Martin 1996, S. 6)
 
 Um die Clean Architektur umzusetzen wird das Dependency Inversion Principle (DIP) verwendet. Es ist eines der SOLID - Prinzipien und stellt sicher, dass die Businesslogik nicht von der Infrastruktur abhängig ist. Im konkreten Fall wird das DIP für den Datenbankzugriff verwendet. Der Zugriff auf die Mongo Datenbank erfolgt über ein Repository. Im Application Layer wurde eine abstrakte Klasse Namens BaseRepositoryInterface definiert, welches im Infrastructure Layer implementiert wurde. Die Instanziierung der konkreten Repositories erfolgt im Entry Point der Anwendung (Streamlit) und wird per Dependency Injection in die Services des Application Layers injiziert. Somit sind die Abhängigkeiten alle nach innen gerichtet.
 
-**Dependency Injection**
+#### Dependency Injection
 
 Dependency Injection ist ein Design Pattern, das die praktische Umsetzung des DIP ermöglicht. Anstatt dass eine Klasse ihre Abhängigkeiten selbst instanziiert, werden diese von außen übergeben. Dadurch bleibt die Klasse unabhängig von konkreten Implementierungen und kennt ausschließlich die Abstraktion.
 
-**Repository**
+#### Repository
 
 Das Repository Pattern entstammt dem Domain-Driven Design (DDD) und abstrahiert den Datenzugriff vollständig von der Businesslogik. Die Services arbeiten ausschließlich gegen ein definiertes Interface und haben keine Kenntnis darüber, ob die Daten aus MongoDB, einer relationalen Datenbank oder einer anderen Quelle stammen. Im Kontext dieser Anwendung übernimmt das Repository dabei implizit auch die Rolle eines Adapters, da es die MongoDB-spezifische Abfragesyntax in die interne Domänensprache übersetzt.
 
-**Decorator Pattern**
+#### Decorator Pattern
 
 Das Decorator Pattern ist ein strukturelles Entwurfsmuster, das einer bestehenden Klasse zur Laufzeit zusätzliches Verhalten hinzufügt, ohne ihre Schnittstelle zu verändern. Der Decorator implementiert dasselbe Interface wie die dekorierte Klasse und umhüllt sie – er delegiert den eigentlichen Aufruf weiter und ergänzt ihn um zusätzliche Logik. In dieser Anwendung wird das Decorator Pattern für das **Logging** eingesetzt: Der “perfomance_log” umhüllt die eigentliche Funktion und protokoliert die Dauer des Funktionslaufs, ohne dass die Funktion verändert werden muss.
 
@@ -259,20 +256,6 @@ Streamlit organisiert die Anwendung in einzelne Pages, die jeweils eine dedizier
 
 Da Streamlit eine zustandslose Ausführung pro User-Interaktion hat, wird der st.session_state verwendet, um Nutzereingaben und Zwischenergebnisse innerhalb einer Session zu persistieren und unnötige Datenbankabfragen zu vermeiden.
 
-**Dashboard – Pages**
-
-Das Dashboard gliedert sich in fünf Pages, die den Funktionsumfang der Anwendung strukturiert abbilden.
-
-Die **Sector Page** dient als Einstiegspunkt des Dashboards. Sie bietet eine sektorweite Übersicht, in der der Nutzer einen Sektor auswählen, verschiedene Ratios selektieren und die enthaltenen Unternehmen visuell miteinander vergleichen kann. Eine eingezeichnete Medianlinie ermöglicht dabei eine schnelle Einordnung einzelner Unternehmen relativ zur Peer Group.
-
-Die **Company Page** ermöglicht die gezielte Analyse einzelner Unternehmen über eine Suchfunktion. Nach Auswahl eines Unternehmens werden Stammdaten, historische Aktienkurse sowie die zeitliche Entwicklung der verfügbaren Ratios dargestellt. Der historische Kursverlauf kann dabei dem S&P 500 gegenübergestellt werden. Zusätzlich werden die Renditen der letzten 1, 3, 5 und 10 Jahre ausgewiesen.
-
-Die **Top-10 Ranking Page** zeigt die zehn bestplatzierten Unternehmen eines ausgewählten Sektors zu einem definierten Datum. Das Ranking kann wahlweise nach dem Combined Value Score oder dem Momentum Score dargestellt werden, was einen direkten Vergleich beider Strategien ermöglicht.
-
-Die **Full Ranking Page** stellt das vollständige sektorweite Ranking dar. Der Nutzer kann entweder den gesamten Sektor einsehen oder gezielt nach einzelnen Unternehmen suchen und deren Rankingposition nachvollziehen.
-
-Die **Pipeline Page** dient als administrative Steuerungsseite der Anwendung. Über sie kann der Datenimport gestartet und die Verarbeitungspipeline ausgelöst werden. Sie bildet damit den operativen Einstiegspunkt für die Datenbeschaffung und -verarbeitung.
-
 ### Docker
 
 Die Anwendung wird mittels Docker containerisiert und über Docker Compose als Multi-Container-Anwendung betrieben. Docker stellt sicher, dass die Anwendung umgebungsunabhängig und reproduzierbar ausgeführt werden kann, da alle Abhängigkeiten im Container gekapselt sind.
@@ -290,6 +273,8 @@ Besonders hervorzuheben ist, dass, wenn immer möglich und sinnvoll, das Mongo A
 
 ### Data Source
 
+TODO
+
 ### Schema Validation
 
 Bevor die Rohdaten in die “raw” Datenbank importiert werden, wird zuerst mit der python Bibliothek jsonschema das Schema der Rohdaten geprüft. Damit wird sichergestellt, dass bestimmte essenzielle Daten vorhanden sind und das die folgenden Verarbeitungsschritte ausgeführt werden können. Ein ValidationError führt dazu, dass der Datensatz geloggt wird und in eine <collection>\_rejected Tabelle eingefügt wird. Somit kann man nochmal nachvollziehen, warum und wie der Datensatz aussieht der nicht importiert wurde.
@@ -298,14 +283,24 @@ Bevor die Rohdaten in die “raw” Datenbank importiert werden, wird zuerst mit
 
 ![Abb. 2: Zielschema. Quelle: Eigene Darstellung](attachments/processed_schema.png)
 
+Abb. 3: Zielschema. Quelle: Eigene Darstellung
+
+TODO
+
 ### Datenfluss
 
 #### FinanceData
 
 ![Abb. 2: Datenfluss Finanzdaten Zeitreihe. Quelle: Eigene Darstellung](attachments/datenfluss_ts.jpg)
 
+Abb. 4: Datenfluss Finanzdaten Zeitreihe. Quelle: Eigene Darstellung
+
 Nach dem Import in die "raw" Datenbank werden die Daten mit dem Mongo Aggregation Framework vorverarbeitet. Dabei werden für den Kontext unwichtige Informationen aus den Collections gefiltert und gegebenenfalls Typumwandlungen gemacht. Verschachtelte Objekte werden abgeflacht, sodass die Daten näher an das Zielschema kommen.
 Die Finanzdaten Zeitreihe wird dann in Python erstellt. Dazu wird die eodPrice Collection durchlaufen, um für jedes Datum die Ratios berechnet. Die letzten vier Incomestatements und die letzten vier Cashflowstatements werden nach einer Validierung genutzt, um die TTM Average Outstanding Shares, die TTM Earnings per Share, den TTM Revenue per Share und die TTM Cashflows zu berechnen. Dies dient als Grundlage für die Berechnung der Price - Ratios. Falls die Berechnung fehlschlägt oder die Statements nicht Korrekt sind, bzw. nicht die erwarteten letzten vier sind, wird die betroffene Ratio auf NONE gesetzt.
+
+![Abb. 2: Systemarchitektur. Quelle: Eigene Darstellung](attachments/Datenfluss.jpg)
+
+Abb. 4: Datenflussdiagramm. Quelle: Eigene Darstellung
 
 #### Constituents - scdConstituents
 
@@ -323,4 +318,32 @@ Aus der Profil Collection wird durch das Mongo Aggregation Framework die Company
 
 Diese Collection ist das Ergebnis der Aggregation aus der Financedata Zeitreihe durch das Mongo Aggregation Framework. Nach einem Join mit der CompanyData Collection wird nach Sektoren und Datum gruppiert und der Median der Ratios wird berechnet.
 
-![Abb. 2: Systemarchitektur. Quelle: Eigene Darstellung](attachments/Datenfluss.jpg)
+## Dashboard
+
+TODO Bilder einfügen
+
+Das Dashboard gliedert sich in fünf Pages, die den Funktionsumfang der Anwendung strukturiert abbilden.
+
+### Sector Page
+
+Die **Sector Page** dient als Einstiegspunkt des Dashboards. Sie bietet eine sektorweite Übersicht, in der der Nutzer einen Sektor auswählen, verschiedene Ratios selektieren und die enthaltenen Unternehmen visuell miteinander vergleichen kann. Eine eingezeichnete Medianlinie ermöglicht dabei eine schnelle Einordnung einzelner Unternehmen relativ zur Peer Group.
+
+### Company Page
+
+Die **Company Page** ermöglicht die gezielte Analyse einzelner Unternehmen über eine Suchfunktion. Nach Auswahl eines Unternehmens werden Stammdaten, historische Aktienkurse sowie die zeitliche Entwicklung der verfügbaren Ratios dargestellt. Der historische Kursverlauf kann dabei dem S&P 500 gegenübergestellt werden. Zusätzlich werden die Renditen der letzten 1, 3, 5 und 10 Jahre ausgewiesen.
+
+### Top-10 Ranking Page Page
+
+Die **Top-10 Ranking Page** zeigt die zehn bestplatzierten Unternehmen eines ausgewählten Sektors zu einem definierten Datum. Das Ranking kann wahlweise nach dem Combined Value Score oder dem Momentum Score dargestellt werden, was einen direkten Vergleich beider Strategien ermöglicht.
+
+### Full Ranking Page
+
+Die **Full Ranking Page** stellt das vollständige sektorweite Ranking dar. Der Nutzer kann entweder den gesamten Sektor einsehen oder gezielt nach einzelnen Unternehmen suchen und deren Rankingposition nachvollziehen.
+
+### Pipeline Page
+
+Die **Pipeline Page** dient als administrative Steuerungsseite der Anwendung. Über sie kann der Datenimport gestartet und die Verarbeitungspipeline ausgelöst werden. Sie bildet damit den operativen Einstiegspunkt für die Datenbeschaffung und -verarbeitung.
+
+## Schluss
+
+TODO
