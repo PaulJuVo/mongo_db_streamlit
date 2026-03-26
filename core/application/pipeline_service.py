@@ -1,5 +1,5 @@
 
-from core.ports.base_repository_interface import BaseRepositoryInterface
+from core.interfaces.base_repository_interface import BaseRepositoryInterface
 from datetime import datetime
 from config.logging_config import performance_log
 from config.mongo_config import FINANCEDATA_TIMESERIES_CONFIG

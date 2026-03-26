@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from core.ports.cursor import Cursor
+from core.interfaces.cursor import Cursor
 from typing import Any, Optional
 
 class BaseRepositoryInterface(ABC):

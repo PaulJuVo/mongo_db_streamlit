@@ -2,7 +2,7 @@ import pytest
 from datetime import datetime, date
 from unittest.mock import MagicMock, patch
 from core.application.pipeline_service import PipelineService
-from core.ports.base_repository_interface import BaseRepositoryInterface
+from core.interfaces.base_repository_interface import BaseRepositoryInterface
 from tests.data.example_data import APPLE_CORRECT, APPLE_ONLY_NONE, APPLE_W_NONE
 
 @pytest.fixture

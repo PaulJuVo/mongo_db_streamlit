@@ -7,7 +7,7 @@ pages = {
     ],
     "Ranking": [
         st.Page("pages/ranking.py", title="Top 10 per Sector"),
-        st.Page("pages/ranking_all.py", title="Company")
+        st.Page("pages/ranking_all.py", title="Full Ranking")
     ],
     "Pipeline": [
         st.Page("pages/pipeline.py", title="Import"),

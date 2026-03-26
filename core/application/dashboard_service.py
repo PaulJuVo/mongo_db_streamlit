@@ -1,4 +1,4 @@
-from core.ports.base_repository_interface import BaseRepositoryInterface
+from core.interfaces.base_repository_interface import BaseRepositoryInterface
 from core.domain.calculation import get_median_from_col, calc_cagr
 from core.exceptions.dashboard_exceptions import NoDataFound
 from datetime import datetime

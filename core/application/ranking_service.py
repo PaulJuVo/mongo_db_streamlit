@@ -1,6 +1,6 @@
 from datetime import datetime
 from core.domain.calculation import calc_mad, get_median_from_col, calc_robust_z_score, get_value_score, calc_momentum
-from core.ports.base_repository_interface import BaseRepositoryInterface
+from core.interfaces.base_repository_interface import BaseRepositoryInterface
 from copy import copy
 from infrastructure.mongo.mongo_connection import MongoConnection
 from infrastructure.mongo.mongo_repository import MongoRepository

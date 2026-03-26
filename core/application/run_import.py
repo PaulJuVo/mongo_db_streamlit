@@ -1,5 +1,5 @@
 from typing import Iterable
-from core.ports.base_repository_interface import BaseRepositoryInterface
+from core.interfaces.base_repository_interface import BaseRepositoryInterface
 from config.logging_config import performance_log
 from config.mongo_config import FILTER_QUERIES_UPLOAD
 from config.processed_schema import VALIDATION_SCHEMAS
