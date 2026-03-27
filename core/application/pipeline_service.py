@@ -96,9 +96,6 @@ class PipelineService:
                 finance_data["peRatio"] = calc_ratio(eps_ttm, adjclosed)
                 finance_data["psRatio"] = calc_ratio(rev_p_share_ttm, adjclosed)
 
-                finance_data["eps_diluted_ttm"] = eps_ttm
-                finance_data["revenue_per_share_ttm"] = rev_p_share_ttm
-
                 if contains_right_cashflow_statements(cashflow_stats, eod_price["date"]):
                     free_cashflow_ttm = calc_per_share_ttm(cashflow_stats,avg_shares_ttm, "freeCashFlow")
                     op_cashflow_ttm = calc_per_share_ttm(cashflow_stats,avg_shares_ttm, "operatingCashFlow")

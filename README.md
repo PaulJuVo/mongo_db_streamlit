@@ -104,21 +104,17 @@ $\quad P/FCF = \frac{\text{Price per Share}}{\text{Free Cashflow per Share (TTM)
 
 ### **Value Strategy**
 
-> Value investing involves picking stocks that seem to be trading for less than their book value.
-
-QUELLE?
+> "Value investing involves picking stocks that seem to be trading for less than their book value." (Investopedia 2025)
 
 Eine Value Strategie basiert auf der Annahmen, dass der Aktienpreis sich von dem tatsächlichen Wert eines Unternehmens im positiven wie auch im negativen entkoppeln kann, jedoch über einen langen Zeitraum zu ihrem wahren Wert zurückkehrt. Um diese Strategie am Aktienmarkt umzusetzen werden mittels verschiedener Methoden die wahren Unternehmenswerte ermittelt. Eine Methode ist es über die Fundamentaldaten auf den Unternehmenswert Rückschlüsse zu führen. Die Hypothese von Value Investoren ist, dass man in unterbewertete Aktien investiert und sich diese mit der Zeit in Richtung ihres eigentlichen Wertes, und damit positiv entwickeln.
 
 #### James O’Shaughnessy und der Value Composite
 
-James O'Shaughnessy ist ein Amerikanischer Investor, CEO von O'Shaughnessy Ventures und Gründer von O'Shaughnessy Asset Management sowie von LLC. In seinem Buch “What Works on Wall Street” stellt er unter anderem den Value Composite One vor. Dieser besteht aus den einem kombinierten Score aus Price-to-book Ratio, Price / Sales Ratio, EBITDA / Enterprise Value, Price / Cashflow Ratio und Price / Earnings Ratio. In seinem Buch hat er mit einem Backtest von 1963 bis 2009 gezeigt, dass man mittels der Kombination aus mehreren Metriken eine Einzelmetrik in 82% der Fällen am Aktienmarkt schlägt. Sein kombinierter Score hatte eine jährliche Rendite von 17.18%.
+James O'Shaughnessy ist ein Amerikanischer Investor, CEO von O'Shaughnessy Ventures und Gründer von O'Shaughnessy Asset Management. In seinem Buch “What Works on Wall Street” stellt er unter anderem den Value Composite One vor. Dieser besteht aus den einem kombinierten Score aus Price-to-book Ratio, Price / Sales Ratio, EBITDA / Enterprise Value, Price / Cashflow Ratio und Price / Earnings Ratio. In seinem Buch hat er mit einem Backtest von 1963 bis 2009 gezeigt, dass man mittels der Kombination aus mehreren Metriken eine Einzelmetrik in 82% der Fällen am Aktienmarkt schlägt. Sein kombinierter Score hatte eine jährliche Rendite von 17.18%. vgl. O'Shaughnessy (2011), zitiert nach Estoppey (2024)
 
 #### Ratio-Auswahl und Peer-Group-Vergleich
 
-Man kann aus der uns zur Verfügung stehenden PE - Ratio, der PS - Ratio und der PFCF - Ratio einen Combined Value Score machen. Die PC - Ratio wird für den Score verworfen, da der Cashflow sonst übergwichtet wäre, und der Free Cashflow einen besseren Einblick über die tatsächlich zu Verfügung stehenden liquiden Mittel gibt. Da die einzelnen Sektoren unterschiedlichen Bedingungen und damit auch unterschiedlichen Ratio Niveaus und Abweichungen unterliegen, ist es sinnvoll eine Sektor-relative Bewertung vorzunehmen.
-
-TODO WIESO SEKTOR RELATIV ??
+Man kann aus der uns zur Verfügung stehenden PE - Ratio, der PS - Ratio und der PFCF - Ratio einen Combined Value Score machen. Die PC - Ratio wird für den Score verworfen, da der Cashflow sonst übergwichtet wäre, und der Free Cashflow einen besseren Einblick über die tatsächlich zu Verfügung stehenden liquiden Mittel gibt. Da die einzelnen Sektoren unterschiedlichen Bedingungen und damit auch unterschiedlichen Ratio Niveaus und Abweichungen unterliegen, ist es sinnvoll eine Sektor-relative Bewertung vorzunehmen. Das heißt, dass Aktien werden nur mit Aktien in ihrem Sektor verglichen.
 
 #### Robust Z-Score
 
@@ -134,13 +130,15 @@ Für die Berechnung der Robust Z-Score standardisierten Ratios werden die Median
 
 #### Momemntum Strategy
 
+Ein Momentum Indikator ist ein technischer Indikator, der dazu verwendet werden kann kurzfristige Börsentrends zu identifizieren. vgl. (Sue Man Fan 2010, S. 87) Investoren, die der Momentum Strategie folgen, gehen davon aus, dass Aktien, die gut laufen, auch weiterhin gut laufen werden. "[...] strategies which buy stocks that have performed well in the past and sell stocks that have performed poorly in the past generate significant positive returns over 3-to 12-month holding periods." (JEGADEESH & TITMAN 1993, Abstract)
+
 ### Momentum Score
 
-Der Momentum Score basiert rein auf technischen Daten und ist die Rendite aus den letzten 6 Monate. Er dient als Vergleich zum Momentum Score. Je besser die Performance der letzten 6 Monate, desto höher der Score. Momentum Investoren gehen davon aus, dass Aktien, die gut laufen auch weiterhin gut laufen werden.
+Der Momentum Score basiert rein auf technischen Daten und ist die Rendite aus den letzten 6 Monate. Er dient als Vergleich zum Momentum Score. Je besser die Performance der letzten 6 Monate, desto höher der Score.
 
 $\quad \text{Price Index}_{6M} = \frac{Price_{end}}{Price_{start}} - 1$
 
-TODO MEHR? RENDERT NICHT
+TODO RENDERT NICHT
 
 ## Technologie
 
@@ -285,7 +283,17 @@ Bevor die Rohdaten in die “raw” Datenbank importiert werden, wird zuerst mit
 
 Abb. 3: Zielschema. Quelle: Eigene Darstellung
 
-TODO
+Das Schema für **Company Data** kann folglich wie eine Dimension gesehen werden, die lediglich Kontextdaten beinhaltet, die für Aggregationen oder die Anzeige im Dashboard relevant sind.
+
+Die **Constituents** Collection ist eine Slowly Changing Dimension und wird im Gegensatz zu den anderen Company-Bezogenen Collections nicht über den Ticker/ das Symbol referenziert, sondern über den Company Namen, da der Ticker / das Symbol im Index neu vergeben werden kann.
+
+Die **Finance Data** - Collection ist eine Time Series Collection mit dem "timeField" : "date" und dem "metaField": "symbol". Somit werden Mongo-internen Buckets auf dem Date und dem Symbol erstellt. Die "granularity" ist auf "hours" konfiguriert, da wir tägliche Börsenwerte haben und "hours" die gröbste Granularität in Mongo ist. Somit werden Daten bis zu einem Monat gruppiert in die Buckets eingefügt. Die Ratio-Felder sind als nullable definiert, da nicht für jeden Datenpunkt alle Kennzahlen berechnet werden können – etwa bei einer negativen Price / Earnings Ratio.
+
+**Sector Data** ist ebenfalls eine Time Series Collection und hat die gleiche Konfiguration wie die Finance Data Collection. Hier ist das "metafield" allerdings "sector" und damit sind die Buckets auch auf Sektor und date erstellt.
+
+Das Schema für **SP500 Data** ist bis auf die fehlenden Ratios das gleiche wie die Finance Data Collection. Es handelt sich ebenfalls um eine Time Series.
+
+Für alle Time Series Collections gilt, dass Dokumente kein eindeutiges \_id-Feld brauchen. MongoDB erstellt keinen Index auf \_id und deshalb spielt \_id für Performance oder Queries meist keine Rolle. Das \_id-Feld könnte also aus der Finance Data Collection auch entfernt werden. Dies wurde der Einfachkeit halber nicht gemacht.
 
 ### Datenfluss
 
@@ -304,7 +312,7 @@ Abb. 4: Datenflussdiagramm. Quelle: Eigene Darstellung
 
 #### Constituents - scdConstituents
 
-Aus der 0_sp_500_constituents_historical_2026.json wird eine Slowly Changing Dimension Type 2 erstellt, um nachvollziehen zu können, wann ein Unternehmen in den Index aufgenommen oder aus dem Index herausgenommen wurde. Diese Collection bleibt bisher ungenutzt, ist aber schon angelegt, da für eine Evaluierung von einer Value Strategie diese Informationen wichtig sind, weil ...
+Aus der 0_sp_500_constituents_historical_2026.json wird eine Slowly Changing Dimension Type 2 erstellt, um nachvollziehen zu können, wann ein Unternehmen in den Index aufgenommen oder aus dem Index herausgenommen wurde. Diese Collection bleibt bisher ungenutzt, ist aber schon angelegt, da für eine Evaluierung von einer Value Strategie diese Informationen wichtig sind, um einen möglichen Survivorship Bias auszuschließen.
 
 #### S&P500 Data
 
@@ -320,30 +328,64 @@ Diese Collection ist das Ergebnis der Aggregation aus der Financedata Zeitreihe 
 
 ## Dashboard
 
-TODO Bilder einfügen
-
 Das Dashboard gliedert sich in fünf Pages, die den Funktionsumfang der Anwendung strukturiert abbilden.
 
 ### Sector Page
 
 Die **Sector Page** dient als Einstiegspunkt des Dashboards. Sie bietet eine sektorweite Übersicht, in der der Nutzer einen Sektor auswählen, verschiedene Ratios selektieren und die enthaltenen Unternehmen visuell miteinander vergleichen kann. Eine eingezeichnete Medianlinie ermöglicht dabei eine schnelle Einordnung einzelner Unternehmen relativ zur Peer Group.
 
+![sector Page](attachments/sector_comparison.png)
+
 ### Company Page
 
 Die **Company Page** ermöglicht die gezielte Analyse einzelner Unternehmen über eine Suchfunktion. Nach Auswahl eines Unternehmens werden Stammdaten, historische Aktienkurse sowie die zeitliche Entwicklung der verfügbaren Ratios dargestellt. Der historische Kursverlauf kann dabei dem S&P 500 gegenübergestellt werden. Zusätzlich werden die Renditen der letzten 1, 3, 5 und 10 Jahre ausgewiesen.
+
+![sector Page](attachments/companydata.png)
+![Price Ratios vs Sector](attachments/ratio_delta.png)
+![Comparison w SP500](attachments/comparison_with_sp500.png)
 
 ### Top-10 Ranking Page Page
 
 Die **Top-10 Ranking Page** zeigt die zehn bestplatzierten Unternehmen eines ausgewählten Sektors zu einem definierten Datum. Das Ranking kann wahlweise nach dem Combined Value Score oder dem Momentum Score dargestellt werden, was einen direkten Vergleich beider Strategien ermöglicht.
 
+![Top 10 Value Ranking](attachments/top10_value.png)
+
 ### Full Ranking Page
 
 Die **Full Ranking Page** stellt das vollständige sektorweite Ranking dar. Der Nutzer kann entweder den gesamten Sektor einsehen oder gezielt nach einzelnen Unternehmen suchen und deren Rankingposition nachvollziehen.
+
+![Ranking Search](attachments/search_ranking.png)
 
 ### Pipeline Page
 
 Die **Pipeline Page** dient als administrative Steuerungsseite der Anwendung. Über sie kann der Datenimport gestartet und die Verarbeitungspipeline ausgelöst werden. Sie bildet damit den operativen Einstiegspunkt für die Datenbeschaffung und -verarbeitung.
 
-## Schluss
+![](attachments/pipeline.png)
+
+# Schluss
 
 TODO
+
+# Literaturverzeichnis
+
+Martin, Robert C..
+
+_Clean Architecture : Das Praxis-Handbuch für professionelles SoftwaredesignRegeln und Paradigmen für effiziente Softwarestrukturierung_, mitp, 2018. _ProQuest Ebook Central_, http://ebookcentral.proquest.com/lib/koln/detail.action?docID=5311206. Created from koln on 2026-03-25 10:59:00.
+
+Martin, Robert C.:
+
+_The Dependency Inversion Principle_. Mai 1996 ([PDF](https://web.archive.org/web/20110714224327/http://www.objectmentor.com/resources/articles/dip.pdf) ([Memento](https://de.wikipedia.org/wiki/Webarchivierung#Begrifflichkeiten) vom 14. Juli 2011 im [_Internet Archive_](https://de.wikipedia.org/wiki/Internet_Archive))).
+
+Investopedia. Value Investing Definition, How It Works, Strategies, and Risks. Juli 2025 https://www.investopedia.com/terms/v/valueinvesting.asp
+
+Estoppey Value Investments. (2024). What is a Value Composite?
+Abgerufen am 26.03.26 von
+https://valueinvestments.ch/en/lexicon/value-composite/
+
+O'Shaughnessy, J. P. (2011). What Works on Wall Street:
+The Classic Guide to the Best-Performing Investment
+Strategies of All Time (4. Aufl.). McGraw-Hill.
+
+Sue Man Fan, Multiple Tests für die Evaluation von Prognosemodellen, 2010, S. 87, [Google Books](https://www.google.de/books/edition/Multiple_Tests_f%C3%BCr_die_Evaluation_von_P/q7dFUZp9h5kC?hl=de&gbpv=1&dq=momentum+zeitreihe&pg=PA87&printsec=frontcover)
+
+JEGADEESH & TITMAN, Returns to Buying Winners and Selling Losers: Implications for Stock Market Efficiency, 1993 https://doi.org/10.1111/j.1540-6261.1993.tb04702.x

@@ -236,7 +236,20 @@ with col2:
             st.success(f"Pipeline abgeschlossen in {pipe_time / 60:.1f} min")
 
         st.toast("Pipeline run completed ✅")
-                
+
+    if st.button(label="Run Pipeline", icon="⚡️", use_container_width=True, help="Startet den Pipeline-Prozess"):
+        with st.spinner("Pipeline läuft...", show_time=True):
+            st.write("⚙️ **Pipeline**")
+            pipe_progress = st.progress(0, text="Pipeline wird ausgeführt...")
+            pipe_start = time.time()
+            
+            pipeline_service.run()
+            
+            pipe_time = time.time() - pipe_start
+            pipe_progress.progress(100, text="Pipeline abgeschlossen ✅")
+            st.success(f"Pipeline abgeschlossen in {pipe_time / 60:.1f} min")
+
+        st.toast("Pipeline run completed ✅")
                      
 
 

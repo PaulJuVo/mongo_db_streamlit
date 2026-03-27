@@ -1,6 +1,6 @@
 from typing import Any
-from core.ports.base_repository_interface import BaseRepositoryInterface
-from core.ports.cursor import Cursor
+from core.interfaces.base_repository_interface import BaseRepositoryInterface
+from core.interfaces.cursor import Cursor
 from infrastructure.mongo.mongo_connection import MongoConnection
 from config.mongo_config import MongoDatabase, MongoCollection
 from config.logging_config import performance_log
