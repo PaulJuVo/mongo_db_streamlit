@@ -1,13 +1,3 @@
-TODO:
-Quellen nachrüsten
-
-Mindestens ergänzen bei:
-
-MongoDB / NoSQL Vorteile
-Time Series DBs
-Z-Score / Robust Statistics
-Momentum Strategie
-
 # Einleitung
 
 ## Problemstellung
@@ -327,6 +317,7 @@ Die Laufzeiten der einzelnen Pipeline-Schritte wurden über den Performance-Logg
 | FinanceData | 98,80 s |
 | SectorData | 78,60 s |
 | **Gesamt** | **~333 s** |
+
 Der zeitintensivste Schritt ist die Erstellung von eod_staged mit 145 Sekunden, da das Aggregation Framework hier die verschachtelten Preishistorien aller S&P500-Unternehmen entschachtelt und als Einzeldokumente in die Staged Collection überführt. Für die Erstellung der FinanceData wird anschließend in Python über alle Handelstage iteriert und für jeden Datenpunkt die TTM-Kennzahlen aus den jeweils vier vorangegangenen Quartalsberichten berechnet. Dies dauert 99 Sekunden.
 
 | Query              | gemessene Zeiten |
