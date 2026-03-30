@@ -4,6 +4,14 @@ from core.exceptions.dashboard_exceptions import NoDataFound
 from datetime import datetime
 from typing import Optional
 
+from app.shared.logging import init_logging
+import logging
+from config.logging_config import performance_log
+
+init_logging()
+logger = logging.getLogger("App - Dashboard Service")
+
+
 class DashboardService():
     def __init__(self, 
                 finance_repo : BaseRepositoryInterface, 
@@ -15,7 +23,7 @@ class DashboardService():
         self.sector_repo = sector_repo
         self.sp_500_repo = sp_500_repo
 
-
+    @performance_log(logger)
     def get_finance_data(self, companies : list, from_date : datetime, to_date : datetime):
 
         fi = { "symbol": { 
@@ -33,7 +41,7 @@ class DashboardService():
             raise NoDataFound(message=f"No data found for filter = {fi}", errorcode=999)
         else: 
             return res_list
-        
+    @performance_log(logger)    
     def get_sector_data(self, sector : str, from_date : datetime, to_date : datetime):
         fi = { "sector": sector, 
                                 "date" : { 
@@ -48,12 +56,12 @@ class DashboardService():
             raise NoDataFound(message=f"No data found for filter = {fi}", errorcode=999)
         else: 
             return res_list
-        
+    @performance_log(logger)   
     def get_data_edge(self):
         result = self.finance_repo.find_one(sort={"date" : -1})
         return result["date"]
 
-        
+    @performance_log(logger)    
     def get_sp500_data(self, index, from_date : datetime, to_date : datetime):
         fi = { "symbol": index, 
                                 "date" : { 

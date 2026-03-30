@@ -7,6 +7,12 @@ from infrastructure.mongo.mongo_repository import MongoRepository
 from config.mongo_config import MongoCollection, MongoDatabase, MongoUser
 from dateutil.relativedelta import relativedelta
 
+from app.shared.logging import init_logging
+import logging
+from config.logging_config import performance_log
+
+init_logging()
+logger = logging.getLogger("App - Ranking Service")
 
 class RankingService():
 
@@ -25,7 +31,7 @@ class RankingService():
         self.sector_data = [*self._get_sector_data()]
         self.sector_medians  = self._get_sector_median_data(self.sector_data)
         self.sector_mad= self._get_sector_mad(self.sector_data)
-        
+    @performance_log(logger)    
     def get_ranking(self):
         companies = self._get_companies()
         z_scores = [v + "_z_score" for v in self.ratios]
@@ -115,17 +121,3 @@ class RankingService():
         return self.sector_repo.find(filter=fi)
     
     
-
-
-if __name__ == "__main__":
-    import pandas as pd
-    with MongoConnection(MongoUser.APPUSER) as conn:
-        fin = MongoRepository(conn, MongoDatabase.PROCESSED, MongoCollection.FINANCEDATA)
-        sec = MongoRepository(conn, MongoDatabase.PROCESSED, MongoCollection.SECTORDATA)
-        com = MongoRepository(conn, MongoDatabase.PROCESSED, MongoCollection.COMPANYDATA)
-        date = datetime(2025,12,28)
-        sector = "Technology"
-        service = RankingService(fin,com, sec, date, sector)
-        ranking = service.get_ranking()
-        df = pd.DataFrame(ranking)
-        #print(df)

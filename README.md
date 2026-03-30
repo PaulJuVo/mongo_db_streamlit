@@ -1,3 +1,13 @@
+TODO:
+Quellen nachrüsten
+
+Mindestens ergänzen bei:
+
+MongoDB / NoSQL Vorteile
+Time Series DBs
+Z-Score / Robust Statistics
+Momentum Strategie
+
 # Einleitung
 
 ## Problemstellung
@@ -11,11 +21,18 @@ Vor diesem Hintergrund stellt sich die Frage, wie eine Anwendung konzipiert und 
 ## Zielsetzung
 
 Ziel dieser Arbeit ist die Konzipierung und Umsetzung einer Anwendung, die fundamental sowie historische Daten verarbeitet, in einer Datenbank speichert und diese dann in einem Dashboard zur Ansicht zur Verfügung stellt. Verschiedene Ratios sollen für ein Unternehmen über die Zeit dargestellt und vergleichbar gemacht werden. Außerdem sollen Unternehmen untereinander und mit dem Peer-Group Median verglichen werden können. Um den vollen Funktionsumfang eines Dashboards zu gewährleisten sollen auch die historischen Aktienpreise und zum Vergleich mit ihrem Index angezeigt werden. Basierend auf den Ratios wird ein Combined Score ermittelt, der in einem Ranking angezeigt und mit einem Momentum Ranking verglichen werden kann. Prototypisch wird die Anwendung nur für Unternehmen aus dem S&P500 umgesetzt. Das Projekt fokussiert sich auf historische Fundamentaldaten und beinhaltet keine Echtzeitdaten, keine Prognose -Modelle und keine automatisierte Investment-Empfehlung.
-Ziel dieser Arbeit ist die Konzipierung und Umsetzung einer Anwendung, die fundamental sowie historische Daten verarbeitet, in einer Datenbank speichert und diese dann in einem Dashboard zur Ansicht zur Verfügung stellt. Verschiedene Ratios sollen für ein Unternehmen über die Zeit dargestellt und vergleichbar gemacht werden. Außerdem sollen Unternehmen untereinander und mit dem Peer-Group Median verglichen werden können. Um den vollen Funktionsumfang eines Dashboards zu gewährleisten sollen auch die historischen Aktienpreise und zum Vergleich mit ihrem Index angezeigt werden. Basierend auf den Ratios wird ein Combined Score ermittelt, der in einem Ranking angezeigt und mit einem Momentum Ranking verglichen werden kann. Prototypisch wird die Anwendung nur für Unternehmen aus dem S&P500 umgesetzt. Das Projekt fokussiert sich auf historische Fundamentaldaten und beinhaltet keine Echtzeitdaten, keine Prognose -Modelle und keine automatisierte Investment-Empfehlung.
 
 Neben der fachlichen Funktionalität legt die Arbeit einen expliziten Schwerpunkt auf die softwaretechnische Qualität der entwickelten Anwendung. Durch den Einsatz von Clean Architecture und dem Prinzip der Dependency Inversion soll eine modulare, testbare und wartbare Codebasis entstehen. Automatisierte Tests, strukturiertes Logging sowie die konsequente Trennung von Verantwortlichkeiten (Separation of Concerns) gewährleisten dabei sowohl die Korrektheit der Berechnungen als auch die langfristige Erweiterbarkeit des Systems.
 
 ## Methodik
+
+### Methodisches Vorgehen
+
+Die Entwicklung der Anwendung erfolgte nach einem iterativen und prototypischen Vorgehensmodell. Ziel war es, die komplexe Kombination aus Datenverarbeitung, Kennzahlenberechnung und Visualisierung schrittweise zu entwickeln und frühzeitig zu validieren.
+
+Zu Beginn wurde ein Minimalprototyp umgesetzt, der den grundlegenden Datenfluss vom Import der Rohdaten bis zur Darstellung erster Kennzahlen abbildet. Darauf aufbauend wurde die Anwendung in mehreren Iterationen erweitert, wobei Datenpipeline, Services und Dashboard schrittweise ergänzt und durch Unit-Tests abgesichert wurden.
+
+Das Vorgehen orientiert sich an Prinzipien agiler Softwareentwicklung, ohne ein formales Framework wie Scrum vollständig umzusetzen. Stattdessen lag der Fokus auf kurzen Entwicklungszyklen und kontinuierlicher Validierung der Ergebnisse.
 
 ### Datengrundlage
 
@@ -27,7 +44,7 @@ Die Anwendung orientiert sich an der Clean-Architecture von Robert C. Martin und
 
 ### Technologie
 
-Als Datenbank hat man eine Mongo Instanz ausgewählt, da sie die Flexibilität einer No-SQL Datenbank mitbringt und spezielle Funktionalitäten für Zeitreihen mitbringt, die für unsere Lösung sehr sinnvoll sind. Als Backend Sprache wird Python verwendet, da es sehr weit verbreitet, gut dokumentiert und die Anforderungen des Anwendungsfall deckt.
+Als Datenbank wurde eine Mongo Instanz ausgewählt, da sie die Flexibilität einer No-SQL Datenbank mitbringt und spezielle Funktionalitäten für Zeitreihen mitbringt, die für die Lösung sehr sinnvoll sind. Als Backend Sprache wird Python verwendet, da es sehr weit verbreitet, gut dokumentiert und die Anforderungen des Anwendungsfall deckt.
 
 # Hauptteil
 
@@ -58,11 +75,6 @@ Trailing bezeichnet die rückwärtsgerichtete Betrachtung einer Kennzahl auf Bas
 #### TTM – Trailing Twelve Months
 
 TTM ist die gebräuchlichste Form der Trailing-Berechnung und aggregiert die Finanzdaten der jeweils letzten zwölf Monate – unabhängig vom Geschäftsjahresende des Unternehmens. Da Unternehmen ihren Bilanzierungskalender selbst definieren, sorgt TTM für eine zeitlich konsistente und unternehmensübergreifend vergleichbare Datenbasis.
-
-#### Forward
-
-Forward-Kennzahlen basieren auf gebräuchlicherweise auf Analystenschätzungen für zukünftige Perioden, z.B. den erwarteten Gewinn der kommenden zwölf Monate. Der Begriff wird zur Abgrenzung gegenüber Trailing-Metriken und bezieht sich in diesem Projektkontext auf tatsächliche Finanzdaten in der vorwärtsgerichteten Betrachtung (kein Forecast!). MEHR
-Forward-Kennzahlen basieren auf gebräuchlicherweise auf Analystenschätzungen für zukünftige Perioden, z.B. den erwarteten Gewinn der kommenden zwölf Monate. Der Begriff wird zur Abgrenzung gegenüber Trailing-Metriken und bezieht sich in diesem Projektkontext auf tatsächliche Finanzdaten in der vorwärtsgerichteten Betrachtung (kein Forecast!). MEHR
 
 #### Index
 
@@ -114,27 +126,37 @@ James O'Shaughnessy ist ein Amerikanischer Investor, CEO von O'Shaughnessy Ventu
 
 #### Ratio-Auswahl und Peer-Group-Vergleich
 
-Man kann aus der uns zur Verfügung stehenden PE - Ratio, der PS - Ratio und der PFCF - Ratio einen Combined Value Score machen. Die PC - Ratio wird für den Score verworfen, da der Cashflow sonst übergwichtet wäre, und der Free Cashflow einen besseren Einblick über die tatsächlich zu Verfügung stehenden liquiden Mittel gibt. Da die einzelnen Sektoren unterschiedlichen Bedingungen und damit auch unterschiedlichen Ratio Niveaus und Abweichungen unterliegen, ist es sinnvoll eine Sektor-relative Bewertung vorzunehmen. Das heißt, dass Aktien werden nur mit Aktien in ihrem Sektor verglichen.
+Zur Aggregation der zur Verfügung stehenden PE - Ratio, der PS - Ratio und der PFCF - Ratio wird ein Combined Value Score definiert. Die PC - Ratio wird für den Score verworfen, da der Cashflow sonst übergwichtet wäre, und der Free Cashflow einen besseren Einblick über die tatsächlich zu Verfügung stehenden liquiden Mittel gibt. Da die einzelnen Sektoren unterschiedlichen Bedingungen und damit auch unterschiedlichen Ratio Niveaus und Abweichungen unterliegen, ist es sinnvoll eine Sektor-relative Bewertung vorzunehmen. Das heißt, dass Aktien werden nur mit Aktien in ihrem Sektor verglichen.
 
 #### Robust Z-Score
 
-Da die Ratio im Vergleich mit sich selbst unterschiedliche Skalen aufweisen, aber trotzdem gleich gewichtet werden sollen, werden sie mittels dem Robust Z-Score standardisiert. Der Robust Z-Score ist im Gegensatz zu dem Z-Score weniger sensitiv im Bezug auf Ausreißer, da er den Durchschnitt mit dem Median und die Standardabweichung mit der mittlere absoluten Abweichung (MAD) ersetzt.
+Da die Ratios im Vergleich unterschiedliche Skalen aufweisen, aber dennoch gleich gewichtet werden sollen, erfolgt eine Standardisierung mittels eines robusten Z-Scores.
 
-$\quad \text{Robust Z-Score }z_i = \frac{x_i - \tilde{x}}{\text{MAD}}$
+Der klassische Z-Score basiert auf dem arithmetischen Mittel und der Standardabweichung, welche beide stark durch Ausreißer beeinflusst werden und somit keine robusten Schätzer darstellen (vgl. Iglewicz & Hoaglin 1993).
+
+Als robuste Alternative werden der Median als Lageparameter sowie die Median Absolute Deviation (MAD) als Streuungsmaß verwendet. Beide weisen einen hohen Breakdown Point von etwa 50 % auf und sind damit deutlich weniger sensitiv gegenüber Ausreißern (vgl. Iglewicz & Hoaglin 1993).
+
+Die MAD ist definiert als Median der absoluten Abweichungen vom Median (Iglewicz & Hoaglin 1993, S. 11):
 
 $\quad \text{MAD} = \text{median}(|x_i - \tilde{x}|)$
 
+Darauf aufbauend ergibt sich der Modified Z-Score nach Iglewicz & Hoaglin (1993) zu:
+
+$\quad M_i = \frac{0.6745 \cdot (x_i - \tilde{x})}{\text{MAD}}$
+
+Im Rahmen dieser Arbeit wird auf den Skalierungsfaktor verzichtet, da ausschließlich relative Vergleiche innerhalb einer Peer Group durchgeführt werden und keine Schwellenwerte zur Ausreißererkennung verwendet werden.
+
 #### Combined Value Score
 
-Für die Berechnung der Robust Z-Score standardisierten Ratios werden die Mediane des Sektores und der MAD des Sektores verwendet, da der Vergleich innerhalb der Peer-Group und nicht mit der Historie der Einzelaktie stattfinden soll. Als nächstes wird der Median der drei standardisierten Ratios genommen. Da unterbewertete Aktien negative Z-Scores erhalten wird als letztes der Wert invertiert, um die Verständlichkeit für den Endanwender zu erhöhen.
+Für die Berechnung der Robust Z-Score standardisierten Ratios werden die Mediane des Sektores und der MAD des Sektores verwendet, da der Vergleich innerhalb der Peer-Group und nicht mit der Historie der Einzelaktie stattfinden soll. Als nächstes wird der Median der drei standardisierten Ratios genommen. Eine unterbewertete Aktien hat einen vergleichsweise geringen Price im Verhältnis zu ihren Earnings / Sales / Casflow. Durch die Division haben diese Aktien im Vergleich zu überbewerteten Aktien eine kleinere Price - Ratio. Da diese Aktien unterhalb des Sektor Medians sind führt das dazu, dass der berechnete Z-Score dieser Aktien eine negative Zahl ist. Je kleiner der Combined Value Score, desto unterbewerteter ist die Aktie. Dies ist für Laien nicht intuitiv und deshalb wird der Wert als letzter Schritt invertiert.
 
-#### Momemntum Strategy
+### Momentum Strategy
 
-Ein Momentum Indikator ist ein technischer Indikator, der dazu verwendet werden kann kurzfristige Börsentrends zu identifizieren. vgl. (Sue Man Fan 2010, S. 87) Investoren, die der Momentum Strategie folgen, gehen davon aus, dass Aktien, die gut laufen, auch weiterhin gut laufen werden. "[...] strategies which buy stocks that have performed well in the past and sell stocks that have performed poorly in the past generate significant positive returns over 3-to 12-month holding periods." (JEGADEESH & TITMAN 1993, Abstract)
+Ein Momentum Indikator ist ein technischer Indikator, der dazu verwendet werden kann kurzfristige Börsentrends zu identifizieren. vgl. (Sue Man Fan 2010, S. 87) Investoren, die der Momentum Strategie folgen, gehen davon aus, dass Aktien, die gut laufen, auch weiterhin gut laufen werden. "[...] strategies which buy stocks that have performed well in the past and sell stocks that have performed poorly in the past generate significant positive returns over 3-to 12-month holding periods." (JEGADEESH & TITMAN 1993, Abstract).
 
-### Momentum Score
+#### Momentum Score
 
-Der Momentum Score basiert rein auf technischen Daten und ist die Rendite aus den letzten 6 Monate. Er dient als Vergleich zum Momentum Score. Je besser die Performance der letzten 6 Monate, desto höher der Score.
+Der Momentum Score basiert rein auf technischen Daten und wird im Projektkontext aus der Rendite der letzten 6 Monate gebildet. Der Betrachtungszeitraum wird auf 6 Monate definiert, da JEGADEESH & TITMAN 3 - 12 Monatszeiträume getestet haben und 6 Monate in dem genannten Zeitraum liegen. Je besser die Performance der letzten 6 Monate, desto höher der Score. Der Momentum Score dient in dieser Arbeit als Vergleichsstrategie und wird darum nicht näher untersucht.
 
 $\quad \text{Price Index}_{6M} = \frac{Price_{end}}{Price_{start}} - 1$
 
@@ -186,7 +208,7 @@ Das Repository Pattern entstammt dem Domain-Driven Design (DDD) und abstrahiert 
 
 #### Decorator Pattern
 
-Das Decorator Pattern ist ein strukturelles Entwurfsmuster, das einer bestehenden Klasse zur Laufzeit zusätzliches Verhalten hinzufügt, ohne ihre Schnittstelle zu verändern. Der Decorator implementiert dasselbe Interface wie die dekorierte Klasse und umhüllt sie – er delegiert den eigentlichen Aufruf weiter und ergänzt ihn um zusätzliche Logik. In dieser Anwendung wird das Decorator Pattern für das **Logging** eingesetzt: Der “perfomance_log” umhüllt die eigentliche Funktion und protokoliert die Dauer des Funktionslaufs, ohne dass die Funktion verändert werden muss.
+Das Decorator Pattern ist ein strukturelles Entwurfsmuster, das einer bestehenden Klasse zur Laufzeit zusätzliches Verhalten hinzufügt, ohne ihre Schnittstelle zu verändern. Der Decorator implementiert dasselbe Interface wie die dekorierte Klasse und umhüllt sie – er delegiert den eigentlichen Aufruf weiter und ergänzt ihn um zusätzliche Logik. In dieser Anwendung wird das Decorator Pattern für das **Logging** eingesetzt: Der “performance_log” umhüllt die eigentliche Funktion und protokoliert die Dauer des Funktionslaufs, ohne dass die Funktion verändert werden muss.
 
 ### Systemarchitektur
 
@@ -230,17 +252,41 @@ anwendung
 
 ### Datenhaltung mit MongoDB
 
-MongoDB ist ein dokumentorientiertes NoSQL-Datenbankmanagementsystem und verwaltet Collections in JSON-ähnlichen Dokumenten. Dadurch dass die Rohdaten in JSON Dateien vorliegen ist der die Entscheidung für eine dokumentorientierte Datenbank naheliegend. Des weiteren hat MongoDB spezielle Collections für Zeitreihen, die für den Anwendungsfall von großem Nutzen sind. Durch die spezielle Persistierung ist die Time Series Collection performanter in Abfragen und ermöglicht so eine schnelle Bereitstellung von vielen Datenpunkten. Außerdem bietet MongoDB ein Aggregation Framework welches eine Verarbeitung auf Datenbankebene ermöglicht und in gewissen Fällen deutlich effizienter ist als die Verarbeitung mit Python. Dieses Framework bietet sich vor allem für Verarbeitungsschritte an, die keine Business Logik beinhalten, sondern Daten nur transformiert oder verschiebt. Business Logik soll testbar sein und das ist innerhalb des Aggregation Frameworks schwer.
+MongoDB ist ein dokumentorientiertes NoSQL-Datenbankmanagementsystem und verwaltet Collections in JSON-ähnlichen Dokumenten. Dadurch dass die Rohdaten in JSON Dateien vorliegen ist der die Entscheidung für eine dokumentorientierte Datenbank naheliegend. MongoDB stellt spezialisierte Time-Series-Collections bereit, die für zeitreihenbasierte Abfragen optimiert sind. Durch die spezielle Persistierung ist die Time Series Collection performanter in Abfragen und ermöglicht so eine schnelle Bereitstellung von vielen Datenpunkten. vgl. (MongoDB, Inc. 2026) Außerdem bietet MongoDB ein Aggregation Framework welches eine Verarbeitung auf Datenbankebene ermöglicht und in gewissen Fällen deutlich effizienter ist als die Verarbeitung mit Python. Dieses Framework bietet sich vor allem für Verarbeitungsschritte an, die keine Business Logik beinhalten, sondern Daten nur transformiert oder verschiebt. Business Logik soll testbar sein und das ist innerhalb des Aggregation Frameworks schwer.
 
-Docker aktiviert beim ersten Start der Mongo Instanz die Authentifizierung automatisch ein. Per Default ist die Authentifizierung deaktiviert und wird aus Sicherheitsgründen in der Anwendung aktiviert. Außerdem gibt es ein Entrypoint-Skript, welches zwei Datenbank User und zwei Datenbanken einrichtet. Es gibt eine Datenbank “raw” für Rohdaten und Zwischenschritte und eine “processed” Datenbank für die finalen Daten. Der erste User hat Lese und Schreibe Rechte auf beiden Datenbanken und wird genutzt um die Daten zu verarbeiten. Der zweite User hat nur Leserechte auf der “processed” Datenbank. Dies bildet eine weitere Sicherheit vor einem ungewollten Schreib-Zugriff und ist im Sinne des Separation of Concerns.
+Docker aktiviert beim ersten Start der Mongo Instanz die Authentifizierung automatisch ein. Per Default ist die Authentifizierung deaktiviert und wird aus Sicherheitsgründen in der Anwendung aktiviert. vgl. (MongoDB, Inc. 2026) Außerdem gibt es ein Entrypoint-Skript, welches zwei Datenbank User und zwei Datenbanken einrichtet. Es gibt eine Datenbank “raw” für Rohdaten und Zwischenschritte und eine Datenbank “processed” für die finalen Daten. Der erste User hat Lese und Schreibe Rechte auf beiden Datenbanken und wird genutzt um die Daten zu verarbeiten. Der zweite User hat nur Leserechte auf der “processed” Datenbank. Dies bildet eine weitere Sicherheit vor einem ungewollten Schreib-Zugriff und ist im Sinne des Separation of Concerns.
 
 ### Backend
 
-Das Application und das Domain Layer sind in Python geschrieben, da Python eine weitverbreitete und im Finanz und Datenbereich beliebte Sprache ist. Darüber hinaus verfügt Python über ein reiches Ökosystem an Bibliotheken, die den Anwendungsfall direkt abdecken – darunter pymongo für den Datenbankzugriff, pytest für das Testing, jsonschema für die Schema-Validierung und viele weitere.
+Das Application und das Domain Layer sind in Python geschrieben, da Python eine weitverbreitete und im Finanz und Datenbereich beliebte Sprache ist.
+Python bietet mit pymongo, pytest und jsonschema direkt relevante Bibliotheken für den Anwendungsfall.
+Dabei ist pymongo für den Datenbankzugriff, pytest für das Testing und jsonschema für die Schema-Validierung besonders nützlich.
 
 ### Testing
 
-Um die Qualität sicherzustellen wird die Anwendung durch Unittests mit pytest abgesichert. Die Funktionen im Domain Layer - darunter die Berechnungsvorschriften für Robust Z-Score, Ratios und Combined Value Score - werden mittels Unittests auf Korrektheit überprüft. Dank DIP und der Dependency Injection ist das Mocken der Repositories und das erstellen des Services verhältnismäßig einfach. Dies ist der direkte praktische Nachweis der gewählten Architektur.
+Die Anwendung wird durch automatisierte Unit Tests mit pytest abgesichert. Die Tests konzentrieren sich auf den Domain Layer und den Application Layer, da dort die gesamte Business Logik der Anwendung liegt.
+
+#### Teststrategie
+
+Es werden zwei Testebenen unterschieden. Auf der ersten Ebene werden die reinen Berechnungs- und Validierungsfunktionen des Domain Layers isoliert getestet. Da diese Funktionen keine externen Abhängigkeiten besitzen, können sie direkt mit Eingabewerten aufgerufen und deren Rückgabewerte geprüft werden. Auf der zweiten Ebene wird der PipelineService des Application Layers getestet. Hier werden die Repository-Abhängigkeiten mittels unittest.mock durch Mock-Objekte ersetzt, die vordefinierte Testdaten zurückgeben. Dies ermöglicht es, das Verhalten des Services isoliert zu testen, ohne eine Datenbankverbindung zu benötigen – ein direkter praktischer Nachweis der gewählten Clean Architecture und des Dependency Inversion Principle.
+
+#### Abdeckung
+
+Die Tests folgen einer mehrschichtigen Abdeckungsstrategie:
+
+- **Happy Path**: Jede Funktion wird zunächst mit validen Eingaben auf korrekte Ergebnisse geprüft, etwa die Berechnung der PE-Ratio aus realistischen AAPL-Finanzdaten.
+
+- **Edge Cases und Grenzwerte**: Kritische Randfälle werden explizit abgedeckt, darunter eine MAD von 0 bei der Robust-Z-Score-Berechnung, ein Startpreis von 0 beim CAGR oder weniger als vier verfügbare Quartale bei der TTM-Berechnung.
+
+- **None-Propagation**: Da nicht für jeden Handelstag alle Finanzkennzahlen berechnet werden können, wird konsequent getestet, ob None-Werte in Eingabedaten korrekt erkannt und weiterpropagiert werden, statt zu Folgefehlern zu führen. Hierfür existieren dedizierte Fixtures mit teils fehlenden Werten.
+
+- **Validierungslogik**: Die Funktion contains_right_income_statements prüft, ob die vier zugehörigen Quartalsberichte für ein gegebenes Datum korrekt und konsistent vorliegen. Getestet werden dabei Duplikate innerhalb der Perioden, None-Werte in Perioden oder Kalenderjahren, zeitlich inkonsistente Statements mit zu großem Jahresabstand sowie ein Bewertungsdatum, das jünger als der neueste vorliegende Bericht ist.
+
+- **Verhaltensverifikation**: Bei den Service-Tests wird nicht nur geprüft, ob Repository-Methoden aufgerufen wurden, sondern welche Daten dabei übergeben wurden. Über insert_many.call_args wird sichergestellt, dass Symbol, Datum und alle berechneten Ratios im persistierten Dokument korrekt enthalten sind.
+
+#### Testdaten
+
+Die Testdaten sind in einer zentralen conftest.py als wiederverwendbare Fixtures organisiert. Die Finanzdaten orientieren sich an realistischen AAPL-Dimensionen, um praxisnahe Berechnungen verifizieren zu können. Für Grenzfall-Tests existieren dedizierte Fixtures, etwa sample_financedata_only_none oder sample_income_period_w_duplicates, die gezielt fehlerhafte oder unvollständige Datensituationen abbilden.
 
 ### Logging
 
@@ -264,8 +310,39 @@ Log-Dateien und Datendateien werden über Volumes in das Host-Dateisystem gemoun
 ### Performance
 
 Um geringe Antwortzeiten zu gewährleisten sind alle Ratios in der Finanzzeitreihe persistiert und diese ist als Timeseries Collection in Mongo konfiguriert. Timeseries Collection sind für Zeitreihen optimiert und ermöglichen dadurch geringe Ladezeiten für Abfragen. Die Zeitreihe wurde außerdem auf dem Ticker-Symbol und dem Datum indexiert, sodass Abfragen noch schneller bearbeitet werden.
+
+![Abb. Memory Usage](attachments/memory_usage.png)
 Die Erstellung der FinanceData Collection efolgt über Batch Inserts, bei denen Dokumente in definierten Blöcken geschrieben werden. Dies beschleunigt die Verarbeitung großer Datenmengen und begrenzt gleichzeitig den Arbeitsspeicherbedarf, da nie alle Dokumente gleichzeitig im RAM gehalten werden müssen. Die Anwendung kommt dadurch mit 2 GB RAM aus.
-Besonders hervorzuheben ist, dass, wenn immer möglich und sinnvoll, das Mongo Aggregation Framework genutzt wird, welches die Datenverarbeitung auf Datenbankebene ermöglicht und damit den Datentransfer zwischen Datenbank und Anwendung minimiert.
+Besonders hervorzuheben ist, dass, sofern kein Business-Logik-Anteil vorliegt, das Mongo Aggregation Framework genutzt wird, welches die Datenverarbeitung auf Datenbankebene ermöglicht und damit den Datentransfer zwischen Datenbank und Anwendung minimiert.
+
+Die Laufzeiten der einzelnen Pipeline-Schritte wurden über den Performance-Logger erfasst und sind in der Tabelle dokumentiert. Die Gesamtpipeline verarbeitet die Rohdaten von ca. 370 MB – bestehend aus rund 1.100 EOD-Preisdokumenten sowie 102.000 Income- und 110.000 Cashflow-Quartalsdaten – in einer Gesamtlaufzeit von ca. 5,5 Minuten. Da die Pipeline nur einmalig zur Datenbeschaffung ausgeführt wird und das Dashboard ausschließlich auf vorberechneten Daten operiert, ist diese Laufzeit für den produktiven Betrieb nicht relevant.
+| Pipeline-Schritt | gemessene Laufzeit |
+|---|---|
+| scdConstituents | 0,10 s |
+| Company Data | 0,06 s |
+| S&P500 Zeitreihe | 0,11 s |
+| eod_staged | 144,85 s |
+| income_staged | 5,37 s |
+| cashflow_staged | 5,47 s |
+| FinanceData | 98,80 s |
+| SectorData | 78,60 s |
+| **Gesamt** | **~333 s** |
+Der zeitintensivste Schritt ist die Erstellung von eod_staged mit 145 Sekunden, da das Aggregation Framework hier die verschachtelten Preishistorien aller S&P500-Unternehmen entschachtelt und als Einzeldokumente in die Staged Collection überführt. Für die Erstellung der FinanceData wird anschließend in Python über alle Handelstage iteriert und für jeden Datenpunkt die TTM-Kennzahlen aus den jeweils vier vorangegangenen Quartalsberichten berechnet. Dies dauert 99 Sekunden.
+
+| Query              | gemessene Zeiten |
+| ------------------ | ---------------- |
+| `get_finance_data` | 3–74 ms          |
+| `get_sector_data`  | 2–8 ms           |
+| `get_sp500_data`   | 2–12 ms          |
+| `get_ranking`      | 414–978 ms       |
+
+Neben den Pipeline-Laufzeiten wurden auch die Antwortzeiten des Dashboards über den
+Performance-Logger gemessen. Einfache Datenbankabfragen wie `get_finance_data`,
+`get_sector_data` und `get_sp500_data` liefern Ergebnisse konsistent im einstelligen
+bis zweistelligen Millisekundenbereich, was auf die Wirksamkeit des zusammengesetzten
+Index auf Symbol und Datum zurückzuführen ist. Der rechenintensivste Dashboard-Aufruf
+ist `get_ranking` mit 414–978 ms, da das Ranking nicht persistiert ist und bei jedem
+Aufruf für alle Unternehmen eines Sektors neu berechnet wird.
 
 ## Data
 
@@ -287,13 +364,13 @@ Das Schema für **Company Data** kann folglich wie eine Dimension gesehen werden
 
 Die **Constituents** Collection ist eine Slowly Changing Dimension und wird im Gegensatz zu den anderen Company-Bezogenen Collections nicht über den Ticker/ das Symbol referenziert, sondern über den Company Namen, da der Ticker / das Symbol im Index neu vergeben werden kann.
 
-Die **Finance Data** - Collection ist eine Time Series Collection mit dem "timeField" : "date" und dem "metaField": "symbol". Somit werden Mongo-internen Buckets auf dem Date und dem Symbol erstellt. Die "granularity" ist auf "hours" konfiguriert, da wir tägliche Börsenwerte haben und "hours" die gröbste Granularität in Mongo ist. Somit werden Daten bis zu einem Monat gruppiert in die Buckets eingefügt. Die Ratio-Felder sind als nullable definiert, da nicht für jeden Datenpunkt alle Kennzahlen berechnet werden können – etwa bei einer negativen Price / Earnings Ratio.
+Die **Finance Data** - Collection ist eine Time Series Collection mit dem "timeField" : "date" und dem "metaField": "symbol". Somit werden Mongo-internen Buckets auf dem Date und dem Symbol erstellt. Die "granularity" ist auf "hours" konfiguriert, da die Datenpunkte aus tägliche Börsenwerte bestehen und "hours" die gröbste Granularität in Mongo ist. Somit werden Daten bis zu einem Monat gruppiert in die Buckets eingefügt. Die Ratio-Felder sind als nullable definiert, da nicht für jeden Datenpunkt alle Kennzahlen berechnet werden können – etwa bei einer negativen Price / Earnings Ratio.
 
 **Sector Data** ist ebenfalls eine Time Series Collection und hat die gleiche Konfiguration wie die Finance Data Collection. Hier ist das "metafield" allerdings "sector" und damit sind die Buckets auch auf Sektor und date erstellt.
 
 Das Schema für **SP500 Data** ist bis auf die fehlenden Ratios das gleiche wie die Finance Data Collection. Es handelt sich ebenfalls um eine Time Series.
 
-Für alle Time Series Collections gilt, dass Dokumente kein eindeutiges \_id-Feld brauchen. MongoDB erstellt keinen Index auf \_id und deshalb spielt \_id für Performance oder Queries meist keine Rolle. Das \_id-Feld könnte also aus der Finance Data Collection auch entfernt werden. Dies wurde der Einfachkeit halber nicht gemacht.
+Für alle Time Series Collections gilt, dass Dokumente kein eindeutiges \_id-Feld brauchen. MongoDB erstellt keinen Index auf \_id und deshalb spielt \_id für Performance oder Queries meist keine Rolle. Das \_id-Feld könnte also aus der Finance Data Collection auch entfernt werden. Da die \_id für Abfragen und Performance in Time Series Collections keine Rolle spielt, wurde auf eine explizite Entfernung verzichtet.
 
 ### Datenfluss
 
@@ -389,3 +466,14 @@ Strategies of All Time (4. Aufl.). McGraw-Hill.
 Sue Man Fan, Multiple Tests für die Evaluation von Prognosemodellen, 2010, S. 87, [Google Books](https://www.google.de/books/edition/Multiple_Tests_f%C3%BCr_die_Evaluation_von_P/q7dFUZp9h5kC?hl=de&gbpv=1&dq=momentum+zeitreihe&pg=PA87&printsec=frontcover)
 
 JEGADEESH & TITMAN, Returns to Buying Winners and Selling Losers: Implications for Stock Market Efficiency, 1993 https://doi.org/10.1111/j.1540-6261.1993.tb04702.x
+
+Jegadeesh, N. and Titman, S. (1993) ‘Returns to Buying Winners and Selling Losers: Implications for Stock Market Efficiency’, Journal of Finance (Wiley-Blackwell), 48(1), pp. 65–91. doi:10.1111/j.1540-6261.1993.tb04702.x.
+https://research.ebsco.com/c/u5zo7q/viewer/pdf/ueaq7mfh2b
+
+Härtung, J.; Elpelt, B.; Klösener, K.-H. (2004):
+Lehr- und Handbuch der angewandten Statistik. 9. Auflage, Oldenbourg Verlag, München, S. 42.
+
+Iglewicz, B.; Hoaglin, D. C. (1993): How to detect and handle outliers. Milwaukee: ASQC Quality Press.
+
+MongoDB, Inc., 2026. MongoDB Developer Documentation. [online] Available at: https://www.mongodb.com/docs/development/
+[Accessed 30 March 2026].
