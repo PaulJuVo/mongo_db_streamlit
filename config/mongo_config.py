@@ -38,9 +38,9 @@ FINANCEDATA_TIMESERIES_CONFIG = {
                "granularity": "hours"
            }
 
-# TODO delete wenn streamlit über docker läuft und prod sein soll 
-from dotenv import load_dotenv
-load_dotenv(".env.dev")
+# delete wenn streamlit über docker läuft und prod sein soll 
+#from dotenv import load_dotenv
+#load_dotenv(".env.dev")
 
 HOST = os.environ["MONGO_HOST"]
 PORT = os.environ["MONGO_PORT"]

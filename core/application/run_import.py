@@ -39,22 +39,13 @@ def import_many(repo: BaseRepositoryInterface, data : list[dict]):
         repo.write_rejected_data(rejected_data)
 
 def import_constituents(repo: BaseRepositoryInterface, data : Iterable[dict]):
-    try:
-        repo.drop()
-        repo.insert_many(data)
-    except Exception:
-        raise
+    repo.drop()
+    repo.insert_many(data)
 
 def import_sp500(repo: BaseRepositoryInterface, data : Iterable[dict]):
-    try:
-        repo.drop()
-        repo.insert_many(data)
-    except Exception:
-        raise
+    repo.drop()
+    repo.insert_many(data)
 
 def import_spxew(repo: BaseRepositoryInterface, data : Iterable[dict]):
-    try:
-        repo.drop()
-        repo.insert_many(data)
-    except Exception:
-        raise
+    repo.drop()
+    repo.insert_many(data)

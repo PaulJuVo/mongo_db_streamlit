@@ -10,85 +10,85 @@ Vor diesem Hintergrund stellt sich die Frage, wie eine Anwendung konzipiert und 
 
 ## Zielsetzung
 
-Ziel dieser Arbeit ist die Konzipierung und Umsetzung einer Anwendung, die fundamental sowie historische Daten verarbeitet, in einer Datenbank speichert und diese dann in einem Dashboard zur Ansicht zur Verfügung stellt. Verschiedene Ratios sollen für ein Unternehmen über die Zeit dargestellt und vergleichbar gemacht werden. Außerdem sollen Unternehmen untereinander und mit dem Peer-Group Median verglichen werden können. Um den vollen Funktionsumfang eines Dashboards zu gewährleisten sollen auch die historischen Aktienpreise und zum Vergleich mit ihrem Index angezeigt werden. Basierend auf den Ratios wird ein Combined Score ermittelt, der in einem Ranking angezeigt und mit einem Momentum Ranking verglichen werden kann. Prototypisch wird die Anwendung nur für Unternehmen aus dem S&P500 umgesetzt. Das Projekt fokussiert sich auf historische Fundamentaldaten und beinhaltet keine Echtzeitdaten, keine Prognose -Modelle und keine automatisierte Investment-Empfehlung.
+Ziel dieser Arbeit ist die Konzipierung und Umsetzung einer Anwendung, die fundamental sowie historische Daten verarbeitet, in einer Datenbank speichert und diese dann in einem Dashboard zur Ansicht zur Verfügung stellt. Verschiedene Ratios sollen für ein Unternehmen über die Zeit dargestellt und vergleichbar gemacht werden. Außerdem sollen Unternehmen untereinander und mit dem Peer-Group Median verglichen werden können. Um den vollen Funktionsumfang eines Dashboards zu gewährleisten sollen auch die historischen Aktienpreise und zum Vergleich mit ihrem Index angezeigt werden. Basierend auf den Ratios wird ein Combined Score ermittelt, der in einem Ranking angezeigt und mit einem Momentum Ranking verglichen werden kann. Prototypisch wird die Anwendung nur für Unternehmen aus dem S&P500 umgesetzt. Das Projekt fokussiert sich auf historische Fundamentaldaten und beinhaltet keine Echtzeitdaten, keine Prognose -Modelle und keine automatisierte Investment-Empfehlung sowie keine empirische Analyse der implementierten Scores.
 
 Neben der fachlichen Funktionalität legt die Arbeit einen expliziten Schwerpunkt auf die softwaretechnische Qualität der entwickelten Anwendung. Durch den Einsatz von Clean Architecture und dem Prinzip der Dependency Inversion soll eine modulare, testbare und wartbare Codebasis entstehen. Automatisierte Tests, strukturiertes Logging sowie die konsequente Trennung von Verantwortlichkeiten (Separation of Concerns) gewährleisten dabei sowohl die Korrektheit der Berechnungen als auch die langfristige Erweiterbarkeit des Systems.
 
+# Grundlagen
+
 ## Finanzgrundlagen
 
-### Finanzbegriffe
-
-#### Income Statement (Gewinn- und Verlustrechnung)
+### Income Statement (Gewinn- und Verlustrechnung)
 
 Das Income Statement ist eine periodische Finanzaufstellung, die Umsätze, Kosten und das Nettoergebnis eines Unternehmens über einen definierten Zeitraum ausweist. Es bildet die Grundlage für ertragsbezogene Kennzahlen wie das Kurs-Gewinn-Verhältnis (P/E Ratio) und ist zentraler Bestandteil der fundamentalen Unternehmensanalyse.
 
-#### Cash Flow Statement (Kapitalflussrechnung)
+### Cash Flow Statement (Kapitalflussrechnung)
 
 Die Kapitalflussrechnung stellt die tatsächlichen Zahlungsströme eines Unternehmens dar und gliedert sich in operativen, investiven und finanzierenden Cashflow. Im Gegensatz zum Income Statement ist sie nicht durch buchhalterische Abgrenzungen beeinflusst und ermöglicht damit eine realistischere Beurteilung der Liquidität – relevant insbesondere für den Free Cash Flow als Basis des P/FCF-Ratios.
 
-#### Symbol / Ticker
+### Symbol / Ticker
 
 Der Ticker ist ein eindeutiges alphanumerisches Kürzel, das ein börsennotiertes Unternehmen an einer Handelsplattform identifiziert (z.B. `AAPL` für Apple).
 
-#### Sector
+### Sector
 
 Der Sektor klassifiziert Unternehmen nach ihrer wirtschaftlichen Haupttätigkeit gemäß dem Global Industry Classification Standard (GICS), z.B. _Information Technology_, _Health Care_ oder _Financials_.
 
-#### Trailing
+### Trailing
 
 Trailing bezeichnet die rückwärtsgerichtete Betrachtung einer Kennzahl auf Basis tatsächlich realisierter Vergangenheitswerte.
 
-#### TTM – Trailing Twelve Months
+### TTM – Trailing Twelve Months
 
 TTM ist die gebräuchlichste Form der Trailing-Berechnung und aggregiert die Finanzdaten der jeweils letzten zwölf Monate – unabhängig vom Geschäftsjahresende des Unternehmens. Da Unternehmen ihren Bilanzierungskalender selbst definieren, sorgt TTM für eine zeitlich konsistente und unternehmensübergreifend vergleichbare Datenbasis.
 
-#### Index
+### Index
 
 Ein Aktienindex aggregiert die Kursentwicklung einer definierten Gruppe von Unternehmen zu einer einzigen Kennzahl und dient als Markt- oder Sektorreferenz. Im Kontext dieser Anwendung bildet der **S&P 500** den Referenzindex, gegen den die historische Kursentwicklung einzelner Unternehmen im Dashboard verglichen wird.
 
-#### Weighted Average Shares Outstanding
+### Weighted Average Shares Outstanding
 
 Die gewichtete durchschnittliche Anzahl ausstehender Aktien berücksichtigt Veränderungen im Aktienbestand – etwa durch Aktienrückkäufe oder Neuemissionen – anteilig über den Berichtszeitraum. Sie ist die Berechnungsgrundlage für den Earnings per Share (EPS) und beeinflusst damit direkt alle EPS-basierten Kennzahlen wie das P/E-Ratio. Im Kontext dieser Anwendung wird ausschließlich die Diluted-Variante verwendet, da sie das vollständige Verwässerungspotenzial eines Unternehmens abbildet und damit eine konservativere sowie aus Anlegerperspektive realistischere Bewertungsgrundlage darstellt.
 
-#### Price - Adjusted Closed
+### Price - Adjusted Closed
 
 Der Price bezieht sich im Projektkontext immer auf den adjusted Closed Preis eines Handelstages. Er ist die modifizierte Version des Closed Wertes, der Aktien Spaltung, Dividenden und andere Events berücksichtigt und ermöglicht dadurch eine realistischere Betrachtung.
 
-#### Price / Earnings - PE - Ratio
+### Price / Earnings - PE - Ratio
 
 Diese relative Kennzahl setzt den Tages Price und die Earnings eines Unternehmens in Verhältnis. Dabei wird der Price durch die TTM Earnings per Share (EPS) geteilt.
 
 $\quad P/E = \frac{\text{Price per Share}}{\text{EPS diluted (TTM)}}$
 
-#### Price / Sales - PS - Ratio
+### Price / Sales - PS - Ratio
 
 Diese relative Kennzahl setzt den Tages Price und die Revenues eines Unternehmens in Verhältnis. Dabei wird der Price durch die TTM Revenues per Share geteilt.
 
 $\quad P/S = \frac{\text{Price per Share}}{\text{Revenue per Share (TTM)}}$
 
-#### Price / Operating Cashflow - PC - Ratio
+### Price / Operating Cashflow - PC - Ratio
 
 Diese relative Kennzahl setzt den Tages Price und die Operating Cashflows eines Unternehmens in Verhältnis. Dabei wird der Price durch die TTM Operating Cashflows per Share geteilt.
 
 $\quad P/C = \frac{\text{Price per Share}}{\text{Operating Cashflow per Share (TTM)}}$
 
-#### Price / Free Cashflow - PFCF - Ratio
+### Price / Free Cashflow - PFCF - Ratio
 
 Diese relative Kennzahl setzt den Tages Price und die Free Cashflows eines Unternehmens in Verhältnis. Dabei wird der Price durch die TTM Free Cashflows per Share geteilt.
 
 $\quad P/FCF = \frac{\text{Price per Share}}{\text{Free Cashflow per Share (TTM)}}$
 
-#### Value Strategy
+### Value Strategy
 
 > "Value investing involves picking stocks that seem to be trading for less than their book value." (Investopedia 2025)
 
 Eine Value Strategie basiert auf der Annahmen, dass der Aktienpreis sich von dem tatsächlichen Wert eines Unternehmens im positiven wie auch im negativen entkoppeln kann, jedoch über einen langen Zeitraum zu ihrem wahren Wert zurückkehrt. Um diese Strategie am Aktienmarkt umzusetzen werden mittels verschiedener Methoden die wahren Unternehmenswerte ermittelt. Eine Methode ist es über die Fundamentaldaten auf den Unternehmenswert Rückschlüsse zu führen. Die Hypothese von Value Investoren ist, dass man in unterbewertete Aktien investiert und sich diese mit der Zeit in Richtung ihres eigentlichen Wertes, und damit positiv entwickeln.
 
-#### James O’Shaughnessy und der Value Composite
+### James O’Shaughnessy und der Value Composite
 
 James O'Shaughnessy ist ein Amerikanischer Investor, CEO von O'Shaughnessy Ventures und Gründer von O'Shaughnessy Asset Management. In seinem Buch “What Works on Wall Street” stellt er unter anderem den Value Composite One vor. Dieser besteht aus den einem kombinierten Score aus Price-to-book Ratio, Price / Sales Ratio, EBITDA / Enterprise Value, Price / Cashflow Ratio und Price / Earnings Ratio. In seinem Buch hat er mit einem Backtest von 1963 bis 2009 gezeigt, dass man mittels der Kombination aus mehreren Metriken eine Einzelmetrik in 82% der Fällen am Aktienmarkt schlägt. Sein kombinierter Score hatte eine jährliche Rendite von 17.18%. vgl. O'Shaughnessy (2011), zitiert nach Estoppey (2024)
 
-#### Momentum Strategy
+### Momentum Strategy
 
 Ein Momentum Indikator ist ein technischer Indikator, der dazu verwendet werden kann kurzfristige Börsentrends zu identifizieren. vgl. (Sue Man Fan 2010, S. 87) Investoren, die der Momentum Strategie folgen, gehen davon aus, dass Aktien, die gut laufen, auch weiterhin gut laufen werden. "[...] strategies which buy stocks that have performed well in the past and sell stocks that have performed poorly in the past generate significant positive returns over 3-to 12-month holding periods." (JEGADEESH & TITMAN 1993, Abstract).
 
@@ -98,7 +98,13 @@ Ein Momentum Indikator ist ein technischer Indikator, der dazu verwendet werden 
 
 “Der **Median** oder **Zentralwert** ist dadurch charakterisiert, daß jeweils mindestens 50% der Beobachtungen xt , . . . , xn einen Wert größer oder gleich bzw. kleiner oder gleich dem Median annehmen.” (Härtung, J.; Elpelt, B.; Klösener, K.-H. 2004, S. 32)
 
-TODO FORMEL
+$\quad \tilde{x} =
+\begin{cases}
+X_{\frac{n+1}{2}}, & \text{falls } n \text{ ungerade} \\
+\\
+0{,}5 \cdot \left( X_{\frac{n}{2}} + X_{\frac{n+2}{2}} \right), & \text{falls } n \text{ gerade}
+\end{cases}
+$
 
 ### Median der absoluten Abweichung
 
@@ -147,7 +153,7 @@ Diese Architektur stellt folgende Eigenschaften sicher:
 
 “High-level modules should not depend upon low-level modules. Both should depend upon abstractions. Abstractions should not depend upon details. Details should depend upon abstractions.” (Martin 1996, S. 6)
 
-Das DIP ermöglicht es die Abhängigkeitsrichtung von Modulen umzukehren, in dem Module nur noch von Abstraktionen abhängig sind und nicht mehr von konkreten Implementierungen. Dies ermöglicht bspw. einen vereinfachten Austausch von einzelnen externen Komponenten oder einfacheres Testing.
+Das DIP ist eines der SOLID - Prinzipien und ermöglicht es die Abhängigkeitsrichtung von Modulen umzukehren, in dem Module nur noch von Abstraktionen abhängig sind und nicht mehr von konkreten Implementierungen. Dies ermöglicht bspw. einen vereinfachten Austausch von einzelnen externen Komponenten oder einfacheres Testing.
 
 ### Dependency Injection
 
@@ -350,7 +356,7 @@ Die Datengrundlage wird von [Financial Modeling Prep](https://site.financialmode
 
 # Hauptteil
 
-## TEIL 1
+## Konzeption
 
 ### Methodisches Vorgehen
 
@@ -391,12 +397,49 @@ Für den Momentum Score werden die Price-Ratios außer acht gelassen, da diese k
 ### Berechnungsflussdiagramm
 
 ![Berechnungsfluss 1](attachments/berechnungsfluss_1.jpg)
-Abb. Berchnungsfluss Price - Ratios.
+Abb. Berechnungsfluss Price - Ratios.
+
+Aus den letzten vier Income Statements werden die TTM Earnings per Share und die TTM Weighted Average Outstanding Shares ermittelt. Danach weren die TTM Revenues per Share berechnet. Aus den letzten vier Cashflow Statements werden die TTM Cashflows berechnet. Aus den Stock Price Data werden die Adjusted Closed Werte extrahiert und mit den anderen Kennzahlen zu den Price - Ratios verarbeitet.
 
 ![Berechnungsfluss 2](attachments/berechnungsfluss_2.jpg)
-Abb. Berchnungsfluss Combined Value Score.
+Abb. Berechnungsfluss Combined Value Score.
 
-## TEIL 2
+Die drei Price - Ratios (PE, PFCF, PS) werden mittels dem modified Z-Score standardisiert. Danach wird der Median dieser standardisierten Werte genommen und invertiert.
+
+## Entwurf und Implementierung
+
+### Datenfluss
+
+Ein großteil der Datenverarbeitung geschieht mittels dem Aggregation Frameworks auf Datenbankebene. Dies hat performance technische Gründe, da so kein Datenaustausch über das Netzwerk geschehen muss und das Framework für Datenbankoperationen optimiert wurde. Business Logik soll testbar sein und das ist innerhalb des Aggregation Frameworks schwer. Darum wird an einigen Stellen auf die Nutzung des Aggregation Frameworks verzichtet und Python benutzt.
+
+#### FinanceData
+
+![Abb. 2: Datenfluss Finanzdaten Zeitreihe. Quelle: Eigene Darstellung](attachments/datenfluss_ts.jpg)
+
+Abb. 4: Datenfluss Finanzdaten Zeitreihe. Quelle: Eigene Darstellung
+
+Nach dem Import in die "raw" Datenbank werden die Daten mit dem Mongo Aggregation Framework vorverarbeitet. Dabei werden für den Kontext unwichtige Informationen aus den Collections gefiltert und gegebenenfalls Typumwandlungen gemacht. Verschachtelte Objekte werden abgeflacht, sodass die Daten näher an das Zielschema kommen.
+Die Finanzdaten Zeitreihe wird dann in Python erstellt. Dazu wird die eodPrice Collection durchlaufen, um für jedes Datum die Ratios berechnet. Die letzten vier Incomestatements und die letzten vier Cashflowstatements werden nach einer Validierung genutzt, um die TTM Average Outstanding Shares, die TTM Earnings per Share, den TTM Revenue per Share und die TTM Cashflows zu berechnen. Dies dient als Grundlage für die Berechnung der Price - Ratios. Falls die Berechnung fehlschlägt oder die Statements nicht Korrekt sind, bzw. nicht die erwarteten letzten vier sind, wird die betroffene Ratio auf NONE gesetzt.
+
+![Abb. 2: Systemarchitektur. Quelle: Eigene Darstellung](attachments/Datenfluss.jpg)
+
+Abb. 4: Datenflussdiagramm. Quelle: Eigene Darstellung
+
+#### Constituents - scdConstituents
+
+Aus der 0_sp_500_constituents_historical_2026.json wird eine Slowly Changing Dimension Type 2 erstellt, um nachvollziehen zu können, wann ein Unternehmen in den Index aufgenommen oder aus dem Index herausgenommen wurde. Diese Collection bleibt bisher ungenutzt, ist aber schon angelegt, da für eine Evaluierung von einer Value Strategie diese Informationen wichtig sind, um einen möglichen Survivorship Bias auszuschließen.
+
+#### S&P500 Data
+
+Für einen Vergleich mit dem Index werden aus den Files SPXEW_autoadjusted.json und ^GSPC_eod_prices.json Zeitreihen für den S&P 500 Index und für den S&P 500 Equal Weights Index extrahiert. Die Extrahierung geschieht durch das Mongo Aggregation Framework.
+
+#### Company Data
+
+Aus der Profil Collection wird durch das Mongo Aggregation Framework die Company Data Collection erstellt. Dabei werden nur ausgewählte Properties übernommen.
+
+#### Sector Data
+
+Diese Collection ist das Ergebnis der Aggregation aus der Financedata Zeitreihe durch das Mongo Aggregation Framework. Nach einem Join mit der CompanyData Collection wird nach Sektoren und Datum gruppiert und der Median der Ratios wird berechnet.
 
 ### Systemarchitektur
 
@@ -439,7 +482,7 @@ anwendung
 └── tests
 ```
 
-### **Docker**
+### Docker
 
 Das `Dockerfile` basiert auf dem schlanken python:3.11-slim Image, um die Container-Größe minimal zu halten. Die Abhängigkeiten werden über requirements.txt installiert und die Streamlit-Applikation wird auf Port 8501 exponiert. Die `docker-compose.yml` definiert zwei Services. Der mongodb Service verwendet das offizielle MongoDB Community Server Image und persistiert die Datenbankdaten in einem externen Docker Volume, sodass die Daten einen Neustart des Containers überleben.
 
@@ -451,19 +494,19 @@ Der Streamlit Service wird aus dem lokalen Dockerfile gebaut und ist über depen
 
 Das `mongo-entrypoint.sh` Skript aktiviert beim ersten Start der Mongo Instanz die Authentifizierung automatisch. Per Default ist die Authentifizierung deaktiviert und wird aus Sicherheitsgründen in der Anwendung aktiviert. vgl. (MongoDB, Inc. 2026) Es werden zwei Datenbank User und zwei Datenbanken eingerichtet. Es gibt eine Datenbank “raw” für Rohdaten und Zwischenschritte und eine Datenbank “processed” für die finalen Daten. Der erste User hat Lese und Schreibe Rechte auf beiden Datenbanken und wird genutzt um die Daten zu verarbeiten. Der zweite User hat nur Leserechte auf der “processed” Datenbank. Dieses Prinzip der minimalen Rechtevergabe bildet eine weitere Sicherheit vor einem ungewollten Schreib-Zugriff und ist im Sinne des Separation of Concerns.
 
-### **Logging**
+### Logging
 
 Das Logging ist in zwei separate Logger aufgeteilt. Der Applikations-Logger protokolliert relevante Vorkommnisse während der Datenpipeline – etwa JSON-Dateien, die nicht importiert werden konnten, leer waren oder die Schema-Validierung nicht bestanden haben. Der MongoDB-Logger erfasst datenbankspezifische Ereignisse wie Verbindungsfehler oder fehlgeschlagene Schreiboperationen. Beide Logger verwenden strukturierte Log-Level (INFO, WARNING, ERROR) und schreiben in dedizierte Log-Dateien, um eine gezielte Fehleranalyse zu ermöglichen. Zusätzlich existiert ein Performance-Logger, der als Decorator an beliebige Funktionen ohne diese zu verändern angehängt werden kann und deren Ausführungszeit dokumentiert. Dies ermöglicht eine gezielte nachträgliche Optimierung rechenintensiver Schritte.
 
-### **Testing**
+### Testing
 
 Die Anwendung wird durch automatisierte Unit Tests mit pytest abgesichert. Die Tests konzentrieren sich auf den Domain Layer und den Application Layer, da dort die gesamte Business Logik der Anwendung liegt.
 
-#### **Teststrategie**
+#### Teststrategie
 
 Es werden zwei Testebenen unterschieden. Auf der ersten Ebene werden die reinen Berechnungs- und Validierungsfunktionen des Domain Layers isoliert getestet. Da diese Funktionen keine externen Abhängigkeiten besitzen, können sie direkt mit Eingabewerten aufgerufen und deren Rückgabewerte geprüft werden. Auf der zweiten Ebene wird der PipelineService des Application Layers getestet. Hier werden die Repository-Abhängigkeiten mittels unittest.mock durch Mock-Objekte ersetzt, die vordefinierte Testdaten zurückgeben. Dies ermöglicht es, das Verhalten des Services isoliert zu testen, ohne eine Datenbankverbindung zu benötigen – ein direkter praktischer Nachweis der gewählten Clean Architecture und des Dependency Inversion Principle.
 
-#### **Abdeckung**
+#### Abdeckung
 
 Die Tests folgen einer mehrschichtigen Abdeckungsstrategie:
 
@@ -473,7 +516,7 @@ Die Tests folgen einer mehrschichtigen Abdeckungsstrategie:
 - **Validierungslogik**: Die Funktion contains_right_income_statements prüft, ob die vier zugehörigen Quartalsberichte für ein gegebenes Datum korrekt und konsistent vorliegen. Getestet werden dabei Duplikate innerhalb der Perioden, None-Werte in Perioden oder Kalenderjahren, zeitlich inkonsistente Statements mit zu großem Jahresabstand sowie ein Bewertungsdatum, das jünger als der neueste vorliegende Bericht ist.
 - **Verhaltensverifikation**: Bei den Service-Tests wird nicht nur geprüft, ob Repository-Methoden aufgerufen wurden, sondern welche Daten dabei übergeben wurden. Über insert_many.call_args wird sichergestellt, dass Symbol, Datum und alle berechneten Ratios im persistierten Dokument korrekt enthalten sind.
 
-#### **Testdaten**
+#### Testdaten
 
 Die Testdaten sind in einer zentralen conftest.py als wiederverwendbare Fixtures organisiert. Die Finanzdaten orientieren sich an realistischen AAPL-Dimensionen, um praxisnahe Berechnungen verifizieren zu können. Für Grenzfall-Tests existieren dedizierte Fixtures, etwa sample_financedata_only_none oder sample_income_period_w_duplicates, die gezielt fehlerhafte oder unvollständige Datensituationen abbilden.
 
@@ -531,9 +574,9 @@ Die Klasse `MongoConnection` kapselt den Verbindungsaufbau zur MongoDB. Sie wird
 
 Die Klasse implementiert das Kontextmanager-Protokoll (`__enter__`/`__exit__`), sodass sie mit `with MongoConnection(user) as conn:` verwendet werden kann und die Verbindung am Ende des Blocks automatisch geschlossen wird – auch im Fehlerfall.
 
-#### **Mongo Repository**
+#### Mongo Repository
 
-Der Zugriff auf die Mongo Datenbank erfolgt über ein Repository. Im Application Layer ( `core/interfaces/base_repository_interface.py` ) wurde eine abstrakte Klasse Namens BaseRepositoryInterface definiert , welches im Infrastructure Layer implementiert wurde. Die Instanziierung der konkreten Repositories erfolgt im Entry Point der Anwendung (Streamlit) und wird per Dependency Injection in die Services des Application Layers injiziert. Somit sind die Abhängigkeiten alle nach innen gerichtet.
+Um die Clean Architektur umzusetzen wird für das Repository das Dependency Inversion Principle (DIP) verwendet. Es stellt sicher, dass die Businesslogik nicht von der Infrastruktur abhängig ist. Im Application Layer ( `core/interfaces/base_repository_interface.py` ) wurde eine abstrakte Klasse Namens BaseRepositoryInterface definiert, welches im Infrastructure Layer als Repository implementiert wurde. Der Zugriff auf die Mongo Datenbank erfolgt über dieses Repository. Im Kontext dieser Anwendung übernimmt das Repository dabei implizit auch die Rolle eines Adapters, da es die MongoDB-spezifische Abfragesyntax in die interne Domänensprache übersetzt. Die Instanziierung der konkreten Repositories erfolgt im Entry Point der Anwendung (Streamlit) und wird per Dependency Injection in die Services des Application Layers injiziert. Somit sind die Abhängigkeiten alle nach innen gerichtet.
 
 ### Core - Application
 
@@ -673,38 +716,61 @@ Die drei Dateien `mongo.py`, `search.py` und `ranking.py` stellen seitenübergre
 
 `ranking.py` stellt die Ranking-Logik und die zugehörigen UI-Komponenten bereit. `get_ranking` berechnet das Ranking über den `RankingService`, reichert es mit Stammdaten an und cached das Ergebnis pro Sektor und Stichtag. `create_table` und `print_ranking_row` übernehmen die einheitliche Darstellung der Ranking-Tabelle auf allen Seiten, sodass Layout und Formatierung nicht mehrfach implementiert werden müssen.
 
-### Datenfluss
+## Resultate
 
-#### FinanceData
+## Datenmodell
 
-![Abb. 2: Datenfluss Finanzdaten Zeitreihe. Quelle: Eigene Darstellung](attachments/datenfluss_ts.jpg)
+![Abb. 2: Datenmodell. Quelle: Eigene Darstellung](attachments/processed_schema.png)
 
-Abb. 4: Datenfluss Finanzdaten Zeitreihe. Quelle: Eigene Darstellung
+Abb. 3: Datenmodell. Quelle: Eigene Darstellung
 
-Nach dem Import in die "raw" Datenbank werden die Daten mit dem Mongo Aggregation Framework vorverarbeitet. Dabei werden für den Kontext unwichtige Informationen aus den Collections gefiltert und gegebenenfalls Typumwandlungen gemacht. Verschachtelte Objekte werden abgeflacht, sodass die Daten näher an das Zielschema kommen.
-Die Finanzdaten Zeitreihe wird dann in Python erstellt. Dazu wird die eodPrice Collection durchlaufen, um für jedes Datum die Ratios berechnet. Die letzten vier Incomestatements und die letzten vier Cashflowstatements werden nach einer Validierung genutzt, um die TTM Average Outstanding Shares, die TTM Earnings per Share, den TTM Revenue per Share und die TTM Cashflows zu berechnen. Dies dient als Grundlage für die Berechnung der Price - Ratios. Falls die Berechnung fehlschlägt oder die Statements nicht Korrekt sind, bzw. nicht die erwarteten letzten vier sind, wird die betroffene Ratio auf NONE gesetzt.
+Das Schema für **Company Data** kann folglich wie eine Dimension gesehen werden, die lediglich Kontextdaten beinhaltet, die für Aggregationen oder die Anzeige im Dashboard relevant sind.
 
-![Abb. 2: Systemarchitektur. Quelle: Eigene Darstellung](attachments/Datenfluss.jpg)
+Die **Constituents** Collection ist eine Slowly Changing Dimension und wird im Gegensatz zu den anderen Company-Bezogenen Collections nicht über den Ticker/ das Symbol referenziert, sondern über den Company Namen, da der Ticker / das Symbol im Index neu vergeben werden kann.
 
-Abb. 4: Datenflussdiagramm. Quelle: Eigene Darstellung
+Die **Finance Data** - Collection ist eine Time Series Collection mit dem "timeField" : "date" und dem "metaField": "symbol". Somit werden Mongo-internen Buckets auf dem Date und dem Symbol erstellt. Die "granularity" ist auf "hours" konfiguriert, da die Datenpunkte aus tägliche Börsenwerte bestehen und "hours" die gröbste Granularität in Mongo ist. Somit werden Daten bis zu einem Monat gruppiert in die Buckets eingefügt. Die Ratio-Felder sind als nullable definiert, da nicht für jeden Datenpunkt alle Kennzahlen berechnet werden können – etwa bei einer negativen Price / Earnings Ratio.
 
-#### Constituents - scdConstituents
+**Sector Data** ist ebenfalls eine Time Series Collection und hat die gleiche Konfiguration wie die Finance Data Collection. Hier ist das "metafield" allerdings "sector" und damit sind die Buckets auch auf Sektor und date erstellt.
 
-Aus der 0_sp_500_constituents_historical_2026.json wird eine Slowly Changing Dimension Type 2 erstellt, um nachvollziehen zu können, wann ein Unternehmen in den Index aufgenommen oder aus dem Index herausgenommen wurde. Diese Collection bleibt bisher ungenutzt, ist aber schon angelegt, da für eine Evaluierung von einer Value Strategie diese Informationen wichtig sind, um einen möglichen Survivorship Bias auszuschließen.
+Das Schema für **SP500 Data** ist bis auf die fehlenden Ratios das gleiche wie die Finance Data Collection. Es handelt sich ebenfalls um eine Time Series.
 
-#### S&P500 Data
+Für alle Time Series Collections gilt, dass Dokumente kein eindeutiges \_id-Feld brauchen. MongoDB erstellt keinen Index auf \_id und deshalb spielt \_id für Performance oder Queries meist keine Rolle. Das \_id-Feld könnte also aus der Finance Data Collection auch entfernt werden. Da die \_id für Abfragen und Performance in Time Series Collections keine Rolle spielt, wurde auf eine explizite Entfernung verzichtet.
 
-Für einen Vergleich mit dem Index werden aus den Files SPXEW_autoadjusted.json und ^GSPC_eod_prices.json Zeitreihen für den S&P 500 Index und für den S&P 500 Equal Weights Index extrahiert. Die Extrahierung geschieht durch das Mongo Aggregation Framework.
+### Dashboard
 
-#### Company Data
+Das Dashboard gliedert sich in fünf Pages, die den Funktionsumfang der Anwendung strukturiert abbilden.
 
-Aus der Profil Collection wird durch das Mongo Aggregation Framework die Company Data Collection erstellt. Dabei werden nur ausgewählte Properties übernommen.
+#### Sector Page
 
-#### Sector Data
+Die **Sector Page** dient als Einstiegspunkt des Dashboards. Sie bietet eine sektorweite Übersicht, in der der Nutzer einen Sektor auswählen, verschiedene Ratios selektieren und die enthaltenen Unternehmen visuell miteinander vergleichen kann. Eine eingezeichnete Medianlinie ermöglicht dabei eine schnelle Einordnung einzelner Unternehmen relativ zur Peer Group.
 
-Diese Collection ist das Ergebnis der Aggregation aus der Financedata Zeitreihe durch das Mongo Aggregation Framework. Nach einem Join mit der CompanyData Collection wird nach Sektoren und Datum gruppiert und der Median der Ratios wird berechnet.
+![sector Page](attachments/sector_comparison.png)
 
-## Teil 3 Resultate
+#### Company Page
+
+Die **Company Page** ermöglicht die gezielte Analyse einzelner Unternehmen über eine Suchfunktion. Nach Auswahl eines Unternehmens werden Stammdaten, historische Aktienkurse sowie die zeitliche Entwicklung der verfügbaren Ratios dargestellt. Der historische Kursverlauf kann dabei dem S&P 500 gegenübergestellt werden. Zusätzlich werden die Renditen der letzten 1, 3, 5 und 10 Jahre ausgewiesen.
+
+![sector Page](attachments/companydata.png)
+![Price Ratios vs Sector](attachments/ratio_delta.png)
+![Comparison w SP500](attachments/comparison_with_sp500.png)
+
+#### Top-10 Ranking Page Page
+
+Die **Top-10 Ranking Page** zeigt die zehn bestplatzierten Unternehmen eines ausgewählten Sektors zu einem definierten Datum. Das Ranking kann wahlweise nach dem Combined Value Score oder dem Momentum Score dargestellt werden, was einen direkten Vergleich beider Strategien ermöglicht.
+
+![Top 10 Value Ranking](attachments/top10_value.png)
+
+#### Full Ranking Page
+
+Die **Full Ranking Page** stellt das vollständige sektorweite Ranking dar. Der Nutzer kann entweder den gesamten Sektor einsehen oder gezielt nach einzelnen Unternehmen suchen und deren Rankingposition nachvollziehen.
+
+![Ranking Search](attachments/search_ranking.png)
+
+#### Pipeline Page
+
+Die **Pipeline Page** dient als administrative Steuerungsseite der Anwendung. Über sie kann der Datenimport gestartet und die Verarbeitungspipeline ausgelöst werden. Sie bildet damit den operativen Einstiegspunkt für die Datenbeschaffung und -verarbeitung.
+
+![](attachments/pipeline.png)
 
 ### Performance
 
@@ -744,73 +810,21 @@ Index auf Symbol und Datum zurückzuführen ist. Der rechenintensivste Dashboard
 ist `get_ranking` mit 414–978 ms, da das Ranking nicht persistiert ist und bei jedem
 Aufruf für alle Unternehmen eines Sektors neu berechnet wird.
 
-### Dashboard
+# Fazit und Ausblick
 
-Das Dashboard gliedert sich in fünf Pages, die den Funktionsumfang der Anwendung strukturiert abbilden.
+Ziel dieser Arbeit war die Konzeption und prototypische Umsetzung einer Anwendung zur strukturierten Verarbeitung historischer Fundamentaldaten des S&P 500 sowie zur Berechnung und vergleichenden Analyse von Bewertungskennzahlen und darauf basierenden Rankings. Dieses Ziel konnte erfolgreich erreicht werden.
 
-#### Sector Page
+Die entwickelte Anwendung ermöglicht es, fundamentale Unternehmenskennzahlen über einen längeren Zeitraum konsistent darzustellen und sektorrelativ zu vergleichen. Es wurde eine vergleichbare Datenbasis geschaffen, indem die Kennzahlen nicht mehr nur auf Quartalsebene, sondern auf täglicher Basis berechnet werden, wodurch unternehmensspezifische zeitliche Unterschiede in den Bilanzierungszyklen explizit berücksichtigt werden können. Aufbauend darauf wurden mit dem Combined Value Score und dem Momentum Score zwei unterschiedliche Bewertungsansätze implementiert, die sowohl fundamentale als auch technische Perspektiven berücksichtigen und im Dashboard gegenübergestellt werden können.
 
-Die **Sector Page** dient als Einstiegspunkt des Dashboards. Sie bietet eine sektorweite Übersicht, in der der Nutzer einen Sektor auswählen, verschiedene Ratios selektieren und die enthaltenen Unternehmen visuell miteinander vergleichen kann. Eine eingezeichnete Medianlinie ermöglicht dabei eine schnelle Einordnung einzelner Unternehmen relativ zur Peer Group.
+Ein besonderer Fokus lag auf der softwaretechnischen Umsetzung. Durch die konsequente Anwendung von Clean Architecture, dem Dependency Inversion Principle sowie einer klaren Trennung von Verantwortlichkeiten konnte eine modulare, testbare und erweiterbare Systemarchitektur realisiert werden. Die Datenverarbeitung wurde bewusst zwischen Datenbankebene und Anwendungsebene aufgeteilt, um sowohl Performancevorteile als auch eine klare Trennung von Businesslogik und Datenmanipulation zu gewährleisten.
 
-![sector Page](attachments/sector_comparison.png)
+Trotz der positiven Ergebnisse beschränkt sich der Combined Value Score auf eine Auswahl weniger Kennzahlen und berücksichtigt keine weiteren fundamentalen oder qualitativen Faktoren. Auch erfolgt keine empirische Validierung der verwendeten Strategien, sodass keine Aussage über deren tatsächliche Performance am Kapitalmarkt getroffen werden kann.
 
-#### Company Page
+Diese Einschränkungen bilden zugleich den Ausgangspunkt für weiterführende Arbeiten. Im Rahmen der Bachelorarbeit kann die entwickelte Anwendung, sowie die entstandende Datengrundlage genutzt und erweitert werden, um eine systematische Backtesting-Analyse der implementierten Value- und Momentum-Strategien durchzuführen. Ziel ist es, die Performance der Scores über verschiedene Zeiträume und Sektoren hinweg zu evaluieren und deren Aussagekraft quantitativ zu untersuchen.
 
-Die **Company Page** ermöglicht die gezielte Analyse einzelner Unternehmen über eine Suchfunktion. Nach Auswahl eines Unternehmens werden Stammdaten, historische Aktienkurse sowie die zeitliche Entwicklung der verfügbaren Ratios dargestellt. Der historische Kursverlauf kann dabei dem S&P 500 gegenübergestellt werden. Zusätzlich werden die Renditen der letzten 1, 3, 5 und 10 Jahre ausgewiesen.
+Darüber hinaus bieten sich Erweiterungen wie die Integration zusätzlicher Kennzahlen oder die Einbindung weiterer Märkte und Indizes an.
 
-![sector Page](attachments/companydata.png)
-![Price Ratios vs Sector](attachments/ratio_delta.png)
-![Comparison w SP500](attachments/comparison_with_sp500.png)
-
-#### Top-10 Ranking Page Page
-
-Die **Top-10 Ranking Page** zeigt die zehn bestplatzierten Unternehmen eines ausgewählten Sektors zu einem definierten Datum. Das Ranking kann wahlweise nach dem Combined Value Score oder dem Momentum Score dargestellt werden, was einen direkten Vergleich beider Strategien ermöglicht.
-
-![Top 10 Value Ranking](attachments/top10_value.png)
-
-#### Full Ranking Page
-
-Die **Full Ranking Page** stellt das vollständige sektorweite Ranking dar. Der Nutzer kann entweder den gesamten Sektor einsehen oder gezielt nach einzelnen Unternehmen suchen und deren Rankingposition nachvollziehen.
-
-![Ranking Search](attachments/search_ranking.png)
-
-#### Pipeline Page
-
-Die **Pipeline Page** dient als administrative Steuerungsseite der Anwendung. Über sie kann der Datenimport gestartet und die Verarbeitungspipeline ausgelöst werden. Sie bildet damit den operativen Einstiegspunkt für die Datenbeschaffung und -verarbeitung.
-
-![](attachments/pipeline.png)
-
-## Technologie
-
-### Frontend
-
-Streamlit organisiert die Anwendung in einzelne Pages, die jeweils eine dedizierte Ansicht des Dashboards repräsentieren. Jede Page instanziiert die benötigten Repository-Implementierungen und injiziert diese in die zuständigen Services – sie übernimmt damit die Rolle des Entry Points und der Composition Root für den jeweiligen Anwendungsfall. Die Pages enthalten dabei selbst keine Geschäftslogik, sondern delegieren ausschließlich an die Services und stellen deren Ergebnisse dar. Dies entspricht der konsequenten Trennung von Präsentation und Businesslogik im Sinne der Clean Architecture.
-
-Da Streamlit eine zustandslose Ausführung pro User-Interaktion hat, wird der st.session_state verwendet, um Nutzereingaben und Zwischenergebnisse innerhalb einer Session zu persistieren und unnötige Datenbankabfragen zu vermeiden.
-
-## Data
-
-### Zielschema
-
-![Abb. 2: Zielschema. Quelle: Eigene Darstellung](attachments/processed_schema.png)
-
-Abb. 3: Zielschema. Quelle: Eigene Darstellung
-
-Das Schema für **Company Data** kann folglich wie eine Dimension gesehen werden, die lediglich Kontextdaten beinhaltet, die für Aggregationen oder die Anzeige im Dashboard relevant sind.
-
-Die **Constituents** Collection ist eine Slowly Changing Dimension und wird im Gegensatz zu den anderen Company-Bezogenen Collections nicht über den Ticker/ das Symbol referenziert, sondern über den Company Namen, da der Ticker / das Symbol im Index neu vergeben werden kann.
-
-Die **Finance Data** - Collection ist eine Time Series Collection mit dem "timeField" : "date" und dem "metaField": "symbol". Somit werden Mongo-internen Buckets auf dem Date und dem Symbol erstellt. Die "granularity" ist auf "hours" konfiguriert, da die Datenpunkte aus tägliche Börsenwerte bestehen und "hours" die gröbste Granularität in Mongo ist. Somit werden Daten bis zu einem Monat gruppiert in die Buckets eingefügt. Die Ratio-Felder sind als nullable definiert, da nicht für jeden Datenpunkt alle Kennzahlen berechnet werden können – etwa bei einer negativen Price / Earnings Ratio.
-
-**Sector Data** ist ebenfalls eine Time Series Collection und hat die gleiche Konfiguration wie die Finance Data Collection. Hier ist das "metafield" allerdings "sector" und damit sind die Buckets auch auf Sektor und date erstellt.
-
-Das Schema für **SP500 Data** ist bis auf die fehlenden Ratios das gleiche wie die Finance Data Collection. Es handelt sich ebenfalls um eine Time Series.
-
-Für alle Time Series Collections gilt, dass Dokumente kein eindeutiges \_id-Feld brauchen. MongoDB erstellt keinen Index auf \_id und deshalb spielt \_id für Performance oder Queries meist keine Rolle. Das \_id-Feld könnte also aus der Finance Data Collection auch entfernt werden. Da die \_id für Abfragen und Performance in Time Series Collections keine Rolle spielt, wurde auf eine explizite Entfernung verzichtet.
-
-# Schluss
-
-TODO
+Insgesamt stellt die entwickelte Anwendung eine solide Grundlage für weiterführende finanzanalytische Untersuchungen dar und verbindet datengetriebene Methoden mit einer skalierbaren Softwarearchitektur.
 
 # Literaturverzeichnis
 

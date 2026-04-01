@@ -3,7 +3,6 @@ import datetime
 def contains_right_income_statements(data : list[dict], date : datetime.datetime):
     return _contains_last_4_statements(data=data, date=date)
 
-
 def contains_right_cashflow_statements(data : list[dict], date : datetime.datetime):
     return _contains_last_4_statements(data=data, date=date)
 
