@@ -390,7 +390,9 @@ $$\text{CVS}_i = -1 \cdot \text{median}\left(\tilde{z}_{i,\text{PE}},\ \tilde{z}
 
 Der Momentum Score basiert rein auf technischen Daten und wird im Projektkontext aus der Rendite der letzten 6 Monate gebildet. Der Betrachtungszeitraum wird auf 6 Monate definiert, da JEGADEESH & TITMAN 3 - 12 Monatszeiträume getestet haben und 6 Monate in dem genannten Zeitraum liegen. Je besser die Performance der letzten 6 Monate, desto höher der Score. Der Momentum Score dient in dieser Arbeit als Vergleichsstrategie und wird darum nicht näher untersucht.
 
-$\quad \text{Price Index}_{6M} = \frac{Price_{end}}{Price_{start}} - 1$
+$$
+\text{Price Index}_{6M} = \frac{Price_{end}}{Price_{start}} - 1
+$$
 
 Für den Momentum Score werden die Price-Ratios außer acht gelassen, da diese kein verlässlicher Momentum Indikator sind. Wenn bspw. die PE-Ratio steigt, kann dies sowohl auf steigende Preise wie auch auf fallende Earnings hinweisen. Dementsprechend ist die PE-Ratio nicht ohne weiteres mit Blick auf ein Momentum interpretierbar. Dies gilt ebenso für die anderen Price Ratios.
 
@@ -716,7 +718,7 @@ Die drei Dateien `mongo.py`, `search.py` und `ranking.py` stellen seitenübergre
 
 `ranking.py` stellt die Ranking-Logik und die zugehörigen UI-Komponenten bereit. `get_ranking` berechnet das Ranking über den `RankingService`, reichert es mit Stammdaten an und cached das Ergebnis pro Sektor und Stichtag. `create_table` und `print_ranking_row` übernehmen die einheitliche Darstellung der Ranking-Tabelle auf allen Seiten, sodass Layout und Formatierung nicht mehrfach implementiert werden müssen.
 
-## Resultate
+# Resultate
 
 ## Datenmodell
 
