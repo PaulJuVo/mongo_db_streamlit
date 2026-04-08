@@ -25,13 +25,15 @@
 
 - [Fazit und Ausblick](#fazit-und-ausblick)
 
+- [Installationsanleitung](#installationsanleitung)
+
 - [Literaturverzeichnis](#literaturverzeichnis)
 
 # Einleitung
 
 ## Problemstellung
 
-Die systematische Verarbeitung, Bewertung und der Aktienvergleich auf Basis von historischen Fundamentaldaten, ist für private wie auch für institutionelle Anwender mit erheblichem Aufwand verbunden. Etablierte Anbieter wie Yahoo Finance, Finanzen.net oder Bloomberg sind entweder sehr teuer oder bieten keine gesonderte zeitliche Darstellung für Price-Ratios an. Viele Anbieter stellen nur Price-Earnings zu den Quartalsenden dar. Da Unternehmen ihren Bilanzierungskalender und damit ihre Quartale selbst definieren, gehen zusätzlich zeitliche Informationen verloren. Durch die vielen Ratios entsteht das Problem der Informationsüberflutung und, da Price-Ratios vor allem für Value-Investoren interessant sind, bietet es sich an, einen kombinierten Value Score aus den Ratios zu generieren, um Sie in einem Ranking anzuzeigen, und Sie mit einem rein technischen Momentum Score Ranking zu vergleichen.
+Die systematische Verarbeitung, Bewertung und der Aktienvergleich auf Basis von historischen Fundamentaldaten, ist für private wie auch für institutionelle Anwender mit erheblichem Aufwand verbunden. Etablierte Anbieter wie Yahoo Finance, Finanzen.net oder Bloomberg sind entweder sehr teuer oder bieten keine gesonderte zeitliche Darstellung für Price-Ratios an. Viele Anbieter stellen nur Price-Earnings zu den Quartalsenden dar. Da Unternehmen ihren Bilanzierungskalender und damit ihre Quartale selbst definieren, gehen zusätzlich zeitliche Informationen verloren. Durch die vielen Ratios entsteht das Problem der Informationsüberflutung und, da Price-Ratios vor allem für Value-Investoren interessant sind, bietet es sich an, einen kombinierten Value Score aus den Ratios zu generieren, um sie in einem Ranking anzuzeigen, und sie mit einem rein technischen Momentum Score Ranking zu vergleichen.
 
 Darüber hinaus erfordert ein System dieser Art eine sorgfältige Softwarearchitektur: Die Kombination aus heterogenen Datenquellen, komplexer Kennzahlenlogik und dem Anspruch an langfristige Wartbarkeit und Erweiterbarkeit erfordert den Einsatz etablierter Architekturprinzipien wie Clean Architecture, Dependency Inversion und systematischem Testing.
 
@@ -111,11 +113,11 @@ $\quad P/FCF = \frac{\text{Price per Share}}{\text{Free Cashflow per Share (TTM)
 
 > "Value investing involves picking stocks that seem to be trading for less than their book value." (Investopedia 2025)
 
-Eine Value Strategie basiert auf der Annahmen, dass der Aktienpreis sich von dem tatsächlichen Wert eines Unternehmens im Positiven wie auch im Negativen entkoppeln kann, jedoch über einen langen Zeitraum zu ihrem wahren Wert zurückkehrt. Um diese Strategie am Aktienmarkt umzusetzen, werden mittels verschiedener Methoden die wahren Unternehmenswerte ermittelt. Eine Methode ist es, über die Fundamentaldaten auf den Unternehmenswert Rückschlüsse zu führen. Die Hypothese von Value Investoren ist, dass man in unterbewertete Aktien investiert und sich diese mit der Zeit in Richtung ihres eigentlichen Wertes, und damit positiv, entwickeln.
+Eine Value Strategie basiert auf der Annahme, dass der Aktienpreis sich von dem tatsächlichen Wert eines Unternehmens im Positiven wie auch im Negativen entkoppeln kann, jedoch über einen langen Zeitraum zu ihrem wahren Wert zurückkehrt. Um diese Strategie am Aktienmarkt umzusetzen, werden mittels verschiedener Methoden die wahren Unternehmenswerte ermittelt. Eine Methode ist es, über die Fundamentaldaten auf den Unternehmenswert Rückschlüsse zu führen. Die Hypothese von Value Investoren ist, dass man in unterbewertete Aktien investiert und sich diese mit der Zeit in Richtung ihres eigentlichen Wertes, und damit positiv, entwickeln.
 
 ### James O’Shaughnessy und der Value Composite
 
-James O'Shaughnessy ist ein amerikanischer Investor, CEO von O'Shaughnessy Ventures und Gründer von O'Shaughnessy Asset Management. In seinem Buch “What Works on Wall Street” stellt er unter anderem den Value Composite One vor. Dieser besteht aus den einem kombinierten Score aus Price-to-book Ratio, Price / Sales Ratio, EBITDA / Enterprise Value, Price / Cashflow Ratio und Price / Earnings Ratio. In seinem Buch hat er mit einem Backtest von 1963 bis 2009 gezeigt, dass man mittels der Kombination aus mehreren Metriken eine Einzelmetrik in 82% der Fällen am Aktienmarkt schlägt. Sein kombinierter Score hatte eine jährliche Rendite von 17,18%. vgl. (O'Shaughnessy 2011, zit. nach Estoppey 2024)
+James O'Shaughnessy ist ein amerikanischer Investor, CEO von O'Shaughnessy Ventures und Gründer von O'Shaughnessy Asset Management. In seinem Buch “What Works on Wall Street” stellt er unter anderem den Value Composite One vor. Dieser besteht aus den einem kombinierten Score aus Price-to-book Ratio, Price / Sales Ratio, EBITDA / Enterprise Value, Price / Cashflow Ratio und Price / Earnings Ratio. In seinem Buch hat er mit einem Backtest von 1963 bis 2009 gezeigt, dass man mittels der Kombination aus mehreren Metriken eine Einzelmetrik in 82% der Fälle am Aktienmarkt schlägt. Sein kombinierter Score hatte eine jährliche Rendite von 17,18%. vgl. (O'Shaughnessy 2011, zit. nach Estoppey 2024)
 
 ### Momentum Strategy
 
@@ -160,7 +162,7 @@ $$\quad M_i = \frac{0.6745 \cdot (x_i - \tilde{x})}{\text{MAD}}$$
 
 Abb. 1: Die saubere Architektur (Martin 2018, S. 193)
 
-Die Clean Architektur folgt einer Regel: “Quellcode-Abhängigkeiten dürfen nur nach innen in Richtung der übergeordneten Richtlinien weisen.” (Martin 2018, S. 194)
+Die Clean Architectur folgt einer Regel: “Quellcode-Abhängigkeiten dürfen nur nach innen in Richtung der übergeordneten Richtlinien weisen.” (Martin 2018, S. 194)
 
 Diese Architektur stellt folgende Eigenschaften sicher:
 
@@ -179,7 +181,7 @@ Diese Architektur stellt folgende Eigenschaften sicher:
 - **Unabhängigkeit von externen Komponenten**:
   Die Domain- und Applikationsschicht hat keinerlei direkte Abhängigkeit zu externen Datenquellen oder Schnittstellen. Ob Daten über eine Finanz-API, eine CSV-Datei oder einen anderen Kanal bezogen werden, ist für die Kernlogik irrelevant.
 
-### Dependency inversion Principle
+### Dependency Inversion Principle
 
 “High-level modules should not depend upon low-level modules. Both should depend upon abstractions. Abstractions should not depend upon details. Details should depend upon abstractions.” (Martin 1996, S. 6)
 
@@ -199,7 +201,7 @@ Das Decorator Pattern ist ein strukturelles Entwurfsmuster, das einer bestehende
 
 ### Python
 
-Python ist eine weitverbreitete und im Finanz und Datenbereich beliebte Programmiersprache. Python bietet mit pymongo, pytest und jsonschema direkt relevante Bibliotheken für den Anwendungsfall. Dabei ist pymongo für den Datenbankzugriff, pytest für das Testing und jsonschema für die Schema-Validierung besonders nützlich.
+Python ist eine weitverbreitete und im Finanz- und Datenbereich beliebte Programmiersprache. Python bietet mit pymongo, pytest und jsonschema direkt relevante Bibliotheken für den Anwendungsfall. Dabei ist pymongo für den Datenbankzugriff, pytest für das Testing und jsonschema für die Schema-Validierung besonders nützlich.
 
 ### MongoDB
 
@@ -424,7 +426,7 @@ $$
 \text{Price Index}_{6M} = \frac{Price_{end}}{Price_{start}} - 1
 $$
 
-Für den Momentum Score werden die Price-Ratios außer Acht gelassen, da diese kein verlässlicher Momentum Indikator sind. Wenn bspw. die PE-Ratio steigt, kann dies sowohl auf steigende Preise wie auch auf fallende Earnings hinweisen. Dementsprechend ist die PE-Ratio nicht ohne weiteres mit Blick auf ein Momentum interpretierbar. Dies gilt ebenso für die anderen Price Ratios.
+Für den Momentum Score werden die Price-Ratios außer Acht gelassen, da diese kein verlässlicher Momentum Indikator sind. Wenn bspw. die PE-Ratio steigt, kann dies sowohl auf steigende Preise wie auch auf fallende Earnings hinweisen. Dementsprechend ist die PE-Ratio nicht ohne weiteres mit Blick auf ein Momentum interpretierbar. Dies gilt ebenso für die anderen Price-Ratios.
 
 ### Berechnungsflussdiagramm
 
@@ -730,7 +732,7 @@ Die Seite ist in zwei Tabs aufgeteilt: „by Sector" ermöglicht die direkte Sek
 
 #### ranking_top10.py
 
-Die Seite zeigt kompakt die Top-10-Aktien eines Sektors nach Value- und Momentum-Score. Sektor und Stichtag werden über die Sidebar gewählt, wobei der Sektor standardmäßig auf den des zuletzt ausgewählten Unternehmens aus dem Session State vorbelegt wird. Das Ranking wird einmalig berechnet und dann in zwei Tabs – Value und Momentum – mit einem Limit von 10 Einträgen dargestellt.
+Die Seite zeigt kompakt die Top-10-Aktien eines Sektors nach Value- und Momentum Score. Sektor und Stichtag werden über die Sidebar gewählt, wobei der Sektor standardmäßig auf den des zuletzt ausgewählten Unternehmens aus dem Session State vorbelegt wird. Das Ranking wird einmalig berechnet und dann in zwei Tabs – Value und Momentum – mit einem Limit von 10 Einträgen dargestellt.
 
 #### sector.py
 
@@ -869,6 +871,115 @@ Diese Einschränkungen bilden zugleich den Ausgangspunkt für weiterführende Ar
 Darüber hinaus bieten sich Erweiterungen wie die Integration zusätzlicher Kennzahlen oder die Einbindung weiterer Märkte und Indizes an.
 
 Insgesamt stellt die entwickelte Anwendung eine solide Grundlage für weiterführende finanzanalytische Untersuchungen dar und verbindet datengetriebene Methoden mit einer skalierbaren Softwarearchitektur.
+
+# Installationsanleitung
+
+Zur lokalen Ausführung der Anwendung sind die folgenden Schritte erforderlich:
+
+## 1. Repository klonen
+
+Zunächst wird das GitHub-Repository lokal geklont:
+
+```bash
+git clone <repository-url>
+cd <repository-name>
+```
+
+---
+
+## 2. Verzeichnisstruktur erstellen
+
+Im Projektverzeichnis muss ein `data`-Ordner mit folgender Struktur angelegt werden:
+
+```
+data/
+├── ^GSPC_eod_prices.json
+├── ^SPXEW_autoadjusted.json
+├── 0_sp_500_constituents_historical_2026.json
+└── data/
+    ├── AAPL_CashflowStatement.json
+    ├── AAPL_eod_prices.json
+    ├── AAPL_IncomeStatement.json
+    └── AAPL_Profile.json
+```
+
+**Hinweise:**
+
+- Die beiden Index-Dateien (`^GSPC_eod_prices.json`, `^SPXEW_autoadjusted.json`) sowie die Constituents-Datei werden direkt im `data/`-Ordner abgelegt.
+- Die Unternehmensdaten befinden sich im Unterordner `data/data/`.
+
+---
+
+## 3. `.env`-Datei erstellen
+
+Im Root-Verzeichnis des Projekts muss eine `.env.dev`-Datei mit folgendem Inhalt erstellt werden:
+
+```env
+MONGODB_INITDB_ROOT_USERNAME=admin
+MONGODB_INITDB_ROOT_PASSWORD=password
+
+MONGO_HOST=mongodb
+MONGO_PORT=27017
+
+MONGO_APPUSER_AUTH_DB=raw
+MONGO_APPUSER_USER=appUser
+MONGO_APPUSER_PASSWORD=password
+
+MONGO_DASHBOARDUSER_AUTH_DB=processed
+MONGO_DASHBOARDUSER_USER=dashboardUser
+MONGO_DASHBOARDUSER_PASSWORD=password
+
+NTFY_CHANNEL=test
+```
+
+---
+
+## 4. Docker-Container starten
+
+Anschließend wird die Anwendung über Docker gestartet:
+
+```bash
+docker compose up -d
+```
+
+Dieser Befehl startet:
+
+- die MongoDB-Datenbank
+- die Streamlit-Anwendung
+
+---
+
+## 5. Anwendung aufrufen
+
+Nach erfolgreichem Start ist das Dashboard im Browser erreichbar unter:
+
+```
+http://localhost:8501
+```
+
+---
+
+## 6. Datenimport und Pipeline ausführen
+
+Nach dem Start der Anwendung:
+
+1. Öffne die **Pipeline Page** im Dashboard
+2. Klicke auf **„Run Import & Pipeline“**
+
+Dadurch werden:
+
+- die JSON-Dateien importiert
+- die Daten verarbeitet
+- alle benötigten Kennzahlen berechnet
+
+---
+
+## 7. Voraussetzungen
+
+Für die Ausführung müssen folgende Tools installiert sein:
+
+- Docker
+- Docker Compose
 
 # Literaturverzeichnis
 
