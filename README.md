@@ -939,6 +939,7 @@ NTFY_CHANNEL=test
 Anschließend wird die Anwendung über Docker gestartet:
 
 ```bash
+docker volume create mongodb # Nur beim ersten starten
 docker compose up -d
 ```
 
