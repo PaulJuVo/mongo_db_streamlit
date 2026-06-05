@@ -141,88 +141,70 @@ CASHFLOW_STAGED = [
         }
     }
 ]
+
 SECTOR_DATA = [
-                  {
-                    "$lookup": {
-                      "from": MongoCollection.COMPANYDATA.value,
-                      "localField": "symbol",
-                      "foreignField": "symbol",
-                      "as": "companyData"
-                    }
-                  },
-                  {
-                    "$replaceRoot": {
-                      "newRoot": {
-                        "$mergeObjects": [
-                          { "$arrayElemAt": [ "$companyData", 0 ] },
-                          "$$ROOT"
+    # Früh filtern – nur Felder die du brauchst weiterreichen
+    {
+        "$project": {
+            "symbol": 1,
+            "date": 1,
+            "pcRatio": 1,
+            "peRatio": 1,
+            "pfcfRatio": 1,
+            "psRatio": 1
+        }
+    },
+    {
+    "$lookup": {
+        "from": MongoCollection.SCD_CONSTITUENTS.value,
+        "let": {
+            "sym": "$symbol",
+            "dt": "$date"
+        },
+        "pipeline": [
+            {
+                "$match": {
+                    "$expr": {
+                        "$and": [
+                            {"$eq": ["$symbol", "$$sym"]},  # ← symbol statt companyName
+                            {"$lte": ["$fromDate", "$$dt"]},
+                            {"$gte": ["$toDate", "$$dt"]}
                         ]
-                      }
                     }
-                  },
-                  {
-                    "$project": { "companyData": 0 }
-                  },
-                  {
-                    "$group": {
-                      "_id": {
-                        "date": "$date",
-                        "sector": "$sector"
-                      },
-                      "pcRatioMedian": {
-                        "$median": {
-                          "input": "$pcRatio",
-                          "method": "approximate"
-                        }
-                      },
-                      "peRatioMedian": {
-                        "$median": {
-                          "input": "$peRatio",
-                          "method": "approximate"
-                        }
-                      },
-                      "pfcfRatioMedian": {
-                        "$median": {
-                          "input": "$pfcfRatio",
-                          "method": "approximate"
-                        }
-                      },
-                      "psRatioMedian": {
-                        "$median": {
-                          "input": "$psRatio",
-                          "method": "approximate"
-                        }
-                      }
-                    }
-                  },
-                  {
-                    "$project": {
-                      "_id": 0,
-                      "date": "$_id.date",      
-                      "sector": "$_id.sector",  
-                      "pcRatioMedian": 1,
-                      "peRatioMedian": 1,
-                      "pfcfRatioMedian": 1,
-                      "psRatioMedian": 1
-                    }
-                  },
-                  {
-                    "$match": {
-                        "sector": { "$exists": True }
-                    }
-                  },
-                  {
-                    "$out": {
-                      "db": MongoDatabase.PROCESSED.value,
-                      "coll": MongoCollection.SECTORDATA.value,
-                      "timeseries": {
-                        "timeField": "date",
-                        "metaField": "sector",    
-                        "granularity": "hours"      
-                      }
-                    }
-                  }
-                ]
+                }
+            },
+            {"$limit": 1},
+            {"$project": {"_id": 1}}
+        ],
+        "as": "constituent"
+    }
+    },
+    {"$match": {"constituent": {"$ne": []}}},
+    {"$project": {"constituent": 0, "companyName": 0, "symbol": 0}},
+    {
+        "$group": {
+            "_id": {
+                "date": "$date",
+                "sector": "$sector"
+            },
+            "pcRatios":   {"$push": "$pcRatio"},
+            "peRatios":   {"$push": "$peRatio"},
+            "pfcfRatios": {"$push": "$pfcfRatio"},
+            "psRatios":   {"$push": "$psRatio"}
+        }
+    },
+    {
+        "$project": {
+            "_id": 0,
+            "date":       "$_id.date",
+            "sector":     "$_id.sector",
+            "pcRatios":   1,
+            "peRatios":   1,
+            "pfcfRatios": 1,
+            "psRatios":   1
+        }
+    }
+]
 
 
 SPXEW = [

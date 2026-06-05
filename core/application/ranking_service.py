@@ -2,16 +2,9 @@ from datetime import datetime
 from core.domain.calculation import calc_mad, get_median_from_col, calc_robust_z_score, get_value_score, calc_momentum
 from core.interfaces.base_repository_interface import BaseRepositoryInterface
 from copy import copy
-from infrastructure.mongo.mongo_connection import MongoConnection
-from infrastructure.mongo.mongo_repository import MongoRepository
-from config.mongo_config import MongoCollection, MongoDatabase, MongoUser
 from dateutil.relativedelta import relativedelta
-
-from app.shared.logging import init_logging
 import logging
 from config.logging_config import performance_log
-
-init_logging()
 logger = logging.getLogger("App - Ranking Service")
 
 class RankingService():
@@ -20,12 +13,14 @@ class RankingService():
                  finance_repo : BaseRepositoryInterface,
                  company_repo : BaseRepositoryInterface,
                  sector_repo : BaseRepositoryInterface,
+                 constituents_repo : BaseRepositoryInterface,
                  date : datetime,
                  sector) -> None:
         self.finance_repo = finance_repo
         self.sector  = sector
         self.company_repo = company_repo
         self.sector_repo = sector_repo
+        self.constituents_repo = constituents_repo
         self.date = date
         self.ratios = ["psRatio", "pfcfRatio", "peRatio"]
         self.sector_data = [*self._get_sector_data()]
@@ -66,7 +61,7 @@ class RankingService():
     def _get_momentum_score(self, symbol):
 
         today = self.date
-        six_m_ago = today - relativedelta(months=6)
+        six_m_ago = today - relativedelta(months=12)
         six_fiter = { "symbol": symbol, 
                                 "date" : { 
                                     "$gte" : datetime(six_m_ago.year, six_m_ago.month, six_m_ago.day),
@@ -89,7 +84,16 @@ class RankingService():
         return None
 
     def _get_companies(self):
-        return [*self.company_repo.find(filter={"sector" : self.sector})]        
+        date1 = self.date
+        constituents = [*self.constituents_repo.find(filter={"fromDate": {"$lte": datetime(date1.year, date1.month, date1.day)},
+                                                           "toDate": {"$gte": datetime(date1.year, date1.month, date1.day)}})]
+        const_set = set(c["symbol"] for c in constituents)
+        companies = [*self.company_repo.find(filter={"sector" : self.sector})]
+        filtered_comp = [c for c in companies if c["symbol"] in const_set]
+        return filtered_comp
+
+    def _normalize(self, name):
+        return name.lower().replace(".", "").replace(",", "").strip()
 
     def _get_sector_median_data(self, data):
         return dict({ratio : get_median_from_col(records=data, colname=ratio + "Median") for ratio in self.ratios})

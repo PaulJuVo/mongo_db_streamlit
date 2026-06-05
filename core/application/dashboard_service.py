@@ -3,12 +3,9 @@ from core.domain.calculation import get_median_from_col, calc_cagr
 from core.exceptions.dashboard_exceptions import NoDataFound
 from datetime import datetime
 from typing import Optional
-
-from app.shared.logging import init_logging
 import logging
 from config.logging_config import performance_log
 
-init_logging()
 logger = logging.getLogger("App - Dashboard Service")
 
 
@@ -22,6 +19,18 @@ class DashboardService():
         self.company_repo= company_repo
         self.sector_repo = sector_repo
         self.sp_500_repo = sp_500_repo
+
+
+    def get_last_available_adj_closed(self, symbol : str, date : datetime):
+        fi = { "symbol": symbol, 
+                                "date" : { "$lte" : date}
+                            }
+        
+        result = self.finance_repo.find_one(filter=fi, sort={"date":-1})
+        if not result:
+            raise NoDataFound(message=f"No data found for filter = {fi}", errorcode=999)
+        else: 
+            return result
 
     @performance_log(logger)
     def get_finance_data(self, companies : list, from_date : datetime, to_date : datetime):

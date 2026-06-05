@@ -1,12 +1,10 @@
 from typing import Iterable
 from core.interfaces.base_repository_interface import BaseRepositoryInterface
-from config.logging_config import performance_log
 from config.mongo_config import FILTER_QUERIES_UPLOAD
 from config.processed_schema import VALIDATION_SCHEMAS
 from jsonschema import validate, ValidationError
 import datetime 
 import logging
-from pprint import pprint
 
 logger = logging.getLogger(__name__)
 

@@ -1,0 +1,2830 @@
+buyyear,sellyear,sector,rendite,strategy
+2010,2011,Basic Materials,-11.23,momentum_score
+2010,2011,Basic Materials,0.62,value_score
+2010,2012,Basic Materials,4.85,momentum_score
+2010,2012,Basic Materials,16.16,value_score
+2010,2013,Basic Materials,11.6,momentum_score
+2010,2013,Basic Materials,18.52,value_score
+2010,2014,Basic Materials,10.61,momentum_score
+2010,2014,Basic Materials,16.54,value_score
+2010,2015,Basic Materials,5.37,momentum_score
+2010,2015,Basic Materials,11.95,value_score
+2010,2016,Basic Materials,7.07,momentum_score
+2010,2016,Basic Materials,11.84,value_score
+2010,2017,Basic Materials,10.67,momentum_score
+2010,2017,Basic Materials,14.95,value_score
+2010,2018,Basic Materials,6.77,momentum_score
+2010,2018,Basic Materials,11.21,value_score
+2010,2019,Basic Materials,8.64,momentum_score
+2010,2019,Basic Materials,12.8,value_score
+2010,2020,Basic Materials,9.07,momentum_score
+2010,2020,Basic Materials,12.83,value_score
+2010,2021,Basic Materials,10.62,momentum_score
+2010,2021,Basic Materials,14.76,value_score
+2010,2022,Basic Materials,8.57,momentum_score
+2010,2022,Basic Materials,11.54,value_score
+2010,2023,Basic Materials,8.08,momentum_score
+2010,2023,Basic Materials,11.68,value_score
+2010,2024,Basic Materials,6.53,momentum_score
+2010,2024,Basic Materials,10.06,value_score
+2010,2025,Basic Materials,5.27,momentum_score
+2010,2025,Basic Materials,9.2,value_score
+2011,2012,Basic Materials,27.58,momentum_score
+2011,2012,Basic Materials,26.43,value_score
+2011,2013,Basic Materials,25.51,momentum_score
+2011,2013,Basic Materials,23.24,value_score
+2011,2014,Basic Materials,20.86,momentum_score
+2011,2014,Basic Materials,19.36,value_score
+2011,2015,Basic Materials,13.74,momentum_score
+2011,2015,Basic Materials,13.44,value_score
+2011,2016,Basic Materials,14.07,momentum_score
+2011,2016,Basic Materials,12.81,value_score
+2011,2017,Basic Materials,16.16,momentum_score
+2011,2017,Basic Materials,15.76,value_score
+2011,2018,Basic Materials,12.56,momentum_score
+2011,2018,Basic Materials,11.46,value_score
+2011,2019,Basic Materials,15.58,momentum_score
+2011,2019,Basic Materials,12.72,value_score
+2011,2020,Basic Materials,15.5,momentum_score
+2011,2020,Basic Materials,12.72,value_score
+2011,2021,Basic Materials,17.15,momentum_score
+2011,2021,Basic Materials,15.24,value_score
+2011,2022,Basic Materials,14.04,momentum_score
+2011,2022,Basic Materials,11.35,value_score
+2011,2023,Basic Materials,14.09,momentum_score
+2011,2023,Basic Materials,12.12,value_score
+2011,2024,Basic Materials,13.03,momentum_score
+2011,2024,Basic Materials,10.33,value_score
+2011,2025,Basic Materials,12.33,momentum_score
+2011,2025,Basic Materials,9.72,value_score
+2012,2013,Basic Materials,28.21,momentum_score
+2012,2013,Basic Materials,21.04,value_score
+2012,2014,Basic Materials,17.05,momentum_score
+2012,2014,Basic Materials,12.73,value_score
+2012,2015,Basic Materials,10.14,momentum_score
+2012,2015,Basic Materials,5.97,value_score
+2012,2016,Basic Materials,13.3,momentum_score
+2012,2016,Basic Materials,7.96,value_score
+2012,2017,Basic Materials,16.12,momentum_score
+2012,2017,Basic Materials,11.06,value_score
+2012,2018,Basic Materials,9.73,momentum_score
+2012,2018,Basic Materials,6.76,value_score
+2012,2019,Basic Materials,12.13,momentum_score
+2012,2019,Basic Materials,8.64,value_score
+2012,2020,Basic Materials,12.01,momentum_score
+2012,2020,Basic Materials,8.85,value_score
+2012,2021,Basic Materials,14.33,momentum_score
+2012,2021,Basic Materials,11.29,value_score
+2012,2022,Basic Materials,10.64,momentum_score
+2012,2022,Basic Materials,9.14,value_score
+2012,2023,Basic Materials,11.68,momentum_score
+2012,2023,Basic Materials,9.71,value_score
+2012,2024,Basic Materials,9.35,momentum_score
+2012,2024,Basic Materials,7.13,value_score
+2012,2025,Basic Materials,8.42,momentum_score
+2012,2025,Basic Materials,6.25,value_score
+2013,2014,Basic Materials,0.1,momentum_score
+2013,2014,Basic Materials,5.46,value_score
+2013,2015,Basic Materials,-9.15,momentum_score
+2013,2015,Basic Materials,-4.39,value_score
+2013,2016,Basic Materials,1.97,momentum_score
+2013,2016,Basic Materials,3.22,value_score
+2013,2017,Basic Materials,9.44,momentum_score
+2013,2017,Basic Materials,8.78,value_score
+2013,2018,Basic Materials,1.81,momentum_score
+2013,2018,Basic Materials,3.41,value_score
+2013,2019,Basic Materials,3.84,momentum_score
+2013,2019,Basic Materials,6.14,value_score
+2013,2020,Basic Materials,4.6,momentum_score
+2013,2020,Basic Materials,6.99,value_score
+2013,2021,Basic Materials,8.82,momentum_score
+2013,2021,Basic Materials,8.95,value_score
+2013,2022,Basic Materials,6.73,momentum_score
+2013,2022,Basic Materials,6.9,value_score
+2013,2023,Basic Materials,7.46,momentum_score
+2013,2023,Basic Materials,7.02,value_score
+2013,2024,Basic Materials,4.27,momentum_score
+2013,2024,Basic Materials,4.78,value_score
+2013,2025,Basic Materials,4.52,momentum_score
+2013,2025,Basic Materials,3.38,value_score
+2014,2015,Basic Materials,-3.95,momentum_score
+2014,2015,Basic Materials,-0.81,value_score
+2014,2016,Basic Materials,4.77,momentum_score
+2014,2016,Basic Materials,3.51,value_score
+2014,2017,Basic Materials,11.96,momentum_score
+2014,2017,Basic Materials,12.45,value_score
+2014,2018,Basic Materials,5.68,momentum_score
+2014,2018,Basic Materials,6.2,value_score
+2014,2019,Basic Materials,9.9,momentum_score
+2014,2019,Basic Materials,9.72,value_score
+2014,2020,Basic Materials,9.94,momentum_score
+2014,2020,Basic Materials,10.21,value_score
+2014,2021,Basic Materials,14.26,momentum_score
+2014,2021,Basic Materials,12.86,value_score
+2014,2022,Basic Materials,10.46,momentum_score
+2014,2022,Basic Materials,8.59,value_score
+2014,2023,Basic Materials,11.14,momentum_score
+2014,2023,Basic Materials,9.49,value_score
+2014,2024,Basic Materials,10.11,momentum_score
+2014,2024,Basic Materials,7.88,value_score
+2014,2025,Basic Materials,9.78,momentum_score
+2014,2025,Basic Materials,6.19,value_score
+2015,2016,Basic Materials,24.29,momentum_score
+2015,2016,Basic Materials,26.94,value_score
+2015,2017,Basic Materials,25.89,momentum_score
+2015,2017,Basic Materials,26.89,value_score
+2015,2018,Basic Materials,9.25,momentum_score
+2015,2018,Basic Materials,12.09,value_score
+2015,2019,Basic Materials,13.54,momentum_score
+2015,2019,Basic Materials,14.34,value_score
+2015,2020,Basic Materials,12.71,momentum_score
+2015,2020,Basic Materials,14.73,value_score
+2015,2021,Basic Materials,17.8,momentum_score
+2015,2021,Basic Materials,16.68,value_score
+2015,2022,Basic Materials,11.8,momentum_score
+2015,2022,Basic Materials,12.83,value_score
+2015,2023,Basic Materials,13.05,momentum_score
+2015,2023,Basic Materials,11.87,value_score
+2015,2024,Basic Materials,10.85,momentum_score
+2015,2024,Basic Materials,8.18,value_score
+2015,2025,Basic Materials,10.93,momentum_score
+2015,2025,Basic Materials,9.15,value_score
+2016,2017,Basic Materials,25.22,momentum_score
+2016,2017,Basic Materials,28.46,value_score
+2016,2018,Basic Materials,4.64,momentum_score
+2016,2018,Basic Materials,5.63,value_score
+2016,2019,Basic Materials,10.59,momentum_score
+2016,2019,Basic Materials,11.54,value_score
+2016,2020,Basic Materials,10.07,momentum_score
+2016,2020,Basic Materials,12.87,value_score
+2016,2021,Basic Materials,14.63,momentum_score
+2016,2021,Basic Materials,15.83,value_score
+2016,2022,Basic Materials,11.6,momentum_score
+2016,2022,Basic Materials,10.22,value_score
+2016,2023,Basic Materials,10.73,momentum_score
+2016,2023,Basic Materials,10.17,value_score
+2016,2024,Basic Materials,7.46,momentum_score
+2016,2024,Basic Materials,6.38,value_score
+2016,2025,Basic Materials,6.04,momentum_score
+2016,2025,Basic Materials,6.5,value_score
+2017,2018,Basic Materials,-10.69,momentum_score
+2017,2018,Basic Materials,-11.15,value_score
+2017,2019,Basic Materials,7.97,momentum_score
+2017,2019,Basic Materials,5.53,value_score
+2017,2020,Basic Materials,11.49,momentum_score
+2017,2020,Basic Materials,7.52,value_score
+2017,2021,Basic Materials,15.82,momentum_score
+2017,2021,Basic Materials,13.19,value_score
+2017,2022,Basic Materials,10.24,momentum_score
+2017,2022,Basic Materials,8.59,value_score
+2017,2023,Basic Materials,8.53,momentum_score
+2017,2023,Basic Materials,8.75,value_score
+2017,2024,Basic Materials,6.19,momentum_score
+2017,2024,Basic Materials,5.24,value_score
+2017,2025,Basic Materials,6.17,momentum_score
+2017,2025,Basic Materials,5.65,value_score
+2018,2019,Basic Materials,27.88,momentum_score
+2018,2019,Basic Materials,24.23,value_score
+2018,2020,Basic Materials,21.21,momentum_score
+2018,2020,Basic Materials,18.85,value_score
+2018,2021,Basic Materials,23.15,momentum_score
+2018,2021,Basic Materials,23.81,value_score
+2018,2022,Basic Materials,13.88,momentum_score
+2018,2022,Basic Materials,14.5,value_score
+2018,2023,Basic Materials,11.01,momentum_score
+2018,2023,Basic Materials,13.3,value_score
+2018,2024,Basic Materials,9.11,momentum_score
+2018,2024,Basic Materials,7.77,value_score
+2018,2025,Basic Materials,8.79,momentum_score
+2018,2025,Basic Materials,7.67,value_score
+2019,2020,Basic Materials,14.62,momentum_score
+2019,2020,Basic Materials,8.14,value_score
+2019,2021,Basic Materials,19.3,momentum_score
+2019,2021,Basic Materials,21.02,value_score
+2019,2022,Basic Materials,5.93,momentum_score
+2019,2022,Basic Materials,12.26,value_score
+2019,2023,Basic Materials,8.91,momentum_score
+2019,2023,Basic Materials,11.29,value_score
+2019,2024,Basic Materials,5.23,momentum_score
+2019,2024,Basic Materials,4.4,value_score
+2019,2025,Basic Materials,5.48,momentum_score
+2019,2025,Basic Materials,2.74,value_score
+2020,2021,Basic Materials,38.71,momentum_score
+2020,2021,Basic Materials,37.29,value_score
+2020,2022,Basic Materials,14.44,momentum_score
+2020,2022,Basic Materials,11.93,value_score
+2020,2023,Basic Materials,10.88,momentum_score
+2020,2023,Basic Materials,14.67,value_score
+2020,2024,Basic Materials,4.64,momentum_score
+2020,2024,Basic Materials,6.57,value_score
+2020,2025,Basic Materials,3.04,momentum_score
+2020,2025,Basic Materials,7.5,value_score
+2021,2022,Basic Materials,-10.3,momentum_score
+2021,2022,Basic Materials,-3.19,value_score
+2021,2023,Basic Materials,2.6,momentum_score
+2021,2023,Basic Materials,2.28,value_score
+2021,2024,Basic Materials,-1.38,momentum_score
+2021,2024,Basic Materials,-3.36,value_score
+2021,2025,Basic Materials,1.43,momentum_score
+2021,2025,Basic Materials,0.01,value_score
+2022,2023,Basic Materials,12.46,momentum_score
+2022,2023,Basic Materials,10.74,value_score
+2022,2024,Basic Materials,4.91,momentum_score
+2022,2024,Basic Materials,-4.49,value_score
+2022,2025,Basic Materials,7.8,momentum_score
+2022,2025,Basic Materials,-4.18,value_score
+2023,2024,Basic Materials,-3.59,momentum_score
+2023,2024,Basic Materials,-18.11,value_score
+2023,2025,Basic Materials,2.7,momentum_score
+2023,2025,Basic Materials,-7.5,value_score
+2024,2025,Basic Materials,0.58,momentum_score
+2024,2025,Basic Materials,-1.86,value_score
+2010,2011,Communication Services,0.38,momentum_score
+2010,2011,Communication Services,5.45,value_score
+2010,2012,Communication Services,14.56,momentum_score
+2010,2012,Communication Services,15.96,value_score
+2010,2013,Communication Services,25.63,momentum_score
+2010,2013,Communication Services,24.81,value_score
+2010,2014,Communication Services,19.35,momentum_score
+2010,2014,Communication Services,20.42,value_score
+2010,2015,Communication Services,17.73,momentum_score
+2010,2015,Communication Services,15.81,value_score
+2010,2016,Communication Services,17.24,momentum_score
+2010,2016,Communication Services,15.76,value_score
+2010,2017,Communication Services,16.01,momentum_score
+2010,2017,Communication Services,13.55,value_score
+2010,2018,Communication Services,14.8,momentum_score
+2010,2018,Communication Services,10.47,value_score
+2010,2019,Communication Services,15.58,momentum_score
+2010,2019,Communication Services,11.45,value_score
+2010,2020,Communication Services,16.57,momentum_score
+2010,2020,Communication Services,10.27,value_score
+2010,2021,Communication Services,15.62,momentum_score
+2010,2021,Communication Services,10.5,value_score
+2010,2022,Communication Services,9.96,momentum_score
+2010,2022,Communication Services,8.04,value_score
+2010,2023,Communication Services,11.31,momentum_score
+2010,2023,Communication Services,7.51,value_score
+2010,2024,Communication Services,13.25,momentum_score
+2010,2024,Communication Services,7.34,value_score
+2010,2025,Communication Services,12.58,momentum_score
+2010,2025,Communication Services,6.76,value_score
+2011,2012,Communication Services,31.13,momentum_score
+2011,2012,Communication Services,31.13,value_score
+2011,2013,Communication Services,36.78,momentum_score
+2011,2013,Communication Services,36.78,value_score
+2011,2014,Communication Services,25.43,momentum_score
+2011,2014,Communication Services,25.43,value_score
+2011,2015,Communication Services,18.26,momentum_score
+2011,2015,Communication Services,18.26,value_score
+2011,2016,Communication Services,16.75,momentum_score
+2011,2016,Communication Services,16.75,value_score
+2011,2017,Communication Services,13.48,momentum_score
+2011,2017,Communication Services,13.48,value_score
+2011,2018,Communication Services,10.44,momentum_score
+2011,2018,Communication Services,10.44,value_score
+2011,2019,Communication Services,12.33,momentum_score
+2011,2019,Communication Services,12.33,value_score
+2011,2020,Communication Services,11.09,momentum_score
+2011,2020,Communication Services,11.09,value_score
+2011,2021,Communication Services,10.69,momentum_score
+2011,2021,Communication Services,10.69,value_score
+2011,2022,Communication Services,7.74,momentum_score
+2011,2022,Communication Services,7.74,value_score
+2011,2023,Communication Services,7.16,momentum_score
+2011,2023,Communication Services,7.16,value_score
+2011,2024,Communication Services,7.07,momentum_score
+2011,2024,Communication Services,7.07,value_score
+2011,2025,Communication Services,6.74,momentum_score
+2011,2025,Communication Services,6.74,value_score
+2012,2013,Communication Services,69.92,momentum_score
+2012,2013,Communication Services,41.23,value_score
+2012,2014,Communication Services,32.53,momentum_score
+2012,2014,Communication Services,22.52,value_score
+2012,2015,Communication Services,30.73,momentum_score
+2012,2015,Communication Services,14.31,value_score
+2012,2016,Communication Services,24.83,momentum_score
+2012,2016,Communication Services,13.45,value_score
+2012,2017,Communication Services,23.82,momentum_score
+2012,2017,Communication Services,10.1,value_score
+2012,2018,Communication Services,22.8,momentum_score
+2012,2018,Communication Services,7.35,value_score
+2012,2019,Communication Services,22.68,momentum_score
+2012,2019,Communication Services,9.79,value_score
+2012,2020,Communication Services,24.79,momentum_score
+2012,2020,Communication Services,8.62,value_score
+2012,2021,Communication Services,23.17,momentum_score
+2012,2021,Communication Services,8.63,value_score
+2012,2022,Communication Services,14.39,momentum_score
+2012,2022,Communication Services,5.79,value_score
+2012,2023,Communication Services,16.38,momentum_score
+2012,2023,Communication Services,5.29,value_score
+2012,2024,Communication Services,19.42,momentum_score
+2012,2024,Communication Services,5.4,value_score
+2012,2025,Communication Services,18.19,momentum_score
+2012,2025,Communication Services,5.18,value_score
+2013,2014,Communication Services,1.84,momentum_score
+2013,2014,Communication Services,8.37,value_score
+2013,2015,Communication Services,7.14,momentum_score
+2013,2015,Communication Services,3.28,value_score
+2013,2016,Communication Services,7.89,momentum_score
+2013,2016,Communication Services,5.62,value_score
+2013,2017,Communication Services,8.72,momentum_score
+2013,2017,Communication Services,4.35,value_score
+2013,2018,Communication Services,7.56,momentum_score
+2013,2018,Communication Services,1.84,value_score
+2013,2019,Communication Services,10.49,momentum_score
+2013,2019,Communication Services,5.36,value_score
+2013,2020,Communication Services,12.41,momentum_score
+2013,2020,Communication Services,4.88,value_score
+2013,2021,Communication Services,12.17,momentum_score
+2013,2021,Communication Services,5.55,value_score
+2013,2022,Communication Services,6.18,momentum_score
+2013,2022,Communication Services,2.87,value_score
+2013,2023,Communication Services,7.92,momentum_score
+2013,2023,Communication Services,2.9,value_score
+2013,2024,Communication Services,10.49,momentum_score
+2013,2024,Communication Services,3.47,value_score
+2013,2025,Communication Services,9.87,momentum_score
+2013,2025,Communication Services,3.18,value_score
+2014,2015,Communication Services,-2.79,momentum_score
+2014,2015,Communication Services,-1.69,value_score
+2014,2016,Communication Services,4.73,momentum_score
+2014,2016,Communication Services,4.51,value_score
+2014,2017,Communication Services,2.04,momentum_score
+2014,2017,Communication Services,3.45,value_score
+2014,2018,Communication Services,0.09,momentum_score
+2014,2018,Communication Services,0.29,value_score
+2014,2019,Communication Services,4.65,momentum_score
+2014,2019,Communication Services,4.75,value_score
+2014,2020,Communication Services,3.59,momentum_score
+2014,2020,Communication Services,4.24,value_score
+2014,2021,Communication Services,4.06,momentum_score
+2014,2021,Communication Services,5.03,value_score
+2014,2022,Communication Services,1.57,momentum_score
+2014,2022,Communication Services,2.19,value_score
+2014,2023,Communication Services,1.41,momentum_score
+2014,2023,Communication Services,2.39,value_score
+2014,2024,Communication Services,2.07,momentum_score
+2014,2024,Communication Services,3.08,value_score
+2014,2025,Communication Services,1.97,momentum_score
+2014,2025,Communication Services,2.81,value_score
+2015,2016,Communication Services,8.06,momentum_score
+2015,2016,Communication Services,6.39,value_score
+2015,2017,Communication Services,9.3,momentum_score
+2015,2017,Communication Services,4.66,value_score
+2015,2018,Communication Services,5.43,momentum_score
+2015,2018,Communication Services,-0.29,value_score
+2015,2019,Communication Services,9.63,momentum_score
+2015,2019,Communication Services,5.69,value_score
+2015,2020,Communication Services,11.24,momentum_score
+2015,2020,Communication Services,4.51,value_score
+2015,2021,Communication Services,11.35,momentum_score
+2015,2021,Communication Services,6.3,value_score
+2015,2022,Communication Services,4.73,momentum_score
+2015,2022,Communication Services,3.63,value_score
+2015,2023,Communication Services,6.86,momentum_score
+2015,2023,Communication Services,4.21,value_score
+2015,2024,Communication Services,9.14,momentum_score
+2015,2024,Communication Services,4.91,value_score
+2015,2025,Communication Services,8.33,momentum_score
+2015,2025,Communication Services,4.38,value_score
+2016,2017,Communication Services,6.72,momentum_score
+2016,2017,Communication Services,-6.74,value_score
+2016,2018,Communication Services,2.89,momentum_score
+2016,2018,Communication Services,-5.67,value_score
+2016,2019,Communication Services,10.7,momentum_score
+2016,2019,Communication Services,3.39,value_score
+2016,2020,Communication Services,13.23,momentum_score
+2016,2020,Communication Services,0.78,value_score
+2016,2021,Communication Services,11.88,momentum_score
+2016,2021,Communication Services,2.36,value_score
+2016,2022,Communication Services,2.79,momentum_score
+2016,2022,Communication Services,-0.51,value_score
+2016,2023,Communication Services,5.72,momentum_score
+2016,2023,Communication Services,-0.71,value_score
+2016,2024,Communication Services,7.7,momentum_score
+2016,2024,Communication Services,0.19,value_score
+2016,2025,Communication Services,6.87,momentum_score
+2016,2025,Communication Services,1.02,value_score
+2017,2018,Communication Services,-7.38,momentum_score
+2017,2018,Communication Services,-6.32,value_score
+2017,2019,Communication Services,8.84,momentum_score
+2017,2019,Communication Services,6.72,value_score
+2017,2020,Communication Services,11.96,momentum_score
+2017,2020,Communication Services,1.99,value_score
+2017,2021,Communication Services,9.9,momentum_score
+2017,2021,Communication Services,2.96,value_score
+2017,2022,Communication Services,0.57,momentum_score
+2017,2022,Communication Services,-2.3,value_score
+2017,2023,Communication Services,4.16,momentum_score
+2017,2023,Communication Services,-1.9,value_score
+2017,2024,Communication Services,6.77,momentum_score
+2017,2024,Communication Services,-1.0,value_score
+2017,2025,Communication Services,5.69,momentum_score
+2017,2025,Communication Services,0.24,value_score
+2018,2019,Communication Services,29.07,momentum_score
+2018,2019,Communication Services,26.26,value_score
+2018,2020,Communication Services,14.94,momentum_score
+2018,2020,Communication Services,10.39,value_score
+2018,2021,Communication Services,10.92,momentum_score
+2018,2021,Communication Services,8.17,value_score
+2018,2022,Communication Services,0.64,momentum_score
+2018,2022,Communication Services,-0.94,value_score
+2018,2023,Communication Services,1.37,momentum_score
+2018,2023,Communication Services,-0.87,value_score
+2018,2024,Communication Services,2.09,momentum_score
+2018,2024,Communication Services,0.57,value_score
+2018,2025,Communication Services,2.25,momentum_score
+2018,2025,Communication Services,1.61,value_score
+2019,2020,Communication Services,3.35,momentum_score
+2019,2020,Communication Services,-3.36,value_score
+2019,2021,Communication Services,8.8,momentum_score
+2019,2021,Communication Services,3.73,value_score
+2019,2022,Communication Services,-4.91,momentum_score
+2019,2022,Communication Services,-4.86,value_score
+2019,2023,Communication Services,-1.22,momentum_score
+2019,2023,Communication Services,-2.96,value_score
+2019,2024,Communication Services,1.21,momentum_score
+2019,2024,Communication Services,-1.02,value_score
+2019,2025,Communication Services,1.78,momentum_score
+2019,2025,Communication Services,-0.84,value_score
+2020,2021,Communication Services,9.21,momentum_score
+2020,2021,Communication Services,5.85,value_score
+2020,2022,Communication Services,-8.05,momentum_score
+2020,2022,Communication Services,-9.73,value_score
+2020,2023,Communication Services,-0.5,momentum_score
+2020,2023,Communication Services,-7.71,value_score
+2020,2024,Communication Services,1.26,momentum_score
+2020,2024,Communication Services,-4.2,value_score
+2020,2025,Communication Services,1.77,momentum_score
+2020,2025,Communication Services,-1.53,value_score
+2021,2022,Communication Services,-24.78,momentum_score
+2021,2022,Communication Services,-24.14,value_score
+2021,2023,Communication Services,-7.84,momentum_score
+2021,2023,Communication Services,-14.05,value_score
+2021,2024,Communication Services,1.0,momentum_score
+2021,2024,Communication Services,-7.58,value_score
+2021,2025,Communication Services,1.14,momentum_score
+2021,2025,Communication Services,-2.92,value_score
+2022,2023,Communication Services,22.13,momentum_score
+2022,2023,Communication Services,-3.75,value_score
+2022,2024,Communication Services,23.02,momentum_score
+2022,2024,Communication Services,2.3,value_score
+2022,2025,Communication Services,15.36,momentum_score
+2022,2025,Communication Services,8.39,value_score
+2023,2024,Communication Services,18.36,momentum_score
+2023,2024,Communication Services,12.06,value_score
+2023,2025,Communication Services,8.65,momentum_score
+2023,2025,Communication Services,4.71,value_score
+2024,2025,Communication Services,15.21,momentum_score
+2024,2025,Communication Services,-4.34,value_score
+2010,2011,Consumer Cyclical,0.21,momentum_score
+2010,2011,Consumer Cyclical,14.92,value_score
+2010,2012,Consumer Cyclical,9.14,momentum_score
+2010,2012,Consumer Cyclical,26.47,value_score
+2010,2013,Consumer Cyclical,16.78,momentum_score
+2010,2013,Consumer Cyclical,31.16,value_score
+2010,2014,Consumer Cyclical,14.37,momentum_score
+2010,2014,Consumer Cyclical,27.51,value_score
+2010,2015,Consumer Cyclical,13.59,momentum_score
+2010,2015,Consumer Cyclical,23.01,value_score
+2010,2016,Consumer Cyclical,10.71,momentum_score
+2010,2016,Consumer Cyclical,19.05,value_score
+2010,2017,Consumer Cyclical,12.38,momentum_score
+2010,2017,Consumer Cyclical,16.92,value_score
+2010,2018,Consumer Cyclical,9.94,momentum_score
+2010,2018,Consumer Cyclical,11.18,value_score
+2010,2019,Consumer Cyclical,10.75,momentum_score
+2010,2019,Consumer Cyclical,10.22,value_score
+2010,2020,Consumer Cyclical,12.96,momentum_score
+2010,2020,Consumer Cyclical,11.34,value_score
+2010,2021,Consumer Cyclical,13.65,momentum_score
+2010,2021,Consumer Cyclical,15.86,value_score
+2010,2022,Consumer Cyclical,7.86,momentum_score
+2010,2022,Consumer Cyclical,9.44,value_score
+2010,2023,Consumer Cyclical,11.11,momentum_score
+2010,2023,Consumer Cyclical,10.52,value_score
+2010,2024,Consumer Cyclical,12.73,momentum_score
+2010,2024,Consumer Cyclical,11.05,value_score
+2010,2025,Consumer Cyclical,12.28,momentum_score
+2010,2025,Consumer Cyclical,10.82,value_score
+2011,2012,Consumer Cyclical,30.35,momentum_score
+2011,2012,Consumer Cyclical,38.41,value_score
+2011,2013,Consumer Cyclical,34.92,momentum_score
+2011,2013,Consumer Cyclical,47.67,value_score
+2011,2014,Consumer Cyclical,29.09,momentum_score
+2011,2014,Consumer Cyclical,33.04,value_score
+2011,2015,Consumer Cyclical,26.33,momentum_score
+2011,2015,Consumer Cyclical,19.66,value_score
+2011,2016,Consumer Cyclical,21.25,momentum_score
+2011,2016,Consumer Cyclical,17.37,value_score
+2011,2017,Consumer Cyclical,20.49,momentum_score
+2011,2017,Consumer Cyclical,19.75,value_score
+2011,2018,Consumer Cyclical,17.76,momentum_score
+2011,2018,Consumer Cyclical,9.36,value_score
+2011,2019,Consumer Cyclical,19.13,momentum_score
+2011,2019,Consumer Cyclical,9.13,value_score
+2011,2020,Consumer Cyclical,18.13,momentum_score
+2011,2020,Consumer Cyclical,12.75,value_score
+2011,2021,Consumer Cyclical,19.25,momentum_score
+2011,2021,Consumer Cyclical,16.81,value_score
+2011,2022,Consumer Cyclical,16.17,momentum_score
+2011,2022,Consumer Cyclical,9.33,value_score
+2011,2023,Consumer Cyclical,15.83,momentum_score
+2011,2023,Consumer Cyclical,9.72,value_score
+2011,2024,Consumer Cyclical,15.6,momentum_score
+2011,2024,Consumer Cyclical,9.66,value_score
+2011,2025,Consumer Cyclical,15.42,momentum_score
+2011,2025,Consumer Cyclical,8.51,value_score
+2012,2013,Consumer Cyclical,38.59,momentum_score
+2012,2013,Consumer Cyclical,69.07,value_score
+2012,2014,Consumer Cyclical,19.0,momentum_score
+2012,2014,Consumer Cyclical,28.9,value_score
+2012,2015,Consumer Cyclical,4.2,momentum_score
+2012,2015,Consumer Cyclical,14.23,value_score
+2012,2016,Consumer Cyclical,5.42,momentum_score
+2012,2016,Consumer Cyclical,15.35,value_score
+2012,2017,Consumer Cyclical,12.64,momentum_score
+2012,2017,Consumer Cyclical,21.3,value_score
+2012,2018,Consumer Cyclical,2.64,momentum_score
+2012,2018,Consumer Cyclical,9.31,value_score
+2012,2019,Consumer Cyclical,5.17,momentum_score
+2012,2019,Consumer Cyclical,11.18,value_score
+2012,2020,Consumer Cyclical,9.15,momentum_score
+2012,2020,Consumer Cyclical,15.88,value_score
+2012,2021,Consumer Cyclical,14.1,momentum_score
+2012,2021,Consumer Cyclical,17.43,value_score
+2012,2022,Consumer Cyclical,6.3,momentum_score
+2012,2022,Consumer Cyclical,10.27,value_score
+2012,2023,Consumer Cyclical,8.81,momentum_score
+2012,2023,Consumer Cyclical,9.99,value_score
+2012,2024,Consumer Cyclical,9.36,momentum_score
+2012,2024,Consumer Cyclical,9.73,value_score
+2012,2025,Consumer Cyclical,7.34,momentum_score
+2012,2025,Consumer Cyclical,7.96,value_score
+2013,2014,Consumer Cyclical,5.12,momentum_score
+2013,2014,Consumer Cyclical,0.43,value_score
+2013,2015,Consumer Cyclical,4.38,momentum_score
+2013,2015,Consumer Cyclical,-5.78,value_score
+2013,2016,Consumer Cyclical,4.38,momentum_score
+2013,2016,Consumer Cyclical,0.94,value_score
+2013,2017,Consumer Cyclical,9.29,momentum_score
+2013,2017,Consumer Cyclical,9.1,value_score
+2013,2018,Consumer Cyclical,4.4,momentum_score
+2013,2018,Consumer Cyclical,0.76,value_score
+2013,2019,Consumer Cyclical,8.01,momentum_score
+2013,2019,Consumer Cyclical,1.44,value_score
+2013,2020,Consumer Cyclical,11.32,momentum_score
+2013,2020,Consumer Cyclical,8.42,value_score
+2013,2021,Consumer Cyclical,11.63,momentum_score
+2013,2021,Consumer Cyclical,11.09,value_score
+2013,2022,Consumer Cyclical,5.32,momentum_score
+2013,2022,Consumer Cyclical,4.57,value_score
+2013,2023,Consumer Cyclical,8.31,momentum_score
+2013,2023,Consumer Cyclical,5.25,value_score
+2013,2024,Consumer Cyclical,9.92,momentum_score
+2013,2024,Consumer Cyclical,5.33,value_score
+2013,2025,Consumer Cyclical,8.49,momentum_score
+2013,2025,Consumer Cyclical,4.74,value_score
+2014,2015,Consumer Cyclical,6.64,momentum_score
+2014,2015,Consumer Cyclical,-16.92,value_score
+2014,2016,Consumer Cyclical,4.98,momentum_score
+2014,2016,Consumer Cyclical,-3.23,value_score
+2014,2017,Consumer Cyclical,14.97,momentum_score
+2014,2017,Consumer Cyclical,11.25,value_score
+2014,2018,Consumer Cyclical,5.83,momentum_score
+2014,2018,Consumer Cyclical,-2.2,value_score
+2014,2019,Consumer Cyclical,9.39,momentum_score
+2014,2019,Consumer Cyclical,1.54,value_score
+2014,2020,Consumer Cyclical,11.94,momentum_score
+2014,2020,Consumer Cyclical,11.19,value_score
+2014,2021,Consumer Cyclical,15.23,momentum_score
+2014,2021,Consumer Cyclical,13.76,value_score
+2014,2022,Consumer Cyclical,10.29,momentum_score
+2014,2022,Consumer Cyclical,4.77,value_score
+2014,2023,Consumer Cyclical,11.17,momentum_score
+2014,2023,Consumer Cyclical,4.57,value_score
+2014,2024,Consumer Cyclical,11.69,momentum_score
+2014,2024,Consumer Cyclical,5.49,value_score
+2014,2025,Consumer Cyclical,11.03,momentum_score
+2014,2025,Consumer Cyclical,4.19,value_score
+2015,2016,Consumer Cyclical,-6.13,momentum_score
+2015,2016,Consumer Cyclical,15.68,value_score
+2015,2017,Consumer Cyclical,15.47,momentum_score
+2015,2017,Consumer Cyclical,31.0,value_score
+2015,2018,Consumer Cyclical,7.81,momentum_score
+2015,2018,Consumer Cyclical,2.59,value_score
+2015,2019,Consumer Cyclical,13.16,momentum_score
+2015,2019,Consumer Cyclical,1.99,value_score
+2015,2020,Consumer Cyclical,22.9,momentum_score
+2015,2020,Consumer Cyclical,8.57,value_score
+2015,2021,Consumer Cyclical,24.1,momentum_score
+2015,2021,Consumer Cyclical,16.05,value_score
+2015,2022,Consumer Cyclical,13.28,momentum_score
+2015,2022,Consumer Cyclical,5.11,value_score
+2015,2023,Consumer Cyclical,15.56,momentum_score
+2015,2023,Consumer Cyclical,6.21,value_score
+2015,2024,Consumer Cyclical,14.46,momentum_score
+2015,2024,Consumer Cyclical,6.51,value_score
+2015,2025,Consumer Cyclical,12.94,momentum_score
+2015,2025,Consumer Cyclical,4.38,value_score
+2016,2017,Consumer Cyclical,16.88,momentum_score
+2016,2017,Consumer Cyclical,55.46,value_score
+2016,2018,Consumer Cyclical,0.15,momentum_score
+2016,2018,Consumer Cyclical,1.95,value_score
+2016,2019,Consumer Cyclical,5.6,momentum_score
+2016,2019,Consumer Cyclical,3.65,value_score
+2016,2020,Consumer Cyclical,6.04,momentum_score
+2016,2020,Consumer Cyclical,16.19,value_score
+2016,2021,Consumer Cyclical,8.18,momentum_score
+2016,2021,Consumer Cyclical,13.11,value_score
+2016,2022,Consumer Cyclical,0.46,momentum_score
+2016,2022,Consumer Cyclical,2.11,value_score
+2016,2023,Consumer Cyclical,1.68,momentum_score
+2016,2023,Consumer Cyclical,3.3,value_score
+2016,2024,Consumer Cyclical,3.6,momentum_score
+2016,2024,Consumer Cyclical,0.6,value_score
+2016,2025,Consumer Cyclical,4.19,momentum_score
+2016,2025,Consumer Cyclical,0.89,value_score
+2017,2018,Consumer Cyclical,2.56,momentum_score
+2017,2018,Consumer Cyclical,-15.45,value_score
+2017,2019,Consumer Cyclical,6.68,momentum_score
+2017,2019,Consumer Cyclical,-11.07,value_score
+2017,2020,Consumer Cyclical,27.97,momentum_score
+2017,2020,Consumer Cyclical,-8.84,value_score
+2017,2021,Consumer Cyclical,25.89,momentum_score
+2017,2021,Consumer Cyclical,3.47,value_score
+2017,2022,Consumer Cyclical,12.29,momentum_score
+2017,2022,Consumer Cyclical,-2.44,value_score
+2017,2023,Consumer Cyclical,12.38,momentum_score
+2017,2023,Consumer Cyclical,0.61,value_score
+2017,2024,Consumer Cyclical,10.19,momentum_score
+2017,2024,Consumer Cyclical,-0.49,value_score
+2017,2025,Consumer Cyclical,10.37,momentum_score
+2017,2025,Consumer Cyclical,-0.53,value_score
+2018,2019,Consumer Cyclical,18.06,momentum_score
+2018,2019,Consumer Cyclical,9.38,value_score
+2018,2020,Consumer Cyclical,27.19,momentum_score
+2018,2020,Consumer Cyclical,53.41,value_score
+2018,2021,Consumer Cyclical,30.13,momentum_score
+2018,2021,Consumer Cyclical,43.62,value_score
+2018,2022,Consumer Cyclical,18.05,momentum_score
+2018,2022,Consumer Cyclical,15.16,value_score
+2018,2023,Consumer Cyclical,14.29,momentum_score
+2018,2023,Consumer Cyclical,14.34,value_score
+2018,2024,Consumer Cyclical,13.36,momentum_score
+2018,2024,Consumer Cyclical,9.76,value_score
+2018,2025,Consumer Cyclical,11.72,momentum_score
+2018,2025,Consumer Cyclical,6.06,value_score
+2019,2020,Consumer Cyclical,38.12,momentum_score
+2019,2020,Consumer Cyclical,55.34,value_score
+2019,2021,Consumer Cyclical,24.99,momentum_score
+2019,2021,Consumer Cyclical,50.73,value_score
+2019,2022,Consumer Cyclical,5.42,momentum_score
+2019,2022,Consumer Cyclical,11.23,value_score
+2019,2023,Consumer Cyclical,9.58,momentum_score
+2019,2023,Consumer Cyclical,11.65,value_score
+2019,2024,Consumer Cyclical,6.03,momentum_score
+2019,2024,Consumer Cyclical,7.45,value_score
+2019,2025,Consumer Cyclical,4.88,momentum_score
+2019,2025,Consumer Cyclical,4.65,value_score
+2020,2021,Consumer Cyclical,32.57,momentum_score
+2020,2021,Consumer Cyclical,46.82,value_score
+2020,2022,Consumer Cyclical,-11.09,momentum_score
+2020,2022,Consumer Cyclical,-2.13,value_score
+2020,2023,Consumer Cyclical,-2.23,momentum_score
+2020,2023,Consumer Cyclical,3.68,value_score
+2020,2024,Consumer Cyclical,-1.01,momentum_score
+2020,2024,Consumer Cyclical,1.49,value_score
+2020,2025,Consumer Cyclical,1.89,momentum_score
+2020,2025,Consumer Cyclical,1.37,value_score
+2021,2022,Consumer Cyclical,-16.42,momentum_score
+2021,2022,Consumer Cyclical,-26.01,value_score
+2021,2023,Consumer Cyclical,-2.54,momentum_score
+2021,2023,Consumer Cyclical,0.12,value_score
+2021,2024,Consumer Cyclical,3.58,momentum_score
+2021,2024,Consumer Cyclical,0.96,value_score
+2021,2025,Consumer Cyclical,4.93,momentum_score
+2021,2025,Consumer Cyclical,0.62,value_score
+2022,2023,Consumer Cyclical,37.05,momentum_score
+2022,2023,Consumer Cyclical,32.18,value_score
+2022,2024,Consumer Cyclical,26.81,momentum_score
+2022,2024,Consumer Cyclical,16.02,value_score
+2022,2025,Consumer Cyclical,22.7,momentum_score
+2022,2025,Consumer Cyclical,11.37,value_score
+2023,2024,Consumer Cyclical,-0.95,momentum_score
+2023,2024,Consumer Cyclical,4.1,value_score
+2023,2025,Consumer Cyclical,3.63,momentum_score
+2023,2025,Consumer Cyclical,5.85,value_score
+2024,2025,Consumer Cyclical,19.51,momentum_score
+2024,2025,Consumer Cyclical,16.97,value_score
+2010,2011,Consumer Defensive,13.24,momentum_score
+2010,2011,Consumer Defensive,11.66,value_score
+2010,2012,Consumer Defensive,17.2,momentum_score
+2010,2012,Consumer Defensive,11.47,value_score
+2010,2013,Consumer Defensive,22.24,momentum_score
+2010,2013,Consumer Defensive,19.46,value_score
+2010,2014,Consumer Defensive,21.42,momentum_score
+2010,2014,Consumer Defensive,19.21,value_score
+2010,2015,Consumer Defensive,22.23,momentum_score
+2010,2015,Consumer Defensive,17.82,value_score
+2010,2016,Consumer Defensive,18.95,momentum_score
+2010,2016,Consumer Defensive,16.51,value_score
+2010,2017,Consumer Defensive,19.24,momentum_score
+2010,2017,Consumer Defensive,14.8,value_score
+2010,2018,Consumer Defensive,15.13,momentum_score
+2010,2018,Consumer Defensive,9.89,value_score
+2010,2019,Consumer Defensive,16.61,momentum_score
+2010,2019,Consumer Defensive,12.52,value_score
+2010,2020,Consumer Defensive,16.68,momentum_score
+2010,2020,Consumer Defensive,11.14,value_score
+2010,2021,Consumer Defensive,17.35,momentum_score
+2010,2021,Consumer Defensive,12.06,value_score
+2010,2022,Consumer Defensive,14.27,momentum_score
+2010,2022,Consumer Defensive,10.5,value_score
+2010,2023,Consumer Defensive,12.96,momentum_score
+2010,2023,Consumer Defensive,9.15,value_score
+2010,2024,Consumer Defensive,12.8,momentum_score
+2010,2024,Consumer Defensive,9.08,value_score
+2010,2025,Consumer Defensive,11.39,momentum_score
+2010,2025,Consumer Defensive,8.67,value_score
+2011,2012,Consumer Defensive,6.94,momentum_score
+2011,2012,Consumer Defensive,16.14,value_score
+2011,2013,Consumer Defensive,16.17,momentum_score
+2011,2013,Consumer Defensive,29.56,value_score
+2011,2014,Consumer Defensive,15.73,momentum_score
+2011,2014,Consumer Defensive,28.96,value_score
+2011,2015,Consumer Defensive,14.29,momentum_score
+2011,2015,Consumer Defensive,27.61,value_score
+2011,2016,Consumer Defensive,12.68,momentum_score
+2011,2016,Consumer Defensive,23.17,value_score
+2011,2017,Consumer Defensive,13.07,momentum_score
+2011,2017,Consumer Defensive,22.06,value_score
+2011,2018,Consumer Defensive,8.52,momentum_score
+2011,2018,Consumer Defensive,14.7,value_score
+2011,2019,Consumer Defensive,11.65,momentum_score
+2011,2019,Consumer Defensive,16.61,value_score
+2011,2020,Consumer Defensive,12.1,momentum_score
+2011,2020,Consumer Defensive,15.19,value_score
+2011,2021,Consumer Defensive,13.42,momentum_score
+2011,2021,Consumer Defensive,15.76,value_score
+2011,2022,Consumer Defensive,11.09,momentum_score
+2011,2022,Consumer Defensive,13.49,value_score
+2011,2023,Consumer Defensive,9.0,momentum_score
+2011,2023,Consumer Defensive,12.2,value_score
+2011,2024,Consumer Defensive,7.65,momentum_score
+2011,2024,Consumer Defensive,12.07,value_score
+2011,2025,Consumer Defensive,7.56,momentum_score
+2011,2025,Consumer Defensive,10.48,value_score
+2012,2013,Consumer Defensive,35.38,momentum_score
+2012,2013,Consumer Defensive,35.65,value_score
+2012,2014,Consumer Defensive,28.04,momentum_score
+2012,2014,Consumer Defensive,28.01,value_score
+2012,2015,Consumer Defensive,26.38,momentum_score
+2012,2015,Consumer Defensive,20.86,value_score
+2012,2016,Consumer Defensive,20.11,momentum_score
+2012,2016,Consumer Defensive,19.24,value_score
+2012,2017,Consumer Defensive,17.92,momentum_score
+2012,2017,Consumer Defensive,16.33,value_score
+2012,2018,Consumer Defensive,11.22,momentum_score
+2012,2018,Consumer Defensive,8.82,value_score
+2012,2019,Consumer Defensive,14.03,momentum_score
+2012,2019,Consumer Defensive,12.03,value_score
+2012,2020,Consumer Defensive,14.39,momentum_score
+2012,2020,Consumer Defensive,10.57,value_score
+2012,2021,Consumer Defensive,15.58,momentum_score
+2012,2021,Consumer Defensive,11.87,value_score
+2012,2022,Consumer Defensive,12.92,momentum_score
+2012,2022,Consumer Defensive,9.42,value_score
+2012,2023,Consumer Defensive,11.53,momentum_score
+2012,2023,Consumer Defensive,7.58,value_score
+2012,2024,Consumer Defensive,11.61,momentum_score
+2012,2024,Consumer Defensive,7.86,value_score
+2012,2025,Consumer Defensive,9.65,momentum_score
+2012,2025,Consumer Defensive,7.83,value_score
+2013,2014,Consumer Defensive,27.44,momentum_score
+2013,2014,Consumer Defensive,22.45,value_score
+2013,2015,Consumer Defensive,24.32,momentum_score
+2013,2015,Consumer Defensive,19.1,value_score
+2013,2016,Consumer Defensive,16.68,momentum_score
+2013,2016,Consumer Defensive,14.61,value_score
+2013,2017,Consumer Defensive,14.29,momentum_score
+2013,2017,Consumer Defensive,12.16,value_score
+2013,2018,Consumer Defensive,8.87,momentum_score
+2013,2018,Consumer Defensive,5.3,value_score
+2013,2019,Consumer Defensive,11.21,momentum_score
+2013,2019,Consumer Defensive,9.93,value_score
+2013,2020,Consumer Defensive,10.33,momentum_score
+2013,2020,Consumer Defensive,8.65,value_score
+2013,2021,Consumer Defensive,11.53,momentum_score
+2013,2021,Consumer Defensive,10.42,value_score
+2013,2022,Consumer Defensive,10.02,momentum_score
+2013,2022,Consumer Defensive,8.54,value_score
+2013,2023,Consumer Defensive,7.79,momentum_score
+2013,2023,Consumer Defensive,7.02,value_score
+2013,2024,Consumer Defensive,6.81,momentum_score
+2013,2024,Consumer Defensive,8.17,value_score
+2013,2025,Consumer Defensive,6.25,momentum_score
+2013,2025,Consumer Defensive,7.61,value_score
+2014,2015,Consumer Defensive,13.17,momentum_score
+2014,2015,Consumer Defensive,15.11,value_score
+2014,2016,Consumer Defensive,8.65,momentum_score
+2014,2016,Consumer Defensive,11.71,value_score
+2014,2017,Consumer Defensive,8.14,momentum_score
+2014,2017,Consumer Defensive,8.36,value_score
+2014,2018,Consumer Defensive,2.74,momentum_score
+2014,2018,Consumer Defensive,-0.81,value_score
+2014,2019,Consumer Defensive,8.37,momentum_score
+2014,2019,Consumer Defensive,5.18,value_score
+2014,2020,Consumer Defensive,10.96,momentum_score
+2014,2020,Consumer Defensive,4.04,value_score
+2014,2021,Consumer Defensive,12.87,momentum_score
+2014,2021,Consumer Defensive,6.31,value_score
+2014,2022,Consumer Defensive,10.51,momentum_score
+2014,2022,Consumer Defensive,6.21,value_score
+2014,2023,Consumer Defensive,9.03,momentum_score
+2014,2023,Consumer Defensive,4.05,value_score
+2014,2024,Consumer Defensive,8.47,momentum_score
+2014,2024,Consumer Defensive,5.25,value_score
+2014,2025,Consumer Defensive,8.51,momentum_score
+2014,2025,Consumer Defensive,5.0,value_score
+2015,2016,Consumer Defensive,1.87,momentum_score
+2015,2016,Consumer Defensive,14.14,value_score
+2015,2017,Consumer Defensive,6.97,momentum_score
+2015,2017,Consumer Defensive,8.78,value_score
+2015,2018,Consumer Defensive,0.28,momentum_score
+2015,2018,Consumer Defensive,-2.35,value_score
+2015,2019,Consumer Defensive,5.53,momentum_score
+2015,2019,Consumer Defensive,7.59,value_score
+2015,2020,Consumer Defensive,5.57,momentum_score
+2015,2020,Consumer Defensive,7.26,value_score
+2015,2021,Consumer Defensive,8.04,momentum_score
+2015,2021,Consumer Defensive,9.53,value_score
+2015,2022,Consumer Defensive,5.45,momentum_score
+2015,2022,Consumer Defensive,8.64,value_score
+2015,2023,Consumer Defensive,5.7,momentum_score
+2015,2023,Consumer Defensive,5.85,value_score
+2015,2024,Consumer Defensive,7.55,momentum_score
+2015,2024,Consumer Defensive,5.79,value_score
+2015,2025,Consumer Defensive,5.84,momentum_score
+2015,2025,Consumer Defensive,5.15,value_score
+2016,2017,Consumer Defensive,4.22,momentum_score
+2016,2017,Consumer Defensive,1.98,value_score
+2016,2018,Consumer Defensive,-2.29,momentum_score
+2016,2018,Consumer Defensive,-10.01,value_score
+2016,2019,Consumer Defensive,9.79,momentum_score
+2016,2019,Consumer Defensive,4.2,value_score
+2016,2020,Consumer Defensive,11.0,momentum_score
+2016,2020,Consumer Defensive,5.0,value_score
+2016,2021,Consumer Defensive,13.85,momentum_score
+2016,2021,Consumer Defensive,8.89,value_score
+2016,2022,Consumer Defensive,10.49,momentum_score
+2016,2022,Consumer Defensive,7.54,value_score
+2016,2023,Consumer Defensive,9.54,momentum_score
+2016,2023,Consumer Defensive,4.72,value_score
+2016,2024,Consumer Defensive,9.41,momentum_score
+2016,2024,Consumer Defensive,5.4,value_score
+2016,2025,Consumer Defensive,7.56,momentum_score
+2016,2025,Consumer Defensive,4.95,value_score
+2017,2018,Consumer Defensive,-5.59,momentum_score
+2017,2018,Consumer Defensive,-11.32,value_score
+2017,2019,Consumer Defensive,16.42,momentum_score
+2017,2019,Consumer Defensive,11.39,value_score
+2017,2020,Consumer Defensive,18.0,momentum_score
+2017,2020,Consumer Defensive,11.7,value_score
+2017,2021,Consumer Defensive,20.65,momentum_score
+2017,2021,Consumer Defensive,14.25,value_score
+2017,2022,Consumer Defensive,12.61,momentum_score
+2017,2022,Consumer Defensive,10.62,value_score
+2017,2023,Consumer Defensive,9.86,momentum_score
+2017,2023,Consumer Defensive,5.6,value_score
+2017,2024,Consumer Defensive,8.62,momentum_score
+2017,2024,Consumer Defensive,4.87,value_score
+2017,2025,Consumer Defensive,8.27,momentum_score
+2017,2025,Consumer Defensive,4.2,value_score
+2018,2019,Consumer Defensive,23.12,momentum_score
+2018,2019,Consumer Defensive,33.81,value_score
+2018,2020,Consumer Defensive,18.04,momentum_score
+2018,2020,Consumer Defensive,18.55,value_score
+2018,2021,Consumer Defensive,15.06,momentum_score
+2018,2021,Consumer Defensive,19.16,value_score
+2018,2022,Consumer Defensive,11.42,momentum_score
+2018,2022,Consumer Defensive,13.16,value_score
+2018,2023,Consumer Defensive,6.7,momentum_score
+2018,2023,Consumer Defensive,8.14,value_score
+2018,2024,Consumer Defensive,5.36,momentum_score
+2018,2024,Consumer Defensive,8.82,value_score
+2018,2025,Consumer Defensive,3.55,momentum_score
+2018,2025,Consumer Defensive,5.9,value_score
+2019,2020,Consumer Defensive,10.42,momentum_score
+2019,2020,Consumer Defensive,4.11,value_score
+2019,2021,Consumer Defensive,11.24,momentum_score
+2019,2021,Consumer Defensive,11.17,value_score
+2019,2022,Consumer Defensive,7.07,momentum_score
+2019,2022,Consumer Defensive,8.57,value_score
+2019,2023,Consumer Defensive,2.15,momentum_score
+2019,2023,Consumer Defensive,4.7,value_score
+2019,2024,Consumer Defensive,2.88,momentum_score
+2019,2024,Consumer Defensive,5.84,value_score
+2019,2025,Consumer Defensive,0.53,momentum_score
+2019,2025,Consumer Defensive,4.5,value_score
+2020,2021,Consumer Defensive,21.26,momentum_score
+2020,2021,Consumer Defensive,18.88,value_score
+2020,2022,Consumer Defensive,6.45,momentum_score
+2020,2022,Consumer Defensive,9.84,value_score
+2020,2023,Consumer Defensive,4.29,momentum_score
+2020,2023,Consumer Defensive,3.71,value_score
+2020,2024,Consumer Defensive,3.31,momentum_score
+2020,2024,Consumer Defensive,4.75,value_score
+2020,2025,Consumer Defensive,2.19,momentum_score
+2020,2025,Consumer Defensive,2.38,value_score
+2021,2022,Consumer Defensive,-2.78,momentum_score
+2021,2022,Consumer Defensive,10.97,value_score
+2021,2023,Consumer Defensive,-3.1,momentum_score
+2021,2023,Consumer Defensive,-2.14,value_score
+2021,2024,Consumer Defensive,-1.49,momentum_score
+2021,2024,Consumer Defensive,0.7,value_score
+2021,2025,Consumer Defensive,-1.17,momentum_score
+2021,2025,Consumer Defensive,-1.88,value_score
+2022,2023,Consumer Defensive,-7.87,momentum_score
+2022,2023,Consumer Defensive,-9.53,value_score
+2022,2024,Consumer Defensive,-7.36,momentum_score
+2022,2024,Consumer Defensive,0.79,value_score
+2022,2025,Consumer Defensive,-6.31,momentum_score
+2022,2025,Consumer Defensive,-1.55,value_score
+2023,2024,Consumer Defensive,1.3,momentum_score
+2023,2024,Consumer Defensive,3.01,value_score
+2023,2025,Consumer Defensive,0.02,momentum_score
+2023,2025,Consumer Defensive,4.42,value_score
+2024,2025,Consumer Defensive,-1.52,momentum_score
+2024,2025,Consumer Defensive,1.26,value_score
+2010,2011,Energy,-9.53,momentum_score
+2010,2011,Energy,5.13,value_score
+2010,2012,Energy,-4.84,momentum_score
+2010,2012,Energy,4.92,value_score
+2010,2013,Energy,6.92,momentum_score
+2010,2013,Energy,12.06,value_score
+2010,2014,Energy,1.64,momentum_score
+2010,2014,Energy,7.64,value_score
+2010,2015,Energy,-6.3,momentum_score
+2010,2015,Energy,-2.6,value_score
+2010,2016,Energy,-0.42,momentum_score
+2010,2016,Energy,4.34,value_score
+2010,2017,Energy,-1.5,momentum_score
+2010,2017,Energy,3.04,value_score
+2010,2018,Energy,-4.62,momentum_score
+2010,2018,Energy,1.27,value_score
+2010,2019,Energy,-2.82,momentum_score
+2010,2019,Energy,3.62,value_score
+2010,2020,Energy,-6.19,momentum_score
+2010,2020,Energy,-0.88,value_score
+2010,2021,Energy,-1.81,momentum_score
+2010,2021,Energy,3.35,value_score
+2010,2022,Energy,2.51,momentum_score
+2010,2022,Energy,6.63,value_score
+2010,2023,Energy,2.56,momentum_score
+2010,2023,Energy,6.27,value_score
+2010,2024,Energy,2.31,momentum_score
+2010,2024,Energy,7.18,value_score
+2010,2025,Energy,2.57,momentum_score
+2010,2025,Energy,6.64,value_score
+2011,2012,Energy,9.28,momentum_score
+2011,2012,Energy,21.3,value_score
+2011,2013,Energy,23.05,momentum_score
+2011,2013,Energy,27.9,value_score
+2011,2014,Energy,10.58,momentum_score
+2011,2014,Energy,16.64,value_score
+2011,2015,Energy,-2.05,momentum_score
+2011,2015,Energy,8.66,value_score
+2011,2016,Energy,5.09,momentum_score
+2011,2016,Energy,10.82,value_score
+2011,2017,Energy,4.1,momentum_score
+2011,2017,Energy,11.96,value_score
+2011,2018,Energy,1.1,momentum_score
+2011,2018,Energy,8.35,value_score
+2011,2019,Energy,2.26,momentum_score
+2011,2019,Energy,9.63,value_score
+2011,2020,Energy,-1.56,momentum_score
+2011,2020,Energy,3.63,value_score
+2011,2021,Energy,3.07,momentum_score
+2011,2021,Energy,7.95,value_score
+2011,2022,Energy,6.44,momentum_score
+2011,2022,Energy,12.27,value_score
+2011,2023,Energy,6.35,momentum_score
+2011,2023,Energy,12.17,value_score
+2011,2024,Energy,7.5,momentum_score
+2011,2024,Energy,11.71,value_score
+2011,2025,Energy,7.15,momentum_score
+2011,2025,Energy,11.97,value_score
+2012,2013,Energy,50.73,momentum_score
+2012,2013,Energy,40.18,value_score
+2012,2014,Energy,15.73,momentum_score
+2012,2014,Energy,13.76,value_score
+2012,2015,Energy,9.21,momentum_score
+2012,2015,Energy,7.63,value_score
+2012,2016,Energy,9.38,momentum_score
+2012,2016,Energy,8.16,value_score
+2012,2017,Energy,11.89,momentum_score
+2012,2017,Energy,11.18,value_score
+2012,2018,Energy,6.0,momentum_score
+2012,2018,Energy,6.89,value_score
+2012,2019,Energy,7.26,momentum_score
+2012,2019,Energy,9.07,value_score
+2012,2020,Energy,3.21,momentum_score
+2012,2020,Energy,4.12,value_score
+2012,2021,Energy,6.16,momentum_score
+2012,2021,Energy,7.41,value_score
+2012,2022,Energy,11.09,momentum_score
+2012,2022,Energy,12.08,value_score
+2012,2023,Energy,11.13,momentum_score
+2012,2023,Energy,11.99,value_score
+2012,2024,Energy,10.09,momentum_score
+2012,2024,Energy,11.14,value_score
+2012,2025,Energy,10.88,momentum_score
+2012,2025,Energy,11.6,value_score
+2013,2014,Energy,-6.11,momentum_score
+2013,2014,Energy,-7.63,value_score
+2013,2015,Energy,-11.75,momentum_score
+2013,2015,Energy,-5.92,value_score
+2013,2016,Energy,0.66,momentum_score
+2013,2016,Energy,-1.48,value_score
+2013,2017,Energy,2.51,momentum_score
+2013,2017,Energy,2.31,value_score
+2013,2018,Energy,-1.31,momentum_score
+2013,2018,Energy,-1.92,value_score
+2013,2019,Energy,2.28,momentum_score
+2013,2019,Energy,1.24,value_score
+2013,2020,Energy,-4.09,momentum_score
+2013,2020,Energy,-2.82,value_score
+2013,2021,Energy,1.13,momentum_score
+2013,2021,Energy,0.82,value_score
+2013,2022,Energy,6.72,momentum_score
+2013,2022,Energy,7.0,value_score
+2013,2023,Energy,7.18,momentum_score
+2013,2023,Energy,7.4,value_score
+2013,2024,Energy,6.8,momentum_score
+2013,2024,Energy,6.47,value_score
+2013,2025,Energy,6.96,momentum_score
+2013,2025,Energy,7.89,value_score
+2014,2015,Energy,-16.76,momentum_score
+2014,2015,Energy,-10.23,value_score
+2014,2016,Energy,-3.75,momentum_score
+2014,2016,Energy,0.44,value_score
+2014,2017,Energy,3.27,momentum_score
+2014,2017,Energy,4.07,value_score
+2014,2018,Energy,-0.01,momentum_score
+2014,2018,Energy,-0.69,value_score
+2014,2019,Energy,4.81,momentum_score
+2014,2019,Energy,1.72,value_score
+2014,2020,Energy,11.87,momentum_score
+2014,2020,Energy,-6.01,value_score
+2014,2021,Energy,12.85,momentum_score
+2014,2021,Energy,-0.26,value_score
+2014,2022,Energy,17.5,momentum_score
+2014,2022,Energy,6.94,value_score
+2014,2023,Energy,12.4,momentum_score
+2014,2023,Energy,7.32,value_score
+2014,2024,Energy,9.07,momentum_score
+2014,2024,Energy,6.1,value_score
+2014,2025,Energy,8.4,momentum_score
+2014,2025,Energy,7.19,value_score
+2015,2016,Energy,13.67,momentum_score
+2015,2016,Energy,23.01,value_score
+2015,2017,Energy,13.58,momentum_score
+2015,2017,Energy,13.36,value_score
+2015,2018,Energy,1.58,momentum_score
+2015,2018,Energy,1.67,value_score
+2015,2019,Energy,4.07,momentum_score
+2015,2019,Energy,3.53,value_score
+2015,2020,Energy,-2.76,momentum_score
+2015,2020,Energy,-6.49,value_score
+2015,2021,Energy,3.32,momentum_score
+2015,2021,Energy,0.63,value_score
+2015,2022,Energy,10.76,momentum_score
+2015,2022,Energy,8.99,value_score
+2015,2023,Energy,10.28,momentum_score
+2015,2023,Energy,8.71,value_score
+2015,2024,Energy,9.08,momentum_score
+2015,2024,Energy,7.49,value_score
+2015,2025,Energy,9.73,momentum_score
+2015,2025,Energy,8.28,value_score
+2016,2017,Energy,2.71,momentum_score
+2016,2017,Energy,14.57,value_score
+2016,2018,Energy,-11.38,momentum_score
+2016,2018,Energy,-4.79,value_score
+2016,2019,Energy,-2.91,momentum_score
+2016,2019,Energy,2.87,value_score
+2016,2020,Energy,-11.71,momentum_score
+2016,2020,Energy,-3.74,value_score
+2016,2021,Energy,-1.39,momentum_score
+2016,2021,Energy,0.29,value_score
+2016,2022,Energy,6.24,momentum_score
+2016,2022,Energy,9.28,value_score
+2016,2023,Energy,6.91,momentum_score
+2016,2023,Energy,10.07,value_score
+2016,2024,Energy,7.44,momentum_score
+2016,2024,Energy,9.27,value_score
+2016,2025,Energy,7.98,momentum_score
+2016,2025,Energy,10.78,value_score
+2017,2018,Energy,-5.6,momentum_score
+2017,2018,Energy,-20.61,value_score
+2017,2019,Energy,37.41,momentum_score
+2017,2019,Energy,-1.2,value_score
+2017,2020,Energy,98.29,momentum_score
+2017,2020,Energy,-13.4,value_score
+2017,2021,Energy,70.69,momentum_score
+2017,2021,Energy,-1.19,value_score
+2017,2022,Energy,65.63,momentum_score
+2017,2022,Energy,7.88,value_score
+2017,2023,Energy,38.27,momentum_score
+2017,2023,Energy,8.14,value_score
+2017,2024,Energy,23.04,momentum_score
+2017,2024,Energy,9.22,value_score
+2017,2025,Energy,14.27,momentum_score
+2017,2025,Energy,9.69,value_score
+2018,2019,Energy,15.53,momentum_score
+2018,2019,Energy,21.8,value_score
+2018,2020,Energy,-10.12,momentum_score
+2018,2020,Energy,-9.35,value_score
+2018,2021,Energy,4.45,momentum_score
+2018,2021,Energy,8.3,value_score
+2018,2022,Energy,15.18,momentum_score
+2018,2022,Energy,17.43,value_score
+2018,2023,Energy,13.4,momentum_score
+2018,2023,Energy,14.51,value_score
+2018,2024,Energy,13.72,momentum_score
+2018,2024,Energy,14.16,value_score
+2018,2025,Energy,12.63,momentum_score
+2018,2025,Energy,13.71,value_score
+2019,2020,Energy,23.87,momentum_score
+2019,2020,Energy,-35.63,value_score
+2019,2021,Energy,22.03,momentum_score
+2019,2021,Energy,0.93,value_score
+2019,2022,Energy,31.69,momentum_score
+2019,2022,Energy,18.25,value_score
+2019,2023,Energy,17.28,momentum_score
+2019,2023,Energy,14.16,value_score
+2019,2024,Energy,9.3,momentum_score
+2019,2024,Energy,9.31,value_score
+2019,2025,Energy,7.29,momentum_score
+2019,2025,Energy,9.68,value_score
+2020,2021,Energy,52.27,momentum_score
+2020,2021,Energy,60.75,value_score
+2020,2022,Energy,52.81,momentum_score
+2020,2022,Energy,60.34,value_score
+2020,2023,Energy,32.45,momentum_score
+2020,2023,Energy,38.01,value_score
+2020,2024,Energy,24.96,momentum_score
+2020,2024,Energy,25.62,value_score
+2020,2025,Energy,21.08,momentum_score
+2020,2025,Energy,22.66,value_score
+2021,2022,Energy,58.5,momentum_score
+2021,2022,Energy,52.22,value_score
+2021,2023,Energy,23.54,momentum_score
+2021,2023,Energy,25.99,value_score
+2021,2024,Energy,13.26,momentum_score
+2021,2024,Energy,21.66,value_score
+2021,2025,Energy,10.42,momentum_score
+2021,2025,Energy,17.6,value_score
+2022,2023,Energy,0.64,momentum_score
+2022,2023,Energy,4.47,value_score
+2022,2024,Energy,-6.77,momentum_score
+2022,2024,Energy,2.07,value_score
+2022,2025,Energy,0.04,momentum_score
+2022,2025,Energy,4.28,value_score
+2023,2024,Energy,11.1,momentum_score
+2023,2024,Energy,-3.69,value_score
+2023,2025,Energy,7.87,momentum_score
+2023,2025,Energy,4.17,value_score
+2024,2025,Energy,0.71,momentum_score
+2024,2025,Energy,9.73,value_score
+2010,2011,Financial Services,-8.06,momentum_score
+2010,2011,Financial Services,-19.44,value_score
+2010,2012,Financial Services,8.57,momentum_score
+2010,2012,Financial Services,4.53,value_score
+2010,2013,Financial Services,23.05,momentum_score
+2010,2013,Financial Services,18.82,value_score
+2010,2014,Financial Services,19.51,momentum_score
+2010,2014,Financial Services,17.02,value_score
+2010,2015,Financial Services,16.52,momentum_score
+2010,2015,Financial Services,12.17,value_score
+2010,2016,Financial Services,16.36,momentum_score
+2010,2016,Financial Services,14.84,value_score
+2010,2017,Financial Services,19.02,momentum_score
+2010,2017,Financial Services,15.34,value_score
+2010,2018,Financial Services,14.38,momentum_score
+2010,2018,Financial Services,9.87,value_score
+2010,2019,Financial Services,18.73,momentum_score
+2010,2019,Financial Services,12.48,value_score
+2010,2020,Financial Services,19.75,momentum_score
+2010,2020,Financial Services,10.66,value_score
+2010,2021,Financial Services,18.39,momentum_score
+2010,2021,Financial Services,12.59,value_score
+2010,2022,Financial Services,14.63,momentum_score
+2010,2022,Financial Services,11.66,value_score
+2010,2023,Financial Services,14.86,momentum_score
+2010,2023,Financial Services,11.36,value_score
+2010,2024,Financial Services,14.78,momentum_score
+2010,2024,Financial Services,13.19,value_score
+2010,2025,Financial Services,13.85,momentum_score
+2010,2025,Financial Services,13.51,value_score
+2011,2012,Financial Services,26.02,momentum_score
+2011,2012,Financial Services,29.79,value_score
+2011,2013,Financial Services,39.86,momentum_score
+2011,2013,Financial Services,44.63,value_score
+2011,2014,Financial Services,29.39,momentum_score
+2011,2014,Financial Services,29.14,value_score
+2011,2015,Financial Services,25.8,momentum_score
+2011,2015,Financial Services,17.86,value_score
+2011,2016,Financial Services,23.23,momentum_score
+2011,2016,Financial Services,19.88,value_score
+2011,2017,Financial Services,23.92,momentum_score
+2011,2017,Financial Services,19.08,value_score
+2011,2018,Financial Services,20.41,momentum_score
+2011,2018,Financial Services,12.33,value_score
+2011,2019,Financial Services,23.74,momentum_score
+2011,2019,Financial Services,14.1,value_score
+2011,2020,Financial Services,23.27,momentum_score
+2011,2020,Financial Services,12.4,value_score
+2011,2021,Financial Services,21.01,momentum_score
+2011,2021,Financial Services,15.28,value_score
+2011,2022,Financial Services,17.28,momentum_score
+2011,2022,Financial Services,14.34,value_score
+2011,2023,Financial Services,17.33,momentum_score
+2011,2023,Financial Services,13.71,value_score
+2011,2024,Financial Services,17.22,momentum_score
+2011,2024,Financial Services,14.75,value_score
+2011,2025,Financial Services,16.57,momentum_score
+2011,2025,Financial Services,15.09,value_score
+2012,2013,Financial Services,56.8,momentum_score
+2012,2013,Financial Services,60.95,value_score
+2012,2014,Financial Services,28.59,momentum_score
+2012,2014,Financial Services,27.33,value_score
+2012,2015,Financial Services,19.27,momentum_score
+2012,2015,Financial Services,14.0,value_score
+2012,2016,Financial Services,19.6,momentum_score
+2012,2016,Financial Services,16.65,value_score
+2012,2017,Financial Services,22.15,momentum_score
+2012,2017,Financial Services,16.29,value_score
+2012,2018,Financial Services,16.42,momentum_score
+2012,2018,Financial Services,9.89,value_score
+2012,2019,Financial Services,21.3,momentum_score
+2012,2019,Financial Services,12.9,value_score
+2012,2020,Financial Services,21.22,momentum_score
+2012,2020,Financial Services,11.28,value_score
+2012,2021,Financial Services,20.49,momentum_score
+2012,2021,Financial Services,13.83,value_score
+2012,2022,Financial Services,15.82,momentum_score
+2012,2022,Financial Services,11.67,value_score
+2012,2023,Financial Services,16.09,momentum_score
+2012,2023,Financial Services,11.96,value_score
+2012,2024,Financial Services,16.44,momentum_score
+2012,2024,Financial Services,13.42,value_score
+2012,2025,Financial Services,16.75,momentum_score
+2012,2025,Financial Services,13.95,value_score
+2013,2014,Financial Services,4.85,momentum_score
+2013,2014,Financial Services,5.23,value_score
+2013,2015,Financial Services,3.82,momentum_score
+2013,2015,Financial Services,-0.37,value_score
+2013,2016,Financial Services,8.01,momentum_score
+2013,2016,Financial Services,9.81,value_score
+2013,2017,Financial Services,13.48,momentum_score
+2013,2017,Financial Services,11.99,value_score
+2013,2018,Financial Services,8.89,momentum_score
+2013,2018,Financial Services,4.43,value_score
+2013,2019,Financial Services,15.18,momentum_score
+2013,2019,Financial Services,8.09,value_score
+2013,2020,Financial Services,15.9,momentum_score
+2013,2020,Financial Services,6.46,value_score
+2013,2021,Financial Services,15.44,momentum_score
+2013,2021,Financial Services,9.68,value_score
+2013,2022,Financial Services,11.55,momentum_score
+2013,2022,Financial Services,8.48,value_score
+2013,2023,Financial Services,12.03,momentum_score
+2013,2023,Financial Services,8.85,value_score
+2013,2024,Financial Services,12.38,momentum_score
+2013,2024,Financial Services,10.79,value_score
+2013,2025,Financial Services,11.66,momentum_score
+2013,2025,Financial Services,11.17,value_score
+2014,2015,Financial Services,2.37,momentum_score
+2014,2015,Financial Services,-5.37,value_score
+2014,2016,Financial Services,12.15,momentum_score
+2014,2016,Financial Services,7.95,value_score
+2014,2017,Financial Services,17.96,momentum_score
+2014,2017,Financial Services,9.04,value_score
+2014,2018,Financial Services,13.88,momentum_score
+2014,2018,Financial Services,0.28,value_score
+2014,2019,Financial Services,19.07,momentum_score
+2014,2019,Financial Services,5.63,value_score
+2014,2020,Financial Services,19.28,momentum_score
+2014,2020,Financial Services,2.36,value_score
+2014,2021,Financial Services,17.99,momentum_score
+2014,2021,Financial Services,5.66,value_score
+2014,2022,Financial Services,13.75,momentum_score
+2014,2022,Financial Services,5.4,value_score
+2014,2023,Financial Services,13.75,momentum_score
+2014,2023,Financial Services,5.71,value_score
+2014,2024,Financial Services,14.29,momentum_score
+2014,2024,Financial Services,7.44,value_score
+2014,2025,Financial Services,14.44,momentum_score
+2014,2025,Financial Services,8.14,value_score
+2015,2016,Financial Services,16.6,momentum_score
+2015,2016,Financial Services,29.85,value_score
+2015,2017,Financial Services,20.47,momentum_score
+2015,2017,Financial Services,22.03,value_score
+2015,2018,Financial Services,13.76,momentum_score
+2015,2018,Financial Services,3.98,value_score
+2015,2019,Financial Services,19.6,momentum_score
+2015,2019,Financial Services,10.46,value_score
+2015,2020,Financial Services,19.55,momentum_score
+2015,2020,Financial Services,6.67,value_score
+2015,2021,Financial Services,18.26,momentum_score
+2015,2021,Financial Services,11.24,value_score
+2015,2022,Financial Services,14.8,momentum_score
+2015,2022,Financial Services,9.34,value_score
+2015,2023,Financial Services,14.68,momentum_score
+2015,2023,Financial Services,9.23,value_score
+2015,2024,Financial Services,16.18,momentum_score
+2015,2024,Financial Services,10.64,value_score
+2015,2025,Financial Services,15.65,momentum_score
+2015,2025,Financial Services,11.58,value_score
+2016,2017,Financial Services,22.32,momentum_score
+2016,2017,Financial Services,15.11,value_score
+2016,2018,Financial Services,-2.87,momentum_score
+2016,2018,Financial Services,-6.41,value_score
+2016,2019,Financial Services,7.26,momentum_score
+2016,2019,Financial Services,5.07,value_score
+2016,2020,Financial Services,5.18,momentum_score
+2016,2020,Financial Services,1.78,value_score
+2016,2021,Financial Services,12.58,momentum_score
+2016,2021,Financial Services,7.79,value_score
+2016,2022,Financial Services,7.45,momentum_score
+2016,2022,Financial Services,6.32,value_score
+2016,2023,Financial Services,6.01,momentum_score
+2016,2023,Financial Services,6.6,value_score
+2016,2024,Financial Services,8.85,momentum_score
+2016,2024,Financial Services,8.57,value_score
+2016,2025,Financial Services,11.65,momentum_score
+2016,2025,Financial Services,9.81,value_score
+2017,2018,Financial Services,-15.16,momentum_score
+2017,2018,Financial Services,-22.18,value_score
+2017,2019,Financial Services,7.99,momentum_score
+2017,2019,Financial Services,2.45,value_score
+2017,2020,Financial Services,15.42,momentum_score
+2017,2020,Financial Services,-2.15,value_score
+2017,2021,Financial Services,15.96,momentum_score
+2017,2021,Financial Services,7.53,value_score
+2017,2022,Financial Services,8.69,momentum_score
+2017,2022,Financial Services,4.63,value_score
+2017,2023,Financial Services,10.22,momentum_score
+2017,2023,Financial Services,5.78,value_score
+2017,2024,Financial Services,13.71,momentum_score
+2017,2024,Financial Services,7.71,value_score
+2017,2025,Financial Services,12.85,momentum_score
+2017,2025,Financial Services,8.89,value_score
+2018,2019,Financial Services,30.77,momentum_score
+2018,2019,Financial Services,22.96,value_score
+2018,2020,Financial Services,22.15,momentum_score
+2018,2020,Financial Services,6.77,value_score
+2018,2021,Financial Services,21.02,momentum_score
+2018,2021,Financial Services,16.64,value_score
+2018,2022,Financial Services,15.39,momentum_score
+2018,2022,Financial Services,9.59,value_score
+2018,2023,Financial Services,15.19,momentum_score
+2018,2023,Financial Services,9.39,value_score
+2018,2024,Financial Services,16.98,momentum_score
+2018,2024,Financial Services,11.56,value_score
+2018,2025,Financial Services,15.01,momentum_score
+2018,2025,Financial Services,13.06,value_score
+2019,2020,Financial Services,12.94,momentum_score
+2019,2020,Financial Services,-9.41,value_score
+2019,2021,Financial Services,18.59,momentum_score
+2019,2021,Financial Services,9.31,value_score
+2019,2022,Financial Services,2.68,momentum_score
+2019,2022,Financial Services,1.13,value_score
+2019,2023,Financial Services,4.08,momentum_score
+2019,2023,Financial Services,1.94,value_score
+2019,2024,Financial Services,7.97,momentum_score
+2019,2024,Financial Services,6.55,value_score
+2019,2025,Financial Services,10.35,momentum_score
+2019,2025,Financial Services,8.96,value_score
+2020,2021,Financial Services,43.94,momentum_score
+2020,2021,Financial Services,29.87,value_score
+2020,2022,Financial Services,5.56,momentum_score
+2020,2022,Financial Services,18.9,value_score
+2020,2023,Financial Services,4.33,momentum_score
+2020,2023,Financial Services,14.99,value_score
+2020,2024,Financial Services,9.98,momentum_score
+2020,2024,Financial Services,17.67,value_score
+2020,2025,Financial Services,13.43,momentum_score
+2020,2025,Financial Services,17.34,value_score
+2021,2022,Financial Services,-15.5,momentum_score
+2021,2022,Financial Services,10.24,value_score
+2021,2023,Financial Services,-5.85,momentum_score
+2021,2023,Financial Services,8.58,value_score
+2021,2024,Financial Services,3.4,momentum_score
+2021,2024,Financial Services,14.29,value_score
+2021,2025,Financial Services,1.29,momentum_score
+2021,2025,Financial Services,14.11,value_score
+2022,2023,Financial Services,5.23,momentum_score
+2022,2023,Financial Services,10.41,value_score
+2022,2024,Financial Services,13.25,momentum_score
+2022,2024,Financial Services,16.64,value_score
+2022,2025,Financial Services,14.02,momentum_score
+2022,2025,Financial Services,19.25,value_score
+2023,2024,Financial Services,26.6,momentum_score
+2023,2024,Financial Services,35.78,value_score
+2023,2025,Financial Services,23.09,momentum_score
+2023,2025,Financial Services,30.26,value_score
+2024,2025,Financial Services,7.85,momentum_score
+2024,2025,Financial Services,16.57,value_score
+2010,2011,Healthcare,-3.7,momentum_score
+2010,2011,Healthcare,23.94,value_score
+2010,2012,Healthcare,10.07,momentum_score
+2010,2012,Healthcare,17.93,value_score
+2010,2013,Healthcare,23.38,momentum_score
+2010,2013,Healthcare,24.27,value_score
+2010,2014,Healthcare,23.68,momentum_score
+2010,2014,Healthcare,24.89,value_score
+2010,2015,Healthcare,19.32,momentum_score
+2010,2015,Healthcare,23.02,value_score
+2010,2016,Healthcare,16.38,momentum_score
+2010,2016,Healthcare,19.16,value_score
+2010,2017,Healthcare,17.92,momentum_score
+2010,2017,Healthcare,20.71,value_score
+2010,2018,Healthcare,17.26,momentum_score
+2010,2018,Healthcare,19.58,value_score
+2010,2019,Healthcare,17.66,momentum_score
+2010,2019,Healthcare,19.31,value_score
+2010,2020,Healthcare,16.55,momentum_score
+2010,2020,Healthcare,18.67,value_score
+2010,2021,Healthcare,17.59,momentum_score
+2010,2021,Healthcare,20.16,value_score
+2010,2022,Healthcare,15.03,momentum_score
+2010,2022,Healthcare,19.22,value_score
+2010,2023,Healthcare,13.8,momentum_score
+2010,2023,Healthcare,18.13,value_score
+2010,2024,Healthcare,13.14,momentum_score
+2010,2024,Healthcare,16.73,value_score
+2010,2025,Healthcare,11.86,momentum_score
+2010,2025,Healthcare,16.56,value_score
+2011,2012,Healthcare,7.21,momentum_score
+2011,2012,Healthcare,20.32,value_score
+2011,2013,Healthcare,25.01,momentum_score
+2011,2013,Healthcare,30.33,value_score
+2011,2014,Healthcare,26.92,momentum_score
+2011,2014,Healthcare,29.9,value_score
+2011,2015,Healthcare,25.35,momentum_score
+2011,2015,Healthcare,24.26,value_score
+2011,2016,Healthcare,19.81,momentum_score
+2011,2016,Healthcare,18.78,value_score
+2011,2017,Healthcare,20.7,momentum_score
+2011,2017,Healthcare,20.71,value_score
+2011,2018,Healthcare,21.77,momentum_score
+2011,2018,Healthcare,18.93,value_score
+2011,2019,Healthcare,17.94,momentum_score
+2011,2019,Healthcare,19.72,value_score
+2011,2020,Healthcare,19.19,momentum_score
+2011,2020,Healthcare,18.72,value_score
+2011,2021,Healthcare,19.12,momentum_score
+2011,2021,Healthcare,19.96,value_score
+2011,2022,Healthcare,18.23,momentum_score
+2011,2022,Healthcare,18.75,value_score
+2011,2023,Healthcare,17.7,momentum_score
+2011,2023,Healthcare,18.04,value_score
+2011,2024,Healthcare,16.95,momentum_score
+2011,2024,Healthcare,16.92,value_score
+2011,2025,Healthcare,17.08,momentum_score
+2011,2025,Healthcare,16.8,value_score
+2012,2013,Healthcare,64.33,momentum_score
+2012,2013,Healthcare,40.2,value_score
+2012,2014,Healthcare,44.84,momentum_score
+2012,2014,Healthcare,33.46,value_score
+2012,2015,Healthcare,31.04,momentum_score
+2012,2015,Healthcare,27.69,value_score
+2012,2016,Healthcare,17.9,momentum_score
+2012,2016,Healthcare,20.98,value_score
+2012,2017,Healthcare,19.18,momentum_score
+2012,2017,Healthcare,22.46,value_score
+2012,2018,Healthcare,15.92,momentum_score
+2012,2018,Healthcare,20.54,value_score
+2012,2019,Healthcare,16.64,momentum_score
+2012,2019,Healthcare,19.82,value_score
+2012,2020,Healthcare,16.18,momentum_score
+2012,2020,Healthcare,18.72,value_score
+2012,2021,Healthcare,17.1,momentum_score
+2012,2021,Healthcare,20.36,value_score
+2012,2022,Healthcare,13.13,momentum_score
+2012,2022,Healthcare,19.2,value_score
+2012,2023,Healthcare,10.98,momentum_score
+2012,2023,Healthcare,17.83,value_score
+2012,2024,Healthcare,10.26,momentum_score
+2012,2024,Healthcare,16.11,value_score
+2012,2025,Healthcare,10.4,momentum_score
+2012,2025,Healthcare,15.87,value_score
+2013,2014,Healthcare,29.55,momentum_score
+2013,2014,Healthcare,22.89,value_score
+2013,2015,Healthcare,16.98,momentum_score
+2013,2015,Healthcare,15.58,value_score
+2013,2016,Healthcare,4.15,momentum_score
+2013,2016,Healthcare,14.03,value_score
+2013,2017,Healthcare,6.56,momentum_score
+2013,2017,Healthcare,18.67,value_score
+2013,2018,Healthcare,4.24,momentum_score
+2013,2018,Healthcare,16.57,value_score
+2013,2019,Healthcare,6.63,momentum_score
+2013,2019,Healthcare,16.99,value_score
+2013,2020,Healthcare,8.3,momentum_score
+2013,2020,Healthcare,16.92,value_score
+2013,2021,Healthcare,10.17,momentum_score
+2013,2021,Healthcare,18.95,value_score
+2013,2022,Healthcare,8.08,momentum_score
+2013,2022,Healthcare,16.8,value_score
+2013,2023,Healthcare,7.18,momentum_score
+2013,2023,Healthcare,14.34,value_score
+2013,2024,Healthcare,6.92,momentum_score
+2013,2024,Healthcare,12.36,value_score
+2013,2025,Healthcare,8.2,momentum_score
+2013,2025,Healthcare,11.7,value_score
+2014,2015,Healthcare,21.86,momentum_score
+2014,2015,Healthcare,11.66,value_score
+2014,2016,Healthcare,10.53,momentum_score
+2014,2016,Healthcare,10.36,value_score
+2014,2017,Healthcare,19.42,momentum_score
+2014,2017,Healthcare,17.17,value_score
+2014,2018,Healthcare,21.51,momentum_score
+2014,2018,Healthcare,13.24,value_score
+2014,2019,Healthcare,18.15,momentum_score
+2014,2019,Healthcare,14.42,value_score
+2014,2020,Healthcare,21.29,momentum_score
+2014,2020,Healthcare,14.65,value_score
+2014,2021,Healthcare,21.69,momentum_score
+2014,2021,Healthcare,17.85,value_score
+2014,2022,Healthcare,15.49,momentum_score
+2014,2022,Healthcare,15.4,value_score
+2014,2023,Healthcare,15.2,momentum_score
+2014,2023,Healthcare,13.0,value_score
+2014,2024,Healthcare,14.16,momentum_score
+2014,2024,Healthcare,11.55,value_score
+2014,2025,Healthcare,13.37,momentum_score
+2014,2025,Healthcare,10.89,value_score
+2015,2016,Healthcare,6.39,momentum_score
+2015,2016,Healthcare,-5.38,value_score
+2015,2017,Healthcare,18.14,momentum_score
+2015,2017,Healthcare,8.11,value_score
+2015,2018,Healthcare,18.42,momentum_score
+2015,2018,Healthcare,5.7,value_score
+2015,2019,Healthcare,17.87,momentum_score
+2015,2019,Healthcare,8.89,value_score
+2015,2020,Healthcare,20.6,momentum_score
+2015,2020,Healthcare,9.38,value_score
+2015,2021,Healthcare,22.1,momentum_score
+2015,2021,Healthcare,12.56,value_score
+2015,2022,Healthcare,15.77,momentum_score
+2015,2022,Healthcare,10.93,value_score
+2015,2023,Healthcare,14.25,momentum_score
+2015,2023,Healthcare,9.06,value_score
+2015,2024,Healthcare,13.64,momentum_score
+2015,2024,Healthcare,7.68,value_score
+2015,2025,Healthcare,13.14,momentum_score
+2015,2025,Healthcare,8.59,value_score
+2016,2017,Healthcare,25.77,momentum_score
+2016,2017,Healthcare,21.14,value_score
+2016,2018,Healthcare,11.92,momentum_score
+2016,2018,Healthcare,13.48,value_score
+2016,2019,Healthcare,19.56,momentum_score
+2016,2019,Healthcare,14.4,value_score
+2016,2020,Healthcare,21.78,momentum_score
+2016,2020,Healthcare,13.19,value_score
+2016,2021,Healthcare,23.33,momentum_score
+2016,2021,Healthcare,16.3,value_score
+2016,2022,Healthcare,14.54,momentum_score
+2016,2022,Healthcare,14.94,value_score
+2016,2023,Healthcare,12.09,momentum_score
+2016,2023,Healthcare,13.72,value_score
+2016,2024,Healthcare,9.24,momentum_score
+2016,2024,Healthcare,12.59,value_score
+2016,2025,Healthcare,7.19,momentum_score
+2016,2025,Healthcare,14.63,value_score
+2017,2018,Healthcare,17.8,momentum_score
+2017,2018,Healthcare,1.59,value_score
+2017,2019,Healthcare,13.11,momentum_score
+2017,2019,Healthcare,9.92,value_score
+2017,2020,Healthcare,17.37,momentum_score
+2017,2020,Healthcare,10.29,value_score
+2017,2021,Healthcare,18.41,momentum_score
+2017,2021,Healthcare,13.77,value_score
+2017,2022,Healthcare,11.78,momentum_score
+2017,2022,Healthcare,11.7,value_score
+2017,2023,Healthcare,9.31,momentum_score
+2017,2023,Healthcare,11.26,value_score
+2017,2024,Healthcare,7.01,momentum_score
+2017,2024,Healthcare,10.15,value_score
+2017,2025,Healthcare,5.59,momentum_score
+2017,2025,Healthcare,12.43,value_score
+2018,2019,Healthcare,15.79,momentum_score
+2018,2019,Healthcare,13.78,value_score
+2018,2020,Healthcare,13.83,momentum_score
+2018,2020,Healthcare,10.85,value_score
+2018,2021,Healthcare,21.98,momentum_score
+2018,2021,Healthcare,15.98,value_score
+2018,2022,Healthcare,16.36,momentum_score
+2018,2022,Healthcare,14.83,value_score
+2018,2023,Healthcare,14.41,momentum_score
+2018,2023,Healthcare,13.98,value_score
+2018,2024,Healthcare,13.24,momentum_score
+2018,2024,Healthcare,11.76,value_score
+2018,2025,Healthcare,14.79,momentum_score
+2018,2025,Healthcare,15.17,value_score
+2019,2020,Healthcare,10.62,momentum_score
+2019,2020,Healthcare,9.85,value_score
+2019,2021,Healthcare,11.69,momentum_score
+2019,2021,Healthcare,15.39,value_score
+2019,2022,Healthcare,6.38,momentum_score
+2019,2022,Healthcare,13.02,value_score
+2019,2023,Healthcare,3.62,momentum_score
+2019,2023,Healthcare,12.6,value_score
+2019,2024,Healthcare,1.8,momentum_score
+2019,2024,Healthcare,11.87,value_score
+2019,2025,Healthcare,2.62,momentum_score
+2019,2025,Healthcare,15.13,value_score
+2020,2021,Healthcare,26.66,momentum_score
+2020,2021,Healthcare,20.99,value_score
+2020,2022,Healthcare,-3.51,momentum_score
+2020,2022,Healthcare,13.14,value_score
+2020,2023,Healthcare,0.89,momentum_score
+2020,2023,Healthcare,10.83,value_score
+2020,2024,Healthcare,3.99,momentum_score
+2020,2024,Healthcare,8.29,value_score
+2020,2025,Healthcare,5.83,momentum_score
+2020,2025,Healthcare,13.25,value_score
+2021,2022,Healthcare,-11.93,momentum_score
+2021,2022,Healthcare,4.75,value_score
+2021,2023,Healthcare,-5.28,momentum_score
+2021,2023,Healthcare,3.26,value_score
+2021,2024,Healthcare,-4.85,momentum_score
+2021,2024,Healthcare,3.41,value_score
+2021,2025,Healthcare,-1.15,momentum_score
+2021,2025,Healthcare,9.5,value_score
+2022,2023,Healthcare,7.06,momentum_score
+2022,2023,Healthcare,0.99,value_score
+2022,2024,Healthcare,6.29,momentum_score
+2022,2024,Healthcare,1.24,value_score
+2022,2025,Healthcare,12.21,momentum_score
+2022,2025,Healthcare,4.37,value_score
+2023,2024,Healthcare,-4.14,momentum_score
+2023,2024,Healthcare,-11.23,value_score
+2023,2025,Healthcare,5.01,momentum_score
+2023,2025,Healthcare,-0.7,value_score
+2024,2025,Healthcare,16.22,momentum_score
+2024,2025,Healthcare,9.1,value_score
+2010,2011,Industrials,-12.29,momentum_score
+2010,2011,Industrials,-0.21,value_score
+2010,2012,Industrials,-0.26,momentum_score
+2010,2012,Industrials,3.86,value_score
+2010,2013,Industrials,8.34,momentum_score
+2010,2013,Industrials,20.72,value_score
+2010,2014,Industrials,6.0,momentum_score
+2010,2014,Industrials,19.04,value_score
+2010,2015,Industrials,0.83,momentum_score
+2010,2015,Industrials,14.77,value_score
+2010,2016,Industrials,5.58,momentum_score
+2010,2016,Industrials,15.38,value_score
+2010,2017,Industrials,9.4,momentum_score
+2010,2017,Industrials,15.14,value_score
+2010,2018,Industrials,6.25,momentum_score
+2010,2018,Industrials,9.69,value_score
+2010,2019,Industrials,8.7,momentum_score
+2010,2019,Industrials,12.71,value_score
+2010,2020,Industrials,10.34,momentum_score
+2010,2020,Industrials,10.99,value_score
+2010,2021,Industrials,12.0,momentum_score
+2010,2021,Industrials,12.69,value_score
+2010,2022,Industrials,10.61,momentum_score
+2010,2022,Industrials,12.83,value_score
+2010,2023,Industrials,11.33,momentum_score
+2010,2023,Industrials,12.12,value_score
+2010,2024,Industrials,11.78,momentum_score
+2010,2024,Industrials,12.53,value_score
+2010,2025,Industrials,12.45,momentum_score
+2010,2025,Industrials,13.55,value_score
+2011,2012,Industrials,18.14,momentum_score
+2011,2012,Industrials,7.92,value_score
+2011,2013,Industrials,25.29,momentum_score
+2011,2013,Industrials,34.21,value_score
+2011,2014,Industrials,24.2,momentum_score
+2011,2014,Industrials,34.38,value_score
+2011,2015,Industrials,20.19,momentum_score
+2011,2015,Industrials,27.86,value_score
+2011,2016,Industrials,19.7,momentum_score
+2011,2016,Industrials,25.19,value_score
+2011,2017,Industrials,18.75,momentum_score
+2011,2017,Industrials,22.79,value_score
+2011,2018,Industrials,15.63,momentum_score
+2011,2018,Industrials,14.9,value_score
+2011,2019,Industrials,17.89,momentum_score
+2011,2019,Industrials,16.26,value_score
+2011,2020,Industrials,18.42,momentum_score
+2011,2020,Industrials,12.95,value_score
+2011,2021,Industrials,19.86,momentum_score
+2011,2021,Industrials,13.51,value_score
+2011,2022,Industrials,17.02,momentum_score
+2011,2022,Industrials,13.52,value_score
+2011,2023,Industrials,17.84,momentum_score
+2011,2023,Industrials,12.02,value_score
+2011,2024,Industrials,17.98,momentum_score
+2011,2024,Industrials,12.19,value_score
+2011,2025,Industrials,16.77,momentum_score
+2011,2025,Industrials,12.88,value_score
+2012,2013,Industrials,43.57,momentum_score
+2012,2013,Industrials,61.89,value_score
+2012,2014,Industrials,17.97,momentum_score
+2012,2014,Industrials,39.57,value_score
+2012,2015,Industrials,5.0,momentum_score
+2012,2015,Industrials,29.13,value_score
+2012,2016,Industrials,9.59,momentum_score
+2012,2016,Industrials,25.21,value_score
+2012,2017,Industrials,13.16,momentum_score
+2012,2017,Industrials,23.37,value_score
+2012,2018,Industrials,7.04,momentum_score
+2012,2018,Industrials,14.81,value_score
+2012,2019,Industrials,11.13,momentum_score
+2012,2019,Industrials,17.22,value_score
+2012,2020,Industrials,12.02,momentum_score
+2012,2020,Industrials,14.53,value_score
+2012,2021,Industrials,14.45,momentum_score
+2012,2021,Industrials,15.59,value_score
+2012,2022,Industrials,11.15,momentum_score
+2012,2022,Industrials,14.58,value_score
+2012,2023,Industrials,13.01,momentum_score
+2012,2023,Industrials,13.25,value_score
+2012,2024,Industrials,13.36,momentum_score
+2012,2024,Industrials,13.4,value_score
+2012,2025,Industrials,13.02,momentum_score
+2012,2025,Industrials,13.75,value_score
+2013,2014,Industrials,37.61,momentum_score
+2013,2014,Industrials,35.4,value_score
+2013,2015,Industrials,15.56,momentum_score
+2013,2015,Industrials,17.99,value_score
+2013,2016,Industrials,14.74,momentum_score
+2013,2016,Industrials,17.05,value_score
+2013,2017,Industrials,17.05,momentum_score
+2013,2017,Industrials,18.46,value_score
+2013,2018,Industrials,8.03,momentum_score
+2013,2018,Industrials,8.41,value_score
+2013,2019,Industrials,10.37,momentum_score
+2013,2019,Industrials,12.19,value_score
+2013,2020,Industrials,8.35,momentum_score
+2013,2020,Industrials,9.54,value_score
+2013,2021,Industrials,8.86,momentum_score
+2013,2021,Industrials,11.25,value_score
+2013,2022,Industrials,6.81,momentum_score
+2013,2022,Industrials,10.55,value_score
+2013,2023,Industrials,7.13,momentum_score
+2013,2023,Industrials,9.61,value_score
+2013,2024,Industrials,7.5,momentum_score
+2013,2024,Industrials,9.79,value_score
+2013,2025,Industrials,8.53,momentum_score
+2013,2025,Industrials,10.68,value_score
+2014,2015,Industrials,3.96,momentum_score
+2014,2015,Industrials,2.82,value_score
+2014,2016,Industrials,10.58,momentum_score
+2014,2016,Industrials,8.65,value_score
+2014,2017,Industrials,14.0,momentum_score
+2014,2017,Industrials,14.41,value_score
+2014,2018,Industrials,7.78,momentum_score
+2014,2018,Industrials,5.64,value_score
+2014,2019,Industrials,12.55,momentum_score
+2014,2019,Industrials,11.8,value_score
+2014,2020,Industrials,10.48,momentum_score
+2014,2020,Industrials,11.4,value_score
+2014,2021,Industrials,12.36,momentum_score
+2014,2021,Industrials,12.83,value_score
+2014,2022,Industrials,11.07,momentum_score
+2014,2022,Industrials,11.45,value_score
+2014,2023,Industrials,10.94,momentum_score
+2014,2023,Industrials,11.34,value_score
+2014,2024,Industrials,11.38,momentum_score
+2014,2024,Industrials,12.02,value_score
+2014,2025,Industrials,10.39,momentum_score
+2014,2025,Industrials,13.29,value_score
+2015,2016,Industrials,15.14,momentum_score
+2015,2016,Industrials,17.3,value_score
+2015,2017,Industrials,14.85,momentum_score
+2015,2017,Industrials,17.86,value_score
+2015,2018,Industrials,3.07,momentum_score
+2015,2018,Industrials,4.26,value_score
+2015,2019,Industrials,10.75,momentum_score
+2015,2019,Industrials,8.37,value_score
+2015,2020,Industrials,8.62,momentum_score
+2015,2020,Industrials,7.14,value_score
+2015,2021,Industrials,11.59,momentum_score
+2015,2021,Industrials,8.06,value_score
+2015,2022,Industrials,8.9,momentum_score
+2015,2022,Industrials,6.61,value_score
+2015,2023,Industrials,9.13,momentum_score
+2015,2023,Industrials,7.62,value_score
+2015,2024,Industrials,9.9,momentum_score
+2015,2024,Industrials,10.53,value_score
+2015,2025,Industrials,9.44,momentum_score
+2015,2025,Industrials,13.49,value_score
+2016,2017,Industrials,22.35,momentum_score
+2016,2017,Industrials,11.54,value_score
+2016,2018,Industrials,4.44,momentum_score
+2016,2018,Industrials,-6.27,value_score
+2016,2019,Industrials,8.74,momentum_score
+2016,2019,Industrials,2.86,value_score
+2016,2020,Industrials,9.94,momentum_score
+2016,2020,Industrials,2.56,value_score
+2016,2021,Industrials,14.95,momentum_score
+2016,2021,Industrials,8.22,value_score
+2016,2022,Industrials,12.35,momentum_score
+2016,2022,Industrials,6.89,value_score
+2016,2023,Industrials,14.18,momentum_score
+2016,2023,Industrials,10.15,value_score
+2016,2024,Industrials,15.14,momentum_score
+2016,2024,Industrials,13.4,value_score
+2016,2025,Industrials,15.09,momentum_score
+2016,2025,Industrials,14.35,value_score
+2017,2018,Industrials,-10.12,momentum_score
+2017,2018,Industrials,-11.69,value_score
+2017,2019,Industrials,9.6,momentum_score
+2017,2019,Industrials,1.67,value_score
+2017,2020,Industrials,12.46,momentum_score
+2017,2020,Industrials,-0.34,value_score
+2017,2021,Industrials,16.37,momentum_score
+2017,2021,Industrials,7.35,value_score
+2017,2022,Industrials,12.63,momentum_score
+2017,2022,Industrials,3.29,value_score
+2017,2023,Industrials,14.64,momentum_score
+2017,2023,Industrials,7.22,value_score
+2017,2024,Industrials,14.73,momentum_score
+2017,2024,Industrials,10.31,value_score
+2017,2025,Industrials,14.74,momentum_score
+2017,2025,Industrials,9.85,value_score
+2018,2019,Industrials,32.81,momentum_score
+2018,2019,Industrials,34.18,value_score
+2018,2020,Industrials,23.75,momentum_score
+2018,2020,Industrials,20.19,value_score
+2018,2021,Industrials,23.95,momentum_score
+2018,2021,Industrials,21.68,value_score
+2018,2022,Industrials,15.18,momentum_score
+2018,2022,Industrials,14.31,value_score
+2018,2023,Industrials,16.53,momentum_score
+2018,2023,Industrials,16.58,value_score
+2018,2024,Industrials,18.37,momentum_score
+2018,2024,Industrials,19.7,value_score
+2018,2025,Industrials,17.52,momentum_score
+2018,2025,Industrials,18.59,value_score
+2019,2020,Industrials,27.87,momentum_score
+2019,2020,Industrials,-2.55,value_score
+2019,2021,Industrials,33.62,momentum_score
+2019,2021,Industrials,0.99,value_score
+2019,2022,Industrials,15.61,momentum_score
+2019,2022,Industrials,-0.79,value_score
+2019,2023,Industrials,21.69,momentum_score
+2019,2023,Industrials,2.66,value_score
+2019,2024,Industrials,19.68,momentum_score
+2019,2024,Industrials,7.26,value_score
+2019,2025,Industrials,16.57,momentum_score
+2019,2025,Industrials,10.68,value_score
+2020,2021,Industrials,29.48,momentum_score
+2020,2021,Industrials,22.51,value_score
+2020,2022,Industrials,13.06,momentum_score
+2020,2022,Industrials,9.25,value_score
+2020,2023,Industrials,21.94,momentum_score
+2020,2023,Industrials,10.7,value_score
+2020,2024,Industrials,25.96,momentum_score
+2020,2024,Industrials,15.37,value_score
+2020,2025,Industrials,27.17,momentum_score
+2020,2025,Industrials,17.25,value_score
+2021,2022,Industrials,-6.07,momentum_score
+2021,2022,Industrials,-2.94,value_score
+2021,2023,Industrials,8.94,momentum_score
+2021,2023,Industrials,8.44,value_score
+2021,2024,Industrials,11.54,momentum_score
+2021,2024,Industrials,11.34,value_score
+2021,2025,Industrials,7.61,momentum_score
+2021,2025,Industrials,17.87,value_score
+2022,2023,Industrials,29.69,momentum_score
+2022,2023,Industrials,16.59,value_score
+2022,2024,Industrials,26.36,momentum_score
+2022,2024,Industrials,14.33,value_score
+2022,2025,Industrials,29.14,momentum_score
+2022,2025,Industrials,12.98,value_score
+2023,2024,Industrials,21.18,momentum_score
+2023,2024,Industrials,23.7,value_score
+2023,2025,Industrials,10.27,momentum_score
+2023,2025,Industrials,17.58,value_score
+2024,2025,Industrials,19.44,momentum_score
+2024,2025,Industrials,13.91,value_score
+2010,2011,Real Estate,-0.54,momentum_score
+2010,2011,Real Estate,15.55,value_score
+2010,2012,Real Estate,10.74,momentum_score
+2010,2012,Real Estate,19.14,value_score
+2010,2013,Real Estate,10.39,momentum_score
+2010,2013,Real Estate,14.2,value_score
+2010,2014,Real Estate,15.6,momentum_score
+2010,2014,Real Estate,18.37,value_score
+2010,2015,Real Estate,12.55,momentum_score
+2010,2015,Real Estate,15.92,value_score
+2010,2016,Real Estate,10.89,momentum_score
+2010,2016,Real Estate,12.81,value_score
+2010,2017,Real Estate,10.17,momentum_score
+2010,2017,Real Estate,11.38,value_score
+2010,2018,Real Estate,7.3,momentum_score
+2010,2018,Real Estate,9.12,value_score
+2010,2019,Real Estate,9.23,momentum_score
+2010,2019,Real Estate,10.01,value_score
+2010,2020,Real Estate,7.24,momentum_score
+2010,2020,Real Estate,8.09,value_score
+2010,2021,Real Estate,11.03,momentum_score
+2010,2021,Real Estate,12.17,value_score
+2010,2022,Real Estate,7.55,momentum_score
+2010,2022,Real Estate,8.64,value_score
+2010,2023,Real Estate,8.39,momentum_score
+2010,2023,Real Estate,9.91,value_score
+2010,2024,Real Estate,8.6,momentum_score
+2010,2024,Real Estate,10.39,value_score
+2010,2025,Real Estate,8.41,momentum_score
+2010,2025,Real Estate,9.25,value_score
+2011,2012,Real Estate,20.33,momentum_score
+2011,2012,Real Estate,26.11,value_score
+2011,2013,Real Estate,8.77,momentum_score
+2011,2013,Real Estate,17.97,value_score
+2011,2014,Real Estate,17.31,momentum_score
+2011,2014,Real Estate,22.09,value_score
+2011,2015,Real Estate,15.52,momentum_score
+2011,2015,Real Estate,17.22,value_score
+2011,2016,Real Estate,11.32,momentum_score
+2011,2016,Real Estate,13.24,value_score
+2011,2017,Real Estate,10.24,momentum_score
+2011,2017,Real Estate,11.95,value_score
+2011,2018,Real Estate,9.3,momentum_score
+2011,2018,Real Estate,8.8,value_score
+2011,2019,Real Estate,10.36,momentum_score
+2011,2019,Real Estate,10.39,value_score
+2011,2020,Real Estate,8.07,momentum_score
+2011,2020,Real Estate,8.5,value_score
+2011,2021,Real Estate,12.09,momentum_score
+2011,2021,Real Estate,13.04,value_score
+2011,2022,Real Estate,7.83,momentum_score
+2011,2022,Real Estate,9.0,value_score
+2011,2023,Real Estate,8.84,momentum_score
+2011,2023,Real Estate,10.4,value_score
+2011,2024,Real Estate,8.94,momentum_score
+2011,2024,Real Estate,11.23,value_score
+2011,2025,Real Estate,8.77,momentum_score
+2011,2025,Real Estate,10.4,value_score
+2012,2013,Real Estate,6.05,momentum_score
+2012,2013,Real Estate,6.15,value_score
+2012,2014,Real Estate,16.82,momentum_score
+2012,2014,Real Estate,18.63,value_score
+2012,2015,Real Estate,11.19,momentum_score
+2012,2015,Real Estate,13.25,value_score
+2012,2016,Real Estate,9.46,momentum_score
+2012,2016,Real Estate,9.16,value_score
+2012,2017,Real Estate,10.83,momentum_score
+2012,2017,Real Estate,8.09,value_score
+2012,2018,Real Estate,8.51,momentum_score
+2012,2018,Real Estate,4.92,value_score
+2012,2019,Real Estate,11.95,momentum_score
+2012,2019,Real Estate,7.03,value_score
+2012,2020,Real Estate,10.76,momentum_score
+2012,2020,Real Estate,4.5,value_score
+2012,2021,Real Estate,15.09,momentum_score
+2012,2021,Real Estate,9.59,value_score
+2012,2022,Real Estate,10.28,momentum_score
+2012,2022,Real Estate,5.89,value_score
+2012,2023,Real Estate,11.23,momentum_score
+2012,2023,Real Estate,7.14,value_score
+2012,2024,Real Estate,11.29,momentum_score
+2012,2024,Real Estate,8.65,value_score
+2012,2025,Real Estate,11.12,momentum_score
+2012,2025,Real Estate,7.72,value_score
+2013,2014,Real Estate,27.69,momentum_score
+2013,2014,Real Estate,34.7,value_score
+2013,2015,Real Estate,13.17,momentum_score
+2013,2015,Real Estate,15.75,value_score
+2013,2016,Real Estate,9.4,momentum_score
+2013,2016,Real Estate,10.66,value_score
+2013,2017,Real Estate,10.87,momentum_score
+2013,2017,Real Estate,8.02,value_score
+2013,2018,Real Estate,7.31,momentum_score
+2013,2018,Real Estate,4.28,value_score
+2013,2019,Real Estate,10.53,momentum_score
+2013,2019,Real Estate,6.52,value_score
+2013,2020,Real Estate,8.98,momentum_score
+2013,2020,Real Estate,2.69,value_score
+2013,2021,Real Estate,13.72,momentum_score
+2013,2021,Real Estate,7.29,value_score
+2013,2022,Real Estate,8.49,momentum_score
+2013,2022,Real Estate,3.39,value_score
+2013,2023,Real Estate,9.73,momentum_score
+2013,2023,Real Estate,5.01,value_score
+2013,2024,Real Estate,10.09,momentum_score
+2013,2024,Real Estate,6.92,value_score
+2013,2025,Real Estate,8.9,momentum_score
+2013,2025,Real Estate,5.34,value_score
+2014,2015,Real Estate,4.33,momentum_score
+2014,2015,Real Estate,1.76,value_score
+2014,2016,Real Estate,4.17,momentum_score
+2014,2016,Real Estate,0.54,value_score
+2014,2017,Real Estate,3.19,momentum_score
+2014,2017,Real Estate,-0.39,value_score
+2014,2018,Real Estate,1.89,momentum_score
+2014,2018,Real Estate,-2.76,value_score
+2014,2019,Real Estate,5.02,momentum_score
+2014,2019,Real Estate,1.21,value_score
+2014,2020,Real Estate,1.18,momentum_score
+2014,2020,Real Estate,-1.68,value_score
+2014,2021,Real Estate,7.04,momentum_score
+2014,2021,Real Estate,3.04,value_score
+2014,2022,Real Estate,3.08,momentum_score
+2014,2022,Real Estate,-0.85,value_score
+2014,2023,Real Estate,5.04,momentum_score
+2014,2023,Real Estate,0.98,value_score
+2014,2024,Real Estate,7.2,momentum_score
+2014,2024,Real Estate,2.52,value_score
+2014,2025,Real Estate,6.58,momentum_score
+2014,2025,Real Estate,2.75,value_score
+2015,2016,Real Estate,3.57,momentum_score
+2015,2016,Real Estate,5.25,value_score
+2015,2017,Real Estate,4.33,momentum_score
+2015,2017,Real Estate,6.66,value_score
+2015,2018,Real Estate,1.48,momentum_score
+2015,2018,Real Estate,0.72,value_score
+2015,2019,Real Estate,7.57,momentum_score
+2015,2019,Real Estate,5.11,value_score
+2015,2020,Real Estate,4.61,momentum_score
+2015,2020,Real Estate,1.54,value_score
+2015,2021,Real Estate,11.36,momentum_score
+2015,2021,Real Estate,7.35,value_score
+2015,2022,Real Estate,5.18,momentum_score
+2015,2022,Real Estate,3.0,value_score
+2015,2023,Real Estate,6.57,momentum_score
+2015,2023,Real Estate,5.81,value_score
+2015,2024,Real Estate,6.67,momentum_score
+2015,2024,Real Estate,8.4,value_score
+2015,2025,Real Estate,5.87,momentum_score
+2015,2025,Real Estate,7.98,value_score
+2016,2017,Real Estate,10.69,momentum_score
+2016,2017,Real Estate,2.49,value_score
+2016,2018,Real Estate,0.7,momentum_score
+2016,2018,Real Estate,-2.26,value_score
+2016,2019,Real Estate,9.94,momentum_score
+2016,2019,Real Estate,5.14,value_score
+2016,2020,Real Estate,5.2,momentum_score
+2016,2020,Real Estate,0.41,value_score
+2016,2021,Real Estate,13.25,momentum_score
+2016,2021,Real Estate,7.08,value_score
+2016,2022,Real Estate,4.92,momentum_score
+2016,2022,Real Estate,0.5,value_score
+2016,2023,Real Estate,6.88,momentum_score
+2016,2023,Real Estate,3.33,value_score
+2016,2024,Real Estate,7.6,momentum_score
+2016,2024,Real Estate,6.34,value_score
+2016,2025,Real Estate,7.06,momentum_score
+2016,2025,Real Estate,6.86,value_score
+2017,2018,Real Estate,-7.73,momentum_score
+2017,2018,Real Estate,-6.86,value_score
+2017,2019,Real Estate,8.58,momentum_score
+2017,2019,Real Estate,8.47,value_score
+2017,2020,Real Estate,6.77,momentum_score
+2017,2020,Real Estate,0.44,value_score
+2017,2021,Real Estate,17.83,momentum_score
+2017,2021,Real Estate,9.93,value_score
+2017,2022,Real Estate,7.5,momentum_score
+2017,2022,Real Estate,2.63,value_score
+2017,2023,Real Estate,8.57,momentum_score
+2017,2023,Real Estate,5.01,value_score
+2017,2024,Real Estate,8.53,momentum_score
+2017,2024,Real Estate,7.31,value_score
+2017,2025,Real Estate,7.27,momentum_score
+2017,2025,Real Estate,7.36,value_score
+2018,2019,Real Estate,24.76,momentum_score
+2018,2019,Real Estate,19.7,value_score
+2018,2020,Real Estate,5.23,momentum_score
+2018,2020,Real Estate,0.35,value_score
+2018,2021,Real Estate,15.82,momentum_score
+2018,2021,Real Estate,13.71,value_score
+2018,2022,Real Estate,4.23,momentum_score
+2018,2022,Real Estate,3.36,value_score
+2018,2023,Real Estate,5.31,momentum_score
+2018,2023,Real Estate,5.93,value_score
+2018,2024,Real Estate,6.97,momentum_score
+2018,2024,Real Estate,7.99,value_score
+2018,2025,Real Estate,6.84,momentum_score
+2018,2025,Real Estate,7.49,value_score
+2019,2020,Real Estate,2.44,momentum_score
+2019,2020,Real Estate,-19.73,value_score
+2019,2021,Real Estate,20.0,momentum_score
+2019,2021,Real Estate,9.89,value_score
+2019,2022,Real Estate,1.38,momentum_score
+2019,2022,Real Estate,-1.74,value_score
+2019,2023,Real Estate,3.51,momentum_score
+2019,2023,Real Estate,4.4,value_score
+2019,2024,Real Estate,3.79,momentum_score
+2019,2024,Real Estate,8.75,value_score
+2019,2025,Real Estate,2.43,momentum_score
+2019,2025,Real Estate,6.14,value_score
+2020,2021,Real Estate,50.18,momentum_score
+2020,2021,Real Estate,47.97,value_score
+2020,2022,Real Estate,6.95,momentum_score
+2020,2022,Real Estate,4.92,value_score
+2020,2023,Real Estate,12.9,momentum_score
+2020,2023,Real Estate,11.52,value_score
+2020,2024,Real Estate,14.99,momentum_score
+2020,2024,Real Estate,15.42,value_score
+2020,2025,Real Estate,13.87,momentum_score
+2020,2025,Real Estate,13.35,value_score
+2021,2022,Real Estate,-26.19,momentum_score
+2021,2022,Real Estate,-23.84,value_score
+2021,2023,Real Estate,-6.91,momentum_score
+2021,2023,Real Estate,-5.8,value_score
+2021,2024,Real Estate,0.37,momentum_score
+2021,2024,Real Estate,2.88,value_score
+2021,2025,Real Estate,-0.8,momentum_score
+2021,2025,Real Estate,-0.04,value_score
+2022,2023,Real Estate,20.04,momentum_score
+2022,2023,Real Estate,22.8,value_score
+2022,2024,Real Estate,18.23,momentum_score
+2022,2024,Real Estate,22.98,value_score
+2022,2025,Real Estate,10.54,momentum_score
+2022,2025,Real Estate,12.77,value_score
+2023,2024,Real Estate,22.64,momentum_score
+2023,2024,Real Estate,7.82,value_score
+2023,2025,Real Estate,7.0,momentum_score
+2023,2025,Real Estate,3.59,value_score
+2024,2025,Real Estate,0.06,momentum_score
+2024,2025,Real Estate,-6.8,value_score
+2010,2011,Technology,-17.84,momentum_score
+2010,2011,Technology,-17.36,value_score
+2010,2012,Technology,-4.81,momentum_score
+2010,2012,Technology,-5.8,value_score
+2010,2013,Technology,1.42,momentum_score
+2010,2013,Technology,13.09,value_score
+2010,2014,Technology,4.15,momentum_score
+2010,2014,Technology,15.28,value_score
+2010,2015,Technology,4.53,momentum_score
+2010,2015,Technology,5.97,value_score
+2010,2016,Technology,11.47,momentum_score
+2010,2016,Technology,10.22,value_score
+2010,2017,Technology,15.69,momentum_score
+2010,2017,Technology,14.31,value_score
+2010,2018,Technology,12.54,momentum_score
+2010,2018,Technology,8.63,value_score
+2010,2019,Technology,15.85,momentum_score
+2010,2019,Technology,11.85,value_score
+2010,2020,Technology,20.69,momentum_score
+2010,2020,Technology,11.8,value_score
+2010,2021,Technology,25.0,momentum_score
+2010,2021,Technology,13.02,value_score
+2010,2022,Technology,16.7,momentum_score
+2010,2022,Technology,9.69,value_score
+2010,2023,Technology,24.58,momentum_score
+2010,2023,Technology,11.01,value_score
+2010,2024,Technology,30.65,momentum_score
+2010,2024,Technology,11.69,value_score
+2010,2025,Technology,31.02,momentum_score
+2010,2025,Technology,14.64,value_score
+2011,2012,Technology,13.75,momentum_score
+2011,2012,Technology,-3.42,value_score
+2011,2013,Technology,19.72,momentum_score
+2011,2013,Technology,29.48,value_score
+2011,2014,Technology,17.53,momentum_score
+2011,2014,Technology,27.53,value_score
+2011,2015,Technology,15.33,momentum_score
+2011,2015,Technology,11.93,value_score
+2011,2016,Technology,14.26,momentum_score
+2011,2016,Technology,18.45,value_score
+2011,2017,Technology,16.92,momentum_score
+2011,2017,Technology,22.98,value_score
+2011,2018,Technology,15.77,momentum_score
+2011,2018,Technology,14.46,value_score
+2011,2019,Technology,18.72,momentum_score
+2011,2019,Technology,18.2,value_score
+2011,2020,Technology,19.8,momentum_score
+2011,2020,Technology,19.42,value_score
+2011,2021,Technology,21.51,momentum_score
+2011,2021,Technology,20.6,value_score
+2011,2022,Technology,15.74,momentum_score
+2011,2022,Technology,13.49,value_score
+2011,2023,Technology,17.62,momentum_score
+2011,2023,Technology,16.64,value_score
+2011,2024,Technology,17.44,momentum_score
+2011,2024,Technology,15.0,value_score
+2011,2025,Technology,17.37,momentum_score
+2011,2025,Technology,19.35,value_score
+2012,2013,Technology,41.27,momentum_score
+2012,2013,Technology,58.52,value_score
+2012,2014,Technology,26.89,momentum_score
+2012,2014,Technology,39.66,value_score
+2012,2015,Technology,15.15,momentum_score
+2012,2015,Technology,17.19,value_score
+2012,2016,Technology,16.33,momentum_score
+2012,2016,Technology,20.71,value_score
+2012,2017,Technology,19.54,momentum_score
+2012,2017,Technology,24.87,value_score
+2012,2018,Technology,12.47,momentum_score
+2012,2018,Technology,14.88,value_score
+2012,2019,Technology,13.39,momentum_score
+2012,2019,Technology,17.87,value_score
+2012,2020,Technology,13.6,momentum_score
+2012,2020,Technology,16.81,value_score
+2012,2021,Technology,15.84,momentum_score
+2012,2021,Technology,19.4,value_score
+2012,2022,Technology,9.08,momentum_score
+2012,2022,Technology,13.66,value_score
+2012,2023,Technology,11.65,momentum_score
+2012,2023,Technology,15.14,value_score
+2012,2024,Technology,12.05,momentum_score
+2012,2024,Technology,14.56,value_score
+2012,2025,Technology,14.95,momentum_score
+2012,2025,Technology,17.07,value_score
+2013,2014,Technology,24.3,momentum_score
+2013,2014,Technology,18.77,value_score
+2013,2015,Technology,11.66,momentum_score
+2013,2015,Technology,0.76,value_score
+2013,2016,Technology,9.87,momentum_score
+2013,2016,Technology,7.96,value_score
+2013,2017,Technology,17.71,momentum_score
+2013,2017,Technology,14.07,value_score
+2013,2018,Technology,13.38,momentum_score
+2013,2018,Technology,6.06,value_score
+2013,2019,Technology,18.68,momentum_score
+2013,2019,Technology,8.54,value_score
+2013,2020,Technology,20.63,momentum_score
+2013,2020,Technology,7.32,value_score
+2013,2021,Technology,19.8,momentum_score
+2013,2021,Technology,11.16,value_score
+2013,2022,Technology,11.85,momentum_score
+2013,2022,Technology,7.02,value_score
+2013,2023,Technology,15.58,momentum_score
+2013,2023,Technology,9.47,value_score
+2013,2024,Technology,16.72,momentum_score
+2013,2024,Technology,9.63,value_score
+2013,2025,Technology,16.68,momentum_score
+2013,2025,Technology,12.56,value_score
+2014,2015,Technology,-2.62,momentum_score
+2014,2015,Technology,-16.14,value_score
+2014,2016,Technology,8.75,momentum_score
+2014,2016,Technology,3.59,value_score
+2014,2017,Technology,17.01,momentum_score
+2014,2017,Technology,13.37,value_score
+2014,2018,Technology,10.64,momentum_score
+2014,2018,Technology,3.55,value_score
+2014,2019,Technology,17.3,momentum_score
+2014,2019,Technology,5.47,value_score
+2014,2020,Technology,19.98,momentum_score
+2014,2020,Technology,4.92,value_score
+2014,2021,Technology,22.06,momentum_score
+2014,2021,Technology,8.35,value_score
+2014,2022,Technology,14.33,momentum_score
+2014,2022,Technology,3.88,value_score
+2014,2023,Technology,19.07,momentum_score
+2014,2023,Technology,5.07,value_score
+2014,2024,Technology,21.1,momentum_score
+2014,2024,Technology,6.13,value_score
+2014,2025,Technology,23.54,momentum_score
+2014,2025,Technology,9.65,value_score
+2015,2016,Technology,36.7,momentum_score
+2015,2016,Technology,32.55,value_score
+2015,2017,Technology,46.63,momentum_score
+2015,2017,Technology,32.78,value_score
+2015,2018,Technology,23.43,momentum_score
+2015,2018,Technology,12.23,value_score
+2015,2019,Technology,27.67,momentum_score
+2015,2019,Technology,15.48,value_score
+2015,2020,Technology,32.95,momentum_score
+2015,2020,Technology,12.94,value_score
+2015,2021,Technology,38.02,momentum_score
+2015,2021,Technology,16.93,value_score
+2015,2022,Technology,22.57,momentum_score
+2015,2022,Technology,9.72,value_score
+2015,2023,Technology,32.55,momentum_score
+2015,2023,Technology,11.54,value_score
+2015,2024,Technology,40.29,momentum_score
+2015,2024,Technology,12.21,value_score
+2015,2025,Technology,39.72,momentum_score
+2015,2025,Technology,14.6,value_score
+2016,2017,Technology,40.59,momentum_score
+2016,2017,Technology,25.81,value_score
+2016,2018,Technology,12.28,momentum_score
+2016,2018,Technology,3.94,value_score
+2016,2019,Technology,22.17,momentum_score
+2016,2019,Technology,12.57,value_score
+2016,2020,Technology,26.89,momentum_score
+2016,2020,Technology,10.99,value_score
+2016,2021,Technology,31.57,momentum_score
+2016,2021,Technology,15.88,value_score
+2016,2022,Technology,16.31,momentum_score
+2016,2022,Technology,7.37,value_score
+2016,2023,Technology,24.32,momentum_score
+2016,2023,Technology,9.9,value_score
+2016,2024,Technology,29.79,momentum_score
+2016,2024,Technology,10.54,value_score
+2016,2025,Technology,32.26,momentum_score
+2016,2025,Technology,13.63,value_score
+2017,2018,Technology,-5.88,momentum_score
+2017,2018,Technology,-13.41,value_score
+2017,2019,Technology,19.72,momentum_score
+2017,2019,Technology,9.34,value_score
+2017,2020,Technology,27.7,momentum_score
+2017,2020,Technology,6.35,value_score
+2017,2021,Technology,32.64,momentum_score
+2017,2021,Technology,13.25,value_score
+2017,2022,Technology,15.39,momentum_score
+2017,2022,Technology,3.91,value_score
+2017,2023,Technology,24.8,momentum_score
+2017,2023,Technology,7.47,value_score
+2017,2024,Technology,28.0,momentum_score
+2017,2024,Technology,7.72,value_score
+2017,2025,Technology,29.46,momentum_score
+2017,2025,Technology,13.09,value_score
+2018,2019,Technology,47.07,momentum_score
+2018,2019,Technology,25.21,value_score
+2018,2020,Technology,46.27,momentum_score
+2018,2020,Technology,18.93,value_score
+2018,2021,Technology,47.47,momentum_score
+2018,2021,Technology,23.68,value_score
+2018,2022,Technology,21.95,momentum_score
+2018,2022,Technology,7.81,value_score
+2018,2023,Technology,25.61,momentum_score
+2018,2023,Technology,11.42,value_score
+2018,2024,Technology,26.42,momentum_score
+2018,2024,Technology,12.26,value_score
+2018,2025,Technology,27.21,momentum_score
+2018,2025,Technology,21.88,value_score
+2019,2020,Technology,55.2,momentum_score
+2019,2020,Technology,11.78,value_score
+2019,2021,Technology,56.79,momentum_score
+2019,2021,Technology,24.31,value_score
+2019,2022,Technology,12.29,momentum_score
+2019,2022,Technology,1.49,value_score
+2019,2023,Technology,28.33,momentum_score
+2019,2023,Technology,10.18,value_score
+2019,2024,Technology,33.82,momentum_score
+2019,2024,Technology,9.95,value_score
+2019,2025,Technology,36.72,momentum_score
+2019,2025,Technology,20.15,value_score
+2020,2021,Technology,30.26,momentum_score
+2020,2021,Technology,27.75,value_score
+2020,2022,Technology,-8.32,momentum_score
+2020,2022,Technology,-2.08,value_score
+2020,2023,Technology,4.4,momentum_score
+2020,2023,Technology,8.54,value_score
+2020,2024,Technology,2.53,momentum_score
+2020,2024,Technology,8.4,value_score
+2020,2025,Technology,7.4,momentum_score
+2020,2025,Technology,12.59,value_score
+2021,2022,Technology,-23.94,momentum_score
+2021,2022,Technology,-20.91,value_score
+2021,2023,Technology,10.93,momentum_score
+2021,2023,Technology,2.29,value_score
+2021,2024,Technology,24.24,momentum_score
+2021,2024,Technology,5.5,value_score
+2021,2025,Technology,23.46,momentum_score
+2021,2025,Technology,10.96,value_score
+2022,2023,Technology,25.52,momentum_score
+2022,2023,Technology,30.37,value_score
+2022,2024,Technology,23.03,momentum_score
+2022,2024,Technology,17.99,value_score
+2022,2025,Technology,19.79,momentum_score
+2022,2025,Technology,33.62,value_score
+2023,2024,Technology,7.47,momentum_score
+2023,2024,Technology,17.78,value_score
+2023,2025,Technology,39.18,momentum_score
+2023,2025,Technology,23.89,value_score
+2024,2025,Technology,-0.32,momentum_score
+2024,2025,Technology,7.8,value_score
+2010,2011,Unknown,-12.12,momentum_score
+2010,2011,Unknown,4.37,value_score
+2010,2012,Unknown,-5.88,momentum_score
+2010,2012,Unknown,-5.23,value_score
+2010,2013,Unknown,5.38,momentum_score
+2010,2013,Unknown,7.32,value_score
+2010,2014,Unknown,7.67,momentum_score
+2010,2014,Unknown,10.44,value_score
+2010,2015,Unknown,6.52,momentum_score
+2010,2015,Unknown,7.72,value_score
+2010,2016,Unknown,7.1,momentum_score
+2010,2016,Unknown,8.32,value_score
+2010,2017,Unknown,8.98,momentum_score
+2010,2017,Unknown,9.76,value_score
+2010,2018,Unknown,8.63,momentum_score
+2010,2018,Unknown,9.54,value_score
+2010,2019,Unknown,7.65,momentum_score
+2010,2019,Unknown,8.44,value_score
+2010,2020,Unknown,6.86,momentum_score
+2010,2020,Unknown,7.56,value_score
+2010,2021,Unknown,6.22,momentum_score
+2010,2021,Unknown,6.85,value_score
+2010,2022,Unknown,5.69,momentum_score
+2010,2022,Unknown,6.26,value_score
+2010,2023,Unknown,5.24,momentum_score
+2010,2023,Unknown,5.77,value_score
+2010,2024,Unknown,4.86,momentum_score
+2010,2024,Unknown,5.34,value_score
+2010,2025,Unknown,4.52,momentum_score
+2010,2025,Unknown,4.98,value_score
+2011,2012,Unknown,-8.22,momentum_score
+2011,2012,Unknown,-13.56,value_score
+2011,2013,Unknown,7.1,momentum_score
+2011,2013,Unknown,9.4,value_score
+2011,2014,Unknown,9.56,momentum_score
+2011,2014,Unknown,11.63,value_score
+2011,2015,Unknown,5.25,momentum_score
+2011,2015,Unknown,5.76,value_score
+2011,2016,Unknown,5.3,momentum_score
+2011,2016,Unknown,6.62,value_score
+2011,2017,Unknown,7.88,momentum_score
+2011,2017,Unknown,8.19,value_score
+2011,2018,Unknown,7.86,momentum_score
+2011,2018,Unknown,8.11,value_score
+2011,2019,Unknown,6.84,momentum_score
+2011,2019,Unknown,7.06,value_score
+2011,2020,Unknown,6.06,momentum_score
+2011,2020,Unknown,6.25,value_score
+2011,2021,Unknown,5.44,momentum_score
+2011,2021,Unknown,5.61,value_score
+2011,2022,Unknown,4.93,momentum_score
+2011,2022,Unknown,5.09,value_score
+2011,2023,Unknown,4.51,momentum_score
+2011,2023,Unknown,4.65,value_score
+2011,2024,Unknown,4.16,momentum_score
+2011,2024,Unknown,4.29,value_score
+2011,2025,Unknown,3.85,momentum_score
+2011,2025,Unknown,3.97,value_score
+2012,2013,Unknown,10.31,momentum_score
+2012,2013,Unknown,28.37,value_score
+2012,2014,Unknown,10.37,momentum_score
+2012,2014,Unknown,21.45,value_score
+2012,2015,Unknown,7.85,momentum_score
+2012,2015,Unknown,8.43,value_score
+2012,2016,Unknown,8.51,momentum_score
+2012,2016,Unknown,9.42,value_score
+2012,2017,Unknown,9.89,momentum_score
+2012,2017,Unknown,10.97,value_score
+2012,2018,Unknown,8.5,momentum_score
+2012,2018,Unknown,10.03,value_score
+2012,2019,Unknown,7.32,momentum_score
+2012,2019,Unknown,8.54,value_score
+2012,2020,Unknown,6.38,momentum_score
+2012,2020,Unknown,7.43,value_score
+2012,2021,Unknown,5.65,momentum_score
+2012,2021,Unknown,6.58,value_score
+2012,2022,Unknown,5.07,momentum_score
+2012,2022,Unknown,5.9,value_score
+2012,2023,Unknown,4.6,momentum_score
+2012,2023,Unknown,5.35,value_score
+2012,2024,Unknown,4.21,momentum_score
+2012,2024,Unknown,4.9,value_score
+2012,2025,Unknown,3.88,momentum_score
+2012,2025,Unknown,4.51,value_score
+2013,2014,Unknown,8.26,momentum_score
+2013,2014,Unknown,11.26,value_score
+2013,2015,Unknown,-0.14,momentum_score
+2013,2015,Unknown,1.26,value_score
+2013,2016,Unknown,4.28,momentum_score
+2013,2016,Unknown,4.05,value_score
+2013,2017,Unknown,7.01,momentum_score
+2013,2017,Unknown,7.29,value_score
+2013,2018,Unknown,5.47,momentum_score
+2013,2018,Unknown,6.77,value_score
+2013,2019,Unknown,4.67,momentum_score
+2013,2019,Unknown,5.61,value_score
+2013,2020,Unknown,3.99,momentum_score
+2013,2020,Unknown,4.79,value_score
+2013,2021,Unknown,3.48,momentum_score
+2013,2021,Unknown,4.18,value_score
+2013,2022,Unknown,3.09,momentum_score
+2013,2022,Unknown,3.7,value_score
+2013,2023,Unknown,2.78,momentum_score
+2013,2023,Unknown,3.33,value_score
+2013,2024,Unknown,2.52,momentum_score
+2013,2024,Unknown,3.02,value_score
+2013,2025,Unknown,2.31,momentum_score
+2013,2025,Unknown,2.77,value_score
+2014,2015,Unknown,-6.57,momentum_score
+2014,2015,Unknown,-11.6,value_score
+2014,2016,Unknown,-2.15,momentum_score
+2014,2016,Unknown,-0.89,value_score
+2014,2017,Unknown,4.34,momentum_score
+2014,2017,Unknown,4.74,value_score
+2014,2018,Unknown,4.33,momentum_score
+2014,2018,Unknown,4.61,value_score
+2014,2019,Unknown,3.45,momentum_score
+2014,2019,Unknown,3.67,value_score
+2014,2020,Unknown,2.86,momentum_score
+2014,2020,Unknown,3.05,value_score
+2014,2021,Unknown,2.45,momentum_score
+2014,2021,Unknown,2.61,value_score
+2014,2022,Unknown,2.14,momentum_score
+2014,2022,Unknown,2.28,value_score
+2014,2023,Unknown,1.9,momentum_score
+2014,2023,Unknown,2.02,value_score
+2014,2024,Unknown,1.71,momentum_score
+2014,2024,Unknown,1.82,value_score
+2014,2025,Unknown,1.55,momentum_score
+2014,2025,Unknown,1.65,value_score
+2015,2016,Unknown,4.47,momentum_score
+2015,2016,Unknown,8.49,value_score
+2015,2017,Unknown,3.92,momentum_score
+2015,2017,Unknown,11.83,value_score
+2015,2018,Unknown,2.44,momentum_score
+2015,2018,Unknown,9.98,value_score
+2015,2019,Unknown,2.0,momentum_score
+2015,2019,Unknown,7.4,value_score
+2015,2020,Unknown,1.6,momentum_score
+2015,2020,Unknown,5.87,value_score
+2015,2021,Unknown,1.33,momentum_score
+2015,2021,Unknown,4.87,value_score
+2015,2022,Unknown,1.14,momentum_score
+2015,2022,Unknown,4.16,value_score
+2015,2023,Unknown,1.0,momentum_score
+2015,2023,Unknown,3.63,value_score
+2015,2024,Unknown,0.88,momentum_score
+2015,2024,Unknown,3.22,value_score
+2015,2025,Unknown,0.8,momentum_score
+2015,2025,Unknown,2.9,value_score
+2016,2017,Unknown,8.5,momentum_score
+2016,2017,Unknown,2.1,value_score
+2016,2018,Unknown,6.48,momentum_score
+2016,2018,Unknown,5.42,value_score
+2016,2019,Unknown,4.45,momentum_score
+2016,2019,Unknown,3.58,value_score
+2016,2020,Unknown,3.32,momentum_score
+2016,2020,Unknown,2.68,value_score
+2016,2021,Unknown,2.65,momentum_score
+2016,2021,Unknown,2.14,value_score
+2016,2022,Unknown,2.2,momentum_score
+2016,2022,Unknown,1.78,value_score
+2016,2023,Unknown,1.89,momentum_score
+2016,2023,Unknown,1.52,value_score
+2016,2024,Unknown,1.65,momentum_score
+2016,2024,Unknown,1.33,value_score
+2016,2025,Unknown,1.46,momentum_score
+2016,2025,Unknown,1.18,value_score
+2017,2018,Unknown,-45.76,momentum_score
+2017,2018,Unknown,-50.41,value_score
+2017,2019,Unknown,-25.84,momentum_score
+2017,2019,Unknown,-29.58,value_score
+2017,2020,Unknown,-18.07,momentum_score
+2017,2020,Unknown,-20.85,value_score
+2017,2021,Unknown,-13.88,momentum_score
+2017,2021,Unknown,-16.08,value_score
+2017,2022,Unknown,-11.27,momentum_score
+2017,2022,Unknown,-13.09,value_score
+2017,2023,Unknown,-9.48,momentum_score
+2017,2023,Unknown,-11.03,value_score
+2017,2024,Unknown,-8.19,momentum_score
+2017,2024,Unknown,-9.53,value_score
+2017,2025,Unknown,-7.2,momentum_score
+2017,2025,Unknown,-8.39,value_score
+2018,2019,Unknown,-88.36,momentum_score
+2018,2020,Unknown,-65.88,momentum_score
+2018,2021,Unknown,-51.17,momentum_score
+2018,2022,Unknown,-41.58,momentum_score
+2018,2023,Unknown,-34.95,momentum_score
+2018,2024,Unknown,-30.12,momentum_score
+2018,2025,Unknown,-26.45,momentum_score
+2010,2011,Utilities,9.88,momentum_score
+2010,2011,Utilities,11.84,value_score
+2010,2012,Utilities,8.34,momentum_score
+2010,2012,Utilities,7.24,value_score
+2010,2013,Utilities,11.97,momentum_score
+2010,2013,Utilities,11.11,value_score
+2010,2014,Utilities,14.82,momentum_score
+2010,2014,Utilities,13.57,value_score
+2010,2015,Utilities,11.36,momentum_score
+2010,2015,Utilities,8.66,value_score
+2010,2016,Utilities,12.56,momentum_score
+2010,2016,Utilities,10.23,value_score
+2010,2017,Utilities,11.92,momentum_score
+2010,2017,Utilities,11.13,value_score
+2010,2018,Utilities,11.04,momentum_score
+2010,2018,Utilities,11.08,value_score
+2010,2019,Utilities,12.2,momentum_score
+2010,2019,Utilities,11.64,value_score
+2010,2020,Utilities,10.41,momentum_score
+2010,2020,Utilities,9.61,value_score
+2010,2021,Utilities,10.87,momentum_score
+2010,2021,Utilities,10.58,value_score
+2010,2022,Utilities,10.28,momentum_score
+2010,2022,Utilities,9.91,value_score
+2010,2023,Utilities,8.76,momentum_score
+2010,2023,Utilities,8.8,value_score
+2010,2024,Utilities,9.25,momentum_score
+2010,2024,Utilities,9.91,value_score
+2010,2025,Utilities,9.44,momentum_score
+2010,2025,Utilities,10.91,value_score
+2011,2012,Utilities,3.03,momentum_score
+2011,2012,Utilities,5.07,value_score
+2011,2013,Utilities,9.43,momentum_score
+2011,2013,Utilities,11.35,value_score
+2011,2014,Utilities,15.97,momentum_score
+2011,2014,Utilities,15.6,value_score
+2011,2015,Utilities,12.23,momentum_score
+2011,2015,Utilities,8.31,value_score
+2011,2016,Utilities,13.17,momentum_score
+2011,2016,Utilities,10.2,value_score
+2011,2017,Utilities,13.62,momentum_score
+2011,2017,Utilities,11.6,value_score
+2011,2018,Utilities,12.18,momentum_score
+2011,2018,Utilities,11.81,value_score
+2011,2019,Utilities,13.82,momentum_score
+2011,2019,Utilities,13.28,value_score
+2011,2020,Utilities,11.86,momentum_score
+2011,2020,Utilities,11.03,value_score
+2011,2021,Utilities,12.03,momentum_score
+2011,2021,Utilities,11.65,value_score
+2011,2022,Utilities,11.16,momentum_score
+2011,2022,Utilities,10.92,value_score
+2011,2023,Utilities,9.55,momentum_score
+2011,2023,Utilities,9.66,value_score
+2011,2024,Utilities,10.38,momentum_score
+2011,2024,Utilities,10.99,value_score
+2011,2025,Utilities,10.71,momentum_score
+2011,2025,Utilities,11.93,value_score
+2012,2013,Utilities,19.55,momentum_score
+2012,2013,Utilities,13.18,value_score
+2012,2014,Utilities,23.52,momentum_score
+2012,2014,Utilities,19.57,value_score
+2012,2015,Utilities,14.06,momentum_score
+2012,2015,Utilities,10.0,value_score
+2012,2016,Utilities,14.48,momentum_score
+2012,2016,Utilities,12.09,value_score
+2012,2017,Utilities,15.58,momentum_score
+2012,2017,Utilities,12.35,value_score
+2012,2018,Utilities,14.22,momentum_score
+2012,2018,Utilities,11.73,value_score
+2012,2019,Utilities,15.82,momentum_score
+2012,2019,Utilities,13.2,value_score
+2012,2020,Utilities,13.55,momentum_score
+2012,2020,Utilities,10.3,value_score
+2012,2021,Utilities,13.63,momentum_score
+2012,2021,Utilities,11.38,value_score
+2012,2022,Utilities,12.16,momentum_score
+2012,2022,Utilities,10.81,value_score
+2012,2023,Utilities,10.4,momentum_score
+2012,2023,Utilities,8.94,value_score
+2012,2024,Utilities,11.68,momentum_score
+2012,2024,Utilities,9.98,value_score
+2012,2025,Utilities,12.51,momentum_score
+2012,2025,Utilities,10.47,value_score
+2013,2014,Utilities,22.73,momentum_score
+2013,2014,Utilities,27.24,value_score
+2013,2015,Utilities,6.26,momentum_score
+2013,2015,Utilities,9.37,value_score
+2013,2016,Utilities,9.45,momentum_score
+2013,2016,Utilities,13.67,value_score
+2013,2017,Utilities,12.12,momentum_score
+2013,2017,Utilities,14.18,value_score
+2013,2018,Utilities,11.74,momentum_score
+2013,2018,Utilities,12.73,value_score
+2013,2019,Utilities,13.99,momentum_score
+2013,2019,Utilities,14.1,value_score
+2013,2020,Utilities,12.38,momentum_score
+2013,2020,Utilities,11.49,value_score
+2013,2021,Utilities,12.74,momentum_score
+2013,2021,Utilities,11.92,value_score
+2013,2022,Utilities,11.24,momentum_score
+2013,2022,Utilities,11.29,value_score
+2013,2023,Utilities,8.79,momentum_score
+2013,2023,Utilities,9.24,value_score
+2013,2024,Utilities,10.03,momentum_score
+2013,2024,Utilities,9.68,value_score
+2013,2025,Utilities,11.23,momentum_score
+2013,2025,Utilities,10.0,value_score
+2014,2015,Utilities,-2.51,momentum_score
+2014,2015,Utilities,-12.26,value_score
+2014,2016,Utilities,7.18,momentum_score
+2014,2016,Utilities,3.0,value_score
+2014,2017,Utilities,9.02,momentum_score
+2014,2017,Utilities,8.34,value_score
+2014,2018,Utilities,8.34,momentum_score
+2014,2018,Utilities,9.05,value_score
+2014,2019,Utilities,11.78,momentum_score
+2014,2019,Utilities,11.57,value_score
+2014,2020,Utilities,9.03,momentum_score
+2014,2020,Utilities,9.23,value_score
+2014,2021,Utilities,9.47,momentum_score
+2014,2021,Utilities,9.99,value_score
+2014,2022,Utilities,8.66,momentum_score
+2014,2022,Utilities,9.12,value_score
+2014,2023,Utilities,6.82,momentum_score
+2014,2023,Utilities,7.71,value_score
+2014,2024,Utilities,7.55,momentum_score
+2014,2024,Utilities,9.22,value_score
+2014,2025,Utilities,7.88,momentum_score
+2014,2025,Utilities,10.52,value_score
+2015,2016,Utilities,16.19,momentum_score
+2015,2016,Utilities,18.88,value_score
+2015,2017,Utilities,14.96,momentum_score
+2015,2017,Utilities,22.29,value_score
+2015,2018,Utilities,11.25,momentum_score
+2015,2018,Utilities,17.83,value_score
+2015,2019,Utilities,15.54,momentum_score
+2015,2019,Utilities,19.03,value_score
+2015,2020,Utilities,11.75,momentum_score
+2015,2020,Utilities,14.35,value_score
+2015,2021,Utilities,11.47,momentum_score
+2015,2021,Utilities,15.19,value_score
+2015,2022,Utilities,10.46,momentum_score
+2015,2022,Utilities,12.5,value_score
+2015,2023,Utilities,7.96,momentum_score
+2015,2023,Utilities,11.49,value_score
+2015,2024,Utilities,8.84,momentum_score
+2015,2024,Utilities,13.92,value_score
+2015,2025,Utilities,9.42,momentum_score
+2015,2025,Utilities,15.59,value_score
+2016,2017,Utilities,11.14,momentum_score
+2016,2017,Utilities,13.63,value_score
+2016,2018,Utilities,9.26,momentum_score
+2016,2018,Utilities,12.82,value_score
+2016,2019,Utilities,12.82,momentum_score
+2016,2019,Utilities,17.76,value_score
+2016,2020,Utilities,9.18,momentum_score
+2016,2020,Utilities,11.79,value_score
+2016,2021,Utilities,10.63,momentum_score
+2016,2021,Utilities,12.84,value_score
+2016,2022,Utilities,9.36,momentum_score
+2016,2022,Utilities,11.98,value_score
+2016,2023,Utilities,6.43,momentum_score
+2016,2023,Utilities,8.21,value_score
+2016,2024,Utilities,7.34,momentum_score
+2016,2024,Utilities,8.83,value_score
+2016,2025,Utilities,7.63,momentum_score
+2016,2025,Utilities,9.77,value_score
+2017,2018,Utilities,10.86,momentum_score
+2017,2018,Utilities,6.39,value_score
+2017,2019,Utilities,17.66,momentum_score
+2017,2019,Utilities,15.31,value_score
+2017,2020,Utilities,12.8,momentum_score
+2017,2020,Utilities,10.01,value_score
+2017,2021,Utilities,14.35,momentum_score
+2017,2021,Utilities,12.15,value_score
+2017,2022,Utilities,10.1,momentum_score
+2017,2022,Utilities,9.82,value_score
+2017,2023,Utilities,7.21,momentum_score
+2017,2023,Utilities,6.28,value_score
+2017,2024,Utilities,10.3,momentum_score
+2017,2024,Utilities,7.36,value_score
+2017,2025,Utilities,12.34,momentum_score
+2017,2025,Utilities,7.96,value_score
+2018,2019,Utilities,27.41,momentum_score
+2018,2019,Utilities,22.64,value_score
+2018,2020,Utilities,13.95,momentum_score
+2018,2020,Utilities,12.3,value_score
+2018,2021,Utilities,13.38,momentum_score
+2018,2021,Utilities,13.8,value_score
+2018,2022,Utilities,10.64,momentum_score
+2018,2022,Utilities,11.17,value_score
+2018,2023,Utilities,6.61,momentum_score
+2018,2023,Utilities,5.66,value_score
+2018,2024,Utilities,8.87,momentum_score
+2018,2024,Utilities,6.8,value_score
+2018,2025,Utilities,11.43,momentum_score
+2018,2025,Utilities,8.02,value_score
+2019,2020,Utilities,-3.62,momentum_score
+2019,2020,Utilities,-2.71,value_score
+2019,2021,Utilities,5.82,momentum_score
+2019,2021,Utilities,6.18,value_score
+2019,2022,Utilities,4.89,momentum_score
+2019,2022,Utilities,4.39,value_score
+2019,2023,Utilities,0.98,momentum_score
+2019,2023,Utilities,1.92,value_score
+2019,2024,Utilities,3.83,momentum_score
+2019,2024,Utilities,5.42,value_score
+2019,2025,Utilities,4.99,momentum_score
+2019,2025,Utilities,9.0,value_score
+2020,2021,Utilities,21.39,momentum_score
+2020,2021,Utilities,15.76,value_score
+2020,2022,Utilities,9.74,momentum_score
+2020,2022,Utilities,6.44,value_score
+2020,2023,Utilities,5.86,momentum_score
+2020,2023,Utilities,2.1,value_score
+2020,2024,Utilities,9.61,momentum_score
+2020,2024,Utilities,7.66,value_score
+2020,2025,Utilities,11.97,momentum_score
+2020,2025,Utilities,11.19,value_score
+2021,2022,Utilities,0.68,momentum_score
+2021,2022,Utilities,-1.23,value_score
+2021,2023,Utilities,-3.39,momentum_score
+2021,2023,Utilities,-2.72,value_score
+2021,2024,Utilities,2.75,momentum_score
+2021,2024,Utilities,5.61,value_score
+2021,2025,Utilities,5.38,momentum_score
+2021,2025,Utilities,10.3,value_score
+2022,2023,Utilities,-1.62,momentum_score
+2022,2023,Utilities,-33.83,value_score
+2022,2024,Utilities,10.18,momentum_score
+2022,2024,Utilities,-0.59,value_score
+2022,2025,Utilities,11.68,momentum_score
+2022,2025,Utilities,13.06,value_score
+2023,2024,Utilities,33.04,momentum_score
+2023,2025,Utilities,28.02,momentum_score
+2024,2025,Utilities,26.09,momentum_score
+2024,2025,Utilities,5.77,value_score

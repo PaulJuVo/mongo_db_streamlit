@@ -2,7 +2,6 @@ from statistics import median
 from scipy.stats import median_abs_deviation
 from typing import Optional
 
-
 def calc_ttm_eps(incom_stats : list[dict], column_name : str = "epsdiluted"):
     return _sum_last_4(stats=incom_stats, column_name=column_name)
 
@@ -13,11 +12,12 @@ def calc_per_share_ttm(stats : list[dict], shares : Optional[float], colname : s
         sum = _sum_last_4(stats=stats, column_name=colname)
         return sum / shares if sum and sum != 0 and shares != 0 else None
 
-def calc_ratio(ttm : Optional[float], adjclosed : float):
-    if ttm is None or ttm < 0:
+def calc_ratio(ttm: Optional[float], adjclosed: float):
+    if ttm is None or ttm <= 0:
         return None
-    else:
-        return adjclosed / ttm if ttm != 0 and adjclosed != 0 else 0  
+    if abs(ttm) < 0.01:   # TTM zu klein → PE wäre unrealistisch
+        return None
+    return adjclosed / ttm if adjclosed != 0 else None 
 
 def get_avg_shares(incom_stats : list[dict]):
     unpacked = [e["weightedAverageShsOutDil"] for e in incom_stats if e.get("weightedAverageShsOutDil") is not None]

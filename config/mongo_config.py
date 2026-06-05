@@ -39,8 +39,8 @@ FINANCEDATA_TIMESERIES_CONFIG = {
            }
 
 # delete wenn streamlit über docker läuft und prod sein soll 
-#from dotenv import load_dotenv
-#load_dotenv(".env.dev")
+from dotenv import load_dotenv
+load_dotenv(".env.dev")
 
 HOST = os.environ["MONGO_HOST"]
 PORT = os.environ["MONGO_PORT"]
@@ -53,6 +53,24 @@ DASHBOARDUSER_USER = os.environ["MONGO_DASHBOARDUSER_USER"]
 DASHBOARDUSER_PASSWORD = os.environ["MONGO_DASHBOARDUSER_PASSWORD"]
 DASHBOARDUSER_AUTHDB = os.environ["MONGO_DASHBOARDUSER_AUTH_DB"]
 
-APPUSER_URI = f"mongodb://{APPUSER_USER}:{APPUSER_PASSWORD}@{HOST}:{PORT}/{APPUSER_AUTHDB}?authSource={APPUSER_AUTHDB}"
-DASHBOARDUSER_URI = f"mongodb://{DASHBOARDUSER_USER}:{DASHBOARDUSER_PASSWORD}@{HOST}:{PORT}/{DASHBOARDUSER_AUTHDB}?authSource={DASHBOARDUSER_AUTHDB}"
+#APPUSER_URI = f"mongodb://{APPUSER_USER}:{APPUSER_PASSWORD}@{HOST}:{PORT}/{APPUSER_AUTHDB}?authSource={APPUSER_AUTHDB}"
+# DASHBOARDUSER_URI = f"mongodb://{DASHBOARDUSER_USER}:{DASHBOARDUSER_PASSWORD}@{HOST}:{PORT}/{DASHBOARDUSER_AUTHDB}?authSource={DASHBOARDUSER_AUTHDB}"
 
+
+def get_appuser_uri():
+    host = os.getenv("MONGO_HOST")
+    port = os.getenv("MONGO_PORT")
+    user = os.getenv("MONGO_APPUSER_USER")
+    pw = os.getenv("MONGO_APPUSER_PASSWORD")
+    db = os.getenv("MONGO_APPUSER_AUTH_DB")
+    return f"mongodb://{user}:{pw}@{host}:{port}/{db}?authSource={db}"
+
+def get_dashboard_uri():
+    host = os.getenv("MONGO_HOST")
+    port = os.getenv("MONGO_PORT")
+
+    user = os.getenv("MONGO_DASHBOARDUSER_USER")
+    pw = os.getenv("MONGO_DASHBOARDUSER_PASSWORD")
+    db = os.getenv("MONGO_DASHBOARDUSER_AUTH_DB")
+
+    return f"mongodb://{user}:{pw}@{host}:{port}/{db}?authSource={db}"

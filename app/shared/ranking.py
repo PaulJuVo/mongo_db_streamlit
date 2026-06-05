@@ -15,8 +15,10 @@ def get_ranking(sector, date1) -> pd.DataFrame:
     finance_repo = MongoRepository(conn, MongoDatabase.PROCESSED, MongoCollection.FINANCEDATA)
     company_repo = MongoRepository(conn, MongoDatabase.PROCESSED, MongoCollection.COMPANYDATA)
     sector_repo = MongoRepository(conn,  MongoDatabase.PROCESSED, MongoCollection.SECTORDATA)
+    constituents_repo = MongoRepository(conn,  MongoDatabase.PROCESSED, MongoCollection.SCD_CONSTITUENTS)
 
-    ranking_service = RankingService(finance_repo=finance_repo, company_repo=company_repo, sector_repo=sector_repo, date=date1, sector=sector)
+    ranking_service = RankingService(finance_repo=finance_repo, constituents_repo =  constituents_repo, \
+                                     company_repo=company_repo, sector_repo=sector_repo, date=date1, sector=sector)
     ranking = ranking_service.get_ranking()
     company_data = dashboard_service.get_all_company_data(filter={"sector":sector})
     df_rank = pd.DataFrame(ranking)

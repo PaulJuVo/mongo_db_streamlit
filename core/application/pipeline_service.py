@@ -7,6 +7,7 @@ from config.pipeline_config import COMPANY_PIPELINE, INCOME_STAGED, EOD_STAGED, 
 from core.domain.validation import contains_right_income_statements, contains_right_cashflow_statements
 from core.domain.calculation import calc_ratio, calc_per_share_ttm, get_avg_shares, calc_ttm_eps
 import logging
+import pandas as pd
 
 logger = logging.getLogger(__name__)
 
@@ -45,13 +46,13 @@ class PipelineService:
 
     def run(self):
         self.create_scd_constituents()
-        self.upsert_company_data()
-        self.create_sp500_timeseries()
-        self.upsert_eod_staged()
-        self.upsert_income_staged()
-        self.upsert_cashflow_staged()
-        self.create_finance_data(2000)
-        self.create_sector_timeseries()
+        # self.upsert_company_data()
+        # self.create_sp500_timeseries()
+        # self.upsert_eod_staged()
+        # self.upsert_income_staged()
+        # self.upsert_cashflow_staged()
+        # self.create_finance_data(2000)
+        # self.create_sector_timeseries()
         
     
     @performance_log(logger)
@@ -124,36 +125,92 @@ class PipelineService:
         self.constituents_repo.execute_pipeline(CONSTITUES)
         self.constituents_repo.create_index(keys=[("removedTicker", 1), ("date", 1)], unique=False)
 
-        events = list(self.constituents_repo.find(sort={"date" : 1}))
-        
+        events = list(self.constituents_repo.find(sort={"date": 1}))
+
         active = {}
         scd = []
 
+        earliest_date = events[0]["date"]
+
+        # Schritt 1: Nur echte 1957er add-only Einträge als Gründer
+        for e in events:
+            added = (e.get("addedSecurity") or "").strip()
+            removed = (e.get("removedSecurity") or "").strip()
+            ticker = (e.get("symbol") or "").strip()
+            if added and not removed and ticker:
+                active[ticker] = {
+                    "date": e["date"],
+                    "symbol": ticker,
+                    "companyName": added
+                }
+
+        print("Active nach add-only Gründer:", len(active))
+
+        # Schritt 2: Hauptschleife chronologisch – nur Swaps
         for event in events:
             date = event["date"]
+            removed_ticker = (event.get("removedTicker") or "").strip()
+            removed_name = (event.get("removedSecurity") or "").strip()
+            added_name = (event.get("addedSecurity") or "").strip()
+            added_ticker = (event.get("symbol") or "").strip()
 
-            if event["removedSecurity"]:
-                name = event["removedSecurity"]
-                if name in active:
-                    scd.append({
-                        "companyName": name,
-                        "fromDate": active[name],
-                        "toDate": date
-                    })
-                    del active[name]
+            if removed_name and added_name:
+                if removed_ticker:
+                    if removed_ticker in active:
+                        scd.append({
+                            "companyName": active[removed_ticker]["companyName"],
+                            "symbol": removed_ticker,
+                            "fromDate": active[removed_ticker]["date"],
+                            "toDate": date
+                        })
+                        del active[removed_ticker]
+                    else:
+                        # Nicht in active → als Gründer nachträglich eintragen und sofort schließen
+                        scd.append({
+                            "companyName": removed_name,
+                            "symbol": removed_ticker,
+                            "fromDate": earliest_date,
+                            "toDate": date
+                        })
 
-            if event["addedSecurity"]:
-                name = event["addedSecurity"]
-                active[name] = date
+                if added_ticker:
+                    active[added_ticker] = {
+                        "date": date,
+                        "symbol": added_ticker,
+                        "companyName": added_name
+                    }
 
-        for name, start in active.items():
+        print("Active am Ende:", len(active))
+
+        # Nach der Hauptschleife, vor dem letzten Loop
+        from collections import Counter
+
+        # Wie viele unique Ticker sind mehrfach in active?
+        ticker_counts = Counter(doc["symbol"] for doc in active.values())
+        duplicates = {t: c for t, c in ticker_counts.items() if c > 1}
+        print("Duplikate in active:", duplicates)
+
+        # Wie viele SCD-Einträge gibt es pro Ticker mit toDate=2999?
+        open_entries = [s for s in scd if s["toDate"] == datetime(2999, 12, 12)]
+        print("Offene SCD-Einträge:", len(open_entries))
+
+        # Wie viele Ticker kommen mehrfach offen vor?
+        open_tickers = Counter(s["symbol"] for s in open_entries)
+        open_duplicates = {t: c for t, c in open_tickers.items() if c > 1}
+        print("Offen doppelte Ticker:", open_duplicates)
+
+        # Schritt 3: Alle noch aktiven → offen bis 2999
+        for ticker, doc in active.items():
             scd.append({
-                "companyName": name,
-                "fromDate": start,
-                "toDate": datetime(2999,12,12)
+                "companyName": doc["companyName"],
+                "symbol": doc["symbol"],
+                "fromDate": doc["date"],
+                "toDate": datetime(2999, 12, 12)
             })
+
         self.scd_constituents_repo.drop()
         self.scd_constituents_repo.insert_many(scd)
+        
 
     def upsert_company_data(self):
         self.company_repo.create_index(keys=[("symbol", 1)], unique=True)
@@ -175,7 +232,40 @@ class PipelineService:
 
     def create_sector_timeseries(self):
         self.sector_repo.drop()
-        self.financedata_repo.execute_pipeline(SECTOR_DATA)
+
+        finance_df = pd.DataFrame(list(self.financedata_repo.find(
+            projection={"symbol": 1, "date": 1, "pcRatio": 1, 
+                       "peRatio": 1, "pfcfRatio": 1, "psRatio": 1, "_id": 0}
+        )))
+
+        company_df = pd.DataFrame(list(self.company_repo.find(
+            projection={"symbol": 1, "sector": 1, "_id": 0}
+        )))
+
+        scd_df = pd.DataFrame(list(self.scd_constituents_repo.find(
+            projection={"symbol": 1, "fromDate": 1, "toDate": 1, "_id": 0}
+        )))
+
+        df = finance_df.merge(company_df, on="symbol", how="inner")
+        df = df[df["sector"].notna()]
+
+        # 3. SCD-Join in Python – merge + Datumsfilter
+        df = df.merge(scd_df, on="symbol", how="inner")
+        mask = (df["fromDate"] <= df["date"]) & (df["toDate"] >= df["date"])
+        df = df[mask].drop(columns=["fromDate", "toDate"])
+
+        rows = []
+        for (date, sector), group in df.groupby(["date", "sector"]):
+            rows.append({
+                "date":            date,
+                "sector":          sector,
+                "pcRatioMedian":   group["pcRatio"].dropna().median() or None,
+                "peRatioMedian":   group["peRatio"].dropna().median() or None,
+                "pfcfRatioMedian": group["pfcfRatio"].dropna().median() or None,
+                "psRatioMedian":   group["psRatio"].dropna().median() or None
+            })
+
+        self.sector_repo.insert_many(rows)
         self.sector_repo.create_index(keys=[("sector", 1), ("date", -1)], unique=False)
 
     def create_sp500_timeseries(self):
