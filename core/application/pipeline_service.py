@@ -3,11 +3,16 @@ from core.interfaces.base_repository_interface import BaseRepositoryInterface
 from datetime import datetime
 from config.logging_config import performance_log
 from config.mongo_config import FINANCEDATA_TIMESERIES_CONFIG
-from config.pipeline_config import COMPANY_PIPELINE, INCOME_STAGED, EOD_STAGED, CASHFLOW_STAGED, CONSTITUES, SECTOR_DATA, SP500
+from config.pipeline_config import COMPANY_PIPELINE, INCOME_STAGED, EOD_STAGED, CASHFLOW_STAGED, CONSTITUES, SP500, CONSTITUENTS_WIKI, CONSTITUENTS_WIKI_CHANGES
+from config.webscraping_config import URL, HEADERS 
 from core.domain.validation import contains_right_income_statements, contains_right_cashflow_statements
 from core.domain.calculation import calc_ratio, calc_per_share_ttm, get_avg_shares, calc_ttm_eps
 import logging
 import pandas as pd
+import requests
+from io import StringIO
+from deprecated import deprecated
+import pprint 
 
 logger = logging.getLogger(__name__)
 
@@ -26,6 +31,8 @@ class PipelineService:
                  scd_constituents_repo : BaseRepositoryInterface,
                  sector_repo : BaseRepositoryInterface,
                  sp500_raw_repo : BaseRepositoryInterface,
+                 const_wiki_repo : BaseRepositoryInterface,
+                 const_wiki_changes_repo : BaseRepositoryInterface,
                  sp500_repo : BaseRepositoryInterface
                  ):
         self.eodprice_repo = eodprice_repo
@@ -42,10 +49,13 @@ class PipelineService:
         self.sector_repo = sector_repo
         self.sp500_raw_repo = sp500_raw_repo
         self.sp500_repo=sp500_repo
-
+        self.const_wiki_repo = const_wiki_repo
+        self.const_wiki_changes_repo = const_wiki_changes_repo
 
     def run(self):
-        self.create_scd_constituents()
+        self.webscrape_constituents()
+        self.create_scd_wiki_constituents()
+        # self.create_scd_constituents()
         # self.upsert_company_data()
         # self.create_sp500_timeseries()
         # self.upsert_eod_staged()
@@ -121,6 +131,83 @@ class PipelineService:
         if processed_data:
             self.financedata_repo.insert_many(processed_data)
 
+    def webscrape_constituents(self):
+        self.const_wiki_repo.drop()
+        self.const_wiki_changes_repo.drop()
+        url = URL
+        headers = HEADERS
+
+        response = requests.get(url, headers=headers)
+        tables = pd.read_html(StringIO(response.text))
+
+        sp500 = tables[0]
+        sp500.columns = [
+            c.replace(' ', '_').lower()
+            for c in sp500.columns
+        ]
+        sp500.rename(columns={"date_added": "date"}, inplace=True)
+
+        sp500_changes = tables[1]
+        sp500_changes.columns = [
+            c[0].lower() if c[0] == c[1]
+            else f"{c[0].lower()}_{c[1].lower()}"
+            for c in sp500_changes.columns
+        ]
+        sp500_changes.rename(columns={"effective date": "date"}, inplace=True)
+
+        self.const_wiki_repo.insert_many(sp500.to_dict(orient="records"))
+        self.const_wiki_changes_repo.insert_many(sp500_changes.to_dict(orient="records"))
+        
+
+    def create_scd_wiki_constituents(self):
+        self.const_wiki_repo.execute_pipeline(CONSTITUENTS_WIKI)
+        self.const_wiki_changes_repo.execute_pipeline(CONSTITUENTS_WIKI_CHANGES)
+
+        cols = ["companyName", "symbol", "fromDate", "toDate"]
+        rem_cols = ["date", "removed_ticker", "removed_security"]
+        add_cols = ["date", "added_ticker", "added_security"]
+
+        events = list(self.const_wiki_changes_repo.find(sort={"date":1}))
+
+        df_events = pd.DataFrame(events)
+        df_removed = df_events[[*rem_cols]].drop_duplicates().dropna(how="all").reset_index(drop=True)
+        df_added = df_events[[*add_cols]].drop_duplicates().dropna(how="all").reset_index(drop=True)
+        
+        scd = []
+
+        for rem_row in df_removed.itertuples(index=False):
+            toDate = rem_row.date
+            rem_symbol = rem_row.removed_ticker
+
+            tmp_added = df_added[(df_added["added_ticker"] == rem_symbol) & (df_added["date"] <= toDate)].sort_values(by=["date"], ascending=False)
+
+            if tmp_added.empty:
+                fromDate = datetime(1900, 1, 1)
+            else:
+                fromDate = tmp_added.iloc[0]["date"]
+
+            scd.append({cols[0]: rem_row.removed_security,
+                        cols[1]: rem_symbol,
+                        cols[2]: fromDate if pd.notna(fromDate) else datetime(1900, 1, 1),
+                        cols[3]: toDate})
+
+        df_scd = pd.DataFrame(scd)
+        todays = list(self.const_wiki_repo.find())
+
+        for comp in todays:
+            symbol = comp.get("symbol")
+            fromDate = comp.get("date")
+            df_existing = df_scd[(df_scd["symbol"] == symbol) & (df_scd["fromDate"] <=  fromDate) & (df_scd["toDate"] >=  fromDate)]
+            if df_existing.empty:
+                scd.append({cols[0]: comp.get("security"),
+                            cols[1]: symbol,
+                            cols[2]: fromDate,
+                            cols[3]: datetime(2999, 12, 12) })
+                
+        self.scd_constituents_repo.drop()
+        self.scd_constituents_repo.insert_many(scd)
+
+    @deprecated
     def create_scd_constituents(self):
         self.constituents_repo.execute_pipeline(CONSTITUES)
         self.constituents_repo.create_index(keys=[("removedTicker", 1), ("date", 1)], unique=False)

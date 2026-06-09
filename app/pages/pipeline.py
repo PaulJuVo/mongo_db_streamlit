@@ -185,6 +185,10 @@ staged_income_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.ST
 staged_cashflow_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.STAGED_CASHFLOW)
 income_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.INCOMESTATEMENT)
 profile_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.PROFILE)
+const_wiki_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.CONST_WIKI)
+const_wiki_changes_repo = MongoRepository(conn, MongoDatabase.RAW, MongoCollection.CONST_WIKI_CHANGES)
+
+
 pipeline_service = PipelineService(eodprice_repo=eod_repo, 
                                     income_repo=income_repo,
                                     cashflow_repo=cashflow_repo, 
@@ -199,6 +203,8 @@ pipeline_service = PipelineService(eodprice_repo=eod_repo,
                                     sector_repo = sector_repo,
                                     sp500_raw_repo=sp500_raw_repo,
                                     sp500_repo=sp500_repo,
+                                    const_wiki_repo=const_wiki_repo,
+                                    const_wiki_changes_repo=const_wiki_changes_repo
                                     )
 
 
