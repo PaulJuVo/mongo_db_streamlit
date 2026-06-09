@@ -24,6 +24,8 @@ class MongoCollection(Enum):
     SECTORDATA = "sectorData"
     SP500 = "sp500Data"
     SPXEW = "spxewData"
+    CONST_WIKI = "constituentsWiki"
+    CONST_WIKI_CHANGES = "constituentsWikiChanges"
     
 
 FILTER_QUERIES_UPLOAD = {MongoCollection.PROFILE.value: ["symbol"], 

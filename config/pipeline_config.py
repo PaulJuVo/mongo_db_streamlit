@@ -21,6 +21,46 @@ CONSTITUES = [{"$set":
                           }
                         }
                         ]
+CONSTITUENTS_WIKI = [{"$set": 
+                            {"date": 
+                                {"$convert": 
+                                    {"input": "$date",
+                                    "to": "date",
+                                    "onError": 0,
+                                    "onNull": 0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                          "$merge": {
+                            "into": MongoCollection.CONST_WIKI.value,   
+                            "on": ["_id"],        
+                            "whenMatched": "replace",   
+                            "whenNotMatched": "insert"  
+                          }
+                        }
+                        ]
+CONSTITUENTS_WIKI_CHANGES = [{"$set": 
+                            {"date": 
+                                {"$convert": 
+                                    {"input": "$date",
+                                    "to": "date",
+                                    "onError": 0,
+                                    "onNull": 0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                          "$merge": {
+                            "into": MongoCollection.CONST_WIKI_CHANGES.value,   
+                            "on": ["_id"],        
+                            "whenMatched": "replace",   
+                            "whenNotMatched": "insert"  
+                          }
+                        }
+                        ]
 
 COMPANY_PIPELINE = [
     {
