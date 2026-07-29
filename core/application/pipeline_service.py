@@ -11,7 +11,6 @@ import logging
 import pandas as pd
 import requests
 from io import StringIO
-from deprecated import deprecated
 import pprint 
 
 logger = logging.getLogger(__name__)
@@ -53,16 +52,15 @@ class PipelineService:
         self.const_wiki_changes_repo = const_wiki_changes_repo
 
     def run(self):
-        self.webscrape_constituents()
+        #self.webscrape_constituents()
         self.create_scd_wiki_constituents()
-        # self.create_scd_constituents()
-        # self.upsert_company_data()
-        # self.create_sp500_timeseries()
-        # self.upsert_eod_staged()
-        # self.upsert_income_staged()
-        # self.upsert_cashflow_staged()
-        # self.create_finance_data(2000)
-        # self.create_sector_timeseries()
+        #self.upsert_company_data()
+        self.create_sp500_timeseries()
+        #self.upsert_eod_staged()
+        #self.upsert_income_staged()
+        #self.upsert_cashflow_staged()
+        #self.create_finance_data(2000)
+        #self.create_sector_timeseries()
         
     
     @performance_log(logger)
@@ -170,7 +168,7 @@ class PipelineService:
         events = list(self.const_wiki_changes_repo.find(sort={"date":1}))
 
         df_events = pd.DataFrame(events)
-        df_removed = df_events[[*rem_cols]].drop_duplicates().dropna(how="all").reset_index(drop=True)
+        df_removed = df_events[[*rem_cols]].drop_duplicates().dropna(subset=["removed_ticker"]).reset_index(drop=True)
         df_added = df_events[[*add_cols]].drop_duplicates().dropna(how="all").reset_index(drop=True)
         
         scd = []
@@ -206,98 +204,6 @@ class PipelineService:
                 
         self.scd_constituents_repo.drop()
         self.scd_constituents_repo.insert_many(scd)
-
-    @deprecated
-    def create_scd_constituents(self):
-        self.constituents_repo.execute_pipeline(CONSTITUES)
-        self.constituents_repo.create_index(keys=[("removedTicker", 1), ("date", 1)], unique=False)
-
-        events = list(self.constituents_repo.find(sort={"date": 1}))
-
-        active = {}
-        scd = []
-
-        earliest_date = events[0]["date"]
-
-        # Schritt 1: Nur echte 1957er add-only Einträge als Gründer
-        for e in events:
-            added = (e.get("addedSecurity") or "").strip()
-            removed = (e.get("removedSecurity") or "").strip()
-            ticker = (e.get("symbol") or "").strip()
-            if added and not removed and ticker:
-                active[ticker] = {
-                    "date": e["date"],
-                    "symbol": ticker,
-                    "companyName": added
-                }
-
-        print("Active nach add-only Gründer:", len(active))
-
-        # Schritt 2: Hauptschleife chronologisch – nur Swaps
-        for event in events:
-            date = event["date"]
-            removed_ticker = (event.get("removedTicker") or "").strip()
-            removed_name = (event.get("removedSecurity") or "").strip()
-            added_name = (event.get("addedSecurity") or "").strip()
-            added_ticker = (event.get("symbol") or "").strip()
-
-            if removed_name and added_name:
-                if removed_ticker:
-                    if removed_ticker in active:
-                        scd.append({
-                            "companyName": active[removed_ticker]["companyName"],
-                            "symbol": removed_ticker,
-                            "fromDate": active[removed_ticker]["date"],
-                            "toDate": date
-                        })
-                        del active[removed_ticker]
-                    else:
-                        # Nicht in active → als Gründer nachträglich eintragen und sofort schließen
-                        scd.append({
-                            "companyName": removed_name,
-                            "symbol": removed_ticker,
-                            "fromDate": earliest_date,
-                            "toDate": date
-                        })
-
-                if added_ticker:
-                    active[added_ticker] = {
-                        "date": date,
-                        "symbol": added_ticker,
-                        "companyName": added_name
-                    }
-
-        print("Active am Ende:", len(active))
-
-        # Nach der Hauptschleife, vor dem letzten Loop
-        from collections import Counter
-
-        # Wie viele unique Ticker sind mehrfach in active?
-        ticker_counts = Counter(doc["symbol"] for doc in active.values())
-        duplicates = {t: c for t, c in ticker_counts.items() if c > 1}
-        print("Duplikate in active:", duplicates)
-
-        # Wie viele SCD-Einträge gibt es pro Ticker mit toDate=2999?
-        open_entries = [s for s in scd if s["toDate"] == datetime(2999, 12, 12)]
-        print("Offene SCD-Einträge:", len(open_entries))
-
-        # Wie viele Ticker kommen mehrfach offen vor?
-        open_tickers = Counter(s["symbol"] for s in open_entries)
-        open_duplicates = {t: c for t, c in open_tickers.items() if c > 1}
-        print("Offen doppelte Ticker:", open_duplicates)
-
-        # Schritt 3: Alle noch aktiven → offen bis 2999
-        for ticker, doc in active.items():
-            scd.append({
-                "companyName": doc["companyName"],
-                "symbol": doc["symbol"],
-                "fromDate": doc["date"],
-                "toDate": datetime(2999, 12, 12)
-            })
-
-        self.scd_constituents_repo.drop()
-        self.scd_constituents_repo.insert_many(scd)
-        
 
     def upsert_company_data(self):
         self.company_repo.create_index(keys=[("symbol", 1)], unique=True)

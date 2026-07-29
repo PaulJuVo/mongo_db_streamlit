@@ -31,6 +31,17 @@ class DashboardService():
             raise NoDataFound(message=f"No data found for filter = {fi}", errorcode=999)
         else: 
             return result
+    
+    def get_last_available_adj_closed_index(self, symbol : str, date : datetime):
+        fi = { "symbol": symbol, 
+                                "date" : { "$lte" : date}
+                            }
+        
+        result = self.sp_500_repo.find_one(filter=fi, sort={"date":-1})
+        if not result:
+            raise NoDataFound(message=f"No data found for filter = {fi}", errorcode=999)
+        else: 
+            return result
 
     @performance_log(logger)
     def get_finance_data(self, companies : list, from_date : datetime, to_date : datetime):

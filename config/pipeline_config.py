@@ -271,25 +271,27 @@ SPXEW = [
     }
 ]
 
-
 SP500 = [
     {
-        "$unwind": "$historical"
+    "$project": {
+      "fields": { "$objectToArray": "$$ROOT" },
+      "_id": 0
+      }
     },
     {
-        "$addFields": {
-            "date": { "$toDate" : "$historical.date"},
-            "adjClose" : "$historical.adjClose"
-            
+    "$unwind": "$fields"
+    },
+    {
+        "$match": {
+            "fields.k": { "$ne": "_id" }
         }
     },
     {
-        "$project": {
-            "_id": 0,
-            "symbol": "GSPC",
-            "date": 1,
-            "adjClose": 1
-        }
+    "$project": {
+      "date": {"$toDate" : "$fields.k"},
+      "adjClose": "$fields.v.Close",
+      "symbol": "GSPC"
+      }
     },
     {
         "$unionWith": {
@@ -308,5 +310,45 @@ SP500 = [
         }
       }
     }
+
 ]
+
+
+# SP500 = [
+#     {
+#         "$unwind": "$historical"
+#     },
+#     {
+#         "$addFields": {
+#             "date": { "$toDate" : "$historical.date"},
+#             "adjClose" : "$historical.adjClose"
+#             
+#         }
+#     },
+#     {
+#         "$project": {
+#             "_id": 0,
+#             "symbol": "GSPC",
+#             "date": 1,
+#             "adjClose": 1
+#         }
+#     },
+#     {
+#         "$unionWith": {
+#             "coll": MongoCollection.SPXEW.value,
+#             "pipeline": SPXEW
+#         }
+#     },
+#     {
+#       "$out": {
+#         "db": MongoDatabase.PROCESSED.value,
+#         "coll": MongoCollection.SP500.value,
+#         "timeseries": {
+#           "timeField": "date",
+#           "metaField": "symbol",
+#           "granularity": "hours"      
+#         }
+#       }
+#     }
+# ]
 
