@@ -224,7 +224,7 @@ with col2:
             import_sp_data()
             
             files = list(RAW_DATA.glob("*.json"))
-            import_files(upload_file=files)
+            # import_files(upload_file=files)
             
             imp_time = time.time() - start_time
             notify(f"Import finished with {imp_time / 60:.0f} min")

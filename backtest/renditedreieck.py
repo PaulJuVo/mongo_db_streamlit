@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 import seaborn as sns
 from typing import Optional
+from pathlib import Path
 
 
 def plot_renditedreieck(
@@ -105,8 +106,13 @@ def plot_renditedreieck(
     fig.subplots_adjust(top=0.88)
 
     if save_path:
-        fig.savefig(save_path, dpi=150, bbox_inches="tight")
-        print(f"Gespeichert: {save_path}")
+        output_dir = Path(save_path) / sektor.lower().replace(" ", "_")
+        output_dir.mkdir(parents=True, exist_ok=True)
+
+        file_path = output_dir / f"{strategie}_{titel}.png"
+        fig.savefig(file_path, dpi=150, bbox_inches="tight")
+
+    print(f"Gespeichert: {file_path}")
 
     plt.close(fig)       # kein plt.show() — Jupyter zeigt fig automatisch beim return
     return fig
