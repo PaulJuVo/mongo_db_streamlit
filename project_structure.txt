@@ -1,0 +1,33 @@
+.
+├── app
+│   ├── logs
+│   ├── pages
+│   ├── shared
+│   └── streamlit_app.py
+├── backtest
+│   ├── backtest.ipynb
+│   ├── renditedreieck.py
+│   ├── sectors
+│   ├── survivorshipbias_2.ipynb
+│   └── survivorshipbias.ipynb
+├── core
+│   ├── application
+│   │   ├── dashboard_service.py
+│   │   ├── notebook_service.py
+│   │   ├── notification_service.py
+│   │   ├── pipeline_service.py
+│   │   ├── ranking_service.py
+│   │   └── run_import.py
+│   ├── domain
+│   │   ├── calculation.py
+│   │   └── validation.py
+│   ├── exceptions
+│   └── interfaces
+├── docker-compose.yml
+├── Dockerfile
+├── infrastructure
+├── logs
+├── scripts
+└── tests
+
+19 directories, 58 files
